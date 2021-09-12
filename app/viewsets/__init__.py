@@ -1,0 +1,1 @@
+from .educacionviewset.ocupacionViewset import ocupacionViewset
