@@ -6,6 +6,6 @@ class etnia(models.Model):
     estado_etnia = models.BooleanField(default=True)
 
     def delete(self, *args):
-        self.estado_ocupacion = False
+        self.estado_etnia = False
         self.save()
         return True
