@@ -9,4 +9,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
+<<<<<<< HEAD
 #
+=======
+from app.models.educacion_model import ocupacion
+from app.serializer.educacionSerializer import ocupacionRegistroSerializer, ocupacionSerializer
+>>>>>>> 0e8bcb3e05a9df9128ceecd0ce595fd9655c8f08
