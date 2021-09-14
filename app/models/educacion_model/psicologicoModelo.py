@@ -1,6 +1,7 @@
 from django.db import models
 from app.models.educacion_model.alumnoModelo import Alumno
 
+class psicologifco(models.Model):
 class psicologico(models.Model):
     alumno =models.ForeignKey(Alumno, on_delete=models.CASCADE, related_name="A_alumno"
     Analisis_psicologico = models.CharField(max_length=255,null=False )
