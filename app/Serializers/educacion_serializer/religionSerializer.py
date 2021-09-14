@@ -8,11 +8,11 @@ class religionRegistroSerializer(serializer.ModelSerializer):
             'nombre_religion',
         )
 
-    class religionSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = religion
-            fields=(
-            'id',
-            'nombre_religion',
-            'estado_religion',
-            )
+class religionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = religion
+        fields=(
+        'id',
+        'nombre_religion',
+        'estado_religion',
+        )

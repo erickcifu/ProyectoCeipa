@@ -8,11 +8,11 @@ class generoRegistroSerializer(serializer.ModelSerializer):
             'genero',
         )
 
-    class generoSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = genero
-            fields=(
-            'id',
-            'genero',
-            'estado_genero',
-            )
+class generoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = genero
+        fields=(
+        'id',
+        'genero',
+        'estado_genero',
+        )

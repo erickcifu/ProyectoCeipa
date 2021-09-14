@@ -8,11 +8,11 @@ class departamentoRegistroSerializer(serializer.ModelSerializer):
             'nombre_departamento',
         )
 
-    class departamentoSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = departamento
-            fields=(
-            'id',
-            'nombre_departamento',
-            'estado_departamento',
-            )
+class departamentoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = departamento
+        fields=(
+        'id',
+        'nombre_departamento',
+        'estado_departamento',
+        )
