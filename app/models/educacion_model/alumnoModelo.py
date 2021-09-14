@@ -9,12 +9,6 @@ class Alumno(models.Model):
     fecha_nacimiento = models.DateField()
     ingreso_familiar = models.FloatField()
     direccion_alumno = models.CharField(max_length=80)
-    GENEROS = (
-        (0, 'Masculino'),
-        (1, 'Femenino'),
-        (2, 'Otro')
-    )
-    genero = models.CharField(choices=GENEROS, max_length=2)
     telefono = models.CharField(max_length=8)
     fotografia = models.ImageField()
 
