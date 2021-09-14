@@ -11,7 +11,3 @@ from rest_framework.settings import api_settings
 
 from app.models.educacion_model import ocupacion
 from app.serializer.educacionSerializer import ocupacionRegistroSerializer, ocupacionSerializer
-<<<<<<< HEAD
-=======
-#adsdiasdas
->>>>>>> 67230c60d8d899aab60e997b6c1ee50c01e41f1b
