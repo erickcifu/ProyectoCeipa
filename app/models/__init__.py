@@ -9,3 +9,10 @@ from .educacion_model.vivienda import vivienda
 from .educacion_model.departamento import departamento
 from .educacion_model.centro_educativo import centro_educativo
 from .educacion_model.idioma import idioma
+from .educacion_model.psicologicoModel import psicologico
+from .educacion_model.seccionModel import seccion
+from .educacion_model.categoriaModel import Categoria
+from .educacion_model.tipopisoModel import Tipo_piso
+from .educacion_model.centropersonaModel import Centropersona
+from .educacion_model.estudiosantModel import EstudiosAnt
+from .educacion_model.municipioModel import municipio
