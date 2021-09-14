@@ -1,1 +1,2 @@
 from .educacionviewset.ocupacionViewset import ocupacionViewset
+from .educacionviewset.religionViewset import religionViewset
