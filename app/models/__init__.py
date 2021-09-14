@@ -9,6 +9,12 @@ from .educacion_model.vivienda import vivienda
 from .educacion_model.departamento import departamento
 from .educacion_model.centro_educativo import centro_educativo
 from .educacion_model.idioma import idioma
+from .educacion_model.conviviente import Conviviente
+from .educacion_model.parentesco import Parentesco
+from .educacion_model.servicio_agua import Servicio_Agua
+from .educacion_model.alumnoModelo import Alumno
+from .educacion_model.tipo_muro import Tipo_muro
+from .educacion_model.tipo_techo import Tipo_techo
 from .educacion_model.psicologicoModel import psicologico
 from .educacion_model.seccionModel import seccion
 from .educacion_model.categoriaModel import Categoria
