@@ -1,4 +1,5 @@
 from django.db import models
+from .personalEducativo import personalEducativo
 
 class tarea(models.Model):
     titulo_tarea = models.CharField(max_length=50,null=False )
@@ -7,7 +8,7 @@ class tarea(models.Model):
     nota_tarea = models.FloatField()
     fecha_entrega = models.DateTimeField()
     estado_tarea = models.BooleanField(default=True)
-    
+
     def delete(self, *args):
         self.estado_tarea = False
         self.save()
