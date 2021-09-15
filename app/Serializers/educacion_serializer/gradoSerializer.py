@@ -1,15 +1,15 @@
 from rest_framework import serializer
-from app.models.educacion_model.grados import grados
+from app.models.educacion_model.grado import Grado
 
-class gradosRegistroSerializer(serializer.serializer):
-    nombre_grados = serializers.CharField()
+class GradoRegistroSerializer(serializer.serializer):
+    nombre_grado = serializers.CharField()
 
-class gradosSerializer(serializers.ModelSerializer):
+class GradoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = grados
+        model = Grado
         fields=(
         'id',
-        'nombre_grados',
-        'descripcion_grados',
-        'estado_grados',
+        'nombre_grado',
+        'descripcion_grado',
+        'estado_grado',
         )

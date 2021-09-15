@@ -1,6 +1,6 @@
 from django.db import models
 
-class grado(models.Model):
+class Grado(models.Model):
     nombre_grado = models.CharField(max_length=50,null=False )
     descripcion_grado = models.CharField(max_length=255, null=True, blank=True)
     estado_grado = models.BooleanField(default=True)

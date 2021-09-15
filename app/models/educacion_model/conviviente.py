@@ -1,6 +1,6 @@
 from django.db import models
-from app.models.educacion_model.parentesco import Parentesco
-from app.models.educacion_model.vivienda import vivienda
+from .parentesco import Parentesco
+from .vivienda import vivienda
 
 class Conviviente(models.Model):
     vivienda = models.ForeignKey(vivienda, on_delete=models.CASCADE)
