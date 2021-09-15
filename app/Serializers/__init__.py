@@ -1,6 +1,7 @@
 from .educacion_serializer.ocupacionSerializer import ocupacionRegistroSerializer, ocupacionSerializer
 from .educacion_serializer.religionSerializer import religionRegistroSerializer, religionSerializer
 from .educacion_serializer.gradosSerializer import gradosRegistroSerializer, gradosSerializer
+from .educacion_serializer.gradoSerializer import GradoRegistroSerializer, GradoSerializer
 from .educacion_serializer.generoSerializer import generoRegistroSerializer, generoSerializer
 from .educacion_serializer.departamentoSerializer import departamentoRegistroSerializer, departamentoSerializer
 from .educacion_serializer.centroSerializer import centroRegistroSerializer, centroSerializer
@@ -17,3 +18,4 @@ from .educacion_serializer.categoriaSerializer import categoriaRegistroSerialize
 from .educacion_serializer.centropersonaSerializer import centropersonaRegistroSerializer,centropersonaSerializer
 from .educacion_serializer.estudiosantSerialiazer import estudiosantRegistroSerializer, estudiosantSerialiazer
 from .educacion_serializer.municipioSerialiazer import municipioRegistroSerialiazer, municipioSerialiazer
+from .educacion_serializer.religion_alumnoSerializer import Religion_alumnoRegistroSerializer, Religion_alumnoSerializer

@@ -22,3 +22,5 @@ from .educacion_model.tipopisoModel import Tipo_piso
 from .educacion_model.centropersonaModel import Centropersona
 from .educacion_model.estudiosantModel import EstudiosAnt
 from .educacion_model.municipioModel import municipio
+from .educacion_model.religion_alumno import Religion_alumno
+from .educacion_model.grado import Grado
