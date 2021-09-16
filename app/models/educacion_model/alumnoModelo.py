@@ -18,7 +18,7 @@ class Alumno(models.Model):
     gen = models.ForeignKey(genero, on_delete=models.CASCADE)
     religion = models.ForeignKey(Religion_alumno, on_delete=models.CASCADE)
 
-    nombres_alumno = models.CharField(max_length=50,null=False )
+    nombres_alumno = models.CharField(max_length=50,null=False)
     cui = models.IntegerField(max_length=13,null=False)
     apellidos_alumno = models.CharField(max_length=100,null=True)
     codigo_mineduc = models.IntegerField(max_length=20,null=False)
