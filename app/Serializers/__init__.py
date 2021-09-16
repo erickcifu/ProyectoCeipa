@@ -20,3 +20,11 @@ from .educacion_serializer.estudiosantSerialiazer import estudiosantRegistroSeri
 from .educacion_serializer.municipioSerialiazer import municipioRegistroSerialiazer, municipioSerialiazer
 from .educacion_serializer.religion_alumnoSerializer import Religion_alumnoRegistroSerializer, Religion_alumnoSerializer
 from .educacion_serializer.alumnoSerializer import AlumnoRegistroSerializer, AlumnoSerializer
+from .educacion_serializer.tareaSerializer import tareaRegistroSerializer, tareaSerializer
+from .educacion_serializer.viviendaSerializer import viviendaRegistroSerializer, viviendaSerializer
+from .educacion_serializer.personalSerializer import personalRegistroSerializer, personalSerializer
+from .educacion_serializer.cicloSerializer import cicloRegistroSerializer, cicloSerializer
+from .educacion_serializer.cursoSerializer import cursoRegistroSerializer, cursoSerializer
+from .educacion_serializer.cgSerializer import cgRegistroSerializer, cgSerializer
+from .educacion_serializer.cgcSerializer import cgcRegistroSerializer, cgcSerializer
+from .educacion_serializer.taSerializer import TARegistroSerializer, TASerializer
