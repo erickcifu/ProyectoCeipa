@@ -19,3 +19,4 @@ from .educacion_serializer.centropersonaSerializer import centropersonaRegistroS
 from .educacion_serializer.estudiosantSerialiazer import estudiosantRegistroSerializer, estudiosantSerialiazer
 from .educacion_serializer.municipioSerialiazer import municipioRegistroSerialiazer, municipioSerialiazer
 from .educacion_serializer.religion_alumnoSerializer import Religion_alumnoRegistroSerializer, Religion_alumnoSerializer
+from .educacion_serializer.alumnoSerializer import AlumnoRegistroSerializer, AlumnoSerializer

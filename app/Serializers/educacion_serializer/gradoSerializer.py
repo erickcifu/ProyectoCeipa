@@ -8,8 +8,9 @@ class GradoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grado
         fields=(
-        'id',
-        'nombre_grado',
-        'descripcion_grado',
-        'estado_grado',
-        )
+            'id',
+            'nombre_grado',
+            'descripcion_grado',
+            'estado_grado',
+            )
+        depth = 2

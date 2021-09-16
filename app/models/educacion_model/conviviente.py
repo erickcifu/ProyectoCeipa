@@ -3,10 +3,10 @@ from .parentesco import Parentesco
 from .vivienda import vivienda
 
 class Conviviente(models.Model):
-    vivienda = models.ForeignKey(vivienda, on_delete=models.CASCADE)
-    parentesco = models.ForeignKey(Parentesco, on_delete=models.CASCADE)
+    vivienda = models.ForeignKey(vivienda, on_delete=models.CASCADE, related_name="V_vivienda")
+    parentesco = models.ForeignKey(Parentesco, on_delete=models.CASCADE, related_name="P_parentesco")
 
-    nombres_conviviente = models.CharField(max_length=50,null=False )
+    nombres_conviviente = models.CharField(max_length=50,null=False)
     apellidos_conviviente = models.CharField(max_length=100,null=True)
     estado_conviviente = models.BooleanField(default=True)
     fecha_nacimiento = models.DateField()
