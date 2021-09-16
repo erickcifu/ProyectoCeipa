@@ -1,11 +1,12 @@
 from django.db import models
 from .personalEducativo import personalEducativo
+from .ciclo_grado_curso import Ciclo_grado_curso
 
 class tarea(models.Model):
     titulo_tarea = models.CharField(max_length=50,null=False )
     descripcion_tarea = models.CharField(max_length=255, null=True, blank=True)
-    maestro = models.Foreignkey(personalEducativo, on_delete=CASCADE, related_name="tarea_maestro")
-    #Foreignkey de ciclo_grado_curso
+    maestro = models.Foreignkey(personalEducativo, on_delete=models.CASCADE, related_name="tarea_maestro")
+    ciclo_grado_curso = models.Foreignkey(Ciclo_grado_curso, on_delete=models.CASCADE,related_name="cgc_tarea")
     nota_tarea = models.FloatField()
     fecha_entrega = models.DateTimeField()
     estado_tarea = models.BooleanField(default=True)
