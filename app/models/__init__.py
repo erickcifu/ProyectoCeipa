@@ -28,3 +28,4 @@ from .educacion_model.ciclo import Ciclo
 from .educacion_model.curso import Curso
 from .educacion_model.ciclo_grado import Ciclo_grado
 from .educacion_model.ciclo_grado_curso import Ciclo_grado_curso
+from .educacion_model.tutor import Tutor
