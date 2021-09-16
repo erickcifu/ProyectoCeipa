@@ -18,3 +18,4 @@ class TASerializer(serializers.ModelSerializer):
         'estado_entrega',
         'estado_tareaAlumno',
         )
+        depth = 2
