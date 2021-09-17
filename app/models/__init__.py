@@ -29,3 +29,6 @@ from .educacion_model.curso import Curso
 from .educacion_model.ciclo_grado import Ciclo_grado
 from .educacion_model.ciclo_grado_curso import Ciclo_grado_curso
 from .educacion_model.tutor import Tutor
+from .educacion_model.padecimientoModelo import Padecimiento
+from .educacion_model.alumnopadecimiento import Apadecimiento
+from .educacion_model.inscipsionesModel  import Inscripcion

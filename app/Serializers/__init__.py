@@ -30,3 +30,6 @@ from .educacion_serializer.cgcSerializer import cgcRegistroSerializer, cgcSerial
 from .educacion_serializer.taSerializer import TARegistroSerializer, TASerializer
 from .educacion_serializer.etniaSerializer import EtniaRegistroSerializer, EtniaSerializer
 from .educacion_serializer.tutorSerializer import TutorRegistroSerializer, TutorSerializer
+from .educacion_serializer.padecimientoSerializer import PadecimientoRegistroSerializer, PadecimientoSerializer
+from .educacion_serializer.alpadecimientoSerializer import AlpadecimientoRegistroSerializer, AlpadecimientoRegistroSerializer
+from .educacion_serializer.inscripsionSerializer import InscRegistroSerializer,InscSerializer

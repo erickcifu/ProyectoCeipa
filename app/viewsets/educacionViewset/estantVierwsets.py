@@ -59,7 +59,7 @@ class estuantoViewset(viewsets.ModelViewset):
             with transaction.atomic():
                 if serializer.is_valid():
                     EstudiosAnt = EstudiosAnt.objects.get(pk = pk)
-                    EstudiosAnt.grado = grados.objects.get(pk-data.get("grados"))
+                    EstudiosAnt.grado = grados.objects.get(pk=data.get("grados"))
                     EstudiosAnt.nombre_establecimiento = data.get("nombre_establecimiento"))
                     EstudiosAnt.repitente = data.get("repitente")
                     EstudiosAnt.telefono = data.get("telefono")

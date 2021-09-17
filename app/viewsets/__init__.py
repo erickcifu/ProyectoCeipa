@@ -30,3 +30,6 @@ from .educacionviewset.cursoViewset import CursoViewset
 from .educacionviewset.cgViewset import CgViewset
 from .educacionviewset.CgcViewset import CgcViewset
 from .educacionviewset.taViewset import TAViewset
+from .educacionviewset.padecimientoViewset import PadecimientoViewset
+from .educacionviewset.alpadeViewset import AlPAViewset
+from .educacionviewset.inscripsionViewsets import InViewset
