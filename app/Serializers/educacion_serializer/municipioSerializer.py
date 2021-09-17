@@ -6,13 +6,13 @@ class municipioRegistroSerializer(serializer.serializer):
     nombre_municipio = serializers.CharField()
 
 
-class estudiosantSerializer(serializers.ModelSerializer):
+class MuniSerializer(serializers.ModelSerializer):
     class Meta:
         model = municipio
         fields=(
         'id',
         'dep',
         'nombre_municipio',
-        'estado_estudiosant',
+        'estado_municipio',
         )
         depth = 2

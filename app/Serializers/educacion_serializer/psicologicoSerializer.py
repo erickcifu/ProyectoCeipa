@@ -4,7 +4,7 @@ from app.models.educacion_model.psicologicoModel import psicologico
 class psicologicoRegistroSerializer(serializer.serializer):
     alumno = serializers.IntegerField()
     Analisis_psicologico = serializers.CharField()
-    fecha_Analisis = serializer.DateTimeField()
+    fecha_Analisis = serializers.DateTimeField()
     Entrevistador = serializers.CharField()
 
 class psicologicoSerializer(serializers.ModelSerializer):

@@ -9,22 +9,21 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.psicologicoModelo import psicologico
-from app.serializer.educacion_serializer.psicologicoSerializer import psicologicoRegistroSerializer, psicologicoSerializer
-from app.models.educacion_model.alumnoModelo import Alumno
+from app.models.educacion_model.seccionModelo import seccion
+from app.serializer.educacion_serializer.seccionSerializer import seccionRegistroSerializer, seccionSerializer
 
-class psicologicoViewset(viewsets.ModelViewset):
-    queryset = psicologico.objects.filter(estado_psicologico=True)
+class SeccionViewset(viewsets.ModelViewset):
+    queryset = seccion.objects.filter(estado_seccion=True)
     filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("alumno__nombre_alumno","estado_psicologico")
-    search_fields = ("alumno__nombre_alumno","estado_psicologico")
-    orderinf_fields = ("alumno__nombre_alumno","estado_psicologico")
+    filter_fields = ("nombre_seccion","estado_seccion")
+    search_fields = ("nombre_seccion","estado_seccion")
+    orderinf_fields = ("nombre_seccion","estado_seccion")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return psicologicoSerializer
+            return seccionSerializer
         else:
-            return psicologicoRegistroSerializer
+            return seccionRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
         else:
@@ -36,16 +35,11 @@ class psicologicoViewset(viewsets.ModelViewset):
     def create(self,request, *args,**kwargs):
         try:
             data = request.data
-            serializer = psicologicoRegistroSerializer(data = data)
-            with transaction.atomic():#detiene procesos si hay mas
+            serializer = seccionRegistroSerializer(data = data)
+            with transaction.atomic():
                 if serializer.is_valid():
-                    alumnos = Alumno.objects.get(pk=data.get('Alumno'))
-                    psicologico.objects.create(
-                    alumno = alumnos,
-                    Analisis_psicologico = data.get("Analisis_psicologico"),
-                    tratamiento = data.get("tratamiento"),
-                    fecha_Analisis = data.get("fecha_Analisis"),
-                    Entrevistador = data.get("Entrevistador"),
+                    seccion.objects.create(
+                    nombre_seccion = data.get("nombre_seccion"),
                     )
                     return response(serializer,data, status=status.HTTP_200_OK)
                 else:
@@ -56,16 +50,12 @@ class psicologicoViewset(viewsets.ModelViewset):
     def update(self,request,pk=none):
         try:
             data = request.data
-            serializer = psicologicoRegistroSerializer(data = data)
+            serializer = seccionRegistroSerializer(data = data)
             with transaction.atomic():
                 if serializer.is_valid():
-                    psicologico = psicologico.objects.get(pk = pk)
-                    psicologico.alumnos = Alumno.objects.get(pk=data.get("Alumno"))
-                    psicologico.Analisis_psicologico = data.get("Analisis_psicologico"))
-                    psicologico.tratamiento = data.get("tratamiento")
-                    psicologico.Entrevistador = data.get("Entrevistador")
-                    psicologico.fecha_Analisis = data.get("fecha_Analisis")
-                    psicologico.save()
+                    seccion= seccion.objects.get(pk = pk)
+                    seccion.nombre_seccion = data.get("nombre_categoria"))
+                    seccion.save()
 
                     return Response(serializer.data, status = status.HTTP_200_OK)
                 else:

@@ -9,22 +9,22 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.psicologicoModelo import psicologico
-from app.serializer.educacion_serializer.psicologicoSerializer import psicologicoRegistroSerializer, psicologicoSerializer
-from app.models.educacion_model.alumnoModelo import Alumno
+from app.models.educacion_model.categoriaModelo import Categoria
+from app.serializer.educacion_serializer.categoriaSerializer import categoriaRegistroSerializer, categoriaSerializer
 
-class psicologicoViewset(viewsets.ModelViewset):
-    queryset = psicologico.objects.filter(estado_psicologico=True)
+
+class CategoriaViewset(viewsets.ModelViewset):
+    queryset = Categoria.objects.filter(estado_categoria=True)
     filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("alumno__nombre_alumno","estado_psicologico")
-    search_fields = ("alumno__nombre_alumno","estado_psicologico")
-    orderinf_fields = ("alumno__nombre_alumno","estado_psicologico")
+    filter_fields = ("nombre_categoria","estado_categoria")
+    search_fields = ("nombre_categoria","estado_categoria")
+    orderinf_fields = ("nombre_categoria","estado_categoria")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return psicologicoSerializer
+            return categoriaSerializer
         else:
-            return psicologicoRegistroSerializer
+            return categoriaRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
         else:
@@ -36,16 +36,12 @@ class psicologicoViewset(viewsets.ModelViewset):
     def create(self,request, *args,**kwargs):
         try:
             data = request.data
-            serializer = psicologicoRegistroSerializer(data = data)
-            with transaction.atomic():#detiene procesos si hay mas
+            serializer = categoriaRegistroSerializer(data = data)
+            with transaction.atomic():
                 if serializer.is_valid():
-                    alumnos = Alumno.objects.get(pk=data.get('Alumno'))
-                    psicologico.objects.create(
-                    alumno = alumnos,
-                    Analisis_psicologico = data.get("Analisis_psicologico"),
-                    tratamiento = data.get("tratamiento"),
-                    fecha_Analisis = data.get("fecha_Analisis"),
-                    Entrevistador = data.get("Entrevistador"),
+                    Categoria.objects.create(
+                    nombre_categoria = data.get("nombre_categoria"),
+                    descripcion_categoria = data.get("descripcion_categoria"),
                     )
                     return response(serializer,data, status=status.HTTP_200_OK)
                 else:
@@ -56,16 +52,13 @@ class psicologicoViewset(viewsets.ModelViewset):
     def update(self,request,pk=none):
         try:
             data = request.data
-            serializer = psicologicoRegistroSerializer(data = data)
+            serializer = categoriaRegistroSerializer(data = data)
             with transaction.atomic():
                 if serializer.is_valid():
-                    psicologico = psicologico.objects.get(pk = pk)
-                    psicologico.alumnos = Alumno.objects.get(pk=data.get("Alumno"))
-                    psicologico.Analisis_psicologico = data.get("Analisis_psicologico"))
-                    psicologico.tratamiento = data.get("tratamiento")
-                    psicologico.Entrevistador = data.get("Entrevistador")
-                    psicologico.fecha_Analisis = data.get("fecha_Analisis")
-                    psicologico.save()
+                    categorias= Categoria.objects.get(pk = pk)
+                    categorias.nombre_categoria = data.get("nombre_categoria"))
+                    categoria.descripcion_categoria = data.get("descripcion_categoria")
+                    categoria.save()
 
                     return Response(serializer.data, status = status.HTTP_200_OK)
                 else:
