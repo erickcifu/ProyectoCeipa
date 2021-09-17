@@ -19,15 +19,15 @@ class Alumno(models.Model):
     religion = models.ForeignKey(Religion_alumno, on_delete=models.CASCADE, related_name="R_religion")
 
     nombres_alumno = models.CharField(max_length=50,null=False)
-    cui = models.IntegerField(max_length=13,null=False)
+    cui = models.IntegerField()
     apellidos_alumno = models.CharField(max_length=100,null=True)
-    codigo_mineduc = models.IntegerField(max_length=20,null=False)
+    codigo_mineduc = models.IntegerField()
     estado_alumno = models.BooleanField(default=True)
     fecha_nacimiento = models.DateField()
     ingreso_familiar = models.FloatField()
     direccion_alumno = models.CharField(max_length=80)
     telefono = models.CharField(max_length=8)
-    fotografia = models.ImageField()
+    fotografia = models.ImageField(upload_to='ceipa', null=True, blank=True)
 
 
     def delete(self, *args):

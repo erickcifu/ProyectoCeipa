@@ -9,12 +9,12 @@ class Tutor(models.Model):
     parentesco = models.ForeignKey(Parentesco, on_delete=models.CASCADE, related_name="Pa_parentesco")
     nombres_tutor = models.CharField(max_length=50,null=False)
     apellidos_tutor = models.CharField(max_length=50,null=True)
-    DPI = models.IntegerField(max_length=13,null=False)
+    DPI = models.IntegerField()
     estado_tutor = models.BooleanField(default=True)
     fecha_nacimiento = models.DateField()
     direccion_tutor = models.CharField(max_length=80)
     telefono = models.CharField(max_length=8)
-    fotografia = models.ImageField()
+    fotografia = models.ImageField(upload_to='ceipa', null=True, blank=True)
     correo = models.EmailField(max_length=80)
 
 

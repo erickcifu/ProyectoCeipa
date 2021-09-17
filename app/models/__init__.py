@@ -15,8 +15,8 @@ from .educacion_model.servicio_agua import Servicio_Agua
 from .educacion_model.alumnoModelo import Alumno
 from .educacion_model.tipo_muro import Tipo_muro
 from .educacion_model.tipo_techo import Tipo_techo
-from .educacion_model.psicologicoModel import psicologico
-from .educacion_model.seccionModel import seccion
+from .educacion_model.psicologicoModelo import psicologico
+from .educacion_model.seccionModelo import seccion
 from .educacion_model.categoriaModel import Categoria
 from .educacion_model.tipopisoModel import Tipo_piso
 from .educacion_model.centropersonaModel import Centropersona
@@ -29,6 +29,6 @@ from .educacion_model.curso import Curso
 from .educacion_model.ciclo_grado import Ciclo_grado
 from .educacion_model.ciclo_grado_curso import Ciclo_grado_curso
 from .educacion_model.tutor import Tutor
-from .educacion_model.padecimientoModelo import Padecimiento
+from .educacion_model.padecimientoModel import Padecimiento
 from .educacion_model.alumnopadecimiento import Apadecimiento
 from .educacion_model.inscipsionesModel  import Inscripcion
