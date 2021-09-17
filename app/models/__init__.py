@@ -32,3 +32,4 @@ from .educacion_model.tutor import Tutor
 from .educacion_model.padecimientoModel import Padecimiento
 from .educacion_model.alumnopadecimiento import Apadecimiento
 from .educacion_model.inscipsionesModel  import Inscripcion
+from .educacion_model.etnia import etnia
