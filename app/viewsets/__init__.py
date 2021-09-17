@@ -16,3 +16,4 @@ from .educacionviewset.tipo_techoViewset import Tipo_techoViewset
 from .educacionviewset.gradoViewset import GradoViewset
 from .educacionviewset.religion_alumnoViewset import Religion_alumnoViewset
 from .educacionviewset.tutorViewset import TutorViewset
+from .educacionviewset.etniaViewset import EtniaViewset
