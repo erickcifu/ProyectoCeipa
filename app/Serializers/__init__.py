@@ -28,3 +28,5 @@ from .educacion_serializer.cursoSerializer import cursoRegistroSerializer, curso
 from .educacion_serializer.cgSerializer import cgRegistroSerializer, cgSerializer
 from .educacion_serializer.cgcSerializer import cgcRegistroSerializer, cgcSerializer
 from .educacion_serializer.taSerializer import TARegistroSerializer, TASerializer
+from .educacion_serializer.etniaSerializer import EtniaRegistroSerializer, EtniaSerializer
+from .educacion_serializer.tutorSerializer import TutorRegistroSerializer, TutorSerializer
