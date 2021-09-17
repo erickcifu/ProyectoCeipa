@@ -9,21 +9,21 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.grado import Grado
-from app.serializer.educacion_serializer.gradoSerializer import GradoRegistroSerializer, GradoSerializer
+from app.models.educacion_model.tipo_muro import Tipo_muro
+from app.serializer.educacion_serializer.tipo_techoSerializer import Tipo_muroRegistroSerializer, Tipo_muroSerializer
 
-class GradoViewset(viewsets.ModelViewset):
-    queryset = Grado.objects.filter(estado_grado=True)
+class Tipo_muroViewset(viewsets.ModelViewset):
+    queryset = Tipo_muro.objects.filter(estado_muro=True)
     filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("nombre_grado", "estado_grado")
-    search_fields = ("nombre_grado", "estado_grado")
-    orderinf_fields = ("nombre_grado", "estado_grado")
+    filter_fields = ("tipo_muro", "estado_muro")
+    search_fields = ("tipo_muro", "estado_muro")
+    orderinf_fields = ("tipo_muro", "estado_muro")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return GradoSerializer
+            return Tipo_muroSerializer
         else:
-            return GradoRegistroSerializer
+            return Tipo_muroRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
         else:
@@ -36,13 +36,13 @@ class GradoViewset(viewsets.ModelViewset):
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
-            serializer = GradoRegistroSerializer
+            serializer = Tipo_muroRegistroSerializer
             with transaction.atomic():
                 if serializer.is_valid():
-                    Grado.objects.create(
-                        nombre_grado = data.get("nombre_grado"),
-                        descripcion_grado = data.get("descripcion_grado"),
-                        estado_grado = data.get("estado_grado"),
+                    Tipo_muro.objects.create(
+                        tipo_muro = data.get("tipo_muro"),
+                        descripcion_muro = data.get("descripcion_muro"),
+                        estado_muro = data.get("estado_muro"),
                     )
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
@@ -54,14 +54,14 @@ class GradoViewset(viewsets.ModelViewset):
     def update(self,request,pk=none):
         try:
             data = request.data
-            serializer = GradoRegistroSerializer
+            serializer = Tipo_muroRegistroSerializer
             with transaction.atomic():
                 if serializer.is_valid():
-                    Grado = Grado.objects.get(pk = pk)
-                    Grado.nombre_grado = data.get("nombre_grado")
-                    Grado.descripcion_grado = data.get("descripcion_grado")
-                    Grado.estado_grado = data.get("estado_grado")
-                    Grado.save()
+                    tipomu = Tipo_techo.objects.get(pk = pk)
+                    tipomu.tipo_muro = data.get("tipo_muro")
+                    tipomu.descripcion_muro = data.get("descripcion_muro")
+                    tipomu.estado_muro = data.get("estado_muro")
+                    tipomu.save()
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)

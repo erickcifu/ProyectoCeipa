@@ -7,3 +7,12 @@ from .educacionviewset.muniViewsets import MuniViewset
 from .educacionviewset.psicologicoView import psicologicoViewset
 from .educacionviewset.seccionViewsets import SeccionViewset
 from .educacionviewset.TpisoViewsets import TpisoViewset
+from .educacionviewset.convivienteViewset import ConvivienteViewset
+from .educacionviewset.parentesco import ParentescoViewset
+from .educacionviewset.servicio_aguaViewset import Servicio_aguaViewset
+from .educacionviewset.alumnoViewset import AlumnoViewset
+from .educacionviewset.tipo_muroViewset import Tipo_muroViewset
+from .educacionviewset.tipo_techoViewset import Tipo_techoViewset
+from .educacionviewset.gradoViewset import GradoViewset
+from .educacionviewset.religion_alumnoViewset import Religion_alumnoViewset
+from .educacionviewset.tutorViewset import TutorViewset
