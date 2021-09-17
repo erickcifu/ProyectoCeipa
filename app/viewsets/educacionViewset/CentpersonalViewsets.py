@@ -9,22 +9,23 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.psicologicoModelo import psicologico
-from app.serializer.educacion_serializer.psicologicoSerializer import psicologicoRegistroSerializer, psicologicoSerializer
-from app.models.educacion_model.alumnoModelo import Alumno
+from app.models.educacion_model.centropersonaModel import Centropersona
+from app.serializer.educacion_serializer.centropersonaSerializer import centropersonaRegistroSerializer,  centropersonaSerializer
+from app.models.educacion_model.centro_Educativo import centro_educativo
+from app.models.educacion_model.personalEducativo import personalEducativo
 
-class psicologicoViewset(viewsets.ModelViewset):
-    queryset = psicologico.objects.filter(estado_psicologico=True)
+class CentroPViewset(viewsets.ModelViewset):
+    queryset = Centropersona.objects.filter(estado_centropersona = True)
     filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("alumno__nombre_alumno","estado_psicologico")
-    search_fields = ("alumno__nombre_alumno","estado_psicologico")
-    orderinf_fields = ("alumno__nombre_alumno","estado_psicologico")
+    filter_fields = ("centro_Educativo__nombre_centro","estado_centropersona")
+    search_fields = ("centro_Educativo__nombre_centro","estado_centropersona")
+    orderinf_fields = ("centro_Educativo__nombre_centro","estado_centropersona")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return psicologicoSerializer
+            return  centropersonaSerializer
         else:
-            return psicologicoRegistroSerializer
+            return centropersonaRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
         else:
@@ -36,16 +37,14 @@ class psicologicoViewset(viewsets.ModelViewset):
     def create(self,request, *args,**kwargs):
         try:
             data = request.data
-            serializer = psicologicoRegistroSerializer(data = data)
-            with transaction.atomic():#detiene procesos si hay mas
+            Centropersona = centropersonaRegistroSerializer(data = data)
+            with transaction.atomic():
                 if serializer.is_valid():
-                    alumnos = Alumno.objects.get(pk=data.get('Alumno'))
-                    psicologico.objects.create(
-                    alumno = alumnos,
-                    Analisis_psicologico = data.get("Analisis_psicologico"),
-                    tratamiento = data.get("tratamiento"),
-                    fecha_Analisis = data.get("fecha_Analisis"),
-                    Entrevistador = data.get("Entrevistador"),
+                    centro_Educativo = centro_educativo.objects.get(pk=data.get("centro_educativo"))
+                    personal = personalEducativo.objects.get(pk=data.get('personalEducativo'))
+                    Centropersona.objects.create(
+                    centro_Educativo = centro_Educativo,
+                    personal = personal
                     )
                     return response(serializer,data, status=status.HTTP_200_OK)
                 else:
@@ -56,17 +55,13 @@ class psicologicoViewset(viewsets.ModelViewset):
     def update(self,request,pk=none):
         try:
             data = request.data
-            serializer = psicologicoRegistroSerializer(data = data)
+            serializer = centropersonaRegistroSerializer(data = data)
             with transaction.atomic():
                 if serializer.is_valid():
-                    psicologico = psicologico.objects.get(pk = pk)
-                    psicologico.alumnos = Alumno.objects.get(pk=data.get("Alumno"))
-                    psicologico.Analisis_psicologico = data.get("Analisis_psicologico"))
-                    psicologico.tratamiento = data.get("tratamiento")
-                    psicologico.Entrevistador = data.get("Entrevistador")
-                    psicologico.fecha_Analisis = data.get("fecha_Analisis")
-                    psicologico.save()
-
+                    Centropersona = Centropersona.objects.get(pk = pk)
+                    Centropersona.centro_Educativo = centro_educativo.objects.get(pk=data.get("centro_educativo"))
+                    Centropersona.personal = personalEducativo.objects.get(pk=data.get("personalEducativo"))
+                    Centropersona.save()
                     return Response(serializer.data, status = status.HTTP_200_OK)
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)

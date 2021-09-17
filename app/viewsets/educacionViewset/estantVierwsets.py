@@ -9,22 +9,22 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.psicologicoModelo import psicologico
-from app.serializer.educacion_serializer.psicologicoSerializer import psicologicoRegistroSerializer, psicologicoSerializer
-from app.models.educacion_model.alumnoModelo import Alumno
+from app.models.educacion_model.estudiosantModel import EstudiosAnt
+from app.serializer.educacion_serializer.estudiosantSerializer import estudiosantRegistroSerializer, estudiosantSerializer
+from app.models.educacion_model.grados import grados
 
-class psicologicoViewset(viewsets.ModelViewset):
-    queryset = psicologico.objects.filter(estado_psicologico=True)
+class estuantoViewset(viewsets.ModelViewset):
+    queryset = EstudiosAnt.objects.filter(estado_estudiosant=True)
     filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("alumno__nombre_alumno","estado_psicologico")
-    search_fields = ("alumno__nombre_alumno","estado_psicologico")
-    orderinf_fields = ("alumno__nombre_alumno","estado_psicologico")
+    filter_fields = ("nombre_establecimiento","estado_estudiosant")
+    search_fields = ("nombre_establecimiento","estado_estudiosant")
+    orderinf_fields = ("nombre_establecimiento","estado_estudiosant")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return psicologicoSerializer
+            return estudiosantSerializer
         else:
-            return psicologicoRegistroSerializer
+            return estudiosantRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
         else:
@@ -36,16 +36,15 @@ class psicologicoViewset(viewsets.ModelViewset):
     def create(self,request, *args,**kwargs):
         try:
             data = request.data
-            serializer = psicologicoRegistroSerializer(data = data)
+            serializer = estudiosantRegistroSerializer(data = data)
             with transaction.atomic():#detiene procesos si hay mas
                 if serializer.is_valid():
-                    alumnos = Alumno.objects.get(pk=data.get('Alumno'))
-                    psicologico.objects.create(
-                    alumno = alumnos,
-                    Analisis_psicologico = data.get("Analisis_psicologico"),
-                    tratamiento = data.get("tratamiento"),
-                    fecha_Analisis = data.get("fecha_Analisis"),
-                    Entrevistador = data.get("Entrevistador"),
+                    grado = grados.objects.get(pk=data.get('grados'))
+                    EstudiosAnt.objects.create(
+                    grado = grado,
+                    nombre_establecimiento = data.get("nombre_establecimiento"),
+                    repitente = data.get("repitente"),
+                    telefono = data.get("telefono"),
                     )
                     return response(serializer,data, status=status.HTTP_200_OK)
                 else:
@@ -56,16 +55,15 @@ class psicologicoViewset(viewsets.ModelViewset):
     def update(self,request,pk=none):
         try:
             data = request.data
-            serializer = psicologicoRegistroSerializer(data = data)
+            serializer = estudiosantRegistroSerializer(data = data)
             with transaction.atomic():
                 if serializer.is_valid():
-                    psicologico = psicologico.objects.get(pk = pk)
-                    psicologico.alumnos = Alumno.objects.get(pk=data.get("Alumno"))
-                    psicologico.Analisis_psicologico = data.get("Analisis_psicologico"))
-                    psicologico.tratamiento = data.get("tratamiento")
-                    psicologico.Entrevistador = data.get("Entrevistador")
-                    psicologico.fecha_Analisis = data.get("fecha_Analisis")
-                    psicologico.save()
+                    EstudiosAnt = EstudiosAnt.objects.get(pk = pk)
+                    EstudiosAnt.grado = grados.objects.get(pk-data.get("grados"))
+                    EstudiosAnt.nombre_establecimiento = data.get("nombre_establecimiento"))
+                    EstudiosAnt.repitente = data.get("repitente")
+                    EstudiosAnt.telefono = data.get("telefono")
+                    EstudiosAnt.save()
 
                     return Response(serializer.data, status = status.HTTP_200_OK)
                 else:
