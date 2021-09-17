@@ -9,21 +9,22 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.grado import Grado
-from app.serializer.educacion_serializer.gradoSerializer import GradoRegistroSerializer, GradoSerializer
+from app.models.educacion_model.religion_alumno import Religion_alumno
+from app.serializer.educacion_serializer.religion_alumnoSerializer import Religion_alumnoRegistroSerializer, Religion_alumnoSerializer
+from app.models.educacion_model.religion import religion
 
-class GradoViewset(viewsets.ModelViewset):
-    queryset = Grado.objects.filter(estado_grado=True)
+class Religion_alumnoViewset(viewsets.ModelViewset):
+    queryset = Religion_alumno.objects.filter(estado_religionalumno=True)
     filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("nombre_grado", "estado_grado")
-    search_fields = ("nombre_grado", "estado_grado")
-    orderinf_fields = ("nombre_grado", "estado_grado")
+    filter_fields = ("religion__nombre_religion","estado_religionalumno")
+    search_fields = ("religion__nombre_religion","estado_religionalumno")
+    orderinf_fields = ("religion__nombre_religion","estado_religionalumno")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return GradoSerializer
+            return Religion_alumnoSerializer
         else:
-            return GradoRegistroSerializer
+            return Religion_alumnoRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
         else:
@@ -36,13 +37,14 @@ class GradoViewset(viewsets.ModelViewset):
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
-            serializer = GradoRegistroSerializer
+            serializer = Religion_alumnoRegistroSerializer
             with transaction.atomic():
                 if serializer.is_valid():
-                    Grado.objects.create(
-                        nombre_grado = data.get("nombre_grado"),
-                        descripcion_grado = data.get("descripcion_grado"),
-                        estado_grado = data.get("estado_grado"),
+                    religion = religion.objects.get(pk=data.get("religion"))
+                    Religion_alumno.objects.create(
+                        religion = religion,
+                        nombre_iglesia = data.get("nombre_iglesia"),
+                        estado_religionalumno = data.get("estado_religionalumno"),
                     )
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
@@ -54,14 +56,14 @@ class GradoViewset(viewsets.ModelViewset):
     def update(self,request,pk=none):
         try:
             data = request.data
-            serializer = GradoRegistroSerializer
+            serializer = Religion_alumnoRegistroSerializer
             with transaction.atomic():
                 if serializer.is_valid():
-                    Grado = Grado.objects.get(pk = pk)
-                    Grado.nombre_grado = data.get("nombre_grado")
-                    Grado.descripcion_grado = data.get("descripcion_grado")
-                    Grado.estado_grado = data.get("estado_grado")
-                    Grado.save()
+                    religion_alumno = Religion_alumno.objects.get(pk = pk)
+                    religion_alumno.religion = religion.objects.get(pk=data.get("religion"))
+                    religion_alumno.nombre_iglesia = data.get("nombre_iglesia")
+                    religion_alumno.estado_religionalumno = data.get("estado_religionalumno")
+                    religion_alumno.save()
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
