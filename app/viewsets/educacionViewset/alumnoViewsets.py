@@ -18,7 +18,7 @@ from app.models.educacion_model.idioma import idioma
 from app.models.educacion_model.estudiosantModel import EstudiosAnt
 from app.models.educacion_model.municipioModel import municipio
 from app.models.educacion_model.genero import genero
-from app.models.educacion_model.religion_alumno import Religion_alumno
+
 
 class AlumnoViewset(viewsets.ModelViewset):
     queryset = Alumno.objects.filter(estado_alumno=True)
@@ -31,8 +31,7 @@ class AlumnoViewset(viewsets.ModelViewset):
         "EstudiosAnt__grado",
         "municipio__nombre_municipio",
         "genero__genero",
-        "Religion_alumno__religion",
-        "estado_alumno"
+        "estado_alumno",
         )
     search_fields = (
         "ocupacion__nombre_ocupacion",
@@ -42,8 +41,7 @@ class AlumnoViewset(viewsets.ModelViewset):
         "EstudiosAnt__grado",
         "municipio__nombre_municipio",
         "genero__genero",
-        "Religion_alumno__religion",
-        "estado_alumno"
+        "estado_alumno",
         )
     orderinf_fields = (
         "ocupacion__nombre_ocupacion",
@@ -53,8 +51,7 @@ class AlumnoViewset(viewsets.ModelViewset):
         "EstudiosAnt__grado",
         "municipio__nombre_municipio",
         "genero__genero",
-        "Religion_alumno__religion",
-        "estado_alumno"
+        "estado_alumno",
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -83,7 +80,6 @@ class AlumnoViewset(viewsets.ModelViewset):
                     estudios_anteriores = EstudiosAnt.objects.get(pk=data.get("EstudiosAnt"))
                     muni = municipio.objects.get(pk=data.get("municipio"))
                     gen = genero.objects.get(pk=data.get("genero"))
-                    religion = Religion_alumno.objects.get(pk=data.get("Religion_alumno"))
                     Alumno.objects.create(
                         ocup = ocup,
                         tutor = tutor,
@@ -92,7 +88,6 @@ class AlumnoViewset(viewsets.ModelViewset):
                         estudios_anteriores = estudios_anteriores,
                         muni = muni,
                         gen = gen,
-                        religion = religion,
                         nombres_alumno = data.get("nombres_alumno"),
                         cui = data.get("cui"),
                         apellidos_alumno = data.get("apellidos_alumno"),
@@ -125,7 +120,6 @@ class AlumnoViewset(viewsets.ModelViewset):
                     alumno.estudios_anteriores = EstudiosAnt.objects.get(pk=data.get("estudios_anteriores"))
                     alumno.muni = municipio.objets.get(pk=data.get("muni"))
                     alumno.gen = genero.objects.get(pk=data.get("gen"))
-                    alumno.religion = Religion_alumno.objets.get(pk=data.get("religion"))
                     alumno.nombres_alumno = data.get("nombres_alumno")
                     alumno.cui = data.get("cui")
                     alumno.apellidos_alumno = data.get("apellidos_alumno")

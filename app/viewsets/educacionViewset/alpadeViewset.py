@@ -12,6 +12,7 @@ from rest_framework.settings import api_settings
 from app.models.educacion_model.alumnopadecimiento import Apadecimiento
 from app.serializer.educacion_serializer.alpadecimientoSerializer import psicologicoRegistroSerializer, psicologicoSerializer
 from app.serializer.educacion_serializer.padecimientoModelo import padecimiento
+from app.serializer.educacion_serializer.alumnoModelo import Alumno
 
 
 class AlPAViewset(viewsets.ModelViewset):
@@ -42,8 +43,10 @@ class AlPAViewset(viewsets.ModelViewset):
             with transaction.atomic():
                 if serializer.is_valid():
                     padecimiento = Padecimiento.objects.get(pk=data.get("padecimiento"))
+                    alumnos = Alumno.objects.get(pk=data.get("Alumno"))
                     Apadecimiento.objects.create(
                         padecimiento = padecimiento,
+                        alumno = alumnos
                         tratamiento = data.get("tratamiento"),
                         lugar = data.get("lugar"),
                     )
@@ -57,10 +60,11 @@ class AlPAViewset(viewsets.ModelViewset):
     def update(self,request,pk=none):
         try:
             data = request.data
-            serializer = TARegistroSerializer
+            serializer = AlpadecimientoRegistroSerializer
             with transaction.atomic():
                 if serializer.is_valid():
                     almpadecimiento = padecimiento.objects.get(pk = pk)
+                    almpadecimiento.alumno = Alumno.objects.get(pk=data.get("Alumno"))
                     almpadedecimiento.tratamiento = tratamiento.objects.get(pk=data.get("tratamiento"))
                     almpadedecimiento.lugar = lugar.objets.get(pk=data.get("lugar"))
                     almpadedecimiento.save()

@@ -12,6 +12,7 @@ from rest_framework.settings import api_settings
 from app.models.educacion_model.religion_alumno import Religion_alumno
 from app.serializer.educacion_serializer.religion_alumnoSerializer import Religion_alumnoRegistroSerializer, Religion_alumnoSerializer
 from app.models.educacion_model.religion import religion
+from app.models.educacion_model.alumno import Alumno
 
 class Religion_alumnoViewset(viewsets.ModelViewset):
     queryset = Religion_alumno.objects.filter(estado_religionalumno=True)
@@ -41,8 +42,10 @@ class Religion_alumnoViewset(viewsets.ModelViewset):
             with transaction.atomic():
                 if serializer.is_valid():
                     religion = religion.objects.get(pk=data.get("religion"))
+                    alumnos = Alumno.objects.get(pk=data.get("Alumno"))
                     Religion_alumno.objects.create(
                         religion = religion,
+                        alumno = alumnos,
                         nombre_iglesia = data.get("nombre_iglesia"),
                         estado_religionalumno = data.get("estado_religionalumno"),
                     )
@@ -60,6 +63,7 @@ class Religion_alumnoViewset(viewsets.ModelViewset):
             with transaction.atomic():
                 if serializer.is_valid():
                     religion_alumno = Religion_alumno.objects.get(pk = pk)
+                    religion_alumno.alumno = Alumno.objects.get(pk=data.get("Alumno"))
                     religion_alumno.religion = religion.objects.get(pk=data.get("religion"))
                     religion_alumno.nombre_iglesia = data.get("nombre_iglesia")
                     religion_alumno.estado_religionalumno = data.get("estado_religionalumno")

@@ -6,7 +6,7 @@ from .idioma import idioma
 from .estudiosantModel import EstudiosAnt
 from .municipioModel import municipio
 from .genero import genero
-from .religion_alumno import Religion_alumno
+
 
 class Alumno(models.Model):
     ocup = models.ForeignKey(ocupacion, on_delete=models.CASCADE, related_name="O_ocupacion")
@@ -16,8 +16,6 @@ class Alumno(models.Model):
     estudios_anteriores = models.ForeignKey(EstudiosAnt, on_delete=models.CASCADE, related_name="EA_estudios")
     muni = models.ForeignKey(municipio, on_delete=models.CASCADE, related_name="M_muni")
     gen = models.ForeignKey(genero, on_delete=models.CASCADE, related_name="G_genero")
-    religion = models.ForeignKey(Religion_alumno, on_delete=models.CASCADE, related_name="R_religion")
-
     nombres_alumno = models.CharField(max_length=50,null=False)
     cui = models.IntegerField()
     apellidos_alumno = models.CharField(max_length=100,null=True)
@@ -32,5 +30,7 @@ class Alumno(models.Model):
 
     def delete(self, *args):
         self.estado_alumno = False
+        if self.fotografia is not  None:
+            self.fotografia.delete()
         self.save()
         return True

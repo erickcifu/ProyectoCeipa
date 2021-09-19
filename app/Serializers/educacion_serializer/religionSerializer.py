@@ -6,7 +6,7 @@ class religionRegistroSerializer(serializer.ModelSerializer):
         model = religion
         fields = (
             'nombre_religion',
-        )
+            )
 
 class religionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,5 +14,6 @@ class religionSerializer(serializers.ModelSerializer):
         fields=(
         'id',
         'nombre_religion',
+        'Alumno',
         'estado_religion',
         )
