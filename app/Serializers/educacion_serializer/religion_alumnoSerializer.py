@@ -3,6 +3,7 @@ from app.models.educacion_model.religion_alumno import Religion_alumno
 
 class Religion_alumnoRegistroSerializer(serializer.ModelSerializer):
     religion = serializers.IntegerField()
+    alumno = serializers.IntegerField()
     nombre_iglesia = serializers.CharField()
 
 class Religion_alumnoSerializer(serializers.ModelSerializer):
@@ -11,6 +12,7 @@ class Religion_alumnoSerializer(serializers.ModelSerializer):
         fields=(
             'id',
             'religion',
+            'alumno',
             'nombre_iglesia',
             'estado_religionalumno',
             )

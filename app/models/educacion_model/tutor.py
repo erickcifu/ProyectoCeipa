@@ -20,5 +20,7 @@ class Tutor(models.Model):
 
     def delete(self, *args):
         self.estado_tutor = False
+        if self.fotografia is not  None:
+            self.fotografia.delete()
         self.save()
         return True

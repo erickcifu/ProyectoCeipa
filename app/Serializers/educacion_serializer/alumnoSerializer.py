@@ -9,7 +9,6 @@ class AlumnoRegistroSerializer(serializer.serializer):
     estudios_anteriores = serializers.IntegerField()
     muni = serializers.IntegerField()
     gen = serializers.IntegerField()
-    religion = serializers.IntegerField()
     nombres_alumno = serializers.CharField()
     cui = serializers.IntegerField()
     apellidos_alumno = serializers.CharField()
@@ -33,7 +32,6 @@ class AlumnoSerializer(serializers.ModelSerializer):
             'estudios_anteriores',
             'muni',
             'gen',
-            'religion',
             'nombres_alumno',
             'cui',
             'apellidos_alumno',
