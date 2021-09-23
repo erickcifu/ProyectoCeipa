@@ -6,6 +6,6 @@ class Padecimiento(models.Model):
     estado_padecimiento = models.BooleanField(default=True)
 
     def delete(self, *args):
-        self.estado_psicologico = False
+        self.estado_padecimiento = False
         self.save()
         return True

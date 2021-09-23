@@ -7,7 +7,7 @@ class personalEducativo(models.Model):
     email_personal = models.CharField(max_length=50,null=True, blank=True)
     fechaNac_personal = models.DateTimeField()
     direccion_personal = models.CharField(max_length=255,null=True, blank=True)
-    certificadoRenas_personal = models.BooleanField(default=False)
+    certificadoRenas_personal = models.BooleanField(default=False, null=False)
     estado_personal = models.BooleanField(default=True)
 
     def delete(self, *args):

@@ -1,6 +1,6 @@
 from django.db import models
 from .religion import religion
-from app.models.educacion_model.alumnoModelo import Alumno
+from .alumnoModelo import Alumno
 
 class Religion_alumno(models.Model):
     religion = models.ForeignKey(religion, on_delete=models.CASCADE, related_name="r_religion")

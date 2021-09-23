@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,15 +10,15 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.ciclo import Ciclo
-from app.serializer.educacion_serializer.cicloSerializer import cicloRegistroSerializer, cicloSerializer
+from app.models import Ciclo
+from app.serializer import cicloRegistroSerializer, cicloSerializer
 
-class CicloViewset(viewsets.ModelViewset):
+class CicloViewset(viewsets.ModelViewSet):
     queryset = Ciclo.objects.filter(estado_ciclo=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
     filter_fields = ("anio","estado_ciclo")
     search_fields = ("anio","estado_ciclo")
-    orderinf_fields = ("anio","estado_ciclo")
+    ordering_fields = ("anio","estado_ciclo")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -32,7 +33,6 @@ class CicloViewset(viewsets.ModelViewset):
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
 
-    """******************** CREATE *****************************"""
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -48,8 +48,7 @@ class CicloViewset(viewsets.ModelViewset):
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-    """********************** ACTULIZAR ***************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = cicloRegistroSerializer(data = data)

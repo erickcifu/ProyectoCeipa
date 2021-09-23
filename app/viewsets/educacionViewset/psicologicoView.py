@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,16 +10,16 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.psicologicoModelo import psicologico
-from app.serializer.educacion_serializer.psicologicoSerializer import psicologicoRegistroSerializer, psicologicoSerializer
-from app.models.educacion_model.alumnoModelo import Alumno
+from app.models import psicologico
+from app.serializer import psicologicoRegistroSerializer, psicologicoSerializer
+from app.models import Alumno
 
-class psicologicoViewset(viewsets.ModelViewset):
+class psicologicoViewset(viewsets.ModelViewSet):
     queryset = psicologico.objects.filter(estado_psicologico=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("alumno__nombre_alumno","estado_psicologico")
-    search_fields = ("alumno__nombre_alumno","estado_psicologico")
-    orderinf_fields = ("alumno__nombre_alumno","estado_psicologico")
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_fields = ("alumno__nombres_alumno","estado_psicologico")
+    search_fields = ("alumno__nombres_alumno","estado_psicologico")
+    orderinf_fields = ("alumno__nombres_alumno","estado_psicologico")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -27,12 +28,11 @@ class psicologicoViewset(viewsets.ModelViewset):
             return psicologicoRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
-        else:
             permissions_classes = [AllowAny]
         else:
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
-"""******************** Crear *************************************-"""
+
     def create(self,request, *args,**kwargs):
         try:
             data = request.data
@@ -52,8 +52,8 @@ class psicologicoViewset(viewsets.ModelViewset):
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
-"""********************** ACTULIZAR ***************************"""
-    def update(self,request,pk=none):
+
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = psicologicoRegistroSerializer(data = data)
@@ -61,7 +61,7 @@ class psicologicoViewset(viewsets.ModelViewset):
                 if serializer.is_valid():
                     psicologico = psicologico.objects.get(pk = pk)
                     psicologico.alumnos = Alumno.objects.get(pk=data.get("Alumno"))
-                    psicologico.Analisis_psicologico = data.get("Analisis_psicologico"))
+                    psicologico.Analisis_psicologico = data.get("Analisis_psicologico")
                     psicologico.tratamiento = data.get("tratamiento")
                     psicologico.Entrevistador = data.get("Entrevistador")
                     psicologico.fecha_Analisis = data.get("fecha_Analisis")

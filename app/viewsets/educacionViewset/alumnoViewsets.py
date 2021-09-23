@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,49 +10,23 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.alumnoModelo import Alumno
-from app.serializer.educacion_serializer.alumnoSerializer import AlumnoRegistroSerializer, AlumnoSerializer
-from app.models.educacion_model.ocupacion import ocupacion
-from app.models.educacion_model.tutor import Tutor
-from app.models.educacion_model.etnia import etnia
-from app.models.educacion_model.idioma import idioma
-from app.models.educacion_model.estudiosantModel import EstudiosAnt
-from app.models.educacion_model.municipioModel import municipio
-from app.models.educacion_model.genero import genero
+from app.models import Alumno
+from app.serializer import AlumnoRegistroSerializer, AlumnoSerializer
+from app.models import ocupacion
+from app.models import Tutor
+from app.models import etnia
+from app.models import idioma
+from app.models import EstudiosAnt
+from app.models import municipio
+from app.models import genero
 
 
-class AlumnoViewset(viewsets.ModelViewset):
+class AlumnoViewset(viewsets.ModelViewSet):
     queryset = Alumno.objects.filter(estado_alumno=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = (
-        "ocupacion__nombre_ocupacion",
-        "Tutor__nombres_tutor",
-        "etnia__nombre_etnia",
-        "idioma__nombre_idioma",
-        "EstudiosAnt__grado",
-        "municipio__nombre_municipio",
-        "genero__genero",
-        "estado_alumno",
-        )
-    search_fields = (
-        "ocupacion__nombre_ocupacion",
-        "Tutor__nombres_tutor",
-        "etnia__nombre_etnia",
-        "idioma__nombre_idioma",
-        "EstudiosAnt__grado",
-        "municipio__nombre_municipio",
-        "genero__genero",
-        "estado_alumno",
-        )
-    orderinf_fields = (
-        "ocupacion__nombre_ocupacion",
-        "Tutor__nombres_tutor",
-        "etnia__nombre_etnia",
-        "idioma__nombre_idioma",
-        "EstudiosAnt__grado",
-        "municipio__nombre_municipio",
-        "genero__genero",
-        "estado_alumno",
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_fields = ("tutor__nombres_tutor","estado_alumno")
+    search_fields = ("tutor__nombres_tutor","estado_alumno")
+    orderinf_fields = ("tutor__nombres_tutor","estado_alumno")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -60,13 +35,11 @@ class AlumnoViewset(viewsets.ModelViewset):
             return AlumnoRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
-        else:
             permissions_classes = [AllowAny]
         else:
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
 
-"""******************** CREATE *****************************"""
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -105,8 +78,7 @@ class AlumnoViewset(viewsets.ModelViewset):
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-"""******************** UPDATE *****************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = AlumnoRegistroSerializer
@@ -135,4 +107,4 @@ class AlumnoViewset(viewsets.ModelViewset):
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST
+            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)

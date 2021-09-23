@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,23 +10,24 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.ciclo_grado_curso import Ciclo_grado_curso
-from app.models.educacion_model.personalEducativo import personalEducativo
-from app.models.educacion_model.curso import Curso
-from app.models.educacion_model.ciclo_grado import Ciclo_grado
+from app.models import Ciclo_grado_curso
+from app.models import personalEducativo
+from app.models import Curso
+from app.models import Ciclo_grado
+from app.serializer import cgcRegistroSerializer, cgcSerializer
 
-class CgcViewset(viewsets.ModelViewset):
+class CgcViewset(viewsets.ModelViewSet):
     queryset = Ciclo_grado_curso.objects.filter(estado_cgc=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("nombre_curso","estado_curso")
-    search_fields = ("nombre_curso","estado_curso")
-    orderinf_fields = ("nombre_curso","estado_curso")
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_fields = ("curso__nombre_curso","estado_cgc")
+    search_fields = ("curso__nombre_curso","estado_cgc")
+    ordering_fields = ("curso__nombre_curso","estado_cgc")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return cursoSerializer
+            return cgcSerializer
         else:
-            return cursoRegistroSerializer
+            return cgcRegistroSerializer
 
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
@@ -34,7 +36,6 @@ class CgcViewset(viewsets.ModelViewset):
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
 
-    """******************** CREATE *****************************"""
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -55,8 +56,7 @@ class CgcViewset(viewsets.ModelViewset):
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-    """********************** ACTULIZAR ***************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = cgcRegistroSerializer(data = data)
@@ -67,7 +67,7 @@ class CgcViewset(viewsets.ModelViewset):
                     ciclo_grado_curso.curso = Curso.objects.get(pk=data.get("curso"))
                     ciclo_grado_curso.ciclo_grado = Ciclo_grado.objects.get(pk=data.get("ciclo_grado"))
                     ciclo_grado_curso.save()
-                    eturn Response(serializer.data, status = status.HTTP_200_OK)
+                    return Response(serializer.data, status = status.HTTP_200_OK)
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         except Exception as e:

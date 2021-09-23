@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,19 +10,18 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.inscripsionModel import Inscripcion
-from app.serializer.educacion_serializer.inscripsionSerializer import InscRegistroSerializer, InscSerializer
-from app.models.educacion_model.centro_educativo import centro_educativo
-from app.models.educacion_model.alumnoModelo import Alumno
-from app.models.educacion_model.ciclo_grado import Ciclo_grado
+from app.models import Inscripcion
+from app.serializer import InscRegistroSerializer, InscSerializer
+from app.models import centro_educativo
+from app.models import Alumno
+from app.models import Ciclo_grado
 
-
-class InViewset(viewsets.ModelViewset):
-    queryset = tarea_alumno.objects.filter(estado_tareaAlumno=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("Alumno__nombre_alumno","estado_inscripsion","centro_educativo")
-    search_fields = ("Alumno__nombre_alumno","estado_inscripsion","centro_educativo")
-    orderinf_fields = ("Alumno__nombre_alumno","estado_inscripsion","centro_educativo")
+class InViewset(viewsets.ModelViewSet):
+    queryset = Inscripcion.objects.filter(estado_incpripsion=True)
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_fields = ("alumno__nombres_alumno","estado_incpripsion","centro_educativo")
+    search_fields = ("alumno__nombres_alumno","estado_incpripsion","centro_educativo")
+    ordering_fields = ("alumno__nombres_alumno","estado_incpripsion","centro_educativo")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -30,13 +30,12 @@ class InViewset(viewsets.ModelViewset):
             return InscRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
-        else:
             permissions_classes = [AllowAny]
         else:
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
 
-"""******************** CREATE *****************************"""
+
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -58,8 +57,7 @@ class InViewset(viewsets.ModelViewset):
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-"""******************** UPDATE *****************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = InscRegistroSerializer
@@ -76,4 +74,4 @@ class InViewset(viewsets.ModelViewset):
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST
+            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)

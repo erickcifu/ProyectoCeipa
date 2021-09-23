@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,14 +10,14 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.tarea import tarea
-from app.models.educacion_model.personalEducativo import personalEducativo
-from app.models.educacion_model.ciclo_grado_curso import Ciclo_grado_curso
-from app.serializer.educacion_serializer.tareaSerializer import tareaRegistroSerializer, tareaSerializer
+from app.models import tarea
+from app.models import personalEducativo
+from app.models import Ciclo_grado_curso
+from app.serializer import tareaRegistroSerializer, tareaSerializer
 
-class TareaViewset(viewsets.ModelViewset):
+class TareaViewset(viewsets.ModelViewSet):
     queryset = tarea.objects.filter(estado_tarea=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
     filter_fields = ("titulo_tarea","estado_tarea")
     search_fields = ("titulo_tarea","estado_tarea")
     orderinf_fields = ("titulo_tarea","estado_tarea")
@@ -28,13 +29,11 @@ class TareaViewset(viewsets.ModelViewset):
             return tareaRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
-        else:
             permissions_classes = [AllowAny]
         else:
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
 
-    """******************** CREATE *****************************"""
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -57,8 +56,7 @@ class TareaViewset(viewsets.ModelViewset):
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-    """********************** ACTULIZAR ***************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = tareaRegistroSerializer(data = data)

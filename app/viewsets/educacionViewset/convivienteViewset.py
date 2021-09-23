@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,17 +10,17 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.conviviente import Conviviente
-from app.serializer.educacion_serializer.convivienteSerializer import ConvivienteRegistroSerializer, ConvivienteSerializer
-from app.models.educacion_model.vivienda import vivienda
-from app.models.educacion_model.parentesco import Parentesco
+from app.models import Conviviente
+from app.serializer import ConvivienteRegistroSerializer, ConvivienteSerializer
+from app.models import vivienda
+from app.models import Parentesco
 
-class ConvivienteViewset(viewsets.ModelViewset):
+class ConvivienteViewset(viewsets.ModelViewSet):
     queryset = Conviviente.objects.filter(estado_conviviente=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("vivienda__cantidad_personas", "Parentesco__nombre_parentesco", "estado_conviviente")
-    search_fields = ("vivienda__cantidad_personas", "Parentesco__nombre_parentesco", "estado_conviviente")
-    orderinf_fields = ("vivienda__cantidad_personas", "Parentesco__nombre_parentesco", "estado_conviviente")
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_fields = ("vivienda__cantidad_personas", "parentesco__nombre_parentesco", "estado_conviviente")
+    search_fields = ("vivienda__cantidad_personas", "parentesco__nombre_parentesco", "estado_conviviente")
+    orderinf_fields = ("vivienda__cantidad_personas", "parentesco__nombre_parentesco", "estado_conviviente")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -28,13 +29,11 @@ class ConvivienteViewset(viewsets.ModelViewset):
             return ConvivienteRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
-        else:
             permissions_classes = [AllowAny]
         else:
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
 
-"""******************** CREATE *****************************"""
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -57,8 +56,7 @@ class ConvivienteViewset(viewsets.ModelViewset):
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-"""******************** UPDATE *****************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = ConvivienteRegistroSerializer
@@ -76,4 +74,4 @@ class ConvivienteViewset(viewsets.ModelViewset):
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST
+            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
