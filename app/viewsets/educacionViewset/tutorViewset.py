@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,31 +10,31 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.tutor import Tutor
-from app.serializer.educacion_serializer.tutorSerializer import TutorRegistroSerializer, TutorSerializer
-from app.models.educacion_model.municipioModel import municipio
-from app.models.educacion_model.genero import genero
-from app.models.educacion_model.parentesco import Parentesco
+from app.models import Tutor
+from app.serializer import TutorRegistroSerializer, TutorSerializer
+from app.models import municipio
+from app.models import genero
+from app.models import Parentesco
 
-class TutorViewset(viewsets.ModelViewset):
+class TutorViewset(viewsets.ModelViewSet):
     queryset = Tutor.objects.filter(estado_tutor=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
     filter_fields = (
-        "municipio__nombre_municipio",
+        "muni__nombre_municipio",
         "genero__genero",
-        "Parentesco__nombre_parentesco",
+        "parentesco__nombre_parentesco",
         "estado_tutor"
         )
     search_fields = (
-        "municipio__nombre_municipio",
+        "muni__nombre_municipio",
         "genero__genero",
-        "Parentesco__nombre_parentesco",
+        "parentesco__nombre_parentesco",
         "estado_tutor"
         )
     orderinf_fields = (
-        "municipio__nombre_municipio",
+        "muni__nombre_municipio",
         "genero__genero",
-        "Parentesco__nombre_parentesco",
+        "parentesco__nombre_parentesco",
         "estado_tutor"
         )
 
@@ -44,13 +45,12 @@ class TutorViewset(viewsets.ModelViewset):
             return TutorRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
-        else:
             permissions_classes = [AllowAny]
         else:
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
 
-"""******************** CREATE *****************************"""
+
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -80,8 +80,7 @@ class TutorViewset(viewsets.ModelViewset):
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-"""******************** UPDATE *****************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = TutorRegistroSerializer
@@ -105,4 +104,4 @@ class TutorViewset(viewsets.ModelViewset):
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST
+            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)

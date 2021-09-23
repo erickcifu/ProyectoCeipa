@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,15 +10,15 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.personalEducativo import personalEducativo
-from app.serializer.educacion_serializer.personalSerializer import personalRegistroSerializer, personalSerializer
+from app.models import personalEducativo
+from app.serializer import personalRegistroSerializer, personalSerializer
 
-class PersonalViewset(viewsets.ModelViewset):
+class PersonalViewset(viewsets.ModelViewSet):
     queryset = personalEducativo.objects.filter(estado_personal=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
-    filter_fields = ("nombre","estado_personal")
-    search_fields = ("nombre","estado_personal")
-    orderinf_fields = ("nombre","estado_personal")
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_fields = ("nombres","estado_personal")
+    search_fields = ("nombres","estado_personal")
+    ordering_fields = ("nombres","estado_personal")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -27,12 +28,11 @@ class PersonalViewset(viewsets.ModelViewset):
 
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
-            permissions_classes = [AllowAny]
+            permission_classes = [AllowAny]
         else:
-            permissions_classes = [IsAuthenticated]
-        return [permissions() for permissions in permissions_classes]
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
 
-    """******************** CREATE *****************************"""
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -48,14 +48,13 @@ class PersonalViewset(viewsets.ModelViewset):
                         direccion_personal = data.get("direccion_personal"),
                         certificadoRenas_personal = data.get("certificadoRenas_personal"),
                     )
-                    return response(serializer,data, status=status.HTTP_200_OK)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-    """********************** ACTULIZAR ***************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = personalRegistroSerializer(data = data)

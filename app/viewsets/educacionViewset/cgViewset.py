@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,18 +10,18 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.ciclo_grado import Ciclo_grado
-from app.models.educacion_model.grado import Grado
-from app.models.educacion_model.Ciclo import Ciclo
-from app.models.educacion_model.seccionModelo import seccion
-from app.serializer.educacion_serializer.cgSerializer import cgRegistroSerializer, cgSerializer
+from app.models import Ciclo_grado
+from app.models import Grado
+from app.models import Ciclo
+from app.models import seccion
+from app.serializer import cgRegistroSerializer, cgSerializer
 
-class CgViewset(viewsets.ModelViewset):
+class CgViewset(viewsets.ModelViewSet):
     queryset = Ciclo_grado.objects.filter(estado_cg=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
     filter_fields = ("grado__nombre_grado","ciclo__anio")
     search_fields = ("grado__nombre_grado","ciclo__anio")
-    orderinf_fields = ("grado_nombre_grado","ciclo__anio")
+    ordering_fields = ("grado_nombre_grado","ciclo__anio")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -35,7 +36,6 @@ class CgViewset(viewsets.ModelViewset):
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
 
-    """******************** CREATE *****************************"""
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -56,8 +56,7 @@ class CgViewset(viewsets.ModelViewset):
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-    """********************** ACTULIZAR ***************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = cgRegistroSerializer(data = data)
@@ -68,7 +67,7 @@ class CgViewset(viewsets.ModelViewset):
                     ciclo_grado.ciclo = ciclo = Ciclo.objects.get(pk=data.get("ciclo"))
                     ciclo_grado.seccion = seccion.objects.get(pk=data.get("seccion"))
                     ciclo_grado.save()
-                    eturn Response(serializer.data, status = status.HTTP_200_OK)
+                    return Response(serializer.data, status = status.HTTP_200_OK)
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         except Exception as e:

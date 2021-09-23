@@ -1,6 +1,7 @@
 import json
+from django.db import transaction
 from django.core.files import File
-from django_filters.rest_framework import djangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -9,17 +10,16 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from app.models.educacion_model.religion_alumno import Religion_alumno
-from app.serializer.educacion_serializer.religion_alumnoSerializer import Religion_alumnoRegistroSerializer, Religion_alumnoSerializer
-from app.models.educacion_model.religion import religion
-from app.models.educacion_model.alumno import Alumno
+from app.models import Alumno
+from app.models import Religion_alumno
+from app.serializer import Religion_alumnoRegistroSerializer, Religion_alumnoSerializer
 
-class Religion_alumnoViewset(viewsets.ModelViewset):
+class Religion_alumnoViewset(viewsets.ModelViewSet):
     queryset = Religion_alumno.objects.filter(estado_religionalumno=True)
-    filter_backends = (djangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter)
     filter_fields = ("religion__nombre_religion","estado_religionalumno")
     search_fields = ("religion__nombre_religion","estado_religionalumno")
-    orderinf_fields = ("religion__nombre_religion","estado_religionalumno")
+    ordering_fields = ("religion__nombre_religion","estado_religionalumno")
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -28,13 +28,10 @@ class Religion_alumnoViewset(viewsets.ModelViewset):
             return Religion_alumnoRegistroSerializer
     def get_permissions(self):
         if self.action == "create" or self.action == "token":
-        else:
             permissions_classes = [AllowAny]
         else:
             permissions_classes = [IsAuthenticated]
         return [permissions() for permissions in permissions_classes]
-
-"""******************** CREATE *****************************"""
     def create(self, request, *args, **kwargs):
         try:
             data = request.data
@@ -55,8 +52,7 @@ class Religion_alumnoViewset(viewsets.ModelViewset):
         except Exception as e:
             return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
-"""******************** UPDATE *****************************"""
-    def update(self,request,pk=none):
+    def update(self,request,pk=None):
         try:
             data = request.data
             serializer = Religion_alumnoRegistroSerializer
@@ -72,4 +68,4 @@ class Religion_alumnoViewset(viewsets.ModelViewset):
                 else:
                     return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST
+            return Response({"detail":str(e)},status=status.HTTP_400_BAD_REQUEST)
