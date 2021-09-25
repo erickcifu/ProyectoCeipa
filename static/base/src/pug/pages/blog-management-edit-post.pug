@@ -1,0 +1,135 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Edit Post'
+
+//- The main CSS is already included within the layout.
+//- Below, the Pug `prepend` directive is used to load stylesheets
+//- that are specific to this page before the theme CSS.
+
+append css
+    //- Load Easy Markdown Editor Stylesheet
+    link(href='https://unpkg.com/easymde/dist/easymde.min.css', rel='stylesheet')
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-compact.pug
+    +header({
+        pageHeaderStyle: 'page-header-light border-bottom',
+        pageHeaderBg: 'bg-white',
+        pageHeaderSpacing: 'mb-4',
+        pageHeaderContainer: 'container-fluid px-4',
+        pageIcon: 'file-text'
+    })
+
+        a.btn.btn-sm.btn-light.text-primary(href='blog-management-posts-list.html')
+            i(data-feather='arrow-left').me-1
+            | Back to All Posts
+
+    // Main page content
+    .container-fluid.px-4
+
+        .row.gx-4
+        
+            .col-lg-8
+                .card.mb-4
+                    .card-header Post Title
+                    .card-body
+                        input#postTitleInput.form-control(type='text', placeholder='Enter your post title...', value='Boots on the Ground, Inclusive Thought Provoking Ideas')
+                .card.card-header-actions.mb-4
+                    .card-header
+                        | Post Preview
+                        i.text-muted(data-feather='info', data-bs-toggle='tooltip', data-bs-placement='left', title='The post preview text shows below the post title, and is the post summary on blog pages.')
+                    .card-body
+                        textarea.lh-base.form-control(type='text', placeholder='Enter your post preview text...', rows='4')
+                            | Empower communities and energize engaging ideas; scale and impact do-gooders while disrupting industries. Venture philanthropy benefits corporations and people by moving the needle.
+                .card.card-header-actions.mb-4.mb-lg-0
+                    .card-header
+                        | Post Content
+                        i.text-muted(data-feather='info', data-bs-toggle='tooltip', data-bs-placement='left', title='Markdown is supported within the post content editor.')
+                    .card-body
+                        textarea#postEditor
+                            | Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit similique distinctio quidem blanditiis architecto ullam a itaque quisquam nihil! Unde ducimus deleniti exercitationem minima, molestiae ab saepe libero. Doloribus, a?
+                            | 
+                            | Magnam amet labore exercitationem maxime consectetur molestias quas quia dicta, praesentium minus illum quis fuga, fugiat velit voluptate sed nostrum ipsam atque.
+                            | 
+                            | ## Creating Something New
+                            | Laborum placeat quas accusantium vitae perferendis dolores possimus tempora, qui consectetur hic ullam autem. Enim, rerum obcaecati numquam quaerat necessitatibus voluptatem? Repellat!
+                            | 
+                            | Quasi, quos quaerat? Sint at odit possimus ullam saepe suscipit officiis nobis eaque, laudantium ut earum tempore repellendus mollitia odio nam! Unde?
+
+            .col-lg-4
+                .card.card-header-actions
+                    .card-header
+                        | Publish
+                        i.text-muted(data-feather='info', data-bs-toggle='tooltip', data-bs-placement='left', title='Your updates will be live once a moderator approves the changes.')
+                    .card-body
+                        .d-grid
+                            button.fw-500.btn.btn-primary Submit Updates
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts    
+    //- Load Easy Markdown Editor Scripts
+    script(src='https://unpkg.com/easymde/dist/easymde.min.js', crossorigin='anonymous')
+    script(src='js/markdown.js')

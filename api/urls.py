@@ -19,8 +19,9 @@ from django.conf.urls.static import static
 from django.urls import path, include
 
 urlpatterns = [
+    path('', include(('app.urls', 'app'), namespace='app')),
+    path('educacion/', include(('app.urls', 'app'), namespace='educacion')),
     path('admin/', admin.site.urls),
-    path('', include('app.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns+=static(settings.STATIC_URL,documentacion_root=settings.STATIC_ROOT)
 '''

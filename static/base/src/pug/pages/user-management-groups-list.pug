@@ -1,0 +1,137 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Groups List'
+
+//- The main CSS is already included within the layout.
+//- Below, the Pug `prepend` directive is used to load stylesheets
+//- that are specific to this page before the theme CSS.
+
+prepend css
+    //- Load Simple DataTables Stylesheet
+    link(href='https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css', rel='stylesheet')
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-compact.pug
+    +header({
+        pageHeaderStyle: 'page-header-light border-bottom',
+        pageHeaderBg: 'bg-white',
+        pageHeaderSpacing: 'mb-4',
+        pageHeaderContainer: 'container-fluid px-4',
+        pageIcon: 'users'
+    })
+
+        a.btn.btn-sm.btn-light.text-primary(href='user-management-list.html')
+            i(data-feather='user').me-1
+            | Manage Users
+        button.btn.btn-sm.btn-light.text-primary(type='button', data-bs-toggle='modal', data-bs-target='#createGroupModal')
+            i(data-feather='plus').me-1
+            | Create New Group
+
+    // Main page content
+    .container-fluid.px-4
+
+        .card
+            .card-body
+                include includes/datatable-groups-table.pug
+
+    // Create group modal
+    #createGroupModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='createGroupModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#createGroupModalLabel.modal-title Create New Group
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    form
+                        .mb-0
+                            label.mb-1.small.text-muted(for='formGroupName') Group Name
+                            input#formGroupName.form-control(type='text', placeholder='Enter group name...')
+                .modal-footer
+                    button.btn.btn-danger-soft.text-danger(type='button', data-bs-dismiss='modal') Cancel
+                    button.btn.btn-primary-soft.text-primary(type='button') Create New Group
+
+    // Edit group modal
+    #editGroupModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='editGroupModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#editGroupModalLabel.modal-title Edit Group
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    form
+                        .mb-0
+                            label.mb-1.small.text-muted(for='formGroupName') Group Name
+                            input#formGroupName.form-control(type='text', placeholder='Enter group name...', value='Sales')
+                .modal-footer
+                    button.btn.btn-danger-soft.text-danger(type='button', data-bs-dismiss='modal') Cancel
+                    button.btn.btn-primary-soft.text-primary(type='button') Save Changes
+
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
+
+append scripts    
+    //- Load Simple DataTables Scripts
+    script(src='https://cdn.jsdelivr.net/npm/simple-datatables@latest', crossorigin='anonymous')
+    script(src='js/datatables/datatables-simple-demo.js')

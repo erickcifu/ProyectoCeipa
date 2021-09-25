@@ -1,0 +1,115 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Organization Details'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-compact.pug
+    +header({
+        pageHeaderStyle: 'page-header-light border-bottom',
+        pageHeaderBg: 'bg-white',
+        pageHeaderSpacing: 'mb-4',
+        pageHeaderContainer: 'container-fluid px-4',
+        pageIcon: 'globe'
+    })
+
+        a.btn.btn-sm.btn-light.text-primary(href='user-management-list.html')
+            i(data-feather='user').me-1
+            | Manage Users
+        a.btn.btn-sm.btn-light.text-primary(href='user-management-groups-list.html')
+            i(data-feather='users').me-1
+            | Manage Groups
+
+    // Main page content
+    .container-fluid.px-4
+
+        .card.bg-gradient-primary-to-secondary.mb-4
+            .card-body
+                .d-flex.align-items-center.justify-content-between
+                    .me-3
+                        .small.text-white-50 Organization Name:
+                        .h1.text-white Start Bootstrap
+                    .text-white
+                        | 20 Member(s)
+
+        .card
+            .card-body
+                .small.text-muted.mb-2 Administrators:
+                .row
+                    .col-lg-4
+                        .d-flex.align-items-center
+                            .avatar.avatar-lg
+                                img.avatar-img.img-fluid(src='assets/img/illustrations/profiles/profile-1.png')
+                            .ms-3
+                                .fs-4.text-dark.fw-500 Tiger Nixon
+                                .small.text-muted Admin
+                    .col-lg-4
+                        .d-flex.align-items-center
+                            .avatar.avatar-lg
+                                img.avatar-img.img-fluid(src='assets/img/illustrations/profiles/profile-2.png')
+                            .ms-3
+                                .fs-4.text-dark.fw-500 Garrett Winters
+                                .small.text-muted Admin
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })
