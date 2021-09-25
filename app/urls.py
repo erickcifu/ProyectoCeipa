@@ -3,6 +3,11 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 from django.conf.urls import  url
 from app import viewsets
+from django.contrib.auth import views as auth_views
+
+from app.views import Home, ParentescoView, ParentescoNew, ParentescoEdit, ParentescoDel, \
+    DepartamentoView, DepartamentoNew, DepartamentoEdit, DepartamentoDel, \
+    MunicipioView, MunicipioNew, MunicipioEdit, MunicipioDel
 
 router = routers.DefaultRouter()
 router.register(r'personalEducativo', viewsets.PersonalViewset)
@@ -41,6 +46,25 @@ router.register(r'tutor', viewsets.TutorViewset)
 router.register(r'vivienda', viewsets.ViviendaViewset)
 urlpatterns = [
     path('app/',include(router.urls)),
-    url(r"^app/token",obtain_auth_token, name="app-token"),
-    path('api-auth/',include('rest_framework.urls')),
-    ]
+    #url(r"^app/token",obtain_auth_token, name="app-token"),
+    #path('api-auth/',include('rest_framework.urls')),
+
+    path('parentesco/', ParentescoView.as_view(), name='parentesco_list'),
+    path('parentesco/new', ParentescoNew.as_view(), name='parentesco_new'),
+    path('parentesco/edit/<int:pk>', ParentescoEdit.as_view(), name='parentesco_edit'),
+    path('parentesco/delete/<int:pk>', ParentescoDel.as_view(), name='parentesco_del'),
+
+    path('departamento/', DepartamentoView.as_view(), name='departamento_list'),
+    path('departamento/new', DepartamentoNew.as_view(), name='departamento_new'),
+    path('departamento/edit/<int:pk>', DepartamentoEdit.as_view(), name='departamento_edit'),
+    path('departamento/delete/<int:pk>', DepartamentoDel.as_view(), name='departamento_del'),
+
+    path('municipio/', MunicipioView.as_view(), name='municipio_list'),
+    path('municipio/new', MunicipioNew.as_view(), name='municipio_new'),
+    path('municipio/edit/<int:pk>', MunicipioEdit.as_view(), name='municipio_edit'),
+    path('municipio/delete/<int:pk>', MunicipioDel.as_view(), name='municipio_del'),
+
+    path('', Home.as_view(), name = 'home'),
+    path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),
+]

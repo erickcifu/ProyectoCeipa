@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+
+{% block page_content %}
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-6 col-md-6 mb-6">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Parentesco
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="nombre_parentesco" maxlength="50" class="form-control" required id="id_nombre_parentesco"
+                                    placeholder="Parentesco" value="{% if obj %} {{ obj.nombre_parentesco }} {% endif %}">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="descripcion_parentesco" maxlength="100" class="form-control" required id="id_descripcion_parentesco"
+                                    placeholder="Descripcion" value="{% if obj %} {{ obj.descripcion_parentesco }} {% endif %}">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="id_estado_parentesco">Estado</label>
+                                    <input type="checkbox" name="estado_parentesco" class="form-control" id="id_estado_parentesco"
+                                    {% if obj.estado_parentesco %} checked {% endif %}>
+                                </div>
+                            </div>
+                            <!-- {{form.as_p}} -->
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-danger"> <span class="fa fa-save"></span>Guardar</button>
+                                <a href="{% url 'educacion:parentesco_list' %}" class="btn btn-success"><span class="fa fa-undo"></span>Cancelar</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
+{% block js_page %}
+{% endblock %}

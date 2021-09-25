@@ -1,0 +1,78 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/authentication.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var pageTitle = 'Login'
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+    .container-xl.px-4
+        .row.justify-content-center
+            .col-xl-5.col-lg-6.col-md-8.col-sm-11
+                // Social login form
+                .card.my-5
+                    .card-body.p-5.text-center
+                        .h3.fw-light.mb-3 Sign In
+                        // Social login links
+                        a.btn.btn-icon.btn-facebook.mx-1(href='#!')
+                            i.fab.fa-facebook-f.fa-fw.fa-sm
+                        a.btn.btn-icon.btn-github.mx-1(href='#!')
+                            i.fab.fa-github.fa-fw.fa-sm
+                        a.btn.btn-icon.btn-google.mx-1(href='#!')
+                            i.fab.fa-google.fa-fw.fa-sm
+                        a.btn.btn-icon.btn-twitter.mx-1(href='#!')
+                            i.fab.fa-twitter.fa-fw.fa-sm.text-white
+                    hr.my-0
+                    .card-body.p-5
+                        // Login form
+                        form
+                            // Form Group (email address)
+                            .mb-3
+                                label.text-gray-600.small(for='emailExample') Email address
+                                input.form-control.form-control-solid(type='text', placeholder='', aria-label='Email Address', aria-describedby='emailExample')
+                            // Form Group (password)
+                            .mb-3
+                                label.text-gray-600.small(for='passwordExample') Password
+                                input.form-control.form-control-solid(type='password', placeholder='', aria-label='Password', aria-describedby='passwordExample')
+                            // Form Group (forgot password link)
+                            .mb-3
+                                a.small(href='auth-password-social.html') Forgot your password?
+                            // Form Group (login box)
+                            .d-flex.align-items-center.justify-content-between.mb-0
+                                .form-check
+                                    input#checkRememberPassword.form-check-input(type='checkbox', value='')
+                                    label.form-check-label(for='checkRememberPassword') Remember password
+                                a.btn.btn-primary(href='dashboard-1.html') Login
+                    hr.my-0
+                    .card-body.px-5.py-4
+                        .small.text-center
+                            | New user? 
+                            a(href="auth-register-social.html") Create an account!
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-dark'
+    })
