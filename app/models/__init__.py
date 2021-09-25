@@ -33,4 +33,9 @@ from .educacion_model.padecimientoModel import Padecimiento
 from .educacion_model.alumnopadecimiento import Apadecimiento
 from .educacion_model.inscipsionesModel  import Inscripcion
 from .educacion_model.etnia import etnia
-from .municipioModel.areaModelo import Area
+#Municipalizacion
+from .municipalizacionModel.area import Area
+from .municipalizacionModel.ausencia import Ausencia
+from .municipalizacionModel.Gorganizado import GOrganizado
+from .municipalizacionModel.institucion import Institucion
+from .municipalizacionModel.programaC import ProgramaC
