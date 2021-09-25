@@ -8,6 +8,7 @@ class Religion_alumno(models.Model):
     nombre_iglesia = models.CharField(max_length=50,null=False)
     estado_religionalumno = models.BooleanField(default=True)
 
+
     def delete(self, *args):
         self.estado_religionalumno = False
         self.save()

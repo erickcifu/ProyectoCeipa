@@ -9,6 +9,8 @@ class psicologico(models.Model):
     Entrevistador = models.CharField(max_length=255, null=True, blank=True)
     estado_psicologico = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.Analisis_psicologico
 
     def delete(self, *args):
         self.estado_psicologico = False

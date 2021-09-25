@@ -1,52 +1,47 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base3.html' %}
 
 {% block page_content %}
-<div class="card shadow mb-4">
-    <!-- Card Header - Dropdown -->
-    <div
-        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Listado de Departamentos</h6>
-        <div class="dropdown no-arrow">
-            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                aria-labelledby="dropdownMenuLink">
-                <div class="dropdown-header">acciones</div>
-                <a class="dropdown-item" href="{% url 'educacion:departamento_new' %}" ><i class="far fa-calendar-plus"></i> Nueva</a>
-            </div>
-        </div>
-    </div>
-    <!-- Card Body -->
-    <div class="card-body">
-        {% if not obj %}
-        <div class="alert alert-info">No hay Departamentos</div>
-        {% else %}
-        <table class="table table-striped table-hover">
-            <thead>
-                <th>Id</th>
-                <th>Departamento</th>
-                <th>Estado</th>
-                <th class="all">Acciones</th>
-            </thead>
-            <tbody>
-                {% for item in obj %}
-                <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.nombre_departamento }}</td>
-                    <td>{{ item.estado_departamento|yesno:"Activo,Inactivo" }}</td>
-                    <td>
-                        <a href="{% url 'educacion:departamento_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                        <a href="{% url 'educacion:departamento_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
-    </div>
-</div>
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Departamentos
+          <div class="dropdown no-caret">
+              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i data-feather="more-vertical"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                  <<a class="dropdown-item" href="{% url 'educacion:departamento_new' %}" ><i class="far fa-calendar-plus"></i> Nueva</a>
+              </div>
+          </div>
+      </div>
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay Departamentos</div>
+          {% else %}
+          <table class="table table-striped table-hover">
+              <thead>
+                  <th>Id</th>
+                  <th>Departamento</th>
+                  <th>Estado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.nombre_departamento }}</td>
+                      <td>{{ item.estado_departamento|yesno:"Activo,Inactivo" }}</td>
+                      <td>
+                          <a href="{% url 'educacion:departamento_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
+                          <a href="{% url 'educacion:departamento_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+
 {% endblock %}
 
 {% block js_page %}

@@ -12,6 +12,9 @@ class Inscripcion(models.Model):
     Fecha_inscripcion = models.DateTimeField()
     estado_incpripsion = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.centro_educativo
+
     def delete(self, *args):
         self.estado_incpripsion = False
         self.save()

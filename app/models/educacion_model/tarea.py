@@ -11,6 +11,9 @@ class tarea(models.Model):
     fecha_entrega = models.DateTimeField()
     estado_tarea = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.titulo_tarea
+
     def delete(self, *args):
         self.estado_tarea = False
         self.save()

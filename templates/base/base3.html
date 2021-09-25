@@ -11,7 +11,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
         <link href="{% static 'base/dist/css/styles.css' %}" rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="{% static 'base/dist/assets/img/favicon.png' %}" />
+        <link rel="icon" type="image/x-icon" href="{% static 'base/dist/assets/img/Ceipa_Logo.jpeg' %}" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
@@ -24,7 +24,7 @@
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="{% url 'app:home' %}">Sistema Ceipa</a>
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="{% url 'app:home' %}">Sistema CEIPA</a>
             <!-- Navbar Search Input-->
             <!-- * * Note: * * Visible only on and above the lg breakpoint-->
             <form class="form-inline me-auto d-none d-lg-block me-3">
@@ -66,7 +66,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'app:logout' %}">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                            Cerrar Sesion?
+                            Cerrar Sesion
                         </a>
                     </div>
                 </li>
@@ -389,7 +389,7 @@
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
                                             HOME
                                         </h1>
-                                        <div class="page-header-subtitle">Estadisiticas de niños y jovenes en toda la organizacion</div>
+                                        <div class="page-header-subtitle">Estadisticas de niños y jovenes en toda la organizacion</div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">
                                         <div class="input-group input-group-joined border-0" style="width: 16.5rem">
@@ -410,11 +410,10 @@
                                         <div class="row align-items-center">
                                             <div class="col-xl-8 col-xxl-12">
                                                 <div class="text-center text-xl-start text-xxl-center mb-4 mb-xl-0 mb-xxl-4">
-                                                    <h1 class="text-primary">Bienvenidos al espacio de trabajo de CEIPA</h1>
-                                                    <p class="text-gray-700 mb-0">Aquí vamos a escribir una pequeña referencia de que es ceipa</p>
+                                                    <h1 class="text-primary">Bienvenido/a al espacio de trabajo</h1>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="{% static 'base/dist/assets/img/illustrations/at-work.svg' %}" style="max-width: 26rem" /></div>
+                                            <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="{% static 'base/dist/assets/img/Ceipa_Logo.jpeg' %}" style="max-width: 15rem" /></div>
                                         </div>
                                     </div>
                                 </div>

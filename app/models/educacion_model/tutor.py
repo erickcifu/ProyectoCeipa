@@ -17,6 +17,8 @@ class Tutor(models.Model):
     fotografia = models.ImageField(upload_to='ceipa', null=True, blank=True)
     correo = models.EmailField(max_length=80)
 
+    def __str__(self):
+        return self.nombres_tutor
 
     def delete(self, *args):
         self.estado_tutor = False

@@ -5,6 +5,9 @@ class Tipo_muro(models.Model):
     descripcion_muro= models.CharField(max_length=100,null=True, blank=True)
     estado_muro = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.tipo_muro
+
     def delete(self, *args):
         self.estado_muro = False
         self.save()
