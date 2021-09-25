@@ -11,6 +11,9 @@ class Conviviente(models.Model):
     estado_conviviente = models.BooleanField(default=True)
     fecha_nacimiento = models.DateField()
 
+    def __str__(self):
+        return self.nombres_conviviente
+
     def delete(self, *args):
         self.estado_conviviente = False
         self.save()

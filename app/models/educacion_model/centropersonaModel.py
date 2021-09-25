@@ -7,6 +7,8 @@ class Centropersona(models.Model):
     personal =models.ForeignKey(personalEducativo, on_delete=models.CASCADE, related_name="p_educativo")
     estado_centropersona = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.centro_Educativo
 
     def delete(self, *args):
         self.estado_centropersona = False

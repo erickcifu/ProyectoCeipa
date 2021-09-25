@@ -1,47 +1,20 @@
 {% extends 'base/base3.html' %}
 
 {% block page_content %}
-<div class="card shadow mb-4">
-    <!-- Card Header - Dropdown -->
-    <!-- <div
-        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Listado de Municipios</h6>
-        <div class="dropdown no-arrow">
-            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                aria-labelledby="dropdownMenuLink">
-                <div class="dropdown-header">acciones</div>
-                <a class="dropdown-item" href="{% url 'educacion:municipio_new' %}" ><i class="far fa-calendar-plus"></i> Nueva</a>
-            </div>
-        </div>
-    </div> -->
-
-        <div class="card mb-4">
-            <div class="card-header"></div>
-            <div class="card-body">
-                <!-- Component Preview-->
-                <h6 class="small text-muted fw-500" id="advancedDropdown">...</h6>
-                <div class="sbp-preview mb-4">
-                    <div class="sbp-preview-content bg-light">
-                        <div class="card card-header-actions">
-                            <div class="card-header">
-                                Listado de Municipios
-                                <div class="dropdown no-caret">
-                                    <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-primary" data-feather="more-vertical"></i></button>
-                                    <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{% url 'educacion:municipio_new' %}">Nuevo</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body"><p class="card-text">........................................................................................................................................................................................................................................................</p></div>
-                        </div>
-                    </div>
-
-    <!-- Card Body -->
-    <div class="card-body">
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Municipios
+          <div class="dropdown no-caret">
+              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i data-feather="more-vertical"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="{% url 'educacion:municipio_new' %}">Nuevo</a>
+              </div>
+          </div>
+      </div>
+      <div class="card-body">
         {% if not obj %}
         <div class="alert alert-info">No hay Municipios</div>
         {% else %}
@@ -49,8 +22,8 @@
             <thead>
                 <th>Id</th>
                 <th>Municipio</th>
-                <th>Estado</th>
                 <th>Departamento</th>
+                <th>Estado</th>
                 <th class="all">Acciones</th>
             </thead>
             <tbody>
@@ -58,20 +31,42 @@
                 <tr>
                     <td>{{ item.id }}</td>
                     <td>{{ item.nombre_municipio }}</td>
-                    <td>{{ item.estado_municipio|yesno:"Activo,Inactivo" }}</td>
                     <td>{{ item.dep }}</td>
+                    <td>{{ item.estado_municipio|yesno:"Activo,Inactivo" }}</td>
                     <td>
                         <a href="{% url 'educacion:municipio_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
                         <a href="{% url 'educacion:municipio_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                        <!--data-bs-toggle="modal" data-bs-target="#exampleModalCenter" -->
+                        </div>
+
                     </td>
                 </tr>
                 {% endfor %}
+                <form method="POST" class="form-inline">
+                  {% csrf_token %}
+                  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalCenterTitle">¿Desea eliminar?</h5>
+                                  <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">El estado del dato {{ obj.id }} cambiará a inactivo</div>
+                              <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-danger"><a>Si, Eliminar</a></button>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
             </tbody>
         </table>
         {% endif %}
+      </div>
     </div>
 </div>
-{% endblock %}
+{% endblock page_content %}
 
 {% block js_page %}
 <script>

@@ -9,6 +9,7 @@ class tarea_alumno(models.Model):
     estado_entrega = models.BooleanField(default=False)
     estado_tareaAlumno = models.BooleanField(default=True)
 
+
     def delete(self, *args):
         self.estado_tareaAlumno = False
         self.save()

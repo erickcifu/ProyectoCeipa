@@ -7,6 +7,9 @@ class Curso(models.Model):
     grado = models.ForeignKey(Grado, on_delete=models.CASCADE, related_name="curso_grado")
     estado_curso = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.nombre_curso
+
     def delete(self, *args):
         self.estado_curso = False
         self.save()

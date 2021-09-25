@@ -27,6 +27,8 @@ class Alumno(models.Model):
     telefono = models.CharField(max_length=8)
     fotografia = models.ImageField(upload_to='ceipa', null=True, blank=True)
 
+    def __str__(self):
+        return self.nombres_alumno
 
     def delete(self, *args):
         self.estado_alumno = False

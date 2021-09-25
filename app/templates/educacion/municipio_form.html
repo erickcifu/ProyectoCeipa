@@ -1,6 +1,7 @@
 {% extends 'base/base3.html' %}
 
 {% block page_content %}
+<div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
     <div class="col-xl-12 col-md-12 mb-12">
@@ -32,11 +33,11 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <div class="input-group">
-                                    <!--<label for="id_estado_departamento">Estado</label>
-                                    <input type="checkbox" name="estado_departamento" class="form-control" id="id_estado_departamento"
-                                    {% if obj.estado_departamento %} checked {% endif %}>-->
-                                    {{ form.estado_municipio }}
+                                <div class="form-group">
+                                    <label for="id_estado_departamento">Estado</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="estado_municipio" class="form-control" id="id_estado_municipio" type="checkbox"  {% if obj.estado_municipio is true %} checked {% endif %}>
+                                    </div>
                                 </div>
                             </div>
                             <!-- {{form.as_p}} -->
@@ -44,8 +45,8 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-danger"> <span class="fa fa-save"></span>Guardar</button>
-                                <a href="{% url 'educacion:municipio_list' %}" class="btn btn-success"><span class="fa fa-undo"></span>Cancelar</a>
+                                <button type="submit" class="btn btn-danger">Guardar</button>
+                                <a href="{% url 'educacion:municipio_list' %}" class="btn btn-success">Cancelar</a>
                             </div>
                         </div>
                     </div>
@@ -54,6 +55,7 @@
         </div>
     </div>
 </form>
+</div>
 {% endblock %}
 {% block js_page %}
 {% endblock %}

@@ -9,6 +9,9 @@ class Apadecimiento(models.Model):
     lugar = models.CharField(max_length=205,null=False )
     estado_Alpadecimiento = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.padecimiento
+
     def delete(self, *args):
         self.estado_Alpadecimiento = False
         self.save()

@@ -10,6 +10,9 @@ class personalEducativo(models.Model):
     certificadoRenas_personal = models.BooleanField(default=False, null=False)
     estado_personal = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.nombres
+
     def delete(self, *args):
         self.estado_personal = False
         self.save()

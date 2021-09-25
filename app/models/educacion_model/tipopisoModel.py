@@ -5,6 +5,9 @@ class Tipo_piso (models.Model):
     descripcion_tipopiso = models.CharField(max_length=100,null=True, blank=True)
     estado_tipopiso = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.tipo_piso
+
     def delete(self, *args):
         self.estado_tipopiso = False
         self.save()
