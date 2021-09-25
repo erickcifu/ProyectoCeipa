@@ -39,7 +39,7 @@ from .municipalizacionModel.ausencia import Ausencia
 from .municipalizacionModel.Gorganizado import GOrganizado
 from .municipalizacionModel.institucion import Institucion
 from .municipalizacionModel.programaC import ProgramaC
-from .municipalizacionModel.tutor_muni import Tutor
+from .municipalizacionModel.tutor_muni import TutorMuni
 from .municipalizacionModel.establecimiento import Establecimiento
 from .municipalizacionModel.mediocomu import MedioComuni
 from .municipalizacionModel.partidopolitic import PartidoPolitic

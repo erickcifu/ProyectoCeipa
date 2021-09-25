@@ -5,10 +5,10 @@ class Establecimiento(models.Model):
     direccion = models.CharField(max_length=80)
     estado = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.nombre_establecimiento
+
     def delete(self, *args):
         self.estado = False
         self.save()
         return True
-
-    def __str__(self):
-        return '{}'.format(self.nombre_establecimiento)
