@@ -10,3 +10,11 @@ from .educacionViewset.padViewset import PadView, PadNew, PadEdit, PadDel
 from .educacionViewset.AlumPadViewset import APadView, APadNew, APadEdit, APadDel
 from .educacionViewset.CenEduViewset import CenEdView, CenEdNew, CenEdEdit, CenEdDel
 from .educacionViewset.homeViewset import Home
+from .educacionViewset.cicloViewset import CicloView, CicloNew, CicloEdit, CicloDel
+from .educacionViewset.cursoViewset import CursoView, CursoNew, CursoEdit, CursoDel
+from .educacionViewset.generoViewset import GeneroView, GeneroNew, GeneroEdit, GeneroDel
+from .educacionViewset.gradosViewset import GradosView, GradosNew, GradosEdit, GradosDel
+from .educacionViewset.idiomaViewset import IdiomaView, IdiomaNew, IdiomaEdit, IdiomaDel
+from .educacionViewset.personalViewset import PersonalView, PersonalNew, PersonalEdit, PersonalDel
+from .educacionViewset.religionViewset import ReligionView, ReligionNew, ReligionEdit, ReligionDel
+from .educacionViewset.tareaViewset import TareaView, TareaNew, TareaEdit, TareaDel

@@ -9,3 +9,11 @@ from .educacionForms.ocupaForm import OcupaForm
 from .educacionForms.padForm import PadeForm
 from .educacionForms.alPadeForm import APadeForm
 from .educacionForms.centEduForm import CentEduForm
+from .educacionForms.cicloForm import CicloForm
+from .educacionForms.cursoForm import CursoForm
+from .educacionForms.generoForm import GeneroForm
+from .educacionForms.gradosForm import GradosForm
+from .educacionForms.idiomaForm import IdiomaForm
+from .educacionForms.personalForms import PersonalForm
+from .educacionForms.religionForm import ReligionForm
+from .educacionForms.tareaForm import TareaForm
