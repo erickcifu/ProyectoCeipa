@@ -5,9 +5,9 @@ from app.models import centro_educativo
 class CentEduForm(forms.ModelForm):
     class Meta:
         model = centro_educativo
-        fields = ['nombre_centro', 'estado_centro']
-        labels = {'padecimiento':"CentroEducativo", 'estado_centro':"Estado"}
-        widget = {'estado_centro': forms.TextInput}
+        fields = ['nombre_centro', 'direccion_centro', 'codigo_centro', 'estado_centro']
+        labels = {'nombre_centro':"CentroEducativo", 'direccion_centro':'Direccion', 'codigo_centro':'Codigo', 'estado_centro':"Estado"}
+        widget = {'nombre_centro': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
