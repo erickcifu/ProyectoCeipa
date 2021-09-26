@@ -90,7 +90,7 @@
                             <!-- Sidenav Accordion (Dashboard)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
                                 <div class="nav-link-icon"><i data-feather="activity"></i></div>
-                                Catalogos
+                                Educacion Acelerada
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
@@ -100,7 +100,14 @@
                                         <!-- <span class="badge bg-primary-soft text-primary ms-auto">Updated</span> -->
                                     </a>
                                     <a class="nav-link" href="{% url 'educacion:municipio_list' %}">Municipios</a>
-                                    <a class="nav-link" href="dashboard-3.html">Affiliate</a>
+                                    <a class="nav-link" href={% url 'educacion:seccion_list' %}>Seccion</a>
+                                    <a class="nav-link" href={% url 'educacion:psico_list' %}>Psicologico</a>
+                                    <a class="nav-link" href={% url 'educacion:cat_list' %}>Propiedad</a>
+                                    <a class="nav-link" href={% url 'educacion:tpiso_list' %}>Tipo Piso</a>
+                                    <a class="nav-link" href={% url 'educacion:ocup_list' %}>Ocupacion</a>
+                                    <a class="nav-link" href={% url 'educacion:pade_list' %}>Padecimiento</a>
+                                    <a class="nav-link" href={% url 'educacion:apad_list' %}>AlumnoPadecimiento</a>
+                                    <a class="nav-link" href={% url 'educacion:centedu_list' %}>CentroEducativo</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Heading (Custom)-->
