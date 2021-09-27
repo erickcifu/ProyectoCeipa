@@ -45,3 +45,12 @@ from .municipalizacionModel.mediocomu import MedioComuni
 from .municipalizacionModel.partidopolitic import PartidoPolitic
 from .municipalizacionModel.lider_comunitario import LiderComunitario
 from .municipalizacionModel.ausen_beneficiado import AusenBeneficiado
+from .municipalizacionModel.beneficiado import Beneficiado
+from .municipalizacionModel.cargo import Cargo
+from .municipalizacionModel.CarGrup import CargoGrupo
+from .municipalizacionModel.comision import Comision
+from .municipalizacionModel.idioPer import IdiomaPersona
+from .municipalizacionModel.maestro import Maestro
+from .municipalizacionModel.padper import PadPer
+from .municipalizacionModel.persona import Persona
+from .municipalizacionModel.profesion import Profesion
