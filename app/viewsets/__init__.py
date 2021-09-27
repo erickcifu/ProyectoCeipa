@@ -20,3 +20,8 @@ from .educacionViewset.religionViewset import ReligionView, ReligionNew, Religio
 from .educacionViewset.tareaViewset import TareaView, TareaNew, TareaEdit, TareaDel
 from .educacionViewset.gradoViewset import GradoView, GradoNew, GradoEdit, GradoDel
 from .educacionViewset.religionalumViewset import Religion_alumnoView, Religion_alumnoNew, Religion_alumnoEdit, Religion_alumnoDel
+from .educacionViewset.techoViewset import TechoView, TechoNew, TechoEdit, TechoDel
+from .educacionViewset.paredViewset import ParedView, ParedNew, ParedEdit, ParedDel
+from .educacionViewset.etniaViewset import EtniaView, EtniaNew, EtniaEdit, EtniaDel
+from .educacionViewset.serviaguaViewset import ServiaguaView, ServiaguaNew, ServiaguaEdit, ServiaguaDel
+from .educacionViewset.convivienteViewset import ConvivienteView, ConvivienteNew, ConvivienteEdit, ConvivienteDel

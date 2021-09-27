@@ -19,3 +19,8 @@ from .educacionForms.religionForm import ReligionForm
 from .educacionForms.tareaForm import TareaForm
 from .educacionForms.gradoForm import GradoForm
 from .educacionForms.religionalumForm import ReligionAlumnoForm
+from .educacionForms.techoForm import TechoForm
+from .educacionForms.paredForm import ParedForm
+from .educacionForms.etniaForm import EtniaForm
+from .educacionForms.serviaguaForm import ServiaguaForm
+from .educacionForms.convivienteForm import ConvivienteForm

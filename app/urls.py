@@ -115,6 +115,31 @@ urlpatterns = [
     path('religionalumno/edit/<int:pk>', viewsets.Religion_alumnoEdit.as_view(), name='religionalum_edit'),
     path('religionalumno/delete/<int:pk>', viewsets.Religion_alumnoDel.as_view(), name='religionalum_del'),
 
+    path('techo/', viewsets.TechoView.as_view(), name='techo_list'),
+    path('techo/new', viewsets.TechoNew.as_view(), name='techo_new'),
+    path('techo/edit/<int:pk>', viewsets.TechoEdit.as_view(), name='techo_edit'),
+    path('techo/delete/<int:pk>', viewsets.TechoDel.as_view(), name='techo_del'),
+
+    path('pared/', viewsets.ParedView.as_view(), name='pared_list'),
+    path('pared/new', viewsets.ParedNew.as_view(), name='pared_new'),
+    path('pared/edit/<int:pk>', viewsets.ParedEdit.as_view(), name='pared_edit'),
+    path('pared/delete/<int:pk>', viewsets.ParedDel.as_view(), name='pared_del'),
+
+    path('etnia/', viewsets.EtniaView.as_view(), name='etnia_list'),
+    path('etnia/new', viewsets.EtniaNew.as_view(), name='etnia_new'),
+    path('etnia/edit/<int:pk>', viewsets.EtniaEdit.as_view(), name='etnia_edit'),
+    path('etnia/delete/<int:pk>', viewsets.EtniaDel.as_view(), name='etnia_del'),
+
+    path('servicioagua/', viewsets.ServiaguaView.as_view(), name='serviagua_list'),
+    path('servicioagua/new', viewsets.ServiaguaNew.as_view(), name='serviagua_new'),
+    path('servicioagua/edit/<int:pk>', viewsets.ServiaguaEdit.as_view(), name='serviagua_edit'),
+    path('servicioagua/delete/<int:pk>', viewsets.ServiaguaDel.as_view(), name='serviagua_del'),
+
+    path('conviviente/', viewsets.ConvivienteView.as_view(), name='conviviente_list'),
+    path('conviviente/new', viewsets.ConvivienteNew.as_view(), name='conviviente_new'),
+    path('conviviente/edit/<int:pk>', viewsets.ConvivienteEdit.as_view(), name='conviviente_edit'),
+    path('conviviente/delete/<int:pk>', viewsets.ConvivienteDel.as_view(), name='conviviente_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),
