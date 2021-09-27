@@ -24,3 +24,5 @@ from .educacionForms.paredForm import ParedForm
 from .educacionForms.etniaForm import EtniaForm
 from .educacionForms.serviaguaForm import ServiaguaForm
 from .educacionForms.convivienteForm import ConvivienteForm
+from .educacionForms.tutorForm import TutorForm
+from .educacionForms.alumnoForm import AlumnoForm

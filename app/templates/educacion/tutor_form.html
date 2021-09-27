@@ -1,0 +1,128 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-6 col-md-6 mb-6">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Tutor
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="nombres_tutor" maxlength="50" class="form-control" required id="id_nombres_tutor"
+                                    placeholder="Nombres" value="{% if obj %} {{ obj.nombres_tutor }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="apellidos_tutor" maxlength="50" class="form-control" required id="id_apellidos_tutor"
+                                    placeholder="Apellidos" value="{% if obj %} {{ obj.apellidos_tutor }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="DPI" maxlength="50" class="form-control" required id="id_DPI"
+                                    placeholder="DPI" value="{% if obj %} {{ obj.DPI }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="date" name="fecha_nacimiento" maxlength="50" class="form-control" required id="id_fecha_nacimiento"
+                                    placeholder="Fecha de nacimiento" value="{% if obj %} {{ obj.fecha_nacimiento }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="direccion_tutor" maxlength="50" class="form-control" required id="id_direccion_tutor"
+                                    placeholder="Direccion" value="{% if obj %} {{ obj.direccion_tutor }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="telefono" maxlength="50" class="form-control" required id="id_telefono"
+                                    placeholder="Telefono" value="{% if obj %} {{ obj.telefono }} {% endif %}">
+                                </div>
+                            </div>
+
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="email" name="correo" maxlength="50" class="form-control" required id="id_correo"
+                                    placeholder="Correo Electronico" value="{% if obj %} {{ obj.correo }} {% endif %}">
+                                </div>
+                            </div>
+
+
+                            <div class="col-10">
+                                <!-- <div class="input-group">
+                                    <input type="image" name="fotografia" maxlength="50" class="form-control" required id="id_fotografia"
+                                    placeholder="Fotografia" value="{% if obj %} {{ obj.fotografia }} {% endif %}">
+                                </div> -->
+                                {{ form.fotografia }}
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="muni" maxlength="50" class="form-control" required id="id_muni"
+                                    placeholder="Municipalidad" value="{% if obj %} {{ obj.muni }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="genero" maxlength="50" class="form-control" required id="id_genero"
+                                    placeholder="Genero" value="{% if obj %} {{ obj.genero }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="parentesco" maxlength="50" class="form-control" required id="id_parentesco"
+                                    placeholder="Parentesco" value="{% if obj %} {{ obj.parentesco }} {% endif %}">
+                                </div>
+                            </div>
+
+
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="id_estado_tutor">Estado</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="estado_tutor" class="form-control" id="id_estado_tutor" type="checkbox"  {% if obj.estado_tutor %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- {{form.as_p}} -->
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'educacion:tutor_list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}

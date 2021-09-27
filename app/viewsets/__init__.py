@@ -25,3 +25,5 @@ from .educacionViewset.paredViewset import ParedView, ParedNew, ParedEdit, Pared
 from .educacionViewset.etniaViewset import EtniaView, EtniaNew, EtniaEdit, EtniaDel
 from .educacionViewset.serviaguaViewset import ServiaguaView, ServiaguaNew, ServiaguaEdit, ServiaguaDel
 from .educacionViewset.convivienteViewset import ConvivienteView, ConvivienteNew, ConvivienteEdit, ConvivienteDel
+from .educacionViewset.tutorViewset import TutorView, TutorNew, TutorEdit, TutorDel
+from .educacionViewset.alumnoViewset import AlumnoView, AlumnoNew, AlumnoEdit, AlumnoDel
