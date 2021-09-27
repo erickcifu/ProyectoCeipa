@@ -17,3 +17,5 @@ from .educacionForms.idiomaForm import IdiomaForm
 from .educacionForms.personalForms import PersonalForm
 from .educacionForms.religionForm import ReligionForm
 from .educacionForms.tareaForm import TareaForm
+from .educacionForms.gradoForm import GradoForm
+from .educacionForms.religionalumForm import ReligionAlumnoForm

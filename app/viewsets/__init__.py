@@ -18,3 +18,5 @@ from .educacionViewset.idiomaViewset import IdiomaView, IdiomaNew, IdiomaEdit, I
 from .educacionViewset.personalViewset import PersonalView, PersonalNew, PersonalEdit, PersonalDel
 from .educacionViewset.religionViewset import ReligionView, ReligionNew, ReligionEdit, ReligionDel
 from .educacionViewset.tareaViewset import TareaView, TareaNew, TareaEdit, TareaDel
+from .educacionViewset.gradoViewset import GradoView, GradoNew, GradoEdit, GradoDel
+from .educacionViewset.religionalumViewset import Religion_alumnoView, Religion_alumnoNew, Religion_alumnoEdit, Religion_alumnoDel
