@@ -140,6 +140,16 @@ urlpatterns = [
     path('conviviente/edit/<int:pk>', viewsets.ConvivienteEdit.as_view(), name='conviviente_edit'),
     path('conviviente/delete/<int:pk>', viewsets.ConvivienteDel.as_view(), name='conviviente_del'),
 
+    path('tutor/', viewsets.TutorView.as_view(), name='tutor_list'),
+    path('tutor/new', viewsets.TutorNew.as_view(), name='tutor_new'),
+    path('tutor/edit/<int:pk>', viewsets.TutorEdit.as_view(), name='tutor_edit'),
+    path('tutor/delete/<int:pk>', viewsets.TutorDel.as_view(), name='tutor_del'),
+
+    path('alumno/', viewsets.AlumnoView.as_view(), name='alumno_list'),
+    path('alumno/new', viewsets.AlumnoNew.as_view(), name='alumno_new'),
+    path('alumno/edit/<int:pk>', viewsets.AlumnoEdit.as_view(), name='alumno_edit'),
+    path('alumno/delete/<int:pk>', viewsets.AlumnoDel.as_view(), name='alumno_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),
