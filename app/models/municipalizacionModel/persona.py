@@ -21,7 +21,7 @@ class Persona(models.Model):
     etni = models.ForeignKey(etnia, on_delete=models.CASCADE, related_name="P_etnia")
     estudios_anteriores = models.ForeignKey(EstudiosAnt, on_delete=models.CASCADE, related_name="EA_estudios")
     gen = models.ForeignKey(genero, on_delete=models.CASCADE, related_name="P_genero")
-    disc = models.ForeignKey(nombre_dis, on_delete=models.CASCADE, related_name="T_disc")
+    disc = models.ForeignKey(Discapacidad, on_delete=models.CASCADE, related_name="T_disc")
 
     def __str__(self):
         return self.nombres_persona
