@@ -105,6 +105,16 @@ urlpatterns = [
     #path('tarea/edit/<int:pk>', viewsets.TareaEdit.as_view(), name='tarea_edit'),
     #path('tarea/delete/<int:pk>', viewsets.TareaDel.as_view(), name='tarea_del'),
 
+    path('grado/', viewsets.GradoView.as_view(), name='grado_list'),
+    path('grado/new', viewsets.GradoNew.as_view(), name='grado_new'),
+    path('grado/edit/<int:pk>', viewsets.GradoEdit.as_view(), name='grado_edit'),
+    path('grado/delete/<int:pk>', viewsets.GradoDel.as_view(), name='grado_del'),
+
+    path('religionalumno/', viewsets.Religion_alumnoView.as_view(), name='religionalum_list'),
+    path('religionalumno/new', viewsets.Religion_alumnoNew.as_view(), name='religionalum_new'),
+    path('religionalumno/edit/<int:pk>', viewsets.Religion_alumnoEdit.as_view(), name='religionalum_edit'),
+    path('religionalumno/delete/<int:pk>', viewsets.Religion_alumnoDel.as_view(), name='religionalum_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),
