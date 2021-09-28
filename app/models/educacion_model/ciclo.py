@@ -5,7 +5,7 @@ class Ciclo(models.Model):
     estado_ciclo = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.anio
+        return str(self.anio)
 
     def delete(self, *args):
         self.estado_ciclo = False

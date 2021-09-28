@@ -27,7 +27,7 @@ class CursoEdit(LoginRequiredMixin, generic.UpdateView):
     model = Curso
     template_name = "educacion/curso_form.html"
     context_object_name = "obj"
-    form_class = Curso
+    form_class = CursoForm
     success_url = reverse_lazy("educacion:curso_list")
     login_url = 'app:login'
 
