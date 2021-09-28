@@ -1,0 +1,56 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Centro Personalsonal
+          <div class="dropdown no-caret">
+              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i data-feather="more-vertical"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                  <<a class="dropdown-item" href="{% url 'educacion:centper_new' %}" ><i class="far fa-calendar-plus"></i> Nueva</a>
+              </div>
+          </div>
+      </div>
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos de Centro Personal</div>
+          {% else %}
+          <table class="table table-striped table-hover">
+              <thead>
+                  <th>Id</th>
+                  <th>Centro Educativo</th>
+                  <th>Personal Educativo</th>
+                  <th>Estado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.centro_Educativo }}</td>
+                      <td>{{ item.personal }}</td>
+                      <td>{{ item.estado_centropersona|yesno:"Activo,Inactivo" }}</td>
+                      <td>
+                          <a href="{% url 'educacion:centper_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
+                          <a href="{% url 'educacion:centper_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}

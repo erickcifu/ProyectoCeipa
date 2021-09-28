@@ -5,7 +5,7 @@ from app.models import Apadecimiento
 class APadeForm(forms.ModelForm):
     class Meta:
         model = Apadecimiento
-        fields = ['padecimiento', 'estado_Alpadecimiento']
+        fields = ['alumno','padecimiento','tratamiento', 'estado_Alpadecimiento']
         labels = {'padecimiento':"AlumPad", 'estado_Alpadecimiento':"Estado"}
         widget = {'estado_Alpadecimiento': forms.TextInput}
 

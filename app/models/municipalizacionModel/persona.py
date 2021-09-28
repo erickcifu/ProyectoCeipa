@@ -19,7 +19,7 @@ class Persona(models.Model):
 
     muni = models.ForeignKey(municipio, on_delete=models.CASCADE, related_name="P_muni")
     etni = models.ForeignKey(etnia, on_delete=models.CASCADE, related_name="P_etnia")
-    estudios_anteriores = models.ForeignKey(EstudiosAnt, on_delete=models.CASCADE, related_name="EA_estudios")
+    estudios_anteriores = models.ForeignKey(EstudiosAnt, on_delete=models.CASCADE, related_name="P_estudios")
     gen = models.ForeignKey(genero, on_delete=models.CASCADE, related_name="P_genero")
     disc = models.ForeignKey(Discapacidad, on_delete=models.CASCADE, related_name="T_disc")
 
