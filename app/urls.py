@@ -160,6 +160,16 @@ urlpatterns = [
     path('EstudiosAnteriores/edit/<int:pk>', viewsets.EstAntEdit.as_view(), name='estant_edit'),
     path('EstudiosAnteriores/delete/<int:pk>', viewsets.EstAntDel.as_view(), name='estant_del'),
 
+    path('CicloGrado/', viewsets.CGView.as_view(), name='cg_list'),
+    path('CicloGrado/new', viewsets.CGNew.as_view(), name='cg_new'),
+    path('CicloGrado/edit/<int:pk>', viewsets.CGEdit.as_view(), name='cg_edit'),
+    path('CicloGrado/delete/<int:pk>', viewsets.CGDel.as_view(), name='cg_del'),
+
+    path('CicloGradoCurso/', viewsets.CGCView.as_view(), name='cgc_list'),
+    path('CicloGradoCurso/new', viewsets.CGCNew.as_view(), name='cgc_new'),
+    path('CicloGradoCurso/edit/<int:pk>', viewsets.CGCEdit.as_view(), name='cgc_edit'),
+    path('CicloGradoCurso/delete/<int:pk>', viewsets.CGCDel.as_view(), name='cgc_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),

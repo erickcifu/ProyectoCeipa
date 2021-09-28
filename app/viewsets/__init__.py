@@ -29,3 +29,5 @@ from .educacionViewset.tutorViewset import TutorView, TutorNew, TutorEdit, Tutor
 from .educacionViewset.alumnoViewset import AlumnoView, AlumnoNew, AlumnoEdit, AlumnoDel
 from .educacionViewset.centperViewset import CentPerView, CentPerNew, CentPerEdit, CentPerDel
 from .educacionViewset.estantViewset import EstAntView, EstAntNew, EstAntEdit, EstAntDel
+from .educacionViewset.cgViewset import CGView, CGNew, CGEdit, CGDel
+from .educacionViewset.cgcViewset import CGCView, CGCNew, CGCEdit, CGCDel
