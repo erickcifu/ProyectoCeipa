@@ -26,3 +26,5 @@ from .educacionForms.serviaguaForm import ServiaguaForm
 from .educacionForms.convivienteForm import ConvivienteForm
 from .educacionForms.tutorForm import TutorForm
 from .educacionForms.alumnoForm import AlumnoForm
+from .educacionForms.centroPerForm import CentPerForm
+from .educacionForms.estantForm import EstAntForm

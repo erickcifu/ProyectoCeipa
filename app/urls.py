@@ -70,10 +70,10 @@ urlpatterns = [
     path('ciclo/edit/<int:pk>', viewsets.CicloEdit.as_view(), name='ciclo_edit'),
     path('ciclo/delete/<int:pk>', viewsets.CicloDel.as_view(), name='ciclo_del'),
 
-    #path('curso/', viewsets.CursoView.as_view(), name='curso_list'),
-    #path('curso/new', viewsets.CursoNew.as_view(), name='curso_new'),
-    #path('curso/edit/<int:pk>', viewsets.CursoEdit.as_view(), name='curso_edit'),
-    #path('curso/delete/<int:pk>', viewsets.CursoDel.as_view(), name='curso_del'),
+    path('curso/', viewsets.CursoView.as_view(), name='curso_list'),
+    path('curso/new', viewsets.CursoNew.as_view(), name='curso_new'),
+    path('curso/edit/<int:pk>', viewsets.CursoEdit.as_view(), name='curso_edit'),
+    path('curso/delete/<int:pk>', viewsets.CursoDel.as_view(), name='curso_del'),
 
     path('genero/', viewsets.GeneroView.as_view(), name='genero_list'),
     path('genero/new', viewsets.GeneroNew.as_view(), name='genero_new'),
@@ -149,6 +149,16 @@ urlpatterns = [
     path('alumno/new', viewsets.AlumnoNew.as_view(), name='alumno_new'),
     path('alumno/edit/<int:pk>', viewsets.AlumnoEdit.as_view(), name='alumno_edit'),
     path('alumno/delete/<int:pk>', viewsets.AlumnoDel.as_view(), name='alumno_del'),
+
+    path('CentrtoPersona/', viewsets.CentPerView.as_view(), name='centper_list'),
+    path('CentrtoPersona/new', viewsets.CentPerNew.as_view(), name='centper_new'),
+    path('CentrtoPersona/edit/<int:pk>', viewsets.CentPerEdit.as_view(), name='centper_edit'),
+    path('CentrtoPersona/delete/<int:pk>', viewsets.CentPerDel.as_view(), name='centper_del'),
+
+    path('EstudiosAnteriores/', viewsets.EstAntView.as_view(), name='estant_list'),
+    path('EstudiosAnteriores/new', viewsets.EstAntNew.as_view(), name='estant_new'),
+    path('EstudiosAnteriores/edit/<int:pk>', viewsets.EstAntEdit.as_view(), name='estant_edit'),
+    path('EstudiosAnteriores/delete/<int:pk>', viewsets.EstAntDel.as_view(), name='estant_del'),
 
     path('', viewsets.Home.as_view(), name = 'home'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
