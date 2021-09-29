@@ -12,6 +12,7 @@ class CursoView(LoginRequiredMixin, generic.ListView):
     template_name = 'educacion/curso_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+    oaginate_by = 10
 
 class CursoNew(LoginRequiredMixin, generic.CreateView):
     pass

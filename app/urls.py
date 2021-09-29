@@ -100,10 +100,10 @@ urlpatterns = [
     path('religion/edit/<int:pk>', viewsets.ReligionEdit.as_view(), name='religion_edit'),
     path('religion/delete/<int:pk>', viewsets.ReligionDel.as_view(), name='religion_del'),
 
-    #path('tarea/', viewsets.TareaView.as_view(), name='tarea_list'),
-    #path('tarea/new', viewsets.TareaNew.as_view(), name='tarea_new'),
-    #path('tarea/edit/<int:pk>', viewsets.TareaEdit.as_view(), name='tarea_edit'),
-    #path('tarea/delete/<int:pk>', viewsets.TareaDel.as_view(), name='tarea_del'),
+    path('tarea/', viewsets.TareaView.as_view(), name='tarea_list'),
+    path('tarea/new', viewsets.TareaNew.as_view(), name='tarea_new'),
+    path('tarea/edit/<int:pk>', viewsets.TareaEdit.as_view(), name='tarea_edit'),
+    path('tarea/delete/<int:pk>', viewsets.TareaDel.as_view(), name='tarea_del'),
 
     path('grado/', viewsets.GradoView.as_view(), name='grado_list'),
     path('grado/new', viewsets.GradoNew.as_view(), name='grado_new'),
