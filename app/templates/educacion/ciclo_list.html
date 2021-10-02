@@ -5,14 +5,7 @@
     <div class="card card-header-actions">
       <div class="card-header">
           Ciclo Escolar
-          <div class="dropdown no-caret">
-              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i data-feather="more-vertical"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
-                  <<a class="dropdown-item" href="{% url 'educacion:ciclo_new' %}" ><i class="far fa-calendar-plus"></i> Nueva</a>
-              </div>
-          </div>
+          <a href="{% url 'educacion:ciclo_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card-body">
           {% if not obj %}
@@ -30,10 +23,20 @@
                   <tr>
                       <td>{{ item.id }}</td>
                       <td>{{ item.anio }}</td>
-                      <td>{{ item.estado_ciclo|yesno:"Activo,Inactivo" }}</td>
+                      {% if item.estado_ciclo is True %}
                       <td>
-                          <a href="{% url 'educacion:ciclo_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                          <a href="{% url 'educacion:ciclo_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                        <span class="badge bg-green-soft text-green">Activo</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                      <td>
+                        <a href="{% url 'educacion:ciclo_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                        <a href="{% url 'educacion:ciclo_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                          <!--<a href="{% url 'educacion:ciclo_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
+                          <a href="{% url 'educacion:ciclo_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>-->
                       </td>
                   </tr>
                   {% endfor %}

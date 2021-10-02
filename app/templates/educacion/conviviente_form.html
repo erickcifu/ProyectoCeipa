@@ -14,7 +14,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Tipo Conviviente
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Conviviente
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
@@ -48,10 +48,9 @@
                             </div>
 
 
-                            <div class="col-10">
+                            <div class="col-5">
                                 <div class="input-group">
-                                    <input type="text" name="parentesco" maxlength="50" class="form-control" required id="id_parentesco"
-                                    placeholder="Parentesco" value="{% if obj %} {{ obj.parentesco }} {% endif %}">
+                                    {{ form.parentesco }}
                                 </div>
                             </div>
 

@@ -181,6 +181,7 @@ urlpatterns = [
     path('Vivienda/delete/<int:pk>', viewsets.VivDel.as_view(), name='viv_del'),
 
     path('', viewsets.Home.as_view(), name = 'home'),
+    path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),
 ]

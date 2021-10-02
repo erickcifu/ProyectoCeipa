@@ -81,46 +81,54 @@
                             <!-- Sidenav Link (Alerts)-->
                             <!-- * * Note: * * Visible only on and above the sm breakpoint-->
                             <!-- Sidenav Menu Heading (Core)-->
-                            <div class="sidenav-menu-heading">Menú NNAT'S</div>
+                            <div class="sidenav-menu-heading">Menú PRONNAT</div>
                             <!-- Sidenav Accordion (Dashboard)-->
-
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCatalogos" aria-expanded="false" aria-controls="collapseCatalogos">
+                              Catálogos
+                              <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
+                              <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                                     <a class="nav-link" href="{% url 'educacion:departamento_list' %}">
-                                        Departamentos
-                                        <!-- <span class="badge bg-primary-soft text-primary ms-auto">Updated</span> -->
+                                        Departamento
                                     </a>
-                                    <a class="nav-link" href="{% url 'educacion:municipio_list' %}">Municipios</a>
-                                    <a class="nav-link" href={% url 'educacion:seccion_list' %}>Seccion</a>
-                                    <a class="nav-link" href={% url 'educacion:psico_list' %}>Psicologico</a>
+                                    <a class="nav-link" href="{% url 'educacion:municipio_list' %}">Municipio</a>
+                                    <a class="nav-link" href={% url 'educacion:seccion_list' %}>Sección</a>
                                     <a class="nav-link" href={% url 'educacion:cat_list' %}>Propiedad</a>
                                     <a class="nav-link" href={% url 'educacion:tpiso_list' %}>Tipo Piso</a>
-                                    <a class="nav-link" href={% url 'educacion:ocup_list' %}>Ocupacion</a>
+                                    <a class="nav-link" href={% url 'educacion:ocup_list' %}>Ocupación</a>
                                     <a class="nav-link" href={% url 'educacion:pade_list' %}>Padecimiento</a>
-                                    <a class="nav-link" href={% url 'educacion:apad_list' %}>Alumno Padecimiento</a>
                                     <a class="nav-link" href={% url 'educacion:centedu_list' %}>Centro Educativo</a>
                                     <a class="nav-link" href={% url 'educacion:ciclo_list' %}>Ciclo Escolar</a>
-                                    <a class="nav-link" href={% url 'educacion:genero_list' %}>Genero</a>
+                                    <a class="nav-link" href={% url 'educacion:genero_list' %}>Género</a>
                                     <a class="nav-link" href={% url 'educacion:grados_list' %}>Grados</a>
                                     <a class="nav-link" href={% url 'educacion:idioma_list' %}>Idioma</a>
-                                    <a class="nav-link" href={% url 'educacion:personal_list' %}>Personal Educativo</a>
-                                    <a class="nav-link" href={% url 'educacion:religion_list' %}>Religion</a>
-                                    <a class="nav-link" href={% url 'educacion:religionalum_list' %}>Religion Alumno</a>
+                                    <a class="nav-link" href={% url 'educacion:religion_list' %}>Religión</a>
                                     <a class="nav-link" href={% url 'educacion:grado_list' %}>Grado</a>
-                                    <a class="nav-link" href={% url 'educacion:techo_list' %}>Tipo Techo</a>
-                                    <a class="nav-link" href={% url 'educacion:pared_list' %}>Tipo Pared o Muro</a>
+                                    <a class="nav-link" href={% url 'educacion:techo_list' %}>Tipo de Techo</a>
+                                    <a class="nav-link" href={% url 'educacion:pared_list' %}>Tipo de Pared</a>
                                     <a class="nav-link" href={% url 'educacion:etnia_list' %}>Tipo de Etnia</a>
                                     <a class="nav-link" href={% url 'educacion:serviagua_list' %}>Servicios de Agua</a>
                                     <a class="nav-link" href={% url 'educacion:conviviente_list' %}>Conviviente</a>
                                     <a class="nav-link" href={% url 'educacion:parentesco_list' %}>Parentesco</a>
-                                    <a class="nav-link" href={% url 'educacion:tutor_list' %}>Tutores</a>
-                                    <a class="nav-link" href={% url 'educacion:alumno_list' %}>Alumnos</a>
-                                    <a class="nav-link" href={% url 'educacion:centper_list' %}>Centro Persona</a>
-                                    <a class="nav-link" href={% url 'educacion:estant_list' %}>Estudios Anteriores</a>
                                     <a class="nav-link" href={% url 'educacion:curso_list' %}>Cursos</a>
-                                    <a class="nav-link" href={% url 'educacion:cg_list' %}>Ciclo Grado</a>
-                                    <a class="nav-link" href={% url 'educacion:cgc_list' %}>Ciclo Grado Curso</a>
-                                    <a class="nav-link" href={% url 'educacion:tarea_list' %}>Tarea</a>
-                                    <a class="nav-link" href={% url 'educacion:ins_list' %}>Inscrpsion</a>
-                                    <a class="nav-link" href={% url 'educacion:viv_list' %}>Vivienda</a>
+                                  </nav>
+                                </div>
+
+                                <div class="sidenav-menu-heading">Inscripción y asignación</div>
+                                <a class="nav-link" href={% url 'educacion:ins_list' %}>Inscrpción</a>
+                                <a class="nav-link" href={% url 'educacion:viv_list' %}>Vivienda</a>
+                                <a class="nav-link" href={% url 'educacion:psico_list' %}>Psicologíco</a>
+                                <a class="nav-link" href={% url 'educacion:apad_list' %}>Alumno Padecimiento</a>
+                                <a class="nav-link" href={% url 'educacion:personal_list' %}>Personal Educativo</a>
+                                <a class="nav-link" href={% url 'educacion:religionalum_list' %}>Religión Alumno</a>
+                                <a class="nav-link" href={% url 'educacion:tutor_list' %}>Tutor</a>
+                                <a class="nav-link" href={% url 'educacion:alumno_list' %}>Alumno</a>
+                                <a class="nav-link" href={% url 'educacion:centper_list' %}>Centro Persona</a>
+                                <a class="nav-link" href={% url 'educacion:estant_list' %}>Estudios Anteriores</a>
+                                <a class="nav-link" href={% url 'educacion:cg_list' %}>Ciclo Grado</a>
+                                <a class="nav-link" href={% url 'educacion:cgc_list' %}>Ciclo Grado Curso</a>
+                                <a class="nav-link" href={% url 'educacion:tarea_list' %}>Tarea</a>
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
                     {% block footer %}
