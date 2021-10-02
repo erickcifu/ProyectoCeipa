@@ -170,6 +170,16 @@ urlpatterns = [
     path('CicloGradoCurso/edit/<int:pk>', viewsets.CGCEdit.as_view(), name='cgc_edit'),
     path('CicloGradoCurso/delete/<int:pk>', viewsets.CGCDel.as_view(), name='cgc_del'),
 
+    path('inscripsion/', viewsets.InsView.as_view(), name='ins_list'),
+    path('inscripsion/new', viewsets.InsNew.as_view(), name='ins_new'),
+    path('inscripsion/edit/<int:pk>', viewsets.InsEdit.as_view(), name='ins_edit'),
+    path('inscripsion/delete/<int:pk>', viewsets.InsDel.as_view(), name='ins_del'),
+
+    path('Vivienda/', viewsets.VivView.as_view(), name='viv_list'),
+    path('Vivienda/new', viewsets.VivNew.as_view(), name='viv_new'),
+    path('Vivienda/edit/<int:pk>', viewsets.VivEdit.as_view(), name='viv_edit'),
+    path('Vivienda/delete/<int:pk>', viewsets.VivDel.as_view(), name='viv_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),

@@ -31,3 +31,5 @@ from .educacionViewset.centperViewset import CentPerView, CentPerNew, CentPerEdi
 from .educacionViewset.estantViewset import EstAntView, EstAntNew, EstAntEdit, EstAntDel
 from .educacionViewset.cgViewset import CGView, CGNew, CGEdit, CGDel
 from .educacionViewset.cgcViewset import CGCView, CGCNew, CGCEdit, CGCDel
+from .educacionViewset.insViewset import InsView, InsNew, InsEdit, InsDel
+from .educacionViewset.viviendaViewset import VivView, VivNew, VivEdit, VivDel
