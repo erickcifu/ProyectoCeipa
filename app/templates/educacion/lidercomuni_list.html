@@ -1,0 +1,72 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Tutor
+          <div class="dropdown no-caret">
+              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i data-feather="more-vertical"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="{% url 'educacion:lidercomuni_new' %}" ><i class="far fa-calendar-plus"></i> Nuevo</a>
+              </div>
+          </div>
+      </div>
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay Lideres Comunitarios</div>
+          {% else %}
+          <table class="table table-striped table-hover">
+              <thead>
+                  <th>Id</th>
+                  <th>Persona</th>
+                  <th>Cargo</th>
+                  <th>Grupo organizado</th>
+                  <th>Programa en CEIPA</th>
+                  <th>Sabe leer</th>
+                  <th>Sabe escribir</th>
+                  <th>Vacuna contra el Covid</th>
+                  <th>Periodo de Lider Comunitario</th>
+                  <th>Fecha de inicio de periodo</th>
+                  <th>Fecha final de periodo</th>
+                  <th>Estado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.persona }}</td>
+                      <td>{{ item.cargo_grupo }}</td>
+                      <td>{{ item.grupo_orga }}</td>
+                      <td>{{ item.programa_c}}</td>
+                      <td>{{ item.leer }}</td>
+                      <td>{{ item.escribir }}</td>
+                      <td>{{ item.vacuna_covid }}</td>
+                      <td>{{ item.periodo }}</td>
+                      <td>{{ item.fecha_inicio|date:"d, M, Y" }}</td>
+                      <td>{{ item.fecha_fin|date:"d, M, Y" }}</td>
+                      <td>{{ item.estado|yesno:"Activo,Inactivo" }}</td>
+                      <td>
+                          <a href="{% url 'educacion:lidercomuni_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
+                          <a href="{% url 'educacion:lidercomuni_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}
