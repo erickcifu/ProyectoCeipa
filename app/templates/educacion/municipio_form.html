@@ -18,21 +18,19 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                            <div class="col-5">
-                                <div class="input-group">
-                                    <!--<input type="text" name="nombre_departamento" maxlength="50" class="form-control" required id="id_nombre_departamento"
-                                    placeholder="Departamento" value="{% if obj %} {{ obj.nombre_departamento }} {% endif %}">-->
-                                    {{ form.dep }}
-                                </div>
+                        <div class="col-5">
+                            <div class="input-group">
+                                {{ form.dep }}
                             </div>
-                            <div class="col-5">
-                                <div class="input-group">
-                                    <!--<input type="text" name="nombre_departamento" maxlength="50" class="form-control" required id="id_nombre_departamento"
-                                    placeholder="Departamento" value="{% if obj %} {{ obj.nombre_departamento }} {% endif %}">-->
-                                    {{ form.nombre_municipio}}
-                                </div>
+                        </div>
+
+                        <div class="col-10">
+                            <div class="input-group">
+                                <input type="text" name="nombre_municipio" maxlength="50" class="form-control" required id="id_nombre_municipio"
+                                placeholder="Nombre del municipio" value="{% if obj %} {{ obj.nombre_municipio }} {% endif %}">
                             </div>
-                            <div class="col-2">
+                        </div>
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label for="id_estado_departamento">Estado</label>
                                     <div class="form-check">
@@ -40,7 +38,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- {{form.as_p}} -->
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
