@@ -5,7 +5,7 @@ class VivForm(forms.ModelForm):
     class Meta:
         model = vivienda
         fields = ['cantidad_personas','cantidad_ambientes', 'techo','piso','servicio','estudiante','estado_vivienda']
-        labels = {'cantidad_personas':"CantidadPersonas", 'piso':'piso','servicio':'servicio','estado_vivienda':"Estado"}
+        labels = {'cantidad_personas':"CantidadPersonas",'techo':'Techo', 'piso':'piso','servicio':'servicio','estado_vivienda':"Estado"}
         widget = {'cantidad_personas': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

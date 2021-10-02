@@ -10,7 +10,7 @@
                   <i data-feather="more-vertical"></i>
               </button>
               <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="{% url 'educacion:ins_new' %}">Nuevo</a>
+                  <a class="dropdown-item" href="{% url 'educacion:viv_new' %}">Nuevo</a>
               </div>
           </div>
       </div>
@@ -51,8 +51,8 @@
                     <td>{{ item.letrina|yesno:"Si,No" }}</td>
                     <td>{{ item.estado_vivienda|yesno:"Activo,Inactivo" }}</td>
                     <td>
-                        <a href="{% url 'educacion:ins_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                        <a href="{% url 'educacion:ins_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                        <a href="{% url 'educacion:viv_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
+                        <a href="{% url 'educacion:viv_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
                         <!--data-bs-toggle="modal" data-bs-target="#exampleModalCenter" -->
                         </div>
 
