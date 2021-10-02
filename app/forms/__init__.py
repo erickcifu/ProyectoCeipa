@@ -30,3 +30,5 @@ from .educacionForms.centroPerForm import CentPerForm
 from .educacionForms.estantForm import EstAntForm
 from .educacionForms.cgForm import CGForm
 from .educacionForms.cgcForm import CGCForm
+from .educacionForms.insForm import InsForm
+from .educacionForms.viviendaForm import VivForm
