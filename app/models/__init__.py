@@ -54,3 +54,7 @@ from .municipalizacionModel.maestro import Maestro
 from .municipalizacionModel.padper import PadPer
 from .municipalizacionModel.persona import Persona
 from .municipalizacionModel.profesion import Profesion
+from .municipalizacionModel.comisionNA import ComisionNA
+from .municipalizacionModel.benefArea import BeneficiadoArea
+from .municipalizacionModel.padresFamilia import PadresFamilia
+from .municipalizacionModel.corporacionMuni import CorporacionMunicipal
