@@ -1,5 +1,5 @@
 from django.db import models
-from app.models.municipalizacionModel.persona import Persona
+from .persona import Persona
 from app.models.educacion_model.padecimientoModel import Padecimiento
 class PadPer(models.Model):
     medicamentos = models.CharField(max_length=255,null=False)

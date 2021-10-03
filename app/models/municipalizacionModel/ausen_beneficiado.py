@@ -1,5 +1,4 @@
 from django.db import models
-
 from .area import Area
 from .beneficiado import Beneficiado
 

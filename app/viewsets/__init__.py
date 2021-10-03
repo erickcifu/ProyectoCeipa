@@ -34,3 +34,6 @@ from .educacionViewset.cgcViewset import CGCView, CGCNew, CGCEdit, CGCDel
 from .educacionViewset.insViewset import InsView, InsNew, InsEdit, InsDel
 from .educacionViewset.viviendaViewset import VivView, VivNew, VivEdit, VivDel
 from .educacionViewset.educacionViewset import HomeEducacion
+#Municipalizacion
+from .MunicViewset.municipalizacionViewset import HomeMunicipalizacion
+from .MunicViewset.areaViewset import AreaView, AreaNew, AreaEdit, AreaDel
