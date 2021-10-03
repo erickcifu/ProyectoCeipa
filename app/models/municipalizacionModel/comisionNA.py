@@ -3,8 +3,8 @@ from .persona import Persona
 from .institucion import Institucion
 
 class ComisionNA(models.Model):
-    persona = models.ForeginKey(Persona, on_delete=models.CASCADE, related_name="comision_pers")
-    institucion = models.ForeginKey(Institucion, on_delete=models.CASCADE, related_name="insti_comision")
+    persona = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name="comision_pers")
+    institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE, related_name="insti_comision")
     participacion = models.BooleanField(default=False)
     estado_comision = models.BooleanField(default=True)
 

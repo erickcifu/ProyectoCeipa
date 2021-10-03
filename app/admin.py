@@ -34,6 +34,31 @@ from .models.educacion_model.padecimientoModel import Padecimiento
 from .models.educacion_model.alumnopadecimiento import Apadecimiento
 from .models.educacion_model.inscipsionesModel  import Inscripcion
 from .models.educacion_model.etnia import etnia
+#Municipalizacion
+from .models.municipalizacionModel.area import Area
+from .models.municipalizacionModel.ausencia import Ausencia
+from .models.municipalizacionModel.Gorganizado import GOrganizado
+from .models.municipalizacionModel.institucion import Institucion
+from .models.municipalizacionModel.programaC import ProgramaC
+from .models.municipalizacionModel.tutor_muni import TutorMuni
+from .models.municipalizacionModel.establecimiento import Establecimiento
+from .models.municipalizacionModel.mediocomu import MedioComuni
+from .models.municipalizacionModel.partidopolitic import PartidoPolitic
+from .models.municipalizacionModel.lider_comunitario import LiderComunitario
+from .models.municipalizacionModel.ausen_beneficiado import AusenBeneficiado
+from .models.municipalizacionModel.beneficiado import Beneficiado
+from .models.municipalizacionModel.cargo import Cargo
+from .models.municipalizacionModel.CarGrup import CargoGrupo
+from .models.municipalizacionModel.comision import Comision
+from .models.municipalizacionModel.idioPer import IdiomaPersona
+from .models.municipalizacionModel.maestro import Maestro
+from .models.municipalizacionModel.padper import PadPer
+from .models.municipalizacionModel.persona import Persona
+from .models.municipalizacionModel.profesion import Profesion
+from .models.municipalizacionModel.comisionNA import ComisionNA
+from .models.municipalizacionModel.benefArea import BeneficiadoArea
+from .models.municipalizacionModel.padresFamilia import PadresFamilia
+from .models.municipalizacionModel.corporacionMuni import CorporacionMunicipal
 
 admin.site.register(ocupacion)
 admin.site.register(religion)
@@ -70,4 +95,28 @@ admin.site.register(Padecimiento)
 admin.site.register(Apadecimiento)
 admin.site.register(Inscripcion)
 admin.site.register(etnia)
-# Register your models here.
+#municipalizacion
+admin.site.register(Area)
+admin.site.register(Ausencia)
+admin.site.register(GOrganizado)
+admin.site.register(Institucion)
+admin.site.register(ProgramaC)
+admin.site.register(TutorMuni)
+admin.site.register(Establecimiento)
+admin.site.register(MedioComuni)
+admin.site.register(PartidoPolitic)
+admin.site.register(LiderComunitario)
+admin.site.register(AusenBeneficiado)
+admin.site.register(Beneficiado)
+admin.site.register(Cargo)
+admin.site.register(CargoGrupo)
+admin.site.register(Comision)
+admin.site.register(IdiomaPersona)
+admin.site.register(Maestro)
+admin.site.register(PadPer)
+admin.site.register(Persona)
+admin.site.register(Profesion)
+admin.site.register(ComisionNA)
+admin.site.register(BeneficiadoArea)
+admin.site.register(PadresFamilia)
+admin.site.register(CorporacionMunicipal)
