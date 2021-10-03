@@ -1,8 +1,8 @@
 from django.db import models
-from app.models.municipalizacionModel.establecimiento import Establecimiento
-from app.models.municipalizacionModel.persona import Persona
-from app.models.municipalizacionModel.CarGrup import CargoGrupo
-from app.models.municipalizacionModel.Gorganizado import GOrganizado
+from .establecimiento import Establecimiento
+from .persona import Persona
+from .CarGrup import CargoGrupo
+from .Gorganizado import GOrganizado
 
 class Maestro(models.Model):
     establecimiento= models.ForeignKey(Establecimiento, on_delete=models.CASCADE, related_name="M_Est")

@@ -1,10 +1,9 @@
 from django.db import models
-from app.models.municipalizacionModel.discapacidad import Discapacidad
+from .discapacidad import Discapacidad
 from app.models.educacion_model.etnia import etnia
 from app.models.educacion_model.estudiosantModel import EstudiosAnt
 from app.models.educacion_model.municipioModel import municipio
 from app.models.educacion_model.genero import genero
-
 
 class Persona(models.Model):
     persona = models.CharField(max_length=50,null=False)

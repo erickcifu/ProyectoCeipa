@@ -179,9 +179,16 @@ urlpatterns = [
     path('Vivienda/new', viewsets.VivNew.as_view(), name='viv_new'),
     path('Vivienda/edit/<int:pk>', viewsets.VivEdit.as_view(), name='viv_edit'),
     path('Vivienda/delete/<int:pk>', viewsets.VivDel.as_view(), name='viv_del'),
+    #Municipalizacion
+
+    path('area/', viewsets.AreaView.as_view(), name='area_list'),
+    path('area/new', viewsets.AreaNew.as_view(), name='area_new'),
+    path('area/edit/<int:pk>', viewsets.AreaEdit.as_view(), name='area_edit'),
+    path('area/delete/<int:pk>', viewsets.AreaDel.as_view(), name='area_del'),
 
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
+    path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),
 ]
