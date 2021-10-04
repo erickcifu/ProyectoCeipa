@@ -58,3 +58,4 @@ from .municipalizacionModel.comisionNA import ComisionNA
 from .municipalizacionModel.benefArea import BeneficiadoArea
 from .municipalizacionModel.padresFamilia import PadresFamilia
 from .municipalizacionModel.corporacionMuni import CorporacionMunicipal
+from .municipalizacionModel.discapacidad import Discapacidad

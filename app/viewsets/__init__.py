@@ -37,3 +37,12 @@ from .educacionViewset.educacionViewset import HomeEducacion
 #Municipalizacion
 from .MunicViewset.municipalizacionViewset import HomeMunicipalizacion
 from .MunicViewset.areaViewset import AreaView, AreaNew, AreaEdit, AreaDel
+from .MunicViewset.curgradViewset import CarGView, CarGNew, CarGEdit, CarGDel
+from .MunicViewset.idperViewset import IdPerView, IdPerNew, IdPerEdit, IdPerDel
+from .MunicViewset.personaViewset import PerView, PerNew, PerEdit, PerDel
+from .MunicViewset.benefViewset import BenView, BenNew, BenEdit, BenDel
+from .MunicViewset.maestroViewset import MaesView, MaesNew, MaesEdit, MaesDel
+from .MunicViewset.ProfesionViewset import ProfView, ProfNew, ProfEdit, ProfDel
+from .MunicViewset.discViewset import DiscView, DiscNew, DiscEdit, DiscDel
+from .MunicViewset.cargoViewset import CarView, CarNew, CarEdit, CarDel
+from .MunicViewset.comisionViewset import ComView, ComNew, ComEdit, ComDel 

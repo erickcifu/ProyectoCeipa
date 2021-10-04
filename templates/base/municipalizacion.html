@@ -91,11 +91,20 @@
                               <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                                     <a class="nav-link" href="{% url 'municipalizacion:area_list' %}">Area</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:municipio_list' %}">Municipio</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:carg_list' %}">Cargo Grupo</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:prof_list' %}">Profesion</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:disc_list' %}">Discapacidad</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:cargo_list' %}">Cargo</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:com_list' %}">Comision</a>
+
                                     </nav>
                                 </div>
 
                                 <div class="sidenav-menu-heading">Inscripción y asignación</div>
-
+                                <a class="nav-link" href="{% url 'municipalizacion:idper_list' %}">Idioma Persona</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:per_list' %}">Persona</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:ben_list' %}">Beneficiado</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:maes_list' %}">Maestro</a>
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
                     {% block footer %}
