@@ -186,6 +186,51 @@ urlpatterns = [
     path('area/edit/<int:pk>', viewsets.AreaEdit.as_view(), name='area_edit'),
     path('area/delete/<int:pk>', viewsets.AreaDel.as_view(), name='area_del'),
 
+    path('cursogrupo/', viewsets.CarGView.as_view(), name='carg_list'),
+    path('cursogrupo/new', viewsets.CarGNew.as_view(), name='carg_new'),
+    path('cursogrupo/edit/<int:pk>', viewsets.CarGEdit.as_view(), name='carg_edit'),
+    path('cursogrupo/delete/<int:pk>', viewsets.CarGDel.as_view(), name='carg_del'),
+
+    path('idiomaPersona/', viewsets.IdPerView.as_view(), name='idper_list'),
+    path('idiomaPersona/new', viewsets.IdPerNew.as_view(), name='idper_new'),
+    path('idiomaPersona/edit/<int:pk>', viewsets.IdPerEdit.as_view(), name='idper_edit'),
+    path('idiomaPersona/delete/<int:pk>', viewsets.IdPerDel.as_view(), name='idper_del'),
+
+    path('persona/', viewsets.PerView.as_view(), name='per_list'),
+    path('persona/new', viewsets.PerNew.as_view(), name='per_new'),
+    path('persona/edit/<int:pk>', viewsets.PerEdit.as_view(), name='per_edit'),
+    path('persona/delete/<int:pk>', viewsets.PerDel.as_view(), name='per_del'),
+
+    path('beneficiado/', viewsets.BenView.as_view(), name='ben_list'),
+    path('beneficiado/new', viewsets.BenNew.as_view(), name='ben_new'),
+    path('beneficiado/edit/<int:pk>', viewsets.BenEdit.as_view(), name='ben_edit'),
+    path('beneficiado/delete/<int:pk>', viewsets.BenDel.as_view(), name='ben_del'),
+
+    path('maestro/', viewsets.MaesView.as_view(), name='maes_list'),
+    path('maestro/new', viewsets.MaesNew.as_view(), name='maes_new'),
+    path('maestro/edit/<int:pk>', viewsets.MaesEdit.as_view(), name='maes_edit'),
+    path('maestro/delete/<int:pk>', viewsets.MaesDel.as_view(), name='maes_del'),
+
+    path('profesion/', viewsets.ProfView.as_view(), name='prof_list'),
+    path('profesion/new', viewsets.ProfNew.as_view(), name='prof_new'),
+    path('profesion/edit/<int:pk>', viewsets.ProfEdit.as_view(), name='prof_edit'),
+    path('profesion/delete/<int:pk>', viewsets.ProfDel.as_view(), name='prof_del'),
+
+    path('discapacidad/', viewsets.DiscView.as_view(), name='disc_list'),
+    path('discapacidad/new', viewsets.DiscNew.as_view(), name='disc_new'),
+    path('discapacidad/edit/<int:pk>', viewsets.DiscEdit.as_view(), name='disc_edit'),
+    path('discapacidad/delete/<int:pk>', viewsets.DiscDel.as_view(), name='disc_del'),
+
+    path('cargo/', viewsets.CarView.as_view(), name='cargo_list'),
+    path('cargo/new', viewsets.CarNew.as_view(), name='cargo_new'),
+    path('cargo/edit/<int:pk>', viewsets.CarEdit.as_view(), name='cargo_edit'),
+    path('cargo/delete/<int:pk>', viewsets.CarDel.as_view(), name='cargo_del'),
+
+    path('comision/', viewsets.ComView.as_view(), name='com_list'),
+    path('comision/new', viewsets.ComNew.as_view(), name='com_new'),
+    path('comision/edit/<int:pk>', viewsets.ComEdit.as_view(), name='com_edit'),
+    path('comision/delete/<int:pk>', viewsets.ComDel.as_view(), name='com_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),

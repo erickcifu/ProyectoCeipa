@@ -34,3 +34,12 @@ from .educacionForms.insForm import InsForm
 from .educacionForms.viviendaForm import VivForm
 #Municipalizacion
 from .muniForms.areaForm import AreaForm
+from .muniForms.cargrupForm import CarGForm
+from .muniForms.idiomaperForm import IdPerForm
+from .muniForms.personaForm import PersonaForm
+from .muniForms.beneficiadoForm import BenForm
+from .muniForms.maestroForm import MaestroForm
+from .muniForms.profecionForm import ProfesionForm
+from .muniForms.discapacidadForm import DiscForm
+from .muniForms.cargoForm import CargoForm
+from .muniForms.comisionForm import ComisionForm
