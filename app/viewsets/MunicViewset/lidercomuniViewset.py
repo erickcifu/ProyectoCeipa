@@ -8,28 +8,28 @@ from app.forms import LiderComuniMuniForm
 
 class LiderComunitarioMuniView(LoginRequiredMixin, generic.ListView):
     model = LiderComunitario
-    template_name = 'educacion/lidercomuni_list.html'
+    template_name = 'municipalizacion/lidercomuni_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
 class LiderComunitarioNew(LoginRequiredMixin, generic.CreateView):
     model = LiderComunitario
-    template_name = 'educacion/lidercomuni_form.html'
+    template_name = 'municipalizacion/lidercomuni_form.html'
     context_object_name = "obj"
     form_class = LiderComuniMuniForm
-    success_url = reverse_lazy("educacion:lidercomuni_list")
+    success_url = reverse_lazy("municipalizacion:lidercomuni_list")
     login_url = 'app:login'
 
 class LiderComunitarioEdit(LoginRequiredMixin, generic.UpdateView):
     model = LiderComunitario
-    template_name = "educacion/lidercomuni_form.html"
+    template_name = "municipalizacion/lidercomuni_form.html"
     context_object_name = "obj"
     form_class = LiderComuniMuniForm
-    success_url = reverse_lazy("educacion:lidercomuni_list")
+    success_url = reverse_lazy("municipalizacion:lidercomuni_list")
     login_url = 'app:login'
 
 class LiderComunitarioDel(LoginRequiredMixin, generic.DeleteView):
     model = LiderComunitario
-    template_name = "educacion/catalogos_del.html"
+    template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"
-    success_url = reverse_lazy("educacion:lidercomuni_list")
+    success_url = reverse_lazy("municipalizacion:lidercomuni_list")

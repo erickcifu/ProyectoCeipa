@@ -8,28 +8,28 @@ from app.forms import TutorMuniForm
 
 class TutorMuniView(LoginRequiredMixin, generic.ListView):
     model = TutorMuni
-    template_name = 'educacion/tutormuni_list.html'
+    template_name = 'municipalizacion/tutormuni_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
 class TutorMuniNew(LoginRequiredMixin, generic.CreateView):
     model = TutorMuni
-    template_name = 'educacion/tutormuni_form.html'
+    template_name = 'municipalizacion/tutormuni_form.html'
     context_object_name = "obj"
     form_class = TutorMuniForm
-    success_url = reverse_lazy("educacion:tutormuni_list")
+    success_url = reverse_lazy("municipalizacion:tutormuni_list")
     login_url = 'app:login'
 
 class TutorMuniEdit(LoginRequiredMixin, generic.UpdateView):
     model = TutorMuni
-    template_name = "educacion/tutormuni_form.html"
+    template_name = "municipalizacion/tutormuni_form.html"
     context_object_name = "obj"
     form_class = TutorMuniForm
-    success_url = reverse_lazy("educacion:tutormuni_list")
+    success_url = reverse_lazy("municipalizacion:tutormuni_list")
     login_url = 'app:login'
 
 class TutorMuniDel(LoginRequiredMixin, generic.DeleteView):
     model = TutorMuni
-    template_name = "educacion/catalogos_del.html"
+    template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"
-    success_url = reverse_lazy("educacion:tutormuni_list")
+    success_url = reverse_lazy("municipalizacion:tutormuni_list")

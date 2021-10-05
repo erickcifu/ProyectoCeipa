@@ -4,15 +4,8 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Medio de Comunicación
-          <div class="dropdown no-caret">
-              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i data-feather="more-vertical"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="{% url 'educacion:mediocomu_new' %}" ><i class="far fa-calendar-plus"></i> Nuevo</a>
-              </div>
-          </div>
+          Medios de Comunicación
+          <a href="{% url 'municipalizacion:mediocomu_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card-body">
           {% if not obj %}
@@ -38,18 +31,28 @@
                       <td>{{ item.telefono }}</td>
                       <td>{{ item.persona }}</td>
                       <td>{{ item.cargo }}</td>
-                      <td>{{ item.estado_tutor|yesno:"Activo,Inactivo" }}</td>
+                      {% if item.estado_tutor is True %}
                       <td>
-                          <a href="{% url 'educacion:mediocomu_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                          <a href="{% url 'educacion:mediocomu_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                        <span class="badge bg-green-soft text-green">Activo</span>
                       </td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
-          {% endif %}
-      </div>
-
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                      <td>
+                          <a href="{% url 'municipalizacion:mediocomu_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                          <a href="{% url 'municipalizacion:mediocomu_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                        <!--data-bs-toggle="modal" data-bs-target="#exampleModalCenter" -->
+                      </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block js_page %}

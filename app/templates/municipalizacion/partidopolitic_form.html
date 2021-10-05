@@ -1,10 +1,10 @@
-{% extends 'base/base3.html' %}
+{% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-12 col-md-12 mb-12">
+    <div class="col-xl-6 col-md-6 mb-6">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -14,25 +14,21 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Establecimiento
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Partido Politico
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-10">
                                 <div class="input-group">
-                                    {{ form.nombre_establecimiento}}
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <div class="input-group">
-                                    {{ form.direccion}}
+                                    <input type="text" name="nombre_partido" maxlength="50" class="form-control" required id="id_nombre_partido"
+                                    placeholder="Nombre Partido Politico" value="{% if obj %} {{ obj.nombre_partido }} {% endif %}">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
-                                    <label for="id_estado">Estado</label>
+                                    <label for="estado">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado" class="form-control" id="id_estado" type="checkbox"  {% if obj.estado is true %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado" class="form-control" id="id_estado" type="checkbox"  {% if obj.estado %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>
@@ -41,8 +37,8 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-danger">Guardar</button>
-                                <a href="{% url 'educacion:estable_list' %}" class="btn btn-success">Cancelar</a>
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'municipalizacion:partidopolitic_list' %}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </div>

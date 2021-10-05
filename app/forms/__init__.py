@@ -43,3 +43,9 @@ from .muniForms.profecionForm import ProfesionForm
 from .muniForms.discapacidadForm import DiscForm
 from .muniForms.cargoForm import CargoForm
 from .muniForms.comisionForm import ComisionForm
+from .muniForms.ausbenefiForm import AusenBeneficiadoForm
+from .muniForms.establecimientoForm import EstablecimientoForm
+from .muniForms.lidercomuniForm import LiderComuniMuniForm
+from .muniForms.mediocomuForm import MedioComuniForm
+from .muniForms.partidopoliticForm import PartidoPoliticForm
+from .muniForms.tutormuniForm import TutorMuniForm

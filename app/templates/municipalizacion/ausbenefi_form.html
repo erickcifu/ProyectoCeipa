@@ -1,4 +1,4 @@
-{% extends 'base/base3.html' %}
+{% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
 <div id="layoutSidenav_content">
@@ -14,28 +14,21 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Medio de Comunicación
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Ausencia
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col-10">
                                 <div class="input-group">
-                                    <input type="text" name="nombre_medio" maxlength="50" class="form-control" required id="id_nombre_medio"
-                                    placeholder="Nombre del Medio de comunicación" value="{% if obj %} {{ obj.nombre_medio }} {% endif %}">
+                                    <input type="text" name="observaciones" maxlength="50" class="form-control" required id="id_observaciones"
+                                    placeholder="Observaciones" value="{% if obj %} {{ obj.observaciones }} {% endif %}">
                                 </div>
                             </div>
 
                             <div class="col-10">
                                 <div class="input-group">
-                                    <input type="email" name="correo" maxlength="50" class="form-control" required id="id_correo"
-                                    placeholder="Correo Electronico" value="{% if obj %} {{ obj.correo }} {% endif %}">
-                                </div>
-                            </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="telefono" maxlength="50" class="form-control" required id="id_telefono"
-                                    placeholder="Telefono" value="{% if obj %} {{ obj.telefono }} {% endif %}">
+                                    <input type="date" name="fecha" maxlength="50" class="form-control" required id="id_fecha"
+                                    placeholder="Fecha de Ausencia" value="{% if obj %} {{ obj.fecha }} {% endif %}">
                                 </div>
                             </div>
 
@@ -44,7 +37,7 @@
                                     <input type="text" name="persona" maxlength="50" class="form-control" required id="id_persona"
                                     placeholder="Persona" value="{% if obj %} {{ obj.persona }} {% endif %}">
                                 </div> -->
-                                {{ form.persona }}
+                                {{ form.area }}
                             </div>
 
                             <div class="col-10">
@@ -52,7 +45,7 @@
                                     <input type="text" name="cargo" maxlength="50" class="form-control" required id="id_cargo"
                                     placeholder="Cargo" value="{% if obj %} {{ obj.cargo }} {% endif %}">
                                 </div> -->
-                                {{ form.cargo }}
+                                {{ form.beneficiado }}
                             </div>
 
                             <div class="col-2">
@@ -69,7 +62,7 @@
                         <div class="row">
                             <div class="col">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'educacion:mediocomu_list' %}" class="btn btn-danger">Cancelar</a>
+                                <a href="{% url 'municipalizacion:ausbenefi_list' %}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </div>
