@@ -231,6 +231,36 @@ urlpatterns = [
     path('comision/edit/<int:pk>', viewsets.ComEdit.as_view(), name='com_edit'),
     path('comision/delete/<int:pk>', viewsets.ComDel.as_view(), name='com_del'),
 
+    path('establecimiento/', viewsets.EstablecimientoView.as_view(), name='establecimiento_list'),
+    path('establecimiento/new', viewsets.EstablecimientoNew.as_view(), name='establecimiento_new'),
+    path('establecimiento/edit/<int:pk>', viewsets.EstablecimientoEdit.as_view(), name='establecimiento_edit'),
+    path('establecimiento/delete/<int:pk>', viewsets.EstablecimientoDel.as_view(), name='establecimiento_del'),
+
+    path('partidopolitico/', viewsets.PartidoPoliticView.as_view(), name='partidopolitic_list'),
+    path('partidopolitico/new', viewsets.PartidoPoliticNew.as_view(), name='partidopolitic_new'),
+    path('partidopolitico/edit/<int:pk>', viewsets.PartidoPoliticEdit.as_view(), name='partidopolitic_edit'),
+    path('partidopolitico/delete/<int:pk>', viewsets.PartidoPoliticDel.as_view(), name='partidopolitic_del'),
+
+    path('mediodecomunicacion/', viewsets.MedioComuniView.as_view(), name='mediocomu_list'),
+    path('mediodecomunicacion/new', viewsets.MedioComuniNew.as_view(), name='mediocomu_new'),
+    path('mediodecomunicacion/edit/<int:pk>', viewsets.MedioComuniEdit.as_view(), name='mediocomu_edit'),
+    path('mediodecomunicacion/delete/<int:pk>', viewsets.MedioComuniDel.as_view(), name='mediocomu_del'),
+
+    path('ausenciabeneficiado/', viewsets.AusenBeneficiadoView.as_view(), name='ausbenefi_list'),
+    path('ausenciabeneficiado/new', viewsets.AusenBeneficiadoNew.as_view(), name='ausbenefi_new'),
+    path('ausenciabeneficiado/edit/<int:pk>', viewsets.AusenBeneficiadoEdit.as_view(), name='ausbenefi_edit'),
+    path('ausenciabeneficiado/delete/<int:pk>', viewsets.AusenBeneficiadoDel.as_view(), name='ausbenefi_del'),
+
+    path('tutormuni/', viewsets.TutorMuniView.as_view(), name='tutormuni_list'),
+    path('tutormuni/new', viewsets.TutorMuniNew.as_view(), name='tutormuni_new'),
+    path('tutormuni/edit/<int:pk>', viewsets.TutorMuniEdit.as_view(), name='tutormuni_edit'),
+    path('tutormuni/delete/<int:pk>', viewsets.TutorMuniDel.as_view(), name='tutormuni_del'),
+
+    path('lidercomunitario/', viewsets.LiderComunitarioMuniView.as_view(), name='lidercomuni_list'),
+    path('lidercomunitario/new', viewsets.LiderComunitarioNew.as_view(), name='lidercomuni_new'),
+    path('lidercomunitario/edit/<int:pk>', viewsets.LiderComunitarioEdit.as_view(), name='lidercomuni_edit'),
+    path('lidercomunitario/delete/<int:pk>', viewsets.LiderComunitarioDel.as_view(), name='lidercomuni_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),

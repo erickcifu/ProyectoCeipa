@@ -1,4 +1,4 @@
-{% extends 'base/base3.html' %}
+{% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
 <div id="layoutSidenav_content">
@@ -14,21 +14,25 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Partido Politico
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Establecimiento
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-5">
                                 <div class="input-group">
-                                    <input type="text" name="nombre_partido" maxlength="50" class="form-control" required id="id_nombre_partido"
-                                    placeholder="Nombre Partido Politico" value="{% if obj %} {{ obj.nombre_partido }} {% endif %}">
+                                    {{ form.nombre_establecimiento}}
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="input-group">
+                                    {{ form.direccion}}
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
-                                    <label for="estado">Estado</label>
+                                    <label for="id_estado">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado" class="form-control" id="id_estado" type="checkbox"  {% if obj.estado %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado" class="form-control" id="id_estado" type="checkbox"  {% if obj.estado is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +42,7 @@
                         <div class="row">
                             <div class="col">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'educacion:partidopolitic_list' %}" class="btn btn-danger">Cancelar</a>
+                                <a href="{% url 'municipalizacion:establecimiento_list' %}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </div>

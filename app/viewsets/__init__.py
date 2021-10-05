@@ -45,4 +45,10 @@ from .MunicViewset.maestroViewset import MaesView, MaesNew, MaesEdit, MaesDel
 from .MunicViewset.ProfesionViewset import ProfView, ProfNew, ProfEdit, ProfDel
 from .MunicViewset.discViewset import DiscView, DiscNew, DiscEdit, DiscDel
 from .MunicViewset.cargoViewset import CarView, CarNew, CarEdit, CarDel
-from .MunicViewset.comisionViewset import ComView, ComNew, ComEdit, ComDel 
+from .MunicViewset.comisionViewset import ComView, ComNew, ComEdit, ComDel
+from .MunicViewset.ausbenefiViewset import AusenBeneficiadoView, AusenBeneficiadoNew, AusenBeneficiadoEdit, AusenBeneficiadoDel
+from .MunicViewset.establecimientoViewset import EstablecimientoView, EstablecimientoNew, EstablecimientoEdit, EstablecimientoDel
+from .MunicViewset.lidercomuniViewset import LiderComunitarioMuniView, LiderComunitarioNew, LiderComunitarioEdit, LiderComunitarioDel
+from .MunicViewset.mediocomuViewset import MedioComuniView, MedioComuniNew, MedioComuniEdit, MedioComuniDel
+from .MunicViewset.partidopoliticViewset import PartidoPoliticView, PartidoPoliticNew, PartidoPoliticEdit, PartidoPoliticDel
+from .MunicViewset.tutormuniViewset import TutorMuniView, TutorMuniNew, TutorMuniEdit, TutorMuniDel
