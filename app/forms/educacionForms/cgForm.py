@@ -14,3 +14,6 @@ class CGForm(forms.ModelForm):
                 self.fields[field].widget.attrs.update({
                     'class':'form-control'
                 })
+                self.fields['grado'].empty_label = "Seleccione un Grado"
+                self.fields['ciclo'].empty_label = "Seleccione un Ciclo"
+                self.fields['seccion'].empty_label = "Seleccione una Seccion"

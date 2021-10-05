@@ -25,5 +25,5 @@ class ReligionAlumnoForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-        self.fields['religion'].empty_label = "Seleccione Religion"
-        self.fields['alumno'].empty_label = "Seleccione al Alumno"
+            self.fields['religion'].empty_label = "Seleccione Religion"
+            self.fields['alumno'].empty_label = "Seleccione al Alumno"

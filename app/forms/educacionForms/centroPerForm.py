@@ -14,3 +14,5 @@ class CentPerForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
+            self.fields['centro_Educativo'].empty_label = "Seleccione un Centro Educativo"
+            self.fields['personal'].empty_label = "Seleccione una persona"
