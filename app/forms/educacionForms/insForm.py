@@ -15,3 +15,6 @@ class InsForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
+            self.fields['centro_educativo'].empty_label = "Seleccione un Centro Educativo"
+            self.fields['alumno'].empty_label = "Seleccione un Alumno"
+            self.fields['ciclo_grado'].empty_label = "Seleccione un Ciclo Grado"

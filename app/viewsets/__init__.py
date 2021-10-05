@@ -52,3 +52,6 @@ from .MunicViewset.lidercomuniViewset import LiderComunitarioMuniView, LiderComu
 from .MunicViewset.mediocomuViewset import MedioComuniView, MedioComuniNew, MedioComuniEdit, MedioComuniDel
 from .MunicViewset.partidopoliticViewset import PartidoPoliticView, PartidoPoliticNew, PartidoPoliticEdit, PartidoPoliticDel
 from .MunicViewset.tutormuniViewset import TutorMuniView, TutorMuniNew, TutorMuniEdit, TutorMuniDel
+from .MunicViewset.padperViewset import PadPerView, PadPerNew, PadPerEdit, PadPerDel
+from .MunicViewset.padfamViewset import PadFamView, PadFamNew, PadFamEdit, PadFamDel
+from .MunicViewset.benefarViewset import BenefArView, BenefArNew, BenefArEdit, BenefArDel

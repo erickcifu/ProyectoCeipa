@@ -14,3 +14,5 @@ class CursoForm(forms.ModelForm):
                 self.fields[field].widget.attrs.update({
                     'class':'form-control'
                 })
+                self.fields['grado'].empty_label = "Seleccione un Grado"
+            

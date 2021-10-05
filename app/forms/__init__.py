@@ -49,3 +49,6 @@ from .muniForms.lidercomuniForm import LiderComuniMuniForm
 from .muniForms.mediocomuForm import MedioComuniForm
 from .muniForms.partidopoliticForm import PartidoPoliticForm
 from .muniForms.tutormuniForm import TutorMuniForm
+from .muniForms.padperForm import PadPerForm
+from .muniForms.padfamForm import PadFamForm
+from .muniForms.benareForm import BenefArForm

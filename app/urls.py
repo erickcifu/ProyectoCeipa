@@ -261,6 +261,21 @@ urlpatterns = [
     path('lidercomunitario/edit/<int:pk>', viewsets.LiderComunitarioEdit.as_view(), name='lidercomuni_edit'),
     path('lidercomunitario/delete/<int:pk>', viewsets.LiderComunitarioDel.as_view(), name='lidercomuni_del'),
 
+    path('padecimientopersona/', viewsets.PadPerView.as_view(), name='padper_list'),
+    path('padecimientopersona/new', viewsets.PadPerNew.as_view(), name='padper_new'),
+    path('padecimientopersona/edit/<int:pk>', viewsets.PadPerEdit.as_view(), name='padper_edit'),
+    path('padecimientopersona/delete/<int:pk>', viewsets.PadPerDel.as_view(), name='padper_del'),
+
+    path('padresfamilia/', viewsets.PadFamView.as_view(), name='padfam_list'),
+    path('padresfamilia/new', viewsets.PadFamNew.as_view(), name='padfam_new'),
+    path('padresfamilia/edit/<int:pk>', viewsets.PadFamEdit.as_view(), name='padfam_edit'),
+    path('padresfamilia/delete/<int:pk>', viewsets.PadFamDel.as_view(), name='padfam_del'),
+
+    path('benefeciadoare/', viewsets.BenefArView.as_view(), name='benefar_list'),
+    path('benefeciadoare/new', viewsets.BenefArNew.as_view(), name='benefar_new'),
+    path('benefeciadoare/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
+    path('benefeciadoare/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),

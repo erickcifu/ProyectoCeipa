@@ -14,3 +14,7 @@ class VivForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
+            self.fields['techo'].empty_label = "Seleccione un techo"
+            self.fields['piso'].empty_label = "Seleccione un Piso"
+            self.fields['servicio'].empty_label = "Seleccione un servicio"
+            self.fields['estudiante'].empty_label = "Seleccione un Alumno"

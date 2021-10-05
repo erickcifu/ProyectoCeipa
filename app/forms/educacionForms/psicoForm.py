@@ -15,3 +15,4 @@ class PsicoForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
+            self.fields['alumno'].empty_label = "Seleccione un Alumno"

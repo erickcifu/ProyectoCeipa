@@ -14,3 +14,5 @@ class TareaForm(forms.ModelForm):
                 self.fields[field].widget.attrs.update({
                     'class':'form-control'
                 })
+                self.fields['maestro'].empty_label = "Seleccione un maestro"
+                self.fields['ciclo_grado_curso'].empty_label = "Seleccione un Ciclo Grado Curso"
