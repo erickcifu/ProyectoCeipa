@@ -7,11 +7,12 @@
           Departamentos
           <a href="{% url 'educacion:cat_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
+      <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
           <div class="alert alert-info">No hay Departamentos</div>
           {% else %}
-          <table class="table table-striped table-hover">
+          <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
                   <th>Departamento</th>
@@ -46,7 +47,7 @@
           </table>
           {% endif %}
       </div>
-
+    </div>
 {% endblock %}
 
 {% block js_page %}
