@@ -8,6 +8,8 @@ class EstudiosAnt(models.Model):
     telefono = models.CharField(max_length=8)
     estado_estudiosant = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.nombre_establecimiento
 
     def delete(self, *args):
             self.estado_estudiosant = False

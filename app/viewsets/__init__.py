@@ -55,3 +55,4 @@ from .MunicViewset.tutormuniViewset import TutorMuniView, TutorMuniNew, TutorMun
 from .MunicViewset.padperViewset import PadPerView, PadPerNew, PadPerEdit, PadPerDel
 from .MunicViewset.padfamViewset import PadFamView, PadFamNew, PadFamEdit, PadFamDel
 from .MunicViewset.benefarViewset import BenefArView, BenefArNew, BenefArEdit, BenefArDel
+from .MunicViewset.ausenciaViewset import AusView, AusNew, AusEdit, AusDel
