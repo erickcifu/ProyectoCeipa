@@ -18,15 +18,23 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-10">
                                 <div class="input-group">
+                                    <input type="text" name="nombre_establecimiento" maxlength="255" class="form-control" required id="id_nombre_establecimiento"
+                                    placeholder="Nombre del establecimiento" value="{% if obj %} {{ obj.nombre_establecimiento }} {% endif %}">
+                                  </div>
+                                <!-- <div class="input-group">
                                     {{ form.nombre_establecimiento}}
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="col-5">
+                            <div class="col-10">
                                 <div class="input-group">
+                                    <input type="text" name="direccion" maxlength="255" class="form-control" required id="id_direccion"
+                                    placeholder="Direccion de establecimiento" value="{% if obj %} {{ obj.direccion }} {% endif %}">
+                                  </div>
+                                <!-- <div class="input-group">
                                     {{ form.direccion}}
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
