@@ -3,22 +3,16 @@
 {% block page_content %}
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
-      <div class="card-header">
-          Alumnos Padecimientos
-          <div class="dropdown no-caret">
-              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i data-feather="more-vertical"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
-                  <<a class="dropdown-item" href="{% url 'educacion:apad_new' %}" ><i class="far fa-calendar-plus"></i> Nueva</a>
-              </div>
-          </div>
-      </div>
+        <div class="card-header">
+            Padecimientos
+            <a href="{% url 'educacion:apad_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+        </div>
+        <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
           <div class="alert alert-info">No hay datos de Alumnos con algun padecimiento</div>
           {% else %}
-          <table class="table table-striped table-hover">
+          <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
                   <th>Alumno</th>

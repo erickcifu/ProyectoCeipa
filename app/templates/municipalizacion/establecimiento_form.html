@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-6 mb-6">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -17,25 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Establecimiento
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="nombre_establecimiento" maxlength="255" class="form-control" required id="id_nombre_establecimiento"
-                                    placeholder="Nombre del establecimiento" value="{% if obj %} {{ obj.nombre_establecimiento }} {% endif %}">
-                                  </div>
-                                <!-- <div class="input-group">
-                                    {{ form.nombre_establecimiento}}
-                                </div> -->
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Nombre del establecimiento </label>
+                                <input type="text" name="nombre_establecimiento" maxlength="255" class="form-control" required id="id_nombre_establecimiento"
+                                    placeholder="Escriba el Nombre del establecimiento" value="{% if obj %} {{ obj.nombre_establecimiento }} {% endif %}">
                             </div>
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="direccion" maxlength="255" class="form-control" required id="id_direccion"
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Direccion del establecimiento </label>
+                                <input type="text" name="direccion" maxlength="255" class="form-control" required id="id_direccion"
                                     placeholder="Direccion de establecimiento" value="{% if obj %} {{ obj.direccion }} {% endif %}">
-                                  </div>
-                                <!-- <div class="input-group">
-                                    {{ form.direccion}}
-                                </div> -->
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado">Estado</label>

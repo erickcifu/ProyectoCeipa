@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-6 mb-6">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -17,24 +17,23 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Parentesco
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="nombre_parentesco" maxlength="50" class="form-control" required id="id_nombre_parentesco"
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Tipo parentesco</label>
+                                <input class="form-control" type="text" name="nombre_parentesco" maxlength="50" class="form-control" required id="id_nombre_parentesco"
                                     placeholder="Parentesco" value="{% if obj %} {{ obj.nombre_parentesco }} {% endif %}">
-                                </div>
                             </div>
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="descripcion_parentesco" maxlength="100" class="form-control" required id="id_descripcion_parentesco"
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Descripción de parentesco</label>
+                                <input class="form-control" type="text" name="descripcion_parentesco" maxlength="100" class="form-control" required id="id_descripcion_parentesco"
                                     placeholder="Descripcion del parentesco" value="{% if obj %} {{ obj.descripcion_parentesco }} {% endif %}">
-                                </div>
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_parentesco">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_parentesco" class="form-control" id="id_estado_parentesco" type="checkbox"  {% if obj.estado_parentesco %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_parentesco" class="form-control" id="id_estado_parentesco" type="checkbox"  {% if obj.estado_parentesco is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

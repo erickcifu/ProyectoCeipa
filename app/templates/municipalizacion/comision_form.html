@@ -17,18 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Comision
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                  <input type="text" name="nombre_comision" maxlength="255" class="form-control" required id="id_nombre_comision"
-                                  placeholder="Nombre de el Cargo " value="{% if obj %} {{ obj.nombre_comision }} {% endif %}">
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Nombre de Comision</label>
+                                <input type="text" name="nombre_comision" maxlength="255" class="form-control" required id="id_nombre_comision"
+                                  placeholder="Escriba la comision" value="{% if obj %} {{ obj.nombre_comision }} {% endif %}">
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_comision">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_comision" class="form-control" id="id_estado_comision" type="checkbox"  {% if obj.estado_comision %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_comision" class="form-control" id="id_estado_comision" type="checkbox"  {% if obj.estado_comision is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

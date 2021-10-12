@@ -14,29 +14,31 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevos {% endif %} centro_educativo
+                            {% if obj %} Editar {% else %} Nuevos {% endif %} Centro Educativo
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                  <div class="input-group">
-                                  <input type="text" name="nombre_centro" maxlength="50" class="form-control" required id="id_nombre_centro"
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Nombre del Centro Educativo</label>
+                                <input type="text" name="nombre_centro" maxlength="50" class="form-control" required id="id_nombre_centro"
                                   placeholder="Nombre del Centro Educativo" value="{% if obj %} {{ obj.nombre_centro }} {% endif %}">
-                                </div>
-                                <div class="input-group">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Direccion de centro educativo</label>
                                 <input type="text" name="direccion_centro" maxlength="50" class="form-control" required id="id_direccion_centro"
                                 placeholder="Direccion del Centro Educativo" value="{% if obj %} {{ obj.direccion_centro }} {% endif %}">
-                              </div>
-                              <div class="input-group">
-                              <input type="text" name="codigo_centro" maxlength="50" class="form-control" required id="id_codigo_centro"
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Código de centro educativo</label>
+                                <input type="text" name="codigo_centro" maxlength="50" class="form-control" required id="id_codigo_centro"
                               placeholder="Codigo Del Centro Educativo" value="{% if obj %} {{ obj.codigo_centro }} {% endif %}">
                             </div>
-                            </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_centro">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_centro" class="form-control" id="id_estado_centro" type="checkbox"  {% if obj.estado_centro %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_centro" class="form-control" id="id_estado_centro" type="checkbox"  {% if obj.estado_centro is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

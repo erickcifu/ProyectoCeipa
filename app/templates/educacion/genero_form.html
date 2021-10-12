@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-6 mb-6">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -17,18 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} genero
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="genero" maxlength="50" class="form-control" required id="id_genero"
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Escriba el Genéro</label>
+                                <input type="text" name="genero" maxlength="50" class="form-control" required id="id_genero"
                                     placeholder="Nombre genero" value="{% if obj %} {{ obj.genero }} {% endif %}">
-                                </div>
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_genero">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_genero" class="form-control" id="id_estado_genero" type="checkbox"  {% if obj.estado_genero %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_genero" class="form-control" id="id_estado_genero" type="checkbox"  {% if obj.estado_genero is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

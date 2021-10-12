@@ -17,18 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Tipo_piso
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="tipo_piso" maxlength="50" class="form-control" required id="id_tipo_piso"
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Tipo de Piso</label>
+                                <input type="text" name="tipo_piso" maxlength="50" class="form-control" required id="id_tipo_piso"
                                     placeholder="Tipo de Piso" value="{% if obj %} {{ obj.tipo_piso }} {% endif %}">
-                                </div>
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="estado_tipopiso">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_tipopiso" class="form-control" id="id_estado_tipopiso" type="checkbox"  {% if obj.estado_tipopiso %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_tipopiso" class="form-control" id="id_estado_tipopiso" type="checkbox"  {% if obj.estado_tipopiso is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>
