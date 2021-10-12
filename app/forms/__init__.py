@@ -52,3 +52,4 @@ from .muniForms.tutormuniForm import TutorMuniForm
 from .muniForms.padperForm import PadPerForm
 from .muniForms.padfamForm import PadFamForm
 from .muniForms.benareForm import BenefArForm
+from .muniForms.ausenciaForm import AusenciaForm

@@ -23,7 +23,7 @@ class Persona(models.Model):
     disc = models.ForeignKey(Discapacidad, on_delete=models.CASCADE, related_name="T_disc")
 
     def __str__(self):
-        return self.nombres_persona
+        return self.persona
 
     def delete(self, *args):
         self.estado_persona = False

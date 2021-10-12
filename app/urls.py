@@ -276,6 +276,11 @@ urlpatterns = [
     path('benefeciadoare/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
     path('benefeciadoare/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
 
+    path('ausencia/', viewsets.AusView.as_view(), name='aus_list'),
+    path('ausencia/new', viewsets.AusNew.as_view(), name='aus_new'),
+    path('ausencia/edit/<int:pk>', viewsets.AusEdit.as_view(), name='aus_edit'),
+    path('ausencia/delete/<int:pk>', viewsets.AusDel.as_view(), name='aus_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),
