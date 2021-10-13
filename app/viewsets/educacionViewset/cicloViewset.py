@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 
 from app.models import Ciclo
 from app.forms import CicloForm
@@ -18,6 +19,7 @@ class CicloNew(LoginRequiredMixin, generic.CreateView):
     context_object_name = "obj"
     form_class = CicloForm
     success_url = reverse_lazy("educacion:ciclo_list")
+    success_message = "Ciclo creado correctamente"
     login_url = 'app:login'
 
 class CicloEdit(LoginRequiredMixin, generic.UpdateView):

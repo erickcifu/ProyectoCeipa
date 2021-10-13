@@ -5,7 +5,7 @@
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -15,17 +15,21 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} personalEducativo
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Alumno
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                          {{ form | crispy }}
+                            <div class="col-10">
+                              {{ form | crispy }}
+
+                            </div>
+
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'educacion:personal_list' %}" class="btn btn-danger">Cancelar</a>
+                                <a href="{% url 'educacion:alumno_list' %}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </div>

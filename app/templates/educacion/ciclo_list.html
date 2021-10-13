@@ -1,58 +1,53 @@
 {% extends 'base/base3.html' %}
+{% load custom_tags %}
 
 {% block page_content %}
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Ciclo Escolar
+          <h2>Ciclo Escolar</h2>
           <a href="{% url 'educacion:ciclo_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
-      <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
           <div class="alert alert-info">No hay datos</div>
           {% else %}
-          <table id="datatablesSimple">
-              <thead>
-                  <th>Id</th>
-                  <th>Año</th>
-                  <th>Estado</th>
-                  <th class="all">Acciones</th>
-              </thead>
-              <tbody>
-                  {% for item in obj %}
-                  <tr>
-                      <td>{{ item.id }}</td>
-                      <td>{{ item.anio }}</td>
-                      {% if item.estado_ciclo is True %}
-                      <td>
-                        <span class="badge bg-green-soft text-green">Activo</span>
-                      </td>
-                      {% else %}
-                      <td>
-                        <span class="badge bg-red-soft text-red">Inactivo</span>
-                      </td>
-                      {% endif %}
-                      <td>
-                        <a href="{% url 'educacion:ciclo_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
-                        <a href="{% url 'educacion:ciclo_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
-                          <!--<a href="{% url 'educacion:ciclo_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                          <a href="{% url 'educacion:ciclo_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>-->
-                      </td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
+          <div class="row">
+          {% for item in obj %}
+          {% set_variable item.id as var %}
+          <div class="col-lg-6 col-xl-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                  <a class="text-primary stretched-link" href="{% url 'educacion:cg_list' %}?lang={{var}}">{{ item.anio }}</a>
+                  <div class="text-primary"><i class="fas fa-angle-right"></i></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="text-lg fw-bold">
+                    {% if item.estado_ciclo is True %}
+                      <span class="badge bg-green-soft text-green">Activo </span>
+                    {% else %}
+                      <span class="badge bg-red-soft text-red">Inactivo</span>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <a href="{% url 'educacion:ciclo_edit' item.id %}" class="btn btn-outline-yellow" role="button">Editar</a>
+                  <a href="{% url 'educacion:ciclo_del' item.id %}" class="btn btn-outline-red" role="button">Eliminar</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
           {% endif %}
       </div>
-    </div>
 {% endblock %}
 
 {% block js_page %}
 <script>
-    //LLamando al dataTables jQuery plugin
     $(document).ready(function(){
         $('.table').DataTable();
     });
 </script>
-{% endblock%}
+{% endblock %}

@@ -22,7 +22,7 @@ class APadNew(LoginRequiredMixin, generic.CreateView):
 
 class APadEdit(LoginRequiredMixin, generic.UpdateView):
     model = Apadecimiento
-    template_name = "educacion/pade_form.html"
+    template_name = "educacion/apad_form.html"
     context_object_name = "obj"
     form_class = APadeForm
     success_url = reverse_lazy("educacion:apad_list")
