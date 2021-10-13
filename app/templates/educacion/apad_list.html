@@ -25,10 +25,16 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.Alumno }}</td>
+                      <td>{{ item.alumno }} {{ item.alumno.apellidos_alumno }}</td>
                       <td>{{ item.padecimiento }}</td>
                       <td>{{ item.tratamiento }}</td>
-                      <td>{{ item.estado_Alpadecimiento|yesno:"Activo,Inactivo" }}</td>
+                      <td>
+                        {% if item.estado_Alpadecimiento is True %}
+                          <span class="badge bg-green-soft text-green">Activo </span>
+                        {% else %}
+                          <span class="badge bg-red-soft text-red">Inactivo</span>
+                        {% endif %}
+                      </td>
                       <td>
                           <a href="{% url 'educacion:apad_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
                           <a href="{% url 'educacion:apad_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>

@@ -3,54 +3,68 @@
 {% block page_content %}
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
-        <div class="card-header">
-            Tutores
-            <a href="{% url 'educacion:tutor_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
-        </div>
-        <div class="card mb-4">
+      <div class="card-header">
+          Tutor
+          <div class="dropdown no-caret">
+              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i data-feather="more-vertical"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="{% url 'educacion:tutor_new' %}" ><i class="far fa-calendar-plus"></i> Nuevo</a>
+              </div>
+          </div>
+      </div>
       <div class="card-body">
           {% if not obj %}
           <div class="alert alert-info">No hay tutores</div>
           {% else %}
-          <table id="datatablesSimple">
+          <table class="table table-striped table-hover">
               <thead>
-                  <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>DPI</th>
-                  <th>Direccion</th>
-                  <th>Telefono</th>
-                  <th>fecha de nacimiento</th>
-                  <th>Correo</th>
-                  <th>Fotografia</th>
-                  <th>Municipalidad</th>
-                  <th>genero</th>
-                  <th>Parentesco</th>
-                  <th>Estado</th>
-                  <th class="all">Acciones</th>
+                  <th>Tutores</th>
               </thead>
               <tbody>
+                <div class="row">
                   {% for item in obj %}
-                  <tr>
-                      <td>{{ item.id }}</td>
-                      <td>{{ item.nombres_tutor }}</td>
-                      <td>{{ item.apellidos_tutor }}</td>
-                      <td>{{ item.DPI }}</td>
-                      <td>{{ item.fecha_nacimiento|date:"d M, Y" }}</td>
-                      <td>{{ item.direccion_tutor }}</td>
-                      <td>{{ item.telefono }}</td>
-                      <td>{{ item.correo }}</td>
-                      <td>{{ item.fotografia }}</td>
-                      <td>{{ item.muni }}</td>
-                      <td>{{ item.genero }}</td>
-                      <td>{{ item.parentesco }}</td>
-                      <td>{{ item.estado_tutor|yesno:"Activo,Inactivo" }}</td>
-                      <td>
-                          <a href="{% url 'educacion:tutor_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                          <a href="{% url 'educacion:tutor_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
-                      </td>
-                  </tr>
+                  <div class="col-lg-6 col-xl-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                          <a class="text-primary stretched-link">{{ item.nombres_tutor }} {{ item.apellidos_tutor }}</a>
+                          <div class="text-primary"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img class="card-img-top" src="{{item.foto_url|default_if_none:'ceipa/default.png'}}">
+                        <div class="card-body">
+                          <label><b>ID: </b>{{ item.id }}</label>
+                          <br/>
+                          <label><b>DPI: </b>{{ item.DPI }}</label>
+                          <label><b>Codigo MINEDUC: </b>{{ item.codigo_mineduc }}</label>
+                          <label><b>Fecha de nacimiento: </b>{{ item.fecha_nacimiento|date:"d M, Y" }}</label>
+                          <label><b>Ingreso familiar: Q.</b>{{ item.ingreso_familiar }}</label>
+                          <label><b>direcciòn: </b>{{ item.direccion_tutor }}</label>
+                          <label><b>No. Telefono: </b>{{ item.telefono }}</label>
+                          <label><b>Correo: </b>{{ item.correo }}</label>
+                          <label><b>Etnia: </b>{{ item.etni }}</label>
+                          <label><b>Municipio: </b>{{ item.muni }}</label>
+                          <label><b>Gènero: </b>{{ item.genero }}</label>
+                          <label><b>Parentesco con el alumno: </b>{{ item.parentesco }}</label>
+
+                          <div class="text-lg fw-bold">
+                            {% if item.estado_tutor is True %}
+                              <span class="badge bg-green-soft text-green">Activo </span>
+                            {% else %}
+                              <span class="badge bg-red-soft text-red">Inactivo</span>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                          <a href="{% url 'educacion:tutor_edit' item.id %}" class="btn btn-outline-yellow" role="button">Editar</a>
+                          <a href="{% url 'educacion:tutor_del' item.id %}" class="btn btn-outline-red" role="button">Eliminar</a>
+                        </div>
+                      </div>
+                    </div>
                   {% endfor %}
+                  </div>
               </tbody>
           </table>
           {% endif %}
