@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'clear_cache',
+    'crispy_forms',
     'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'django.conf.urls',
     'rest_auth',
     ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,7 +133,7 @@ REST_FRAMEWORK = {
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_devel')
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/ceipa/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
