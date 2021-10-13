@@ -10,7 +10,7 @@ class Apadecimiento(models.Model):
     estado_Alpadecimiento = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.padecimiento
+        return str(self.padecimiento)
 
     def delete(self, *args):
         self.estado_Alpadecimiento = False

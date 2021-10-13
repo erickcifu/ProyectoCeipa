@@ -12,6 +12,13 @@ class CGCView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'obj'
     login_url = 'app:login'
 
+    def get_queryset(self):
+        qs = Ciclo_grado_curso.objects.all()
+        cg_id = self.request.GET.get("lang")
+        if cg_id:
+            qs = qs.filter(ciclo_grado__id=cg_id)
+        return qs
+
 class CGCNew(LoginRequiredMixin, generic.CreateView):
     model = Ciclo_grado_curso
     template_name = 'educacion/cgc_form.html'

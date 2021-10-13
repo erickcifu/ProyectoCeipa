@@ -15,7 +15,8 @@
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>psicologico</th>
+                  <th>Alumno</th>
+                  <th>Análisis</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -23,8 +24,15 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
+                      <td>{{ item.alumno }} {{ item.alumno.apellidos_alumno }}</td>
                       <td>{{ item.Analisis_psicologico }}</td>
-                      <td>{{ item.estado_psicologico|yesno:"Activo,Inactivo" }}</td>
+                      <td>
+                        {% if item.estado_psicologico is True %}
+                          <span class="badge bg-green-soft text-green">Activo </span>
+                        {% else %}
+                          <span class="badge bg-red-soft text-red">Inactivo</span>
+                        {% endif %}
+                      </td>
                       <td>
                         <a href="{% url 'educacion:psico_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
                         <a href="{% url 'educacion:psico_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>

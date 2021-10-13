@@ -3,66 +3,57 @@
 {% block page_content %}
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
-        <div class="card-header">
-            Alumnos
-            <a href="{% url 'educacion:alumno_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
-        </div>
-        <div class="card mb-4">
+      <div class="card-header">
+          Alumno
+          <a href="{% url 'educacion:alumno_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+      </div>
       <div class="card-body">
           {% if not obj %}
           <div class="alert alert-info">No hay Alumnos</div>
           {% else %}
-          <table id="datatablesSimple">
-              <thead>
-                  <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>CUI</th>
-                  <th>Codigo de Mineduc</th>
-                  <th>fecha de nacimiento</th>
-                  <th>Ingreso Familiar</th>
-                  <th>Direccion</th>
-                  <th>Telefono</th>
-                  <th>Fotografia</th>
-                  <th>Ocupacion</th>
-                  <th>Tutor</th>
-                  <th>Etnia</th>
-                  <th>Idioma</th>
-                  <th>Estudios Anteriores</th>
-                  <th>Municipalidad</th>
-                  <th>Genero</th>
-                  <th>Estado</th>
-                  <th class="all">Acciones</th>
-              </thead>
-              <tbody>
+            <div class="row">
                   {% for item in obj %}
-                  <tr>
-                      <td>{{ item.id }}</td>
-                      <td>{{ item.nombres_alumno }}</td>
-                      <td>{{ item.apellidos_alumno }}</td>
-                      <td>{{ item.cui }}</td>
-                      <td>{{ item.codigo_mineduc }}</td>
-                      <td>{{ item.fecha_nacimiento|date:"d M, Y" }}</td>
-                      <td>{{ item.ingreso_familiar }}</td>
-                      <td>{{ item.direccion_alumno }}</td>
-                      <td>{{ item.telefono }}</td>
-                      <td>{{ item.fotografia }}</td>
-                      <td>{{ item.ocup }}</td>
-                      <td>{{ item.tutor }}</td>
-                      <td>{{ item.etni }}</td>
-                      <td>{{ item.idiome }}</td>
-                      <td>{{ item.estudios_anteriores }}</td>
-                      <td>{{ item.muni }}</td>
-                      <td>{{ item.gen }}</td>
-                      <td>{{ item.estado_alumno|yesno:"Activo,Inactivo" }}</td>
-                      <td>
-                          <a href="{% url 'educacion:alumno_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                          <a href="{% url 'educacion:alumno_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
-                      </td>
-                  </tr>
+                  <div class="col-lg-6 col-xl-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                          <a class="text-primary stretched-link">{{ item.nombres_alumno }} {{ item.apellidos_alumno }}</a>
+                          <div class="text-primary"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img class="card-img-top" src="{{item.foto_url|default_if_none:'ceipa/default.png'}}">
+                        <div class="card-body">
+                          <label><b>ID: </b>{{ item.id }}</label>
+                          <br/>
+                          <label><b>CUI: </b>{{ item.cui }}</label>
+                          <label><b>Codigo MINEDUC: </b>{{ item.codigo_mineduc }}</label>
+                          <label><b>Fecha de nacimiento: </b>{{ item.fecha_nacimiento|date:"d M, Y" }}</label>
+                          <label><b>Ingreso familiar: Q.</b>{{ item.ingreso_familiar }}</label>
+                          <label><b>direcciòn: </b>{{ item.direccion_alumno }}</label>
+                          <label><b>No. Telefono: </b>{{ item.telefono }}</label>
+                          <label><b>Ocupaciòn: </b>{{ item.ocup }}</label>
+                          <label><b>Etnia: </b>{{ item.etni }}</label>
+                          <label><b>Idioma: </b>{{ item.idiome }}</label>
+                          <label><b>Municipio: </b>{{ item.muni }}</label>
+                          <label><b>Gènero: </b>{{ item.gen }}</label>
+                          <label><b>Ultimo grado: </b>{{ item.estudios_anteriores }}</label>
+                          <label><b>Tutor: </b>{{ item.tutor }}</label>
+                          <div class="text-lg fw-bold">
+                            {% if item.estado_alumno is True %}
+                              <span class="badge bg-green-soft text-green">Activo </span>
+                            {% else %}
+                              <span class="badge bg-red-soft text-red">Inactivo</span>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                          <a href="{% url 'educacion:alumno_edit' item.id %}" class="btn btn-outline-yellow" role="button">Editar</a>
+                          <a href="{% url 'educacion:alumno_del' item.id %}" class="btn btn-outline-red" role="button">Eliminar</a>
+                        </div>
+                      </div>
+                    </div>
                   {% endfor %}
-              </tbody>
-          </table>
+                  </div>
           {% endif %}
       </div>
 
@@ -74,5 +65,16 @@
     $(document).ready(function(){
         $('.table').DataTable();
     });
+
+</script>
+<script >
+  function eliminar(id){
+  swal.fire({
+    "titulo":"Esta seguro",
+    "text":"esta accion no se puede deshacer",
+    "icon":"question",
+    "showCancelButton":true
+  })
+  }
 </script>
 {% endblock%}

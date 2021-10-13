@@ -1,6 +1,7 @@
 {% extends 'base/base3.html' %}
 
 {% block page_content %}
+{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
@@ -18,71 +19,7 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="nombres" maxlength="50" class="form-control" required id="id_nombres"
-                                    placeholder="Nombre" value="{% if obj %} {{ obj.nombres }} {% endif %}">
-                                </div>
-                            </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="apellidos" maxlength="50" class="form-control" required id="id_nombres"
-                                    placeholder="Apellidos" value="{% if obj %} {{ obj.apellidos }} {% endif %}">
-                                </div>
-                            </div>
-
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="telefono_personal" maxlength="50" class="form-control" required id="id_telefono_personal"
-                                    placeholder="telefono" value="{% if obj %} {{ obj.telefono_personal }} {% endif %}">
-                                </div>
-                            </div>
-
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="email_personal" maxlength="50" class="form-control" required id="id_email_personal"
-                                    placeholder="Correo Electronico" value="{% if obj %} {{ obj.email_personal }} {% endif %}">
-                                </div>
-                            </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="date" name="fechaNac_personal" class="form-control" required id="id_fechaNac_personal"
-                                    placeholder="Fecha de nacimiento" value="{% if obj %} {{ obj.fechaNac_personal }} {% endif %}">
-                                </div>
-                            </div>
-
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="direccion_personal" maxlength="50" class="form-control" required id="id_direccion_personal"
-                                    placeholder="Direccion" value="{% if obj %} {{ obj.direccion_personal }} {% endif %}">
-                                </div>
-                            </div>
-
-
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="id_certificadoRenas_personal">Certificado Renas</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="certificadoRenas_personal" class="form-control" id="id_certificadoRenas_personal" type="checkbox"  {% if obj.certificadoRenas_personal %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="id_estado_personal">Estado</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="estado_personal" class="form-control" id="id_estado_personal" type="checkbox"  {% if obj.estado_personal %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- {{form.as_p}} -->
+                          {{ form | crispy }}
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">

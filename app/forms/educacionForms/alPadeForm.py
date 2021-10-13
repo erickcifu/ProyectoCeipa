@@ -5,7 +5,7 @@ from app.models import Apadecimiento
 class APadeForm(forms.ModelForm):
     class Meta:
         model = Apadecimiento
-        fields = ['alumno','padecimiento','tratamiento', 'estado_Alpadecimiento']
+        fields = ['padecimiento','tratamiento', 'estado_Alpadecimiento']
         labels = {'padecimiento':"AlumPad", 'estado_Alpadecimiento':"Estado"}
         widget = {'estado_Alpadecimiento': forms.TextInput}
 
@@ -15,5 +15,4 @@ class APadeForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-            self.fields['alumno'].empty_label = "Seleccione un alumno"
             self.fields['padecimiento'].empty_label = "Seleccione un padecimiento"
