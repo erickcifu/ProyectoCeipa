@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -17,49 +17,37 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Conviviente
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="nombres_conviviente" maxlength="50" class="form-control" required id="id_nombres_conviviente"
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Nombre Conviviente</label>
+                                <input class="form-control" type="text" name="nombres_conviviente" maxlength="50" class="form-control" required id="id_nombres_conviviente"
                                     placeholder="Nombre" value="{% if obj %} {{ obj.nombres_conviviente }} {% endif %}">
-                                </div>
                             </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="apellidos_conviviente" maxlength="50" class="form-control" required id="id_apellidos_conviviente"
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Apellidos</label>
+                                <input class="form-control" type="text" name="apellidos_conviviente" maxlength="50" class="form-control" required id="id_apellidos_conviviente"
                                     placeholder="Apellidos" value="{% if obj %} {{ obj.apellidos_conviviente }} {% endif %}">
-                                </div>
                             </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="date" name="fecha_nacimiento" maxlength="50" class="form-control" required id="id_fecha_nacimiento"
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Fecha de nacimiento</label>
+                                <input class="form-control" type="date" name="fecha_nacimiento" maxlength="50" class="form-control" required id="id_fecha_nacimiento"
                                     placeholder="Fecha de nacimiento" value="{% if obj %} {{ obj.fecha_nacimiento }} {% endif %}">
-                                </div>
                             </div>
-
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="vivienda" maxlength="50" class="form-control" required id="id_vivienda"
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Ambiente de vivienda</label>
+                                <input class="form-control" type="text" name="vivienda" maxlength="50" class="form-control" required id="id_vivienda"
                                     placeholder="Ambiente de vivienda" value="{% if obj %} {{ obj.vivienda }} {% endif %}">
-                                </div>
                             </div>
-
-
-                            <div class="col-5">
-                                <div class="input-group">
-                                    {{ form.parentesco }}
-                                </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Elija un parentesco</label>
+                                {{ form.parentesco }}
                             </div>
-
-
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_conviviente">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_conviviente" class="form-control" id="id_estado_conviviente" type="checkbox"  {% if obj.estado_conviviente %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_conviviente" class="form-control" id="id_estado_conviviente" type="checkbox"  {% if obj.estado_conviviente is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

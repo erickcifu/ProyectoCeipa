@@ -17,18 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Ciclo
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="anio" maxlength="50" class="form-control" required id="id_anio"
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Escriba el Año</label>
+                                <input type="text" name="anio" maxlength="50" class="form-control" required id="id_anio"
                                     placeholder="Año" value="{% if obj %} {{ obj.anio }} {% endif %}">
-                                </div>
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_ciclo">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_ciclo" class="form-control" id="id_estado_ciclo" type="checkbox"  {% if obj.estado_ciclo %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_ciclo" class="form-control" id="id_estado_ciclo" type="checkbox"  {% if obj.estado_ciclo is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

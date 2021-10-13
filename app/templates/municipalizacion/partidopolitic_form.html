@@ -17,18 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Partido Politico
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="nombre_partido" maxlength="50" class="form-control" required id="id_nombre_partido"
-                                    placeholder="Nombre Partido Politico" value="{% if obj %} {{ obj.nombre_partido }} {% endif %}">
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Nombre del Partido Politico</label>
+                                <input type="text" name="nombre_partido" maxlength="50" class="form-control" required id="id_nombre_partido"
+                                    placeholder="Escriba el Nombre Partido Politico" value="{% if obj %} {{ obj.nombre_partido }} {% endif %}">
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="estado">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado" class="form-control" id="id_estado" type="checkbox"  {% if obj.estado %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado" class="form-control" id="id_estado" type="checkbox"  {% if obj.estado is true%} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

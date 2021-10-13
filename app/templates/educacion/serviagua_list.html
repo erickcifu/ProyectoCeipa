@@ -7,11 +7,12 @@
           Servicio de Agua
           <a href="{% url 'educacion:serviagua_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
+      <div class="card mb-4">
       <div class="card-body">
         {% if not obj %}
         <div class="alert alert-info">No hay Servicios de Agua</div>
         {% else %}
-        <table class="table table-striped table-hover">
+        <table id="datatablesSimple">
             <thead>
                 <th>Id</th>
                 <th>Tipo de Servicio de Agua</th>
@@ -46,6 +47,7 @@
         </table>
         {% endif %}
       </div>
+    </div>
 {% endblock page_content %}
 
 {% block js_page %}

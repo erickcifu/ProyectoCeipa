@@ -17,17 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Grado
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="input-group">
-                                    {{ form.nombre_grado}}
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Nombre de grado</label>
+                                <input class="form-control" type="text" name="nombre_grado" maxlength="50" class="form-control" required id="id_nombre_grado"
+                                placeholder="Nombre del Grado" value="{% if obj %} {{ obj.nombre_grado }} {% endif %}">
                             </div>
-                            <div class="col-5">
-                                <div class="input-group">
-                                    {{ form.descripcion_grado}}
-                                </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Descripcion</label>
+                                <input class="form-control" type="text" name="descripcion_grado" maxlength="50" class="form-control" required id="id_descripcion_grado"
+                                placeholder="Descripcion del Grado" value="{% if obj %} {{ obj.descripcion_grado }} {% endif %}">
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_grado">Estado</label>

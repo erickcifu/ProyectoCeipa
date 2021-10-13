@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -17,25 +17,27 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Curso
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-15">
-                              <div class="input-group">
-                                  {{ form.grado}}
-                              </div>
-                              <div class="input-group">
-                                  <input type="text" name="nombre_curso" maxlength="50" class="form-control" required id="id_nombre_curso"
-                                  placeholder="Nombre del curso" value="{% if obj %} {{ obj.nombre_curso }} {% endif %}">
-                              </div>
-                              <div class="input-group">
-                                  <input type="text" name="descripcion_curso" maxlength="255" class="form-control" required id="id_descripcion_curso"
-                                  placeholder="decrpcion" value="{% if obj %} {{ obj.descripcion_curso }} {% endif %}">
-                              </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Nombre del curso</label>
+                                <input class="form-control" type="text" name="nombre_curso" maxlength="50" class="form-control" required id="id_nombre_curso"
+                                    placeholder="Nombre" value="{% if obj %} {{ obj.nombre_curso }} {% endif %}">
                             </div>
-                            <div class="col-3">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Descripción del curso</label>
+                                <input class="form-control" type="text" name="descripcion_curso" maxlength="255" class="form-control" required id="id_descripcion_curso"
+                                  placeholder="Descripción" value="{% if obj %} {{ obj.descripcion_curso }} {% endif %}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Escoja un Grado</label>
+                                {{ form.grado }}
+                            </div>
+                        </form>
+                            <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_curso">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_curso" class="form-control" id="id_estado_curso" type="checkbox"  {% if obj.estado_curso %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_curso" class="form-control" id="id_estado_curso" type="checkbox"  {% if obj.estado_curso is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

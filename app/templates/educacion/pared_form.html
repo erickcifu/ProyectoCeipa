@@ -17,17 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Tipo de Pared
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="input-group">
-                                    {{ form.tipo_muro}}
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Tipo de Pared</label>
+                                <input class="form-control" type="text" name="tipo_muro" maxlength="50" class="form-control" required id="id_tipo_muro"
+                                placeholder="Agrege un nuevo tipo de Pared" value="{% if obj %} {{ obj.tipo_muro }} {% endif %}">
                             </div>
-                            <div class="col-5">
-                                <div class="input-group">
-                                    {{ form.descripcion_muro}}
-                                </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Descripción de pared</label>
+                                <input class="form-control" type="text" name="descripcion_muro" maxlength="50" class="form-control" required id="id_descripcion_muro"
+                                placeholder="Agrege una descripcion para esta pared" value="{% if obj %} {{ obj.descripcion_muro }} {% endif %}">
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_muro">Estado</label>

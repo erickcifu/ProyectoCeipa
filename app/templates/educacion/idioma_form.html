@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label for="id_estado_idioma">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_idioma" class="form-control" id="id_estado_idioma" type="checkbox"  {% if obj.estado_idioma %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_idioma" class="form-control" id="id_estado_idioma" type="checkbox"  {% if obj.estado_idioma is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

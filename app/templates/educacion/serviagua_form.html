@@ -17,24 +17,23 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Servicio de Agua
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="servicio_agua" maxlength="50" class="form-control" required id="id_servicio_agua"
-                                    placeholder="Servicio de Agua" value="{% if obj %} {{ obj.servicio_agua }} {% endif %}">
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Servicio de Agua</label>
+                                <input class="form-control" type="text" name="servicio_agua" maxlength="50" class="form-control" required id="id_servicio_agua"
+                                    placeholder="Agrege su servicio de agua" value="{% if obj %} {{ obj.servicio_agua }} {% endif %}">
                             </div>
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="descripcion_servicio_agua" maxlength="100" class="form-control" required id="id_descripcion_servicio_agua"
-                                    placeholder="Descripcion del Servicio" value="{% if obj %} {{ obj.descripcion_servicio_agua }} {% endif %}">
-                                </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Descripcion</label>
+                                <input class="form-control" type="text" name="descripcion_servicio_agua" maxlength="100" class="form-control" required id="id_descripcion_servicio_agua"
+                                    placeholder="Descripcion de Servicio" value="{% if obj %} {{ obj.descripcion_servicio_agua }} {% endif %}">
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_agua">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_agua" class="form-control" id="id_estado_agua" type="checkbox"  {% if obj.estado_agua %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_agua" class="form-control" id="id_estado_agua" type="checkbox"  {% if obj.estado_agua is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>

@@ -1,10 +1,10 @@
 {% extends 'base/base3.html' %}
-
+{#{ % block side_bar %} {% endblock side_bar % }#}
 {% block page_content %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -14,25 +14,24 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} seccion
+                            {% if obj %} Editar {% else %} Nueva {% endif %} sección
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="nombre_seccion" maxlength="50" class="form-control" required id="id_nombre_seccion"
-                                    placeholder="seccion" value="{% if obj %} {{ obj.nombre_seccion }} {% endif %}">
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Sección</label>
+                                <input type="text" name="nombre_seccion" maxlength="50" class="form-control" required id="id_nombre_seccion"
+                                    placeholder="Ingrese nueva sección" value="{% if obj %} {{ obj.nombre_seccion }} {% endif %}">
                             </div>
-                            <div class="col-2">
+                        </form>
+                            <div class="col-5">
                                 <div class="form-group">
                                     <label for="id_estado_seccion">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_seccion" class="form-control" id="id_estado_seccion" type="checkbox"  {% if obj.estado_seccion %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_seccion" class="form-control" id="id_estado_seccion" type="checkbox"  {% if obj.estado_seccion is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>
-                            <!-- {{form.as_p}} -->
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">

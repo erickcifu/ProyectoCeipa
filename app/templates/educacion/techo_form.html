@@ -17,17 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Tipo de Techo
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="input-group">
-                                    {{ form.tipo_techo}}
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Tipo de techo</label>
+                                <input class="form-control" type="text" name="tipo_techo" maxlength="50" class="form-control" required id="id_tipo_techo"
+                                placeholder="Agrege un nuevo tipo de techo" value="{% if obj %} {{ obj.tipo_techo }} {% endif %}">
                             </div>
-                            <div class="col-5">
-                                <div class="input-group">
-                                    {{ form.descripcion_techo}}
-                                </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Descripción de techo</label>
+                                <input class="form-control" type="text" name="descripcion_techo" maxlength="50" class="form-control" required id="id_descripcion_techo"
+                                placeholder="Agrege una descripcion para este techo" value="{% if obj %} {{ obj.descripcion_techo }} {% endif %}">
                             </div>
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_techo">Estado</label>
