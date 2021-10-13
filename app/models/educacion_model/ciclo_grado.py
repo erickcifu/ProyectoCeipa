@@ -11,7 +11,7 @@ class Ciclo_grado(models.Model):
 
     def __str__(self):
         return str(self.ciclo)
-        
+
     def delete(self, *args):
         self.estado_cg = False
         self.save()

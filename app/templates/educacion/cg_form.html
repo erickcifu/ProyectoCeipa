@@ -1,6 +1,7 @@
 {% extends 'base/base3.html' %}
 
 {% block page_content %}
+{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
@@ -18,26 +19,7 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                            <div class="col-15">
-                              <div class="input-group">
-                                  {{ form.grado}}
-                              </div>
-                              <div class="input-group">
-                                 {{ form.ciclo}}
-                             </div>
-                              <div class="input-group">
-                                 {{ form.seccion}}
-                             </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="id_estado_cg">Estado</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="estado_cg" class="form-control" id="id_estado_cg" type="checkbox"  {% if obj.estado_cg %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- {{form.as_p}} -->
+                            {{ form | crispy }}
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">

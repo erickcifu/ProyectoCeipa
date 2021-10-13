@@ -5,18 +5,11 @@
     <div class="card card-header-actions">
       <div class="card-header">
             Ciclo grado curso
-          <div class="dropdown no-caret">
-              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i data-feather="more-vertical"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton">
-                  <<a class="dropdown-item" href="{% url 'educacion:cgc_new' %}" ><i class="far fa-calendar-plus"></i> Nueva</a>
-              </div>
-          </div>
+            <a href="{% url 'educacion:cgc_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay datos de Ciclo grado curso</div>
+          <div class="alert alert-info">No hay datos de Curso urso</div>
           {% else %}
           <table class="table table-striped table-hover">
               <thead>
@@ -24,7 +17,6 @@
                   <th>Maestro</th>
                   <th>Curso</th>
                   <th>Seccion</th>
-                  <th>Ciclo Grado</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -34,7 +26,6 @@
                       <td>{{ item.id }}</td>
                       <td>{{ item.maestro }}</td>
                       <td>{{ item.curso }}</td>
-                      <td>{{ item.seccion }}</td>
                       <td>{{ item.ciclo_grado }}</td>
                       <td>{{ item.estado_cgc|yesno:"Activo,Inactivo" }}</td>
                       <td>
