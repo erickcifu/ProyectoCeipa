@@ -1,4 +1,4 @@
-{% extends 'base/base3.html' %}
+{% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
 <div id="layoutSidenav_content">
@@ -17,21 +17,18 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} idioma
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="nombre_idioma" maxlength="50" class="form-control" required id="id_nombre_idioma"
-                                    placeholder="Idioma" value="{% if obj %} {{ obj.nombre_idioma }} {% endif %}">
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Idioma</label>
+                                <input class="form-control" type="text" name="nombre_idioma" maxlength="50" class="form-control" required id="id_nombre_idioma"
+                                placeholder="Idioma" value="{% if obj %} {{ obj.nombre_idioma }} {% endif %}">
                             </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="descripcion_idioma" maxlength="50" class="form-control" required id="id_descripcion_idioma"
+                            <div class="mb-3">
+                                  <label for="exampleFormControlInput1">Descripción del idioma</label>
+                                    <input class="form-control" type="text" name="descripcion_idioma" maxlength="50" class="form-control" required id="id_descripcion_idioma"
                                     placeholder="Descripcion" value="{% if obj %} {{ obj.descripcion_idioma }} {% endif %}">
                                 </div>
-                            </div>
-
+                          </form>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="id_estado_idioma">Estado</label>
@@ -50,6 +47,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

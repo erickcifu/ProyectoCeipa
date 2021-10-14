@@ -281,6 +281,46 @@ urlpatterns = [
     path('ausencia/edit/<int:pk>', viewsets.AusEdit.as_view(), name='aus_edit'),
     path('ausencia/delete/<int:pk>', viewsets.AusDel.as_view(), name='aus_del'),
 
+    path('idioma_m/', viewsets.IdiomaMuniView.as_view(), name='idiomaMuni_list'),
+    path('idioma_m/new', viewsets.IdiomaMuniNew.as_view(), name='idiomaMuni_new'),
+    path('idioma_m/edit/<int:pk>', viewsets.IdiomaMuniEdit.as_view(), name='idiomaMuni_edit'),
+    path('idioma_m/delete/<int:pk>', viewsets.IdiomaMuniDel.as_view(), name='idiomaMuni_del'),
+
+    path('municipio_m/', viewsets.MunicView.as_view(), name='muni_list'),
+    path('municipio_m/new', viewsets.MuniNew.as_view(), name='muni_new'),
+    path('municipio_m/edit/<int:pk>', viewsets.MuniEdit.as_view(), name='muni_edit'),
+    path('municipio_m/delete/<int:pk>', viewsets.MuniDel.as_view(), name='muni_del'),
+
+    path('departamento_m/', viewsets.DeptoView.as_view(), name='depto_list'),
+    path('departamento_m/new', viewsets.DeptoNew.as_view(), name='depto_new'),
+    path('departamento_m/edit/<int:pk>', viewsets.DeptoEdit.as_view(), name='depto_edit'),
+    path('departamento_m/delete/<int:pk>', viewsets.DeptoDel.as_view(), name='depto_del'),
+
+    path('etnia_m/', viewsets.EtnMuniView.as_view(), name='etniamuni_list'),
+    path('etnia_m/new', viewsets.EtniaMuniNew.as_view(), name='etniamuni_new'),
+    path('etnia_m/edit/<int:pk>', viewsets.EtniaMuniEdit.as_view(), name='etniamuni_edit'),
+    path('etnia_m/delete/<int:pk>', viewsets.EtniaMuniDel.as_view(), name='etniamuni_del'),
+
+    path('estant_m/', viewsets.EstMuniView.as_view(), name='estmuni_list'),
+    path('estant_m/new', viewsets.EstMuniNew.as_view(), name='estmuni_new'),
+    path('estant_m/edit/<int:pk>', viewsets.EstMuniEdit.as_view(), name='estmuni_edit'),
+    path('estant_m/delete/<int:pk>', viewsets.EstMuniDel.as_view(), name='estmuni_del'),
+
+    path('padecimiento_m/', viewsets.PadMuniView.as_view(), name='padmuni_list'),
+    path('padecimiento_m/new', viewsets.PadMuniNew.as_view(), name='padmuni_new'),
+    path('padecimiento_m/edit/<int:pk>', viewsets.PadMuniEdit.as_view(), name='padmuni_edit'),
+    path('padecimiento_m/delete/<int:pk>', viewsets.PadMuniDel.as_view(), name='padmuni_del'),
+
+    path('genero_m/', viewsets.GeneroMuniView.as_view(), name='generomuni_list'),
+    path('genero_m/new', viewsets.GeneroMuniNew.as_view(), name='generomuni_new'),
+    path('genero_m/edit/<int:pk>', viewsets.GeneroMuniEdit.as_view(), name='generomuni_edit'),
+    path('genero_m/delete/<int:pk>', viewsets.GeneroMuniDel.as_view(), name='generomuni_del'),
+
+    path('ocupacion_m/', viewsets.OcupacionMuniView.as_view(), name='ocupmuni_list'),
+    path('ocupacion_m/new', viewsets.OcupacionMuniNew.as_view(), name='ocupmuni_new'),
+    path('ocupacion_m/edit/<int:pk>', viewsets.OcupacionMuniEdit.as_view(), name='ocupmuni_edit'),
+    path('ocupacion_m/delete/<int:pk>', viewsets.OcupacionMuniDel.as_view(), name='ocupmuni_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),

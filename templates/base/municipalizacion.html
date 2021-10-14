@@ -89,8 +89,15 @@
                             </a>
                             <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
                               <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                <a class="nav-link" href="{% url 'municipalizacion:idiomaMuni_list' %}">Idioma</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:area_list' %}">Area</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:municipio_list' %}">Municipio</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:muni_list' %}">Municipio</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:depto_list' %}">Departamento</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:etniamuni_list' %}">Etnia</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:estmuni_list' %}">Estudios Anteriores</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:padmuni_list' %}">Padecimiento</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:generomuni_list' %}">Genero</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:ocupmuni_list' %}">Ocupación</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:carg_list' %}">Cargo Grupo</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:prof_list' %}">Profesion</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:disc_list' %}">Discapacidad</a>

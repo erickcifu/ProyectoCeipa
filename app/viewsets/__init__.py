@@ -56,3 +56,11 @@ from .MunicViewset.padperViewset import PadPerView, PadPerNew, PadPerEdit, PadPe
 from .MunicViewset.padfamViewset import PadFamView, PadFamNew, PadFamEdit, PadFamDel
 from .MunicViewset.benefarViewset import BenefArView, BenefArNew, BenefArEdit, BenefArDel
 from .MunicViewset.ausenciaViewset import AusView, AusNew, AusEdit, AusDel
+from .MunicViewset.idioma_MuniView import IdiomaMuniView, IdiomaMuniNew, IdiomaMuniEdit, IdiomaMuniDel
+from .MunicViewset.MuniView import MunicView, MuniNew, MuniEdit, MuniDel
+from .MunicViewset.DepView import DeptoView, DeptoNew, DeptoEdit, DeptoDel
+from .MunicViewset.EtniaMuniView import EtnMuniView, EtniaMuniNew, EtniaMuniEdit, EtniaMuniDel
+from .MunicViewset.estantMuniView import EstMuniView, EstMuniNew, EstMuniEdit, EstMuniDel
+from .MunicViewset.PadecMuniView import PadMuniView, PadMuniNew, PadMuniEdit, PadMuniDel
+from .MunicViewset.generoMuniView import GeneroMuniView, GeneroMuniNew, GeneroMuniEdit, GeneroMuniDel
+from .MunicViewset.ocupMuniView import OcupacionMuniView, OcupacionMuniNew, OcupacionMuniEdit, OcupacionMuniDel
