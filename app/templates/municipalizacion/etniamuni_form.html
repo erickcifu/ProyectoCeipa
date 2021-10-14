@@ -1,10 +1,10 @@
-{% extends 'base/base3.html' %}
+{% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-12 col-md-12 mb-12">
+    <div class="col-xl-6 col-md-6 mb-6">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -14,29 +14,26 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} idioma
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Nombre de Etnia
                         </div>
                         <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="nombre_idioma" maxlength="50" class="form-control" required id="id_nombre_idioma"
-                                    placeholder="Idioma" value="{% if obj %} {{ obj.nombre_idioma }} {% endif %}">
-                                </div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Etnia</label>
+                                <input class="form-control" type="text" name="nombre_etnia" maxlength="50" class="form-control" required id="id_nombre_etnia"
+                                    placeholder="Etnia" value="{% if obj %} {{ obj.nombre_etnia }} {% endif %}">
                             </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="descripcion_idioma" maxlength="50" class="form-control" required id="id_descripcion_idioma"
-                                    placeholder="Descripcion" value="{% if obj %} {{ obj.descripcion_idioma }} {% endif %}">
-                                </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Descripcion</label>
+                                <input class="form-control" type="text" name="descripcion_etnia" maxlength="100" class="form-control" required id="id_descripcion_etnia"
+                                    placeholder="Descripcion de Etnia" value="{% if obj %} {{ obj.descripcion_etnia }} {% endif %}">
                             </div>
-
+                        </form>
                             <div class="col-2">
                                 <div class="form-group">
-                                    <label for="id_estado_idioma">Estado</label>
+                                    <label for="id_estado_etnia">Estado</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_idioma" class="form-control" id="id_estado_idioma" type="checkbox"  {% if obj.estado_idioma is true %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_etnia" class="form-control" id="id_estado_etnia" type="checkbox"  {% if obj.estado_etnia is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +43,7 @@
                         <div class="row">
                             <div class="col">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'educacion:idioma_list' %}" class="btn btn-danger">Cancelar</a>
+                                <a href="{% url 'educacion:etniamuni_list' %}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </div>

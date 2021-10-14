@@ -1,0 +1,64 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-6 col-md-6 mb-6">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Estudios Anteriores
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col-15">
+                              <div class="input-group">
+                                  {{ form.grado}}
+                              </div>
+                              <div class="input-group">
+                                  <input type="text" name="nombre_establecimiento" maxlength="50" class="form-control" required id="id_nombre_establecimiento"
+                                  placeholder="Nombre del establecimiento anterior" value="{% if obj %} {{ obj.nombre_establecimiento }} {% endif %}">
+                              </div>
+                              <div class="input-group">
+                                  <input type="text" name="telefono" maxlength="8" class="form-control" required id="id_telefono"
+                                  placeholder="Numero Telefonico" value="{% if obj %} {{ obj.telefono }} {% endif %}">
+                              </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                  <label for="id_repitente">Repitente</label>
+                                  <div class="form-checked">
+                                    <input class="form-checked-input" name="repitente" class="form-control" id="repitente" type="checkbox"  {% if obj.repitente %} checked {% endif %}>
+                                  </div>
+                                    <label for="id_estado_estudiosant">Estado</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="estado_estudiosant" class="form-control" id="id_estado_estudiosant" type="checkbox"  {% if obj.estado_estudiosant %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- {{form.as_p}} -->
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'municipalizacion:estmuni_list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}
