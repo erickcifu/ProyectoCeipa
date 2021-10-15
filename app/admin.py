@@ -59,6 +59,7 @@ from .models.municipalizacionModel.comisionNA import ComisionNA
 from .models.municipalizacionModel.benefArea import BeneficiadoArea
 from .models.municipalizacionModel.padresFamilia import PadresFamilia
 from .models.municipalizacionModel.corporacionMuni import CorporacionMunicipal
+from .models.municipalizacionModel.discapacidad import Discapacidad
 
 admin.site.register(ocupacion)
 admin.site.register(religion)
@@ -120,3 +121,4 @@ admin.site.register(ComisionNA)
 admin.site.register(BeneficiadoArea)
 admin.site.register(PadresFamilia)
 admin.site.register(CorporacionMunicipal)
+admin.site.register(Discapacidad)

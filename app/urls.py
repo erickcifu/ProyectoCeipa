@@ -321,6 +321,11 @@ urlpatterns = [
     path('ocupacion_m/edit/<int:pk>', viewsets.OcupacionMuniEdit.as_view(), name='ocupmuni_edit'),
     path('ocupacion_m/delete/<int:pk>', viewsets.OcupacionMuniDel.as_view(), name='ocupmuni_del'),
 
+    path('corporacionmunicipal/', viewsets.CorpMuniView.as_view(), name='corpmuni_list'),
+    path('corporacionmunicipal/new', viewsets.CorpMuniNew.as_view(), name='corpmuni_new'),
+    path('corporacionmunicipal/edit/<int:pk>', viewsets.CorpMuniEdit.as_view(), name='corpmuni_edit'),
+    path('corporacionmunicipal/delete/<int:pk>', viewsets.CorpMuniDel.as_view(), name='corpmuni_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),
