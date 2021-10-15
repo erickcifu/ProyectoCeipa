@@ -64,3 +64,4 @@ from .MunicViewset.estantMuniView import EstMuniView, EstMuniNew, EstMuniEdit, E
 from .MunicViewset.PadecMuniView import PadMuniView, PadMuniNew, PadMuniEdit, PadMuniDel
 from .MunicViewset.generoMuniView import GeneroMuniView, GeneroMuniNew, GeneroMuniEdit, GeneroMuniDel
 from .MunicViewset.ocupMuniView import OcupacionMuniView, OcupacionMuniNew, OcupacionMuniEdit, OcupacionMuniDel
+from .MunicViewset.corpmuniviewet import CorpMuniView, CorpMuniNew, CorpMuniEdit, CorpMuniDel

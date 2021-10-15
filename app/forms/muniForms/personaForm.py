@@ -6,7 +6,7 @@ class PersonaForm(forms.ModelForm):
     class Meta:
         model = Persona
         fields = ['persona', 'apellidos_persona','fecha_nacimiento','direccion_persona','telefono','telefonoc','cui', 'fotografia','muni', 'etni', 'estudios_anteriores', 'gen', 'disc','estado_persona']
-        labels = {'persona':'Persona', 'muni':'Muni', 'etni':'etnia', 'estudios_anteriores':'estudiosAnteriores', 'estado_persona':"Estado"}
+        labels = {'persona':'Nombres', 'muni':'Municipio', 'etni':'etnia', 'estudios_anteriores':'academico', 'estado_persona':"Estado"}
         widget = {'persona': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

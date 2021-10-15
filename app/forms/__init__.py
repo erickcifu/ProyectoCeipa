@@ -54,3 +54,4 @@ from .muniForms.padfamForm import PadFamForm
 from .muniForms.benareForm import BenefArForm
 from .muniForms.ausenciaForm import AusenciaForm
 from .muniForms.idiomaForm import IdiomaMuniForm
+from .muniForms.CorMuniForm import CorpMuniForm

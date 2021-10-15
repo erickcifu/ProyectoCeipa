@@ -89,7 +89,7 @@
                             </a>
                             <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
                               <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                <a class="nav-link" href="{% url 'municipalizacion:idiomaMuni_list' %}">Idioma</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:idiomaMuni_list' %}">Idioma</a> 
                                     <a class="nav-link" href="{% url 'municipalizacion:area_list' %}">Area</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:muni_list' %}">Municipio</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:depto_list' %}">Departamento</a>
@@ -121,6 +121,7 @@
                                 <a class="nav-link" href="{% url 'municipalizacion:padfam_list' %}">Padres de Familia</a>
                                 <a class="nav-link" href="{% url 'municipalizacion:benefar_list' %}">Beneficiado Area</a>
                                 <a class="nav-link" href="{% url 'municipalizacion:aus_list' %}">Ausencia</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:corpmuni_list' %}">Corporacion Municipalizacion</a>
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
                     {% block footer %}
