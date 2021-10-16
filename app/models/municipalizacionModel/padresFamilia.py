@@ -10,9 +10,9 @@ class PadresFamilia(models.Model):
     escribir = models.BooleanField(default=False)
     vacunaCovid = models.BooleanField(default=False)
     participacionG = models.BooleanField(default=False)
-    grupo = models.ForeignKey(GOrganizado, on_delete=models.CASCADE, related_name="grupoOr_padre")
-    cargo = models.ForeignKey(CargoGrupo, on_delete=models.CASCADE, related_name="cargoG_padre")
-    programaC = models.ForeignKey(ProgramaC, on_delete=models.CASCADE, related_name="programa_padre")
+    grupo = models.ForeignKey(GOrganizado, on_delete=models.CASCADE, related_name="grupoOr_padre", null=True, blank=True)
+    cargo = models.ForeignKey(CargoGrupo, on_delete=models.CASCADE, related_name="cargoG_padre", null=True, blank=True)
+    programaC = models.ForeignKey(ProgramaC, on_delete=models.CASCADE, related_name="programa_padre", null=True, blank=True)
     estado_padres = models.BooleanField(default=True)
 
     def __str__(self):

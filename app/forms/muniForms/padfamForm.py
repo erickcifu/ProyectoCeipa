@@ -2,11 +2,27 @@ from django import forms
 from app.models import PadresFamilia
 
 class PadFamForm(forms.ModelForm):
+    estado_padres = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = PadresFamilia
-        fields = ['persona', 'grupo', 'cargo', 'programaC', 'estado_padres']
-        labels = {'persona':'persona', 'grupo':'grupo', 'cargo':'cargo', 'programaC':'programaC','estado_padres':"Estado"}
-        widget = {'persona': forms.TextInput}
+        fields = ['leer', 'escribir', 'programaC','vacunaCovid','participacionG', 'grupo', 'cargo','estado_padres']
+        labels = {'leer':'Sabe leer',
+        'escribir':'Sabe escribir',
+        'programaC':'Programa al que pertenece en CEIPA',
+        'vacunaCovid':'Està vacunado contra COVID19',
+        'participacionG':'Ha participado en algùn grupo organizado',
+        'grupo':'Grupo en el que ha participado',
+        'cargo':'Cargo que ha ocupado',
+        'estado_padres':"Activo/Inactivo"}
+        widget = {
+        'grupo': forms.TextInput,
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -14,7 +30,6 @@ class PadFamForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-            self.fields['persona'].empty_label = "Seleccione a la Persona"
-            self.fields['grupo'].empty_label = "Seleccione un grupo"
-            self.fields['cargo'].empty_label = "Seleccione a la cargo"
+            self.fields['grupo'].empty_label = "Seleccione grupo"
+            self.fields['cargo'].empty_label = "Seleccione cargo"
             self.fields['programaC'].empty_label = "Seleccione un Programa Ceipa"
