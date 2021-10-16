@@ -1,10 +1,11 @@
 {% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
+{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-12 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -14,50 +15,127 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} beneficiado
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <form>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione un Tutor</label>
-                                {{ form.tutor }}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione una persona</label>
-                                {{ form.persona }}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione el genero</label>
-                                {{ form.gen }}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione la ocupacion</label>
-                                {{ form.ocup }}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione estudio anterior</label>
-                                {{ form.estudios_anteriores }}
-                            </div>
-                        </form>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="id_estado_beneficiado">Estado</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="estado_beneficiado" class="form-control" id="id_estado_beneficiado" type="checkbox"  {% if obj.estado_beneficiado is true %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- {{form.as_p}} -->
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'municipalizacion:ben_list' %}" class="btn btn-danger">Cancelar</a>
-                            </div>
-                        </div>
+                          <div class="col-12 col-md-6 offset-md-3">
+                            <h4>{% if obj %} Editar {% else %} Nuevo {% endif %} Registro de beneficiado
+                            </h4>
+                          </div>
                     </div>
                 </div>
+                <!--Wizzard-->
+                        <div class="card">
+                          <div class="card-header border-bottom">
+                            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                              <!--Wizard item 1-->
+                              <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                <div class="wizard-step-icon">1</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Persona</div>
+                                  <div class="wizard-step-text-details">Infomaciòn general de la Persona</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 2-->
+                              <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Beneficiado</div>
+                                  <div class="wizard-step-text-details">Informaciòn Beneficiado</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 3-->
+                              <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
+                                <div class="wizard-step-icon">3</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Idioma</div>
+                                  <div class="wizard-step-text-details">Informaciòn de idiomas</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 4-->
+                              <a class="nav-item nav-link" id="wizard4-tab" href="#wizard4" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
+                                <div class="wizard-step-icon">4</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Tutor</div>
+                                  <div class="wizard-step-text-details">Informaciòn informacio de  tutor</div>
+                                </div>
+                              </a>
+                            <!--Wizard Body-->
+                                <div class="tab-content" id="cardTabContent">
+                                  <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 1</h3>
+                                        <h5 class="card-title mb-4">Ingrese la informaciòn personal del Personal </h5>
+                                        <!--Inicio Formulario-->
+                                          <div class="row gx-3">
+                                                {{ form | crispy }}
+                                          </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                          </div>
+                                        <!--Fin Formulario-->
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!--Tab item 2-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 2</h3>
+                                        <h5 class="card-title mb-4">Ingrese informaciòn del Beneficiado</h5>
+                                          <div class="row gx-3">
+                                              {{ form2 | crispy }}
+                                          </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-primary next-step" role="button">Siguiente</a>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--Tab item 3-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 3</h3>
+                                        <h5 class="card-title mb-4">Ingrese idiomas</h5>
+                                            <div class="row gx-3">
+                                                {{ form3 | crispy }}
+                                              </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-ligth" href="{% url 'municipalizacion:maes_list' %}">Cancelar</a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Tab item 4-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard4" role="tabpanel" aria-labelledby="wizard4-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 3</h3>
+                                          <h5 class="card-title mb-4">Ingrese infomracion tutor</h5>
+                                              <div class="row gx-3">
+                                                  {{ form4 | crispy }}
+                                                </div>
+                                            <hr class="my-4"/>
+                                            <div class="d-flex justify-content-between">
+                                              <button class="btn btn-ligth" type="button">Anterior</button>
+                                              <a class="btn btn-ligth" href="{% url 'municipalizacion:ben_list' %}">Cancelar</a>
+                                              <button type="submit" class="btn btn-success"">Guardar</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <!--Tab fin -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
             </div>
         </div>
     </div>
