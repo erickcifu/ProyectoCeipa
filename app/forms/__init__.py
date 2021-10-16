@@ -55,3 +55,6 @@ from .muniForms.benareForm import BenefArForm
 from .muniForms.ausenciaForm import AusenciaForm
 from .muniForms.idiomaForm import IdiomaMuniForm
 from .muniForms.CorMuniForm import CorpMuniForm
+from .muniForms.GOrgForm import GOrgForm
+from .muniForms.ComisionNAForm import Comision_NAForm
+from .muniForms.programasForm import ProgramaCForm
