@@ -15,9 +15,9 @@
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>Persona</th>
-                  <th>Cargo</th>
+                  <th>Nombre</th>
                   <th>Grupo organizado</th>
+                  <th>Cargo</th>
                   <th>Programa en CEIPA</th>
                   <th>Sabe leer</th>
                   <th>Sabe escribir</th>
@@ -32,13 +32,37 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.persona }}</td>
+                      <td>{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</td>
                       <td>{{ item.cargo_grupo }}</td>
                       <td>{{ item.grupo_orga }}</td>
                       <td>{{ item.programa_c}}</td>
-                      <td>{{ item.leer }}</td>
-                      <td>{{ item.escribir }}</td>
-                      <td>{{ item.vacuna_covid }}</td>
+                      {% if item.leer is True %}
+                      <td>
+                        <span class="badge rounded-pill bg-light text-dark">Sabe leer</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge rounded-pill bg-light text-dark">No sabe leer</span>
+                      </td>
+                      {% endif %}
+                      {% if item.escribir is True %}
+                      <td>
+                        <span class="badge rounded-pill bg-light text-dark">Sabe escribir</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge rounded-pill bg-light text-dark">No sabe escribir</span>
+                      </td>
+                      {% endif %}
+                      {% if item.vacunaCovid is True %}
+                      <td>
+                        <span class="badge rounded-pill bg-light text-dark">Vacunado</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge rounded-pill bg-light text-dark">No vacunado</span>
+                      </td>
+                      {% endif %}
                       <td>{{ item.periodo }}</td>
                       <td>{{ item.fecha_inicio|date:"d, M, Y" }}</td>
                       <td>{{ item.fecha_fin|date:"d, M, Y" }}</td>

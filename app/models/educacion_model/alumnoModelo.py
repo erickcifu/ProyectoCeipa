@@ -22,13 +22,6 @@ class Alumno(models.Model):
     codigo_mineduc = models.IntegerField()
     estado_alumno = models.BooleanField(default=True)
     fecha_nacimiento = models.DateField()
-<<<<<<< HEAD
-    ingreso_familiar = models.FloatField()
-    direccion_alumno = models.CharField(max_length=80)
-    telefono = models.CharField(max_length=8)
-    fotografia = models.ImageField(upload_to='ceipa', null=True, blank=True)
-
-=======
     ingreso_familiar = models.FloatField(null=True, blank=True)
     direccion_alumno = models.CharField(max_length=80, null=True, blank=True)
     telefono = models.CharField(max_length=8, null=True, blank=True)
@@ -40,7 +33,6 @@ class Alumno(models.Model):
             return self.fotografia.url
         
 
->>>>>>> bc8e20b1a70bb13ca8876219b9405d2cc10ee5e2
     def __str__(self):
         return self.nombres_alumno
 

@@ -3,10 +3,34 @@ from app.models import Persona
 
 
 class PersonaForm(forms.ModelForm):
+    fecha_nacimiento = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        )
+    )
+    estado_persona = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = Persona
         fields = ['persona', 'apellidos_persona','fecha_nacimiento','direccion_persona','telefono','telefonoc','cui', 'fotografia','muni', 'etni', 'estudios_anteriores', 'gen', 'disc','estado_persona']
-        labels = {'persona':'Persona', 'muni':'Muni', 'etni':'etnia', 'estudios_anteriores':'estudiosAnteriores', 'estado_persona':"Estado"}
+        labels = {
+        'persona':'Nombres',
+        'apellidos_persona':'Apellidos',
+        'fecha_nacimiento':'Fecha de nacimiento',
+        'direccion_persona':'Direcciòn',
+        'telefono':'Telefono personal',
+        'telefonoc':'Telefono de casa',
+        'muni':'Municipio',
+        'etni':'Etnia',
+        'estudios_anteriores':'Ultimos grado cursado',
+         'gen':'Gènero',
+         'disc':' ¿Tiene alguna discapacidad?',
+         'estado_persona':" Activo/inactivo"}
         widget = {'persona': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
@@ -15,9 +39,8 @@ class PersonaForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-            self.fields['estudios_anteriores'].empty_label = "Seleccione su centro anterior"
+            self.fields['estudios_anteriores'].empty_label = "Seleccione ultimo grado cursado"
             self.fields['muni'].empty_label = "Seleccione Municipio"
             self.fields['etni'].empty_label = "Seleccione Etnia"
-            self.fields['estudios_anteriores'].empty_label = "Seleccione un centro educativo"
             self.fields['gen'].empty_label = "Seleccione Genero"
             self.fields['disc'].empty_label = "Seleccione Discapacidad"
