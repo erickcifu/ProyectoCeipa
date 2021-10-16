@@ -326,6 +326,16 @@ urlpatterns = [
     path('corporacionmunicipal/edit/<int:pk>', viewsets.CorpMuniEdit.as_view(), name='corpmuni_edit'),
     path('corporacionmunicipal/delete/<int:pk>', viewsets.CorpMuniDel.as_view(), name='corpmuni_del'),
 
+    path('Grupo_organizado/', viewsets.GrupoOrganizadoView.as_view(), name='Gorg_list'),
+    path('Grupo_organizado/new', viewsets.GrupoOrganizadoNew.as_view(), name='Gorg_new'),
+    path('Grupo_organizado/edit/<int:pk>', viewsets.GrupoOrganizadoEdit.as_view(), name='Gorg_edit'),
+    path('Grupo_organizado/delete/<int:pk>', viewsets.GrupoOrganizadoDel.as_view(), name='Gorg_del'),
+
+    path('programas_ceipa/', viewsets.ProgramasView.as_view(), name='programas_list'),
+    path('programas_ceipa/new', viewsets.ProgramasNew.as_view(), name='programas_new'),
+    path('programas_ceipa/edit/<int:pk>', viewsets.ProgramasEdit.as_view(), name='programas_edit'),
+    path('programas_ceipa/delete/<int:pk>', viewsets.ProgramasDel.as_view(), name='programas_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),

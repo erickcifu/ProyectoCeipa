@@ -65,3 +65,5 @@ from .MunicViewset.PadecMuniView import PadMuniView, PadMuniNew, PadMuniEdit, Pa
 from .MunicViewset.generoMuniView import GeneroMuniView, GeneroMuniNew, GeneroMuniEdit, GeneroMuniDel
 from .MunicViewset.ocupMuniView import OcupacionMuniView, OcupacionMuniNew, OcupacionMuniEdit, OcupacionMuniDel
 from .MunicViewset.corpmuniviewet import CorpMuniView, CorpMuniNew, CorpMuniEdit, CorpMuniDel
+from .MunicViewset.goView import GrupoOrganizadoView, GrupoOrganizadoNew, GrupoOrganizadoEdit, GrupoOrganizadoDel
+from .MunicViewset.programasView import ProgramasView, ProgramasNew, ProgramasEdit, ProgramasDel

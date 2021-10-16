@@ -3,10 +3,17 @@ from app.models import Beneficiado
 
 
 class BenForm(forms.ModelForm):
+    estado_beneficiado = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = Beneficiado
         fields = ['gen', 'ocup', 'establecimiento', 'estado_beneficiado']
-        labels = {'gen':'Genero', 'ocup':'ocupacion','establecimiento':'establecimiento','estado_beneficiado':"Estado"}
+        labels = {'gen':'Genero', 'ocup':'Ocupación','establecimiento':'Establecimiento donde estudia','estado_beneficiado':"Activo/Inactivo"}
         widget = {'estado_beneficiado': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
