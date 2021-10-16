@@ -1,7 +1,7 @@
 from django.db import models
 from .discapacidad import Discapacidad
 from app.models.educacion_model.etnia import etnia
-from app.models.educacion_model.estudiosantModel import EstudiosAnt
+from .gradoAcademico import GradoAcademico
 from app.models.educacion_model.municipioModel import municipio
 from app.models.educacion_model.genero import genero
 
@@ -11,16 +11,16 @@ class Persona(models.Model):
     fecha_nacimiento = models.DateField()
     cui = models.IntegerField()
     direccion_persona = models.CharField(max_length=80)
-    telefono = models.CharField(max_length=8)
-    telefonoc = models.CharField(max_length=8)
+    telefono = models.CharField(max_length=8, null=True, blank=True)
+    telefonoc = models.CharField(max_length=8, null=True, blank=True)
     fotografia = models.ImageField(upload_to='ceipa', null=True, blank=True)
     estado_persona = models.BooleanField(default=True)
 
     muni = models.ForeignKey(municipio, on_delete=models.CASCADE, related_name="P_muni")
     etni = models.ForeignKey(etnia, on_delete=models.CASCADE, related_name="P_etnia")
-    estudios_anteriores = models.ForeignKey(EstudiosAnt, on_delete=models.CASCADE, related_name="P_estudios")
+    estudios_anteriores = models.ForeignKey(GradoAcademico, on_delete=models.CASCADE, related_name="P_estudios")
     gen = models.ForeignKey(genero, on_delete=models.CASCADE, related_name="P_genero")
-    disc = models.ForeignKey(Discapacidad, on_delete=models.CASCADE, related_name="T_disc")
+    disc = models.BooleanField(default=False)
 
     def __str__(self):
         return self.persona

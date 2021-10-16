@@ -4,25 +4,23 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Padecimiento Persona
+          Padres de familia
           <a href="{% url 'municipalizacion:padfam_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay datos de Padecimiento Persona </div>
+          <div class="alert alert-info">No hay datos de Padres de familia </div>
           {% else %}
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>Medicamentos</th>
-                  <th>Persona</th>
-                  <th>observacion</th>
-                  <th>padecimiento</th>
-                  <th>Leer</th>
-                  <th>Escribir</th>
-                  <th>Vacuna Covid</th>
-                  <th>Participacion Grupos</th>
+                  <th>Nombre</th>
+                  <th>Lee</th>
+                  <th>Escribe</th>
+                  <th>Vacunado</th>
+                  <th>Participacion en grupo</th>
+                  <th>Programa en CEIPA</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -30,14 +28,44 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.persona }}</td>
-                      <td>{{ item.grupo }}</td>
-                      <td>{{ item.cargo }}</td>
+                      <td>{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</td>
+                        {% if item.leer is True %}
+                        <td>
+                          <span class="badge rounded-pill bg-light text-dark">Sabe leer</span>
+                        </td>
+                        {% else %}
+                        <td>
+                          <span class="badge rounded-pill bg-light text-dark">No sabe leer</span>
+                        </td>
+                        {% endif %}
+                        {% if item.escribir is True %}
+                        <td>
+                          <span class="badge rounded-pill bg-light text-dark">Sabe escribir</span>
+                        </td>
+                        {% else %}
+                        <td>
+                          <span class="badge rounded-pill bg-light text-dark">No sabe escribir</span>
+                        </td>
+                        {% endif %}
+                        {% if item.vacunaCovid is True %}
+                        <td>
+                          <span class="badge rounded-pill bg-light text-dark">Vacunado</span>
+                        </td>
+                        {% else %}
+                        <td>
+                          <span class="badge rounded-pill bg-light text-dark">No vacunado</span>
+                        </td>
+                        {% endif %}
+                        {% if item.participacionG is True %}
+                        <td>
+                          <span class="badge rounded-pill bg-light text-dark">Participa en grupo</span>
+                        </td>
+                        {% else %}
+                        <td>
+                          <span class="badge rounded-pill bg-light text-dark">No participa en grupo</span>
+                        </td>
+                        {% endif %}
                       <td>{{ item.programaC }}</td>
-                      <td>{{ item.leer|yesno:"Si,No" }}</td>
-                      <td>{{ item.escribir|yesno:"Si,no" }}</td>
-                      <td>{{ item.vacunaCovid|yesno:"Si,No" }}</td>
-                      <td>{{ item.participacionG|yesno:"Si,No" }}</td>
                       {% if item.estado_padres is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

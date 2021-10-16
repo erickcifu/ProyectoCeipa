@@ -1,10 +1,11 @@
 {% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
+{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -12,93 +13,206 @@
         {% endif %}
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Lider Comunitario
+                  <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                        <div class="col-12 col-md-12 offset-md-12">
+                          <h2>{% if obj %} Editar {% else %} Nuevo {% endif %} Lider Comunitario
+                          </h2>
                         </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                {{ form.persona }}
-                            </div>
+                  </div>
+              </div>
 
-                            <div class="col-10">
-                                {{ form.cargo_grupo }}
-                            </div>
+                      <!--Wizzard-->
+                              <div class="card">
+                                <div class="card-header border-bottom">
+                                  <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                                    <!--Wizard item 1-->
+                                    <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                      <div class="wizard-step-icon">1</div>
+                                      <div class="wizard-step-text">
+                                        <div class="wizard-step-text-name">Persona</div>
+                                        <div class="wizard-step-text-details">Infomaciòn general</div>
+                                      </div>
+                                    </a>
+                                    <!--Wizard item 2-->
+                                    <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
+                                      <div class="wizard-step-icon">2</div>
+                                      <div class="wizard-step-text">
+                                        <div class="wizard-step-text-name">Registro Lider Comunitario</div>
+                                        <div class="wizard-step-text-details">Informaciòn adicional del lider comunitario</div>
+                                      </div>
+                                    </a>
+                                    <!--Wizard item 3-->
+                                    <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
+                                      <div class="wizard-step-icon">3</div>
+                                      <div class="wizard-step-text">
+                                        <div class="wizard-step-text-name">Idiomas</div>
+                                        <div class="wizard-step-text-details">Informaciòn sobre los idiomas del maestro</div>
+                                      </div>
+                                    </a>
 
-                            <div class="col-10">
-                                {{ form.grupo_orga }}
-                            </div>
+                                  <div class="card-body">
+                                    <!--Wizard Body-->
+                                      <div class="tab-content" id="cardTabContent">
+                                        <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                                          <div class="row justify-content-center">
+                                            <div class="col-xxl-6 col-xl-8">
+                                              <h3 class="text-primary">Paso 1</h3>
+                                              <h5 class="card-title mb-4">Ingrese la informaciòn general de la persona</h5>
+                                              <!--Inicio Formulario-->
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-6">
+                                                      {{ form.persona | as_crispy_field }}
+                                                  </div>
+                                                  <div class="mb-3 col-md-6">
+                                                      {{ form.apellidos_persona | as_crispy_field }}
+                                                  </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-12">
+                                                  {{ form.fecha_nacimiento | as_crispy_field }}
+                                                  </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-12">
+                                                      {{ form.cui | as_crispy_field }}
+                                                  </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-12">
+                                                      {{ form.direccion_persona | as_crispy_field }}
+                                                  </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-6">
+                                                      {{ form.telefono | as_crispy_field }}
+                                                  </div>
+                                                  <div class="mb-3 col-md-6">
+                                                    {{ form.telefonoc | as_crispy_field }}
+                                                  </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-12">
+                                                      {{ form.fotografia | as_crispy_field }}
+                                                  </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-12">
+                                                      {{ form.muni | as_crispy_field }}
+                                                  </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-12">
+                                                      {{ form.etni | as_crispy_field }}
+                                                  </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-12">
+                                                      {{ form.estudios_anteriores | as_crispy_field }}
+                                                  </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                  <div class="mb-3 col-md-12">
+                                                      {{ form.gen | as_crispy_field }}
+                                                  </div>
+                                                </div>
 
-                            <div class="col-10">
-                                {{ form.programa_c }}
-                            </div>
+                                                  <div class="row gx-3">
+                                                    <div class="mb-3 col-md-6">
+                                                      {{ form.disc | as_crispy_field }}
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                      {{ form.estado_persona | as_crispy_field }}
+                                                    </div>
+                                                  </div>
 
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="id_leer">Sabe leer</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="leer" class="form-control" id="id_leer" type="checkbox"  {% if obj.leer %} checked {% endif %}>
+                                                <hr class="my-4"/>
+                                                <div class="d-flex justify-content-between">
+                                                  <button class="btn btn-ligth" type="button">Anterior</button>
+                                                  <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                                </div>
+                                              <!--Fin Formulario-->
+                                          </div>
+                                          </div>
+                                        </div>
+                                        <!--Tab item 2-->
+                                        <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                                          <div class="row justify-content-center">
+                                            <div class="col-xxl-6 col-xl-8">
+                                              <h3 class="text-primary">Paso 2</h3>
+                                              <h5 class="card-title mb-4">Ingrese informaciòn del lider comunitario</h5>
+                                                <div class="row gx-3">
+                                                    <div class="mb-3 col-md-12">
+                                                      {{ form2.programa_c | as_crispy_field }}
+                                                    </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                    <div class="mb-3 col-md-6">
+                                                      {{ form2.grupo_orga | as_crispy_field }}
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                      {{ form2.cargo_grupo | as_crispy_field }}
+                                                    </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                    <div class="mb-3 col-md-12">
+                                                      {{ form2.periodo | as_crispy_field }}
+                                                    </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                    <div class="mb-3 col-md-6">
+                                                      {{ form2.fecha_inicio | as_crispy_field }}
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                      {{ form2.fecha_fin | as_crispy_field }}
+                                                    </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                    <div class="mb-3 col-md-12">
+                                                      {{ form2.leer | as_crispy_field }}
+                                                    </div>
+                                                    <div class="mb-3 col-md-12">
+                                                      {{ form2.escribir | as_crispy_field }}
+                                                    </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                    <div class="mb-3 col-md-6">
+                                                      {{ form2.vacuna_covid | as_crispy_field }}
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                      {{ form2.estado | as_crispy_field }}
+                                                    </div>
+                                                </div>
+                                                <hr class="my-4"/>
+                                                <div class="d-flex justify-content-between">
+                                                  <button class="btn btn-ligth" type="button">Anterior</button>
+                                                  <a class="btn btn-primary next-step" role="button">Siguiente</a>
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!--Tab item 3-->
+                                        <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
+                                          <div class="row justify-content-center">
+                                            <div class="col-xxl-6 col-xl-8">
+                                              <h3 class="text-primary">Paso 3</h3>
+                                              <h5 class="card-title mb-4"></h5>
+                                                  <div class="row gx-3">
+                                                      {{ form3 | crispy }}
+                                                    </div>
+                                                <hr class="my-4"/>
+                                                <div class="d-flex justify-content-between">
+                                                  <a href="{% url 'municipalizacion:lidercomuni_list' %}" class="btn btn-danger">Cancelar</a>
+                                                    <button type="submit" class="btn btn-success">Guardar</button>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div>
                                     </div>
+                                  </div>
                                 </div>
-                            </div>
-
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="id_escribir">Sabe escribir</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="escribir" class="form-control" id="id_escribir" type="checkbox"  {% if obj.escribir %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="id_vacuna_covid">Tiene la Vacuna contra el covid</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="vacuna_covid" class="form-control" id="id_vacuna_covid" type="checkbox"  {% if obj.vacuna_covid %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="periodo" maxlength="50" class="form-control" required id="id_periodo"
-                                    placeholder="Periodo" value="{% if obj %} {{ obj.periodo }} {% endif %}">
-                                </div>
-                            </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="date" name="fecha_inicio" maxlength="50" class="form-control" required id="id_fecha_inicio"
-                                    placeholder="Fecha de inicio de periodo" value="{% if obj %} {{ obj.fecha_inicio }} {% endif %}">
-                                </div>
-                            </div>
-
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="date" name="fecha_fin" maxlength="50" class="form-control" required id="id_fecha_fin"
-                                    placeholder="Fecha de fin de periodo" value="{% if obj %} {{ obj.fecha_fin }} {% endif %}">
-                                </div>
-                            </div>
-
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="id_estado">Estado</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="estado" class="form-control" id="id_estado" type="checkbox"  {% if obj.estado %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- {{form.as_p}} -->
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'municipalizacion:lidercomuni_list' %}" class="btn btn-danger">Cancelar</a>
-                            </div>
-                        </div>
+                              </div>
                     </div>
                 </div>
             </div>

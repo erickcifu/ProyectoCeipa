@@ -3,11 +3,18 @@ from app.models import IdiomaPersona
 
 
 class IdPerForm(forms.ModelForm):
+    estado_ip = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = IdiomaPersona
-        fields = ['idioma',  'estado_ip']
-        labels = {'idioma':"idioma", 'estado_ip':"Estado"}
-        widget = {'idioma': forms.TextInput}
+        fields = ['idioma', 'estado_ip']
+        labels = {'idioma':"idioma", 'estado_ip':"Activo/Inactivo"}
+        widget = {'estado_ip': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -15,5 +22,4 @@ class IdPerForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-
             self.fields['idioma'].empty_label = "Seleccione idioma"
