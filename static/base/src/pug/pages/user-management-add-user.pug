@@ -1,0 +1,150 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Add User'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    //- Bring in the page header mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/headers/header-compact.pug
+    +header({
+        pageHeaderStyle: 'page-header-light border-bottom',
+        pageHeaderBg: 'bg-white',
+        pageHeaderSpacing: 'mb-4',
+        pageHeaderContainer: 'container-xl px-4',
+        pageIcon: 'user-plus'
+    })
+
+        a.btn.btn-sm.btn-light.text-primary(href='user-management-list.html')
+            i(data-feather='arrow-left').me-1
+            | Back to Users List
+
+    // Main page content
+    .container-xl.px-4.mt-4
+        .row
+            .col-xl-4
+                // Profile picture card
+                .card.mb-4.mb-xl-0
+                    .card-header Profile Picture
+                    .card-body.text-center
+                        // Profile picture image
+                        img.img-account-profile.rounded-circle.mb-2(src='assets/img/demo/user-placeholder.svg', alt='')
+                        // Profile picture help block
+                        .small.font-italic.text-muted.mb-4 JPG or PNG no larger than 5 MB
+                        // Profile picture upload button
+                        button.btn.btn-primary(type='button') Upload new image
+            .col-xl-8
+                // Account details card
+                .card.mb-4
+                    .card-header Account Details
+                    .card-body
+                        form
+                            // Form Row
+                            .row.gx-3.mb-3
+                                // Form Group (first name)
+                                .col-md-6
+                                    label.small.mb-1(for='inputFirstName') First name
+                                    input#inputFirstName.form-control(type='text', placeholder='Enter your first name', value='')
+                                // Form Group (last name)
+                                .col-md-6
+                                    label.small.mb-1(for='inputLastName') Last name
+                                    input#inputLastName.form-control(type='text', placeholder='Enter your last name', value='')
+                            // Form Group (email address)
+                            .mb-3
+                                label.small.mb-1(for='inputEmailAddress') Email address
+                                input#inputEmailAddress.form-control(type='email', placeholder='Enter your email address', value='')
+                            // Form Group (Group Selection Checkboxes)
+                            .mb-3
+                                label.small.mb-1 Group(s)
+                                .form-check
+                                    input#groupSales.form-check-input(type='checkbox', value='')
+                                    label.form-check-label(for='groupSales')
+                                        | Sales
+                                .form-check
+                                    input#groupDevs.form-check-input(type='checkbox', value='')
+                                    label.form-check-label(for='groupDevs')
+                                        | Developers
+                                .form-check
+                                    input#groupMarketing.form-check-input(type='checkbox', value='')
+                                    label.form-check-label(for='groupMarketing')
+                                        | Marketing
+                                .form-check
+                                    input#groupManagers.form-check-input(type='checkbox', value='')
+                                    label.form-check-label(for='groupManagers')
+                                        | Managers
+                                .form-check
+                                    input#groupCustomer.form-check-input(type='checkbox', value='')
+                                    label.form-check-label(for='groupCustomer')
+                                        | Customer
+                            // Form Group (Roles)
+                            .mb-3
+                                label.small.mb-1 Role
+                                select.form-select(aria-label='Default select example')
+                                    option(selected, disabled) Select a role:
+                                    option(value='administrator') Administrator
+                                    option(value='registered') Registered
+                                    option(value='edtior') Editor
+                                    option(value='guest') Guest
+                            // Submit button
+                            button.btn.btn-primary(type='button') Add user
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

@@ -1,0 +1,56 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Categoria
+          <a href="{% url 'educacion:cat_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+      </div>
+      <div class="card mb-4">
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos de Propiedad</div>
+          {% else %}
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>Categoria</th>
+                  <th>Estado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.nombre_categoria }}</td>
+                      {% if item.estado_categoria is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Activo</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                      <td>
+                          <a href="{% url 'educacion:cat_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                          <a href="{% url 'educacion:cat_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+    </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}

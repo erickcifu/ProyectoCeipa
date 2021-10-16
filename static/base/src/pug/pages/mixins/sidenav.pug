@@ -1,0 +1,371 @@
+mixin sidenav(options)
+
+    nav.sidenav.shadow-right(class=options.sidenavStyle)
+            
+        .sidenav-menu
+            
+            .nav.accordion#accordionSidenav
+
+                // Sidenav Menu Heading (Account)
+                // * * Note: * * Visible only on and above the sm breakpoint
+                .sidenav-menu-heading.d-sm-none
+                    | Account
+
+                // Sidenav Link (Alerts)
+                // * * Note: * * Visible only on and above the sm breakpoint
+                a.nav-link.d-sm-none(href='#!')
+                    .nav-link-icon
+                        i(data-feather='bell')
+                    | Alerts
+                    span.badge.bg-warning-soft.text-warning.ms-auto 4 New!
+
+                // Sidenav Link (Messages)
+                // * * Note: * * Visible only on and above the sm breakpoint
+                a.nav-link.d-sm-none(href='#!')
+                    .nav-link-icon
+                        i(data-feather='mail')
+                    | Messages
+                    span.badge.bg-success-soft.text-success.ms-auto 2 New!
+
+                // Sidenav Menu Heading (Core)
+                .sidenav-menu-heading
+                    | Core
+                    
+                // Sidenav Accordion (Dashboard)
+                a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseDashboards', aria-expanded='false', aria-controls='collapseDashboards')
+                    .nav-link-icon
+                        i(data-feather='activity')
+                    | Dashboards
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseDashboards.collapse(data-bs-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav.accordion#accordionSidenavPages
+                        a.nav-link(href='dashboard-1.html')
+                            | Default
+                            span.badge.bg-primary-soft.text-primary.ms-auto Updated
+                        a.nav-link(href='dashboard-2.html')
+                            | Multipurpose
+                        a.nav-link(href='dashboard-3.html')
+                            | Affiliate
+
+                // Sidenav Heading (Custom)
+                .sidenav-menu-heading
+                    | Custom
+
+                // Sidenav Accordion (Pages)
+                a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapsePages', aria-expanded='false', aria-controls='collapsePages')
+                    .nav-link-icon
+                        i(data-feather='grid')
+                    | Pages
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapsePages.collapse(data-bs-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav.accordion#accordionSidenavPagesMenu
+
+                        // Nested Sidenav Accordion (Pages -> Account)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#pagesCollapseAccount', aria-expanded='false', aria-controls='pagesCollapseAccount')
+                            | Account
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #pagesCollapseAccount.collapse(data-bs-parent='#accordionSidenavPagesMenu')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='account-profile.html')
+                                    | Profile
+                                a.nav-link(href='account-billing.html')
+                                    | Billing
+                                a.nav-link(href='account-security.html')
+                                    | Security
+                                a.nav-link(href='account-notifications.html')
+                                    | Notifications
+
+                        // Nested Sidenav Accordion (Pages -> Authentication)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#pagesCollapseAuth', aria-expanded='false', aria-controls='pagesCollapseAuth')
+                            | Authentication
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #pagesCollapseAuth.collapse(data-bs-parent='#accordionSidenavPagesMenu')
+                            nav.sidenav-menu-nested.nav.accordion#accordionSidenavPagesAuth
+
+                                // Nested Sidenav Accordion (Pages -> Authentication -> Basic)
+                                a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#pagesCollapseAuthBasic', aria-expanded='false', aria-controls='pagesCollapseAuthBasic')
+                                    | Basic
+                                    .sidenav-collapse-arrow
+                                        i.fas.fa-angle-down
+                                #pagesCollapseAuthBasic.collapse(data-bs-parent='#accordionSidenavPagesAuth')
+                                    nav.sidenav-menu-nested.nav
+                                        a.nav-link(href='auth-login-basic.html')
+                                            | Login
+                                        a.nav-link(href='auth-register-basic.html')
+                                            | Register
+                                        a.nav-link(href='auth-password-basic.html')
+                                            | Forgot Password
+
+                                // Nested Sidenav Accordion (Pages -> Authentication -> Social)
+                                a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#pagesCollapseAuthSocial', aria-expanded='false', aria-controls='pagesCollapseAuthSocial')
+                                    | Social
+                                    .sidenav-collapse-arrow
+                                        i.fas.fa-angle-down
+                                #pagesCollapseAuthSocial.collapse(data-bs-parent='#accordionSidenavPagesAuth')
+                                    nav.sidenav-menu-nested.nav
+                                        a.nav-link(href='auth-login-social.html')
+                                            | Login
+                                        a.nav-link(href='auth-register-social.html')
+                                            | Register
+                                        a.nav-link(href='auth-password-social.html')
+                                            | Forgot Password
+
+                        // Nested Sidenav Accordion (Pages -> Error)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#pagesCollapseError', aria-expanded='false', aria-controls='pagesCollapseError')
+                            | Error
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #pagesCollapseError.collapse(data-bs-parent='#accordionSidenavPagesMenu')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='error-400.html')
+                                    | 400 Error
+                                a.nav-link(href='error-401.html')
+                                    | 401 Error
+                                a.nav-link(href='error-403.html')
+                                    | 403 Error
+                                a.nav-link(href='error-404-1.html')
+                                    | 404 Error 1
+                                a.nav-link(href='error-404-2.html')
+                                    | 404 Error 2
+                                a.nav-link(href='error-500.html')
+                                    | 500 Error
+                                a.nav-link(href='error-503.html')
+                                    | 503 Error
+                                a.nav-link(href='error-504.html')
+                                    | 504 Error
+
+                        a.nav-link(href='pricing.html')
+                            | Pricing
+
+                        a.nav-link(href='invoice.html')
+                            | Invoice
+
+                // Sidenav Accordion (Applications)
+                a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseApps', aria-expanded='false', aria-controls='collapseApps')
+                    .nav-link-icon
+                        i(data-feather='globe')
+                    | Applications
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseApps.collapse(data-bs-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav.accordion#accordionSidenavAppsMenu
+
+                        // Nested Sidenav Accordion (Apps -> Knowledge Base)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#appsCollapseKnowledgeBase', aria-expanded='false', aria-controls='appsCollapseKnowledgeBase')
+                            | Knowledge Base
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #appsCollapseKnowledgeBase.collapse(data-bs-parent='#accordionSidenavAppsMenu')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='knowledge-base-home-1.html')
+                                    | Home 1
+                                a.nav-link(href='knowledge-base-home-2.html')
+                                    | Home 2
+                                a.nav-link(href='knowledge-base-category.html')
+                                    | Category
+                                a.nav-link(href='knowledge-base-article.html')
+                                    | Article
+
+                        // Nested Sidenav Accordion (Apps -> User Management)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#appsCollapseUserManagement', aria-expanded='false', aria-controls='appsCollapseUserManagement')
+                            | User Management
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #appsCollapseUserManagement.collapse(data-bs-parent='#accordionSidenavAppsMenu')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='user-management-list.html')
+                                    | Users List
+                                a.nav-link(href='user-management-edit-user.html')
+                                    | Edit User
+                                a.nav-link(href='user-management-add-user.html')
+                                    | Add User
+                                a.nav-link(href='user-management-groups-list.html')
+                                    | Groups List
+                                a.nav-link(href='user-management-org-details.html')
+                                    | Organization Details
+
+                        // Nested Sidenav Accordion (Apps -> Posts Management)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#appsCollapsePostsManagement', aria-expanded='false', aria-controls='appsCollapsePostsManagement')
+                            | Posts Management
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #appsCollapsePostsManagement.collapse(data-bs-parent='#accordionSidenavAppsMenu')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='blog-management-posts-list.html')
+                                    | Posts List
+                                a.nav-link(href='blog-management-create-post.html')
+                                    | Create Post
+                                a.nav-link(href='blog-management-edit-post.html')
+                                    | Edit Post
+                                a.nav-link(href='blog-management-posts-admin.html')
+                                    | Posts Admin
+
+                // Sidenav Accordion (Flows)
+                a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseFlows', aria-expanded='false', aria-controls='collapseFlows')
+                    .nav-link-icon
+                        i(data-feather='repeat')
+                    | Flows
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseFlows.collapse(data-bs-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav
+                        a.nav-link(href='multi-tenant-select.html') Multi-Tenant Registration
+                        a.nav-link(href='wizard.html')
+                            | Wizard
+
+                // Sidenav Heading (UI Toolkit)
+                .sidenav-menu-heading
+                    | UI Toolkit
+
+                // Sidenav Accordion (Layout)
+                a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseLayouts', aria-expanded='false', aria-controls='collapseLayouts')
+                    .nav-link-icon
+                        i(data-feather='layout')
+                    | Layout
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseLayouts.collapse(data-bs-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav.accordion#accordionSidenavLayout
+
+                        // Nested Sidenav Accordion (Layout -> Navigation)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseLayoutSidenavVariations', aria-expanded='false', aria-controls='collapseLayoutSidenavVariations')
+                            | Navigation
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #collapseLayoutSidenavVariations.collapse(data-bs-parent='#accordionSidenavLayout')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='layout-static.html')
+                                    | Static Sidenav
+                                a.nav-link(href='layout-dark.html')
+                                    | Dark Sidenav
+                                a.nav-link(href='layout-rtl.html')
+                                    | RTL Layout
+
+                        // Nested Sidenav Accordion (Layout -> Container Options)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseLayoutContainers', aria-expanded='false', aria-controls='collapseLayoutContainers')
+                            | Container Options
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #collapseLayoutContainers.collapse(data-bs-parent='#accordionSidenavLayout')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='layout-boxed.html')
+                                    | Boxed Layout
+                                a.nav-link(href='layout-fluid.html')
+                                    | Fluid Layout
+
+                        // Nested Sidenav Accordion (Layout -> Page Headers)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseLayoutsPageHeaders', aria-expanded='false', aria-controls='collapseLayoutsPageHeaders')
+                            | Page Headers
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #collapseLayoutsPageHeaders.collapse(data-bs-parent='#accordionSidenavLayout')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='header-simplified.html')
+                                    | Simplified
+                                a.nav-link(href='header-compact.html')
+                                    | Compact
+                                a.nav-link(href='header-overlap.html')
+                                    | Content Overlap
+                                a.nav-link(href='header-breadcrumbs.html')
+                                    | Breadcrumbs
+                                a.nav-link(href='header-light.html')
+                                    | Light
+
+                        // Nested Sidenav Accordion (Layout -> Starter Layouts)
+                        a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseLayoutsStarterTemplates', aria-expanded='false', aria-controls='collapseLayoutsStarterTemplates')
+                            | Starter Layouts
+                            .sidenav-collapse-arrow
+                                i.fas.fa-angle-down
+                        #collapseLayoutsStarterTemplates.collapse(data-bs-parent='#accordionSidenavLayout')
+                            nav.sidenav-menu-nested.nav
+                                a.nav-link(href='starter-default.html')
+                                    | Default
+                                a.nav-link(href='starter-minimal.html')
+                                    | Minimal
+
+                // Sidenav Accordion (Components)
+                a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseComponents', aria-expanded='false', aria-controls='collapseComponents')
+                    .nav-link-icon
+                        i(data-feather='package')
+                    | Components
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseComponents.collapse(data-bs-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav
+                        a.nav-link(href='alerts.html')
+                            | Alerts
+                        a.nav-link(href='avatars.html')
+                            | Avatars
+                        a.nav-link(href='badges.html')
+                            | Badges
+                        a.nav-link(href='buttons.html')
+                            | Buttons
+                        a.nav-link(href='cards.html')
+                            | Cards
+                            span.badge.bg-primary-soft.text-primary.ms-auto Updated
+                        a.nav-link(href='dropdowns.html')
+                            | Dropdowns
+                        a.nav-link(href='forms.html')
+                            | Forms
+                            span.badge.bg-primary-soft.text-primary.ms-auto Updated
+                        a.nav-link(href='modals.html') Modals
+                        a.nav-link(href='navigation.html')
+                            | Navigation
+                        a.nav-link(href='progress.html')
+                            | Progress
+                        a.nav-link(href='step.html')
+                            | Step
+                        a.nav-link(href='timeline.html')
+                            | Timeline
+                        a.nav-link(href='toasts.html')
+                            | Toasts
+                        a.nav-link(href='tooltips.html')
+                            | Tooltips
+
+                // Sidenav Accordion (Utilities)
+                a.nav-link.collapsed(href='javascript:void(0);', data-bs-toggle='collapse', data-bs-target='#collapseUtilities', aria-expanded='false', aria-controls='collapseUtilities')
+                    .nav-link-icon
+                        i(data-feather='tool')
+                    | Utilities
+                    .sidenav-collapse-arrow
+                        i.fas.fa-angle-down
+                #collapseUtilities.collapse(data-bs-parent='#accordionSidenav')
+                    nav.sidenav-menu-nested.nav
+                        a.nav-link(href='animations.html')
+                            | Animations
+                        a.nav-link(href='background.html')
+                            | Background
+                        a.nav-link(href='borders.html')
+                            | Borders
+                        a.nav-link(href='lift.html')
+                            | Lift
+                        a.nav-link(href='shadows.html')
+                            | Shadows
+                        a.nav-link(href='typography.html')
+                            | Typography
+
+                // Sidenav Heading (Addons)
+                .sidenav-menu-heading
+                    | Plugins
+
+                // Sidenav Link (Charts)
+                a.nav-link(href='charts.html')
+                    .nav-link-icon
+                        i(data-feather='bar-chart')
+                    | Charts
+
+                // Sidenav Link (Tables)
+                a.nav-link(href='tables.html')
+                    .nav-link-icon
+                        i(data-feather='filter')
+                    | Tables
+
+        // Sidenav Footer
+        .sidenav-footer
+            .sidenav-footer-content
+                .sidenav-footer-subtitle Logged in as:
+                .sidenav-footer-title Valerie Luna

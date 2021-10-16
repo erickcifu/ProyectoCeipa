@@ -1,0 +1,76 @@
+{% extends 'base/municipalizacion.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Padecimiento Persona
+          <a href="{% url 'municipalizacion:padfam_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+      </div>
+      <div class="card mb-4">
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos de Padecimiento Persona </div>
+          {% else %}
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>Medicamentos</th>
+                  <th>Persona</th>
+                  <th>observacion</th>
+                  <th>padecimiento</th>
+                  <th>Leer</th>
+                  <th>Escribir</th>
+                  <th>Vacuna Covid</th>
+                  <th>Participacion Grupos</th>
+                  <th>Estado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.persona }}</td>
+                      <td>{{ item.grupo }}</td>
+                      <td>{{ item.cargo }}</td>
+                      <td>{{ item.programaC }}</td>
+                      <td>{{ item.leer|yesno:"Si,No" }}</td>
+                      <td>{{ item.escribir|yesno:"Si,no" }}</td>
+                      <td>{{ item.vacunaCovid|yesno:"Si,No" }}</td>
+                      <td>{{ item.participacionG|yesno:"Si,No" }}</td>
+                      {% if item.estado_padres is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Activo</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                      <td>
+                        <a href="{% url 'municipalizacion:padfam_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                        <a href="{% url 'municipalizacion:padfam_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                          <!--<a href="{% url 'municipalizacion:area_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
+                          <a href="{% url 'municipalizacion:area_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                        -->
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}

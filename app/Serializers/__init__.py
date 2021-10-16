@@ -1,1 +1,0 @@
-from .educacion_serializer.ocupacionSerializer import ocupacionRegistroSerializer, ocupacionSerializer

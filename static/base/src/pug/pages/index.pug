@@ -1,0 +1,236 @@
+//- * * * * * * * *
+//- * * Layout  * *
+//- * * * * * * * *
+
+//- The page layout is set using the Pug `extends` directive with a path to a layout template
+//- All of the layout options are contained in src/pug/layouts
+extends ../layouts/dashboard.pug
+
+//- * * * * * * * *
+//- * * Config  * *
+//- * * * * * * * *
+
+//- These are page-level configuration options that should be set for each page
+block config
+    - var navPosition = 'nav-fixed'
+    - var pageTitle = 'Overview'
+
+//- * * * * * * * *
+//- * * Topnav  * *
+//- * * * * * * * *
+
+//- Define the `block topnav` from the layout
+block topnav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/topnav.pug
+    +topnav({
+        topnavStyle: 'navbar-light bg-white'
+    })
+
+//- * * * * * * * *
+//- * * Sidenav * *
+//- * * * * * * * *
+
+//- Define the `block sidenav` from the layout
+//- Note: The chosen page layout must have a `block sidenav` or no sidenav will appear
+block sidenav
+
+    //- Bring in the sidenav mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.com/sb-admin-pro/
+    include mixins/sidenav.pug
+    +sidenav({
+        sidenavStyle: 'sidenav-light'
+    })
+
+//- * * * * * * * * * * *
+//- * * Page Content  * *
+//- * * * * * * * * * * *
+
+//- Define the main `block content` from the layout
+block content
+
+    header.py-10.mb-4.bg-gradient-primary-to-secondary
+        .container-xl.px-4
+            .text-center
+                h1.text-white Welcome to SB Admin Pro
+                p.lead.mb-0.text-white-50 A professionally designed admin panel template built with Bootstrap 5
+
+    // Main page content
+    .container-xl.px-4
+
+        h2.mt-5.mb-0 Dashboards
+        p Three dashboard examples to get you started!
+        hr.mt-0.mb-4
+
+        .row
+            .col-md-6.col-xl-4.mb-4.mb-xl-0
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='dashboard-1.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/dashboards/default.png', alt='...')
+                .text-center.small Default Dashboard
+            .col-md-6.col-xl-4.mb-4.mb-xl-0
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='dashboard-3.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/dashboards/affiliate.png', alt='...')
+                .text-center.small Affiliate Dashboard
+            .col-md-6.col-xl-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='dashboard-2.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/dashboards/multipurpose.png', alt='...')
+                .text-center.small Multipurpose Dashboard
+
+        h2.mt-5.mb-0 App Pages
+        p App pages to cover common use pages to help build your app!
+        hr.mt-0.mb-4
+
+        .row
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='account-billing.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/account-billing.png', alt='...')
+                .text-center.small Account - Billing
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='account-notifications.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/account-notifications.png', alt='...')
+                .text-center.small Account - Notifications
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='account-profile.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/account-profile.png', alt='...')
+                .text-center.small Account - Profile
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='account-security.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/account-security.png', alt='...')
+                .text-center.small Account - Security
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='auth-login-basic.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/auth-login-basic.png', alt='...')
+                .text-center.small Auth - Login
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='auth-login-social.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/auth-login-social.png', alt='...')
+                .text-center.small Auth - Login (Social)
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='multi-tenant-select.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/auth-mutli-tenant.png', alt='...')
+                .text-center.small Auth - Multi Tenant
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='auth-password-basic.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/auth-password-basic.png', alt='...')
+                .text-center.small Auth - Password
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='auth-password-social.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/auth-password-social.png', alt='...')
+                .text-center.small Auth - Password (Social)
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='auth-register-basic.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/auth-register-basic.png', alt='...')
+                .text-center.small Auth - Register
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='auth-register-social.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/auth-register-social.png', alt='...')
+                .text-center.small Auth - Register (Social)
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='invoice.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/invoice.png', alt='...')
+                .text-center.small Invoice
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='knowledge-base-article.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/knowledgebase-article.png', alt='...')
+                .text-center.small Knowledgebase - Article
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='knowledge-base-category.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/knowledgebase-category.png', alt='...')
+                .text-center.small Knowledgebase - Category
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='knowledge-base-home-1.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/knowledgebase-home-1.png', alt='...')
+                .text-center.small Knowledgebase - Home 1
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='knowledge-base-home-2.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/knowledgebase-home-2.png', alt='...')
+                .text-center.small Knowledgebase - Home 2
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='pricing.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/pricing.png', alt='...')
+                .text-center.small Pricing
+            .col-sm-6.col-md-4.col-xl-3.mb-4
+                a.d-block.lift.rounded.overflow-hidden.mb-2(href='wizard.html')
+                    img.img-fluid(src='https://assets.startbootstrap.com/img/screenshots-product-pages/sb-admin-pro/pages/wizard.png', alt='...')
+                .text-center.small Wizard
+
+        h2.mt-5.mb-0 Starter Layouts
+        p Layouts for creating new pages within your project!
+        hr.mt-0.mb-4
+
+        .row
+            .col-sm-6.col-md-4.mb-4
+                .small.mb-1 Navigation
+                .list-group.mb-4
+                    a.list-group-item.list-group-item-action.p-3(href='layout-static.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Static Sidenav
+                            i.text-muted(data-feather='arrow-right')
+                    a.list-group-item.list-group-item-action.p-3(href='layout-dark.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Dark Sidenav
+                            i.text-muted(data-feather='arrow-right')
+                    a.list-group-item.list-group-item-action.p-3(href='layout-rtl.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | RTL Layout
+                            i.text-muted(data-feather='arrow-right')
+                .small.mb-1 Container Options
+                .list-group
+                    a.list-group-item.list-group-item-action.p-3(href='layout-boxed.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Boxed Layouts
+                            i.text-muted(data-feather='arrow-right')
+                    a.list-group-item.list-group-item-action.p-3(href='layout-fluid.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Fluid Layout
+                            i.text-muted(data-feather='arrow-right')
+            .col-sm-6.col-md-4.mb-4
+                .small.mb-1 Page Headers
+                .list-group
+                    a.list-group-item.list-group-item-action.p-3(href='header-simplified.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Simplified
+                            i.text-muted(data-feather='arrow-right')
+                    a.list-group-item.list-group-item-action.p-3(href='header-compact.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Compact
+                            i.text-muted(data-feather='arrow-right')
+                    a.list-group-item.list-group-item-action.p-3(href='header-overlap.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Content Overlap
+                            i.text-muted(data-feather='arrow-right')
+                    a.list-group-item.list-group-item-action.p-3(href='header-breadcrumbs.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Breadcrumbs
+                            i.text-muted(data-feather='arrow-right')
+                    a.list-group-item.list-group-item-action.p-3(href='header-light.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Light
+                            i.text-muted(data-feather='arrow-right')
+            .col-sm-6.col-md-4.mb-4
+                .small.mb-1 Starter Layouts
+                .list-group.mb-4
+                    a.list-group-item.list-group-item-action.p-3(href='starter-default.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Default
+                            i.text-muted(data-feather='arrow-right')
+                    a.list-group-item.list-group-item-action.p-3(href='starter-minimal.html')
+                        .d-flex.align-items-center.justify-content-between
+                            | Minimal
+                            i.text-muted(data-feather='arrow-right')
+
+//- * * * * * * * *
+//- * * Footer  * *
+//- * * * * * * * *
+
+//- Define the `block footer` from the layout
+block footer
+
+    //- Bring in the footer mixin and configure
+    //- For all available config options for this mixin, visit https://docs.startbootstrap.co/sb-admin-pro/
+    include mixins/footer.pug
+    +footer({
+        footerStyle: 'footer-light'
+    })

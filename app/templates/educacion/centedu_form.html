@@ -1,0 +1,63 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-6 col-md-6 mb-6">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            {% if obj %} Editar {% else %} Nuevos {% endif %} Centro Educativo
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Nombre del Centro Educativo</label>
+                                <input type="text" name="nombre_centro" maxlength="50" class="form-control" required id="id_nombre_centro"
+                                  placeholder="Nombre del Centro Educativo" value="{% if obj %} {{ obj.nombre_centro }} {% endif %}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Direccion de centro educativo</label>
+                                <input type="text" name="direccion_centro" maxlength="50" class="form-control" required id="id_direccion_centro"
+                                placeholder="Direccion del Centro Educativo" value="{% if obj %} {{ obj.direccion_centro }} {% endif %}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Código de centro educativo</label>
+                                <input type="text" name="codigo_centro" maxlength="50" class="form-control" required id="id_codigo_centro"
+                              placeholder="Codigo Del Centro Educativo" value="{% if obj %} {{ obj.codigo_centro }} {% endif %}">
+                            </div>
+                        </form>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="id_estado_centro">Estado</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="estado_centro" class="form-control" id="id_estado_centro" type="checkbox"  {% if obj.estado_centro is true %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- {{form.as_p}} -->
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'educacion:centedu_list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}

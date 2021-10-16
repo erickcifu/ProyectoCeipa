@@ -1,0 +1,79 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-12 col-md-12 mb-12">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            {% if obj %} Editar {% else %} Nueva {% endif %} tarea
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                          <div class="input-group">
+                              <input type="text" name="titulo_tarea" maxlength="50" class="form-control" required id="id_titulo_tarea"
+                              placeholder="Titulo" value="{% if obj %} {{ obj.titulo_tarea }} {% endif %}">
+                          </div>
+
+                            <div class="input-group">
+                                <input type="text" name="descripcion_tarea" maxlength="50" class="form-control" required id="id_descripcion_tarea"
+                                placeholder="Descripcion" value="{% if obj %} {{ obj.descripcion_tarea }} {% endif %}">
+                            </div>
+
+                            <div class="col-5">
+                                <div class="input-group">
+                                    {{ form.maestro }}
+                            </div>
+
+
+                            <div class="col-5">
+                                <div class="input-group">
+                                    {{ form.ciclo_grado_curso }}
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <input type="float" name="nota_tarea" maxlength="50" class="form-control" required id="id_nota_tarea"
+                                placeholder="Nota" value="{% if obj %} {{ obj.nota_tarea }} {% endif %}">
+                            </div>
+
+                            <div class="input-group">
+                                <input type="date" name="fecha_entrega" maxlength="50" class="form-control" required id="id_fecha_entrega"
+                                placeholder="fecha" value="{% if obj %} {{ obj.fecha_entrega }} {% endif %}">
+                            </div>
+
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="id_estado_tarea">Estado</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="estado_tarea" class="form-control" id="id_estado_tarea" type="checkbox"  {% if obj.estado_tarea %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- {{form.as_p}} -->
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'educacion:tarea_list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}
