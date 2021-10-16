@@ -2,6 +2,13 @@ from django import forms
 from app.models import Maestro
 
 class MaestroForm(forms.ModelForm):
+    estado_maestro = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = Maestro
         fields = ['establecimiento', 'gruporg', 'cargogrup', 'estado_maestro']

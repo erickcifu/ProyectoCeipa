@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.db import IntegrityError, transaction
 
 from app.models import PadresFamilia, IdiomaPersona, Persona
@@ -62,12 +63,55 @@ class PadFamNew(LoginRequiredMixin, generic.CreateView):
             handle_exception()
 
 class PadFamEdit(LoginRequiredMixin, generic.UpdateView):
-    model = PadresFamilia
     template_name = "municipalizacion/padfam_form.html"
-    context_object_name = "obj"
-    form_class = PadFamForm
     success_url = reverse_lazy("municipalizacion:padfam_list")
+    model = PadresFamilia
+    context_object_name = "obj"
+    form_class = PersonaForm
+    second_form_class = PadFamForm
+    third_form_class = IdPerForm
     login_url = 'app:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.second_form_class
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        padfam = self.get_object()
+        persona = padfam.persona
+        idioma = persona.I_persona.first()
+
+        form = self.form_class(request.POST, instance = persona)
+        form2 = self.second_form_class(request.POST, instance = padfam)
+        form3 = self.third_form_class(request.POST, instance = idioma )
+
+        with transaction.atomic():
+            if form.is_valid() and form2.is_valid() and form3.is_valid():
+                form.save()
+                form2.save()
+                form3.save()
+                return HttpResponseRedirect(self.success_url)
+            else:
+                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
+
+    def get(self, request, *args, **kwargs):
+        padfam = self.get_object()
+        persona = padfam.persona
+        idioma = persona.I_persona.first()
+
+        context = {}
+        if 'form' not in context:
+            context['form'] = self.form_class(instance = persona)
+        if 'form2' not in context:
+            context['form2'] = self.second_form_class(instance = padfam)
+        if 'form3' not in context:
+            context['form3'] = self.third_form_class(instance = idioma)
+        context['obj'] = ''
+        context['persona'] = self.get_object()
+
+        return render(request, self.template_name, context)
 
 class PadFamDel(LoginRequiredMixin, generic.DeleteView):
     model = PadresFamilia
