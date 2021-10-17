@@ -336,6 +336,11 @@ urlpatterns = [
     path('programas_ceipa/edit/<int:pk>', viewsets.ProgramasEdit.as_view(), name='programas_edit'),
     path('programas_ceipa/delete/<int:pk>', viewsets.ProgramasDel.as_view(), name='programas_del'),
 
+    path('Comisiona_NA/', viewsets.ComisionNAView.as_view(), name='comisionNA_list'),
+    path('Comisiona_NA/new', viewsets.ComisionNANew.as_view(), name='comisionNA_new'),
+    path('Comisiona_NA/edit/<int:pk>', viewsets.ComisionNAEdit.as_view(), name='comisionNA_edit'),
+    path('Comisiona_NA/delete/<int:pk>', viewsets.ComisionNADel.as_view(), name='comisionNA_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),

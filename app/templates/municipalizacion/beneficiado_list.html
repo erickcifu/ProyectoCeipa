@@ -16,7 +16,7 @@
               <thead>
                   <th>Id</th>
                   <th>Tutor</th>
-                  <th>Persona</th>
+                  <th>Beneficiado</th>
                   <th>Genero</th>
                   <th>Ocupacion</th>
                   <th>Establecimiento</th>
@@ -28,7 +28,7 @@
                   <tr>
                       <td>{{ item.id }}</td>
                       <td>{{ item.tutor }}</td>
-                      <td>{{ item.persona }}</td>
+                      <td>{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</td>
                       <td>{{ item.gen }}</td>
                       <td>{{ item.ocup }}</td>
                       <td>{{ item.establecimiento }}</td>

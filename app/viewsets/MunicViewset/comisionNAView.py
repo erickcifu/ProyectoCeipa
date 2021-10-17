@@ -7,42 +7,39 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-
-from app.models import Beneficiado, Persona, IdiomaPersona, TutorMuni
-from app.forms import BenForm, PersonaForm, IdPerForm, TutorMuniForm
 from django.db import IntegrityError, transaction
 
-class BenView(LoginRequiredMixin, generic.ListView):
-    model = Beneficiado
-    template_name = 'municipalizacion/beneficiado_list.html'
+from app.models import ComisionNA, Persona, IdiomaPersona
+from app.forms import Comision_NAForm, PersonaForm, IdPerForm
+
+class ComisionNAView(LoginRequiredMixin, generic.ListView):
+    model = ComisionNA
+    template_name = 'municipalizacion/comisionNA_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
-class BenNew(LoginRequiredMixin, generic.CreateView):
-    model = Beneficiado
-    template_name = 'municipalizacion/beneficiado_form.html'
+class ComisionNANew(LoginRequiredMixin, generic.CreateView):
+    model = ComisionNA
+    template_name = 'municipalizacion/comisionNA_form.html'
     context_object_name = "obj"
     form_class = PersonaForm
-    second_form_class = BenForm
+    second_form_class = Comision_NAForm
     third_form_class = IdPerForm
-    four_form_class = TutorMuniForm
-    success_url = reverse_lazy("municipalizacion:ben_list")
+    success_url = reverse_lazy("municipalizacion:comisionNA_list")
     login_url = 'app:login'
 
     def get_context_data(self, **kwargs):
-        context = super(BenNew, self).get_context_data(**kwargs)
+        context = super(ComisionNANew, self).get_context_data(**kwargs)
         if 'form' not in context:
             context['form'] = self.form_class(self.request.GET)
         if 'form2' not in context:
             context['form2'] = self.second_form_class(self.request.GET)
         if 'form3' not in context:
             context['form3'] = self.third_form_class(self.request.GET)
-        if 'form4' not in context:
-            context['form4'] = self.four_form_class(self.request.GET)
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
-        return get_object_or_404(Beneficiado, pk=self.kwargs.get('pk'))
+        return get_object_or_404(ComisionNA, pk=self.kwargs.get('pk'))
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
@@ -52,32 +49,28 @@ class BenNew(LoginRequiredMixin, generic.CreateView):
                 form = self.form_class(request.POST)
                 form2 = self.second_form_class(request.POST)
                 form3 = self.third_form_class(request.POST)
-                form4 = self.four_form_class(request.POST)
-                if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
+                if form.is_valid() and form2.is_valid() and form3.is_valid():
                     persona = form.save()
-                    beneficiado = form2.save(commit=False)
-                    beneficiado.persona = persona
-                    beneficiado.tutor = form4.save()
-                    beneficiado.save()
+                    comision_na = form2.save(commit=False)
+                    comision_na.persona = persona
+                    comision_na.save()
                     idioma = form3.save(commit=False)
                     idioma.persona = persona
                     idioma.save()
                     return HttpResponseRedirect(self.get_success_url())
                 else:
-                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4))
+                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
         except IntegrityError:
             handle_exception()
 
-
-class  BenEdit(LoginRequiredMixin, generic.UpdateView):
-    template_name = "municipalizacion/beneficiado_form.html"
-    success_url = reverse_lazy("municipalizacion:ben_list")
+class ComisionNAEdit(LoginRequiredMixin, generic.UpdateView):
+    model = ComisionNA
+    template_name = "municipalizacion/comisionNA_form.html"
     context_object_name = "obj"
-    model = Beneficiado
     form_class = PersonaForm
-    second_form_class = BenForm
+    second_form_class = Comision_NAForm
     third_form_class = IdPerForm
-    four_form_class = TutorMuniForm
+    success_url = reverse_lazy("municipalizacion:comisionNA_list")
     login_url = 'app:login'
 
     def get_context_data(self, **kwargs):
@@ -87,49 +80,43 @@ class  BenEdit(LoginRequiredMixin, generic.UpdateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        beneficiado = self.get_object()
-        persona = beneficiado.persona
+        comna = self.get_object()
+        persona = comna.persona
         idioma = persona.I_persona.first()
-        tutor = beneficiado.tutor
 
         form = self.form_class(request.POST, instance = persona)
-        form2 = self.second_form_class(request.POST, instance = beneficiado)
+        form2 = self.second_form_class(request.POST, instance = comna)
         form3 = self.third_form_class(request.POST, instance = idioma )
-        form4 = self.four_form_class(request.POST, instance = tutor )
 
         with transaction.atomic():
-            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
+            if form.is_valid() and form2.is_valid() and form3.is_valid():
                 form.save()
                 form2.save()
                 form3.save()
-                form4.save()
                 return HttpResponseRedirect(self.success_url)
             else:
-                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4))
+                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
 
     def get(self, request, *args, **kwargs):
-        beneficiado = self.get_object()
-        persona = beneficiado.persona
+        comna = self.get_object()
+        persona = comna.persona
         idioma = persona.I_persona.first()
-        tutor = beneficiado.tutor
 
         context = {}
         if 'form' not in context:
             context['form'] = self.form_class(instance = persona)
         if 'form2' not in context:
-            context['form2'] = self.second_form_class(instance = beneficiado)
+            context['form2'] = self.second_form_class(instance = comna)
         if 'form3' not in context:
             context['form3'] = self.third_form_class(instance = idioma)
-        if 'form4' not in context:
-            context['form4'] = self.four_form_class(instance = tutor)
-
         context['obj'] = ''
         context['persona'] = self.get_object()
 
         return render(request, self.template_name, context)
 
-class BenDel(LoginRequiredMixin, generic.DeleteView):
-    model = Beneficiado
+
+class ComisionNADel(LoginRequiredMixin, generic.DeleteView):
+    model = ComisionNA
     template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"
-    success_url = reverse_lazy("municipalizacion:ben_list")
+    success_url = reverse_lazy("municipalizacion:comisionNA_list")

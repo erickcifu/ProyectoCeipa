@@ -12,8 +12,8 @@ class BenForm(forms.ModelForm):
     )
     class Meta:
         model = Beneficiado
-        fields = ['gen', 'ocup', 'establecimiento', 'estado_beneficiado']
-        labels = {'gen':'Genero', 'ocup':'Ocupación','establecimiento':'Establecimiento donde estudia','estado_beneficiado':"Activo/Inactivo"}
+        fields = ['ocup', 'establecimiento', 'estado_beneficiado']
+        labels = {'ocup':'Ocupación','establecimiento':'Establecimiento donde estudia','estado_beneficiado':"Activo/Inactivo"}
         widget = {'estado_beneficiado': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
@@ -22,6 +22,5 @@ class BenForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-            self.fields['gen'].empty_label = "Seleccione su Genero"
             self.fields['ocup'].empty_label = "Seleccione su ocupacion"
             self.fields['establecimiento'].empty_label = "Seleccione su establecimiento"

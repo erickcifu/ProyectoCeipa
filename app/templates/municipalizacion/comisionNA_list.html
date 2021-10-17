@@ -4,21 +4,20 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Maestro
-          <a href="{% url 'municipalizacion:maes_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+          Comision NA
+          <a href="{% url 'municipalizacion:comisionNA_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay datos de Maestro </div>
+          <div class="alert alert-info">No hay datos de comisiones na</div>
           {% else %}
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>Establecimiento</th>
-                  <th>Maestro</th>
-                  <th>Grupo Organizado</th>
-                  <th>Cargo Grupo</th>
+                  <th>Representante</th>
+                  <th>Institucion</th>
+                  <th>Participacion en grupo</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -26,11 +25,18 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.establecimiento }}</td>
                       <td>{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</td>
-                      <td>{{ item.gruporg }}</td>
-                      <td>{{ item.cargogrup }}</td>
-                      {% if item.estado_maestro is True %}
+                      <td>{{ item.institucion }}</td>
+                      {% if item.participacion is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Si participa</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">No participa</span>
+                      </td>
+                      {% endif %}
+                      {% if item.estado_comision is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>
                       </td>
@@ -40,11 +46,8 @@
                       </td>
                       {% endif %}
                       <td>
-                        <a href="{% url 'municipalizacion:maes_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
-                        <a href="{% url 'municipalizacion:maes_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
-                          <!--<a href="{% url 'municipalizacion:area_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                          <a href="{% url 'municipalizacion:area_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
-                        -->
+                        <a href="{% url 'municipalizacion:comisionNA_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                        <a href="{% url 'municipalizacion:comisionNA_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
                       </td>
                   </tr>
                   {% endfor %}
