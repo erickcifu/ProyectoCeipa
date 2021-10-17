@@ -1,0 +1,119 @@
+{% extends 'base/municipalizacion.html' %}
+
+{% block page_content %}
+{% load crispy_forms_tags %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-12 col-md-12 mb-12">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          <div class="col-12 col-md-6 offset-md-3">
+                            <h4>{% if obj %} Editar {% else %} Nuevo {% endif %} Registro de comision NA
+                            </h4>
+                          </div>
+                    </div>
+                </div>
+                <!--Wizzard-->
+                        <div class="card">
+                          <div class="card-header border-bottom">
+                            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                              <!--Wizard item 1-->
+                              <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                <div class="wizard-step-icon">1</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Representante</div>
+                                  <div class="wizard-step-text-details">Infomaciòn general del representante</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 2-->
+                              <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Comision</div>
+                                  <div class="wizard-step-text-details">Informaciòn de la comision</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 3-->
+                              <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
+                                <div class="wizard-step-icon">3</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Idioma</div>
+                                  <div class="wizard-step-text-details">Informaciòn de idioma</div>
+                                </div>
+                              </a>
+                            <!--Wizard Body-->
+                                <div class="tab-content" id="cardTabContent">
+                                  <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 1</h3>
+                                        <h5 class="card-title mb-4">Ingrese la informaciòn personal del representante</h5>
+                                        <!--Inicio Formulario-->
+                                          <div class="row gx-3">
+                                                {{ form | crispy }}
+                                          </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                          </div>
+                                        <!--Fin Formulario-->
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!--Tab item 2-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 2</h3>
+                                        <h5 class="card-title mb-4">Ingrese informaciòn de la comision</h5>
+                                          <div class="row gx-3">
+                                              {{ form2 | crispy }}
+                                          </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-primary next-step" role="button">Siguiente</a>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--Tab item 3-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 3</h3>
+                                        <h5 class="card-title mb-4">Ingrese la información del idioma que habla el representante</h5>
+                                            <div class="row gx-3">
+                                                {{ form3 | crispy }}
+                                              </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <a class="btn btn-ligth" href="{% url 'municipalizacion:comisionNA_list' %}">Cancelar</a>
+                                            <button class="btn btn-ligth" type="submit">Guardar</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}

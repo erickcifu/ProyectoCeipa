@@ -29,7 +29,7 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.persona }}</td>
+                      <td>{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</td>
                       <td>{{ item.comision }}</td>
                       <td>{{ item.partido }}</td>
                       <td>{{ item.grupo }}</td>
