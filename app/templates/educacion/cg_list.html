@@ -4,10 +4,49 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-            Ciclo grado
-            <h2>Ciclo Escolar</h2>
-            <a href="{% url 'educacion:cg_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
-      </div>
+            {%if id_ciclo%}
+            <h2>Ciclo Escolar {{id_ciclo.anio}}</h2>
+              <a href="{% url 'educacion:cg_new' id_ciclo.id %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+              {%else%}
+              <h2>Ciclo Escolar</h2>
+              <a href="{% url 'educacion:cg_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+
+            {%endif%}
+
+            {%if id_ciclo%}
+                <form method="GET" class="form-inline">
+                  <select name="ciclo" id="ciclo">
+                    {%if ciclos%}
+                      {%for ciclo in ciclos%}
+                          {%if id_ciclo.id == ciclo.id%}
+                            <option value="{{ciclo.id}}" selected>{{ciclo.anio}}</option>
+                          {%else%}
+                            <option value="{{ciclo.id}}">{{ciclo.anio}}</option>
+                          {%endif%}
+                      {%endfor%}
+                      
+                    {%endif%}
+                    
+                  </select>
+                  <button type="submit" class="btn btn-success">buscar</button>
+              </form>
+            {%else%}
+              <form method="GET" class="form-inline">
+                <select name="ciclo" id="ciclo">
+                  {%if ciclos%}
+                    {%for ciclo in ciclos%}
+                      <option value="{{ciclo.id}}">{{ciclo.anio}}</option>
+                    {%endfor%}
+                  {%endif%}
+                  
+                </select>
+                <button type="submit" class="btn btn-success">buscar</button>
+              </form>
+            {%endif%}
+
+            
+
+        </div>
       <div class="card-body">
           {% if not obj %}
           <div class="alert alert-info">No hay datos de Grados</div>

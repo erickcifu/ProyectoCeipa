@@ -1,0 +1,67 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+{% load crispy_forms_tags %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-6 col-md-6 mb-6">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            agregar un nuevo personal al {{id_centro_educativo.nombre_centro}}
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div id="div_id_centro_Educativo" class="form-group">
+                                <label for="id_centro_Educativo" id=" requiredField">centro educativo</label>
+                                <select name="centro_Educativo" id="id_centro_Educativo" class="form-control select form-control" disabled>
+                                    <option value selected>---------</option>
+                                    {%if centros_educativos%}
+                                      {%for centro in centros_educativos%}
+                                        {%if id_centro_educativo.id == centro.id%}
+                                            <option value="{{centro.id}}" selected>{{centro.nombre_centro}}</option>
+                                        {%else%}
+                                        <option value="{{centro.id}}">{{centro.nombre_centro}}</option>
+    
+                                        {%endif%}
+                                        
+                                      {%endfor%}
+                                    {%endif%}
+                                </select>
+                            </div>
+                            <div id="div_id_personal" class="form-group">
+                                <label for="id_personal" id=" requiredField">personal</label>
+                                <select name="personal" id="id_personal" class="form-control select form-control" {%if id_ciclo%}disabled{%endif%}>
+                                    <option value selected>---------</option>
+                                    {%if maestros%}
+                                      {%for maestro in maestros%}
+                                        <option value="{{maestro.id}}">{{maestro.nombres}} {{maestro.apellidos}}</option>
+                                      {%endfor%}
+                                    {%endif%}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'educacion:cg_list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}

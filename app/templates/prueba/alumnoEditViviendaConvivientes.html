@@ -1,0 +1,171 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+{% load crispy_forms_tags %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            Convivientes
+      </div>
+      <div class="card-body">
+          {% if not convivientes %}
+          <div class="alert alert-info">No hay datos de Curso urso</div>
+          {% else %}
+          <table class="table table-striped table-hover">
+              <thead>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Parentezco</th>
+                  <th>Estado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in convivientes %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.nombres_conviviente }}</td>
+                      <td>{{ item.apellidos_conviviente }}</td>
+                      <td>{{ item.parentesco }}</td>
+                      <td>{{ item.estado_conviviente|yesno:"Activo,Inactivo" }}</td>
+                      <td>
+                          <a href="{% url 'educacion:conviviente_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
+                          <a href="{% url 'educacion:conviviente_edit' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+      <form method="POST" class="form-inline">
+        {% csrf_token %}
+            <div class="col-xl-12 col-md-12 mb-12">
+                <div class="row mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                      <div class="col-12 col-md-12 offset-md-12">
+                          <h2>Agrega mas vovivientes</h2>
+                      </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xxl-6 col-xl-8">
+                        <div class="row gx-3">
+                            {{convivientes_form.management_form}}
+                                <div id="formularios_convivientes" class="row">
+                                    {%for f in convivientes_form%}
+                                        <div id="hijo_fomulario_conviviente" class="row">
+                                            {{ f | crispy}}
+                                        </div>
+                                    {%endfor%}
+                                </div>
+                        </div>
+                        <br/>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-primary" type="button" role="button" onclick="agregar_convivientes();">
+                              nuevo form
+                            </button>
+                        </div>
+                        <hr class="my-4"/>
+                    </div>
+                </div>
+                {% if form_viv %}
+                <div class="card border-left-warning shadow h-100 py-2">
+                {% else %}
+                <div class="card border-left-success shadow h-100 py-2">
+                {% endif %}
+                    <div class="row mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          <div class="col-12 col-md-12 offset-md-12">
+                              <h2>Vivienda</h2>
+                          </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-6 col-xl-8">
+                            <div class="row gx-3">
+                                {{ form_viv | crispy }}
+                            </div>
+                            <hr class="my-4"/>
+                            <div class="d-flex justify-content-between">
+                                <a class="btn btn-ligth" href="{% url 'educacion:prueba_alumno' alumno.id%}">Cancelar</a>
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+      </form>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+
+
+    function agregar_convivientes(){
+        const $total_forms = document.getElementById('id_convivientes-TOTAL_FORMS')
+        const $total_forms_convivientes = document.getElementById('formularios_convivientes').childElementCount
+        console.log($total_forms_convivientes)
+        let $label_nombre = document.createElement('label')
+          $label_nombre.innerHTML = 'Nombre'
+          let $input_nombre = document.querySelector('#id_convivientes-0-nombres_conviviente').cloneNode(true)
+          $input_nombre.name = "convivientes-"+$total_forms.value+"-nombres_conviviente"
+          $input_nombre.id =  "id_convivientes-"+$total_forms.value+"-nombres_conviviente"
+
+          //apellidos
+
+          let $label_apellido = document.createElement('label')
+          $label_apellido.innerHTML = 'apellidos'
+          let $input_apellidos = document.querySelector('#id_convivientes-0-apellidos_conviviente').cloneNode(true)
+          $input_apellidos.name = "convivientes-"+$total_forms.value+"-apellidos_conviviente"
+          $input_apellidos.id =  "id_convivientes-"+$total_forms.value+"-apellidos_conviviente"
+          
+          //fecha
+          let $label_fecha = document.createElement('label')
+          $label_fecha.innerHTML = 'fecha de nacimiento'
+          let $input_fecha = document.querySelector('#id_convivientes-0-fecha_nacimiento').cloneNode(true)
+          $input_fecha.name = "convivientes-"+$total_forms.value+"-fecha_nacimiento"
+          $input_fecha.id =  "id_convivientes-"+$total_forms.value+"-fecha_nacimiento"
+
+          //parentesco
+          let $label_parentesco = document.createElement('label')
+          $label_parentesco.innerHTML = 'parentesco'
+          let $input_parenteso = document.querySelector('#id_convivientes-0-parentesco').cloneNode(true)
+          $input_parenteso.name = "convivientes-"+$total_forms.value+"-parentesco"
+          $input_parenteso.id =  "id_convivientes-"+$total_forms.value+"-parentesco"
+          //estado
+          let $label_estado = document.createElement('label')
+          $label_estado.innerHTML = 'estado'
+          let $input_estado = document.querySelector('#id_convivientes-0-estado_conviviente').cloneNode(true)
+          $input_estado.name = "convivientes-"+$total_forms.value+"-estado_conviviente"
+          $input_estado.id =  "id_convivientes-"+$total_forms.value+"-estado_conviviente"
+
+          console.log('convivientes')
+          const $formualio_hijo = document.createElement('div')
+          $formualio_hijo.id =`hijo_formulario_conviviente_${$total_forms_convivientes}`
+          
+          $formualio_hijo.appendChild($label_nombre)
+          $formualio_hijo.appendChild($input_nombre)
+          $formualio_hijo.appendChild($label_apellido)
+          $formualio_hijo.appendChild($input_apellidos)
+          $formualio_hijo.appendChild($label_fecha)
+          $formualio_hijo.appendChild($input_fecha)
+          $formualio_hijo.appendChild($label_parentesco)
+          $formualio_hijo.appendChild($input_parenteso)
+          $formualio_hijo.appendChild($label_estado)
+          $formualio_hijo.appendChild($input_estado)
+        
+          console.log($formualio_hijo)
+          document.getElementById('formularios_convivientes').appendChild($formualio_hijo)
+        $total_forms.value = parseInt($total_forms.value) + 1
+        
+      }
+
+      function eliminar_convivientes() {
+          
+      }
+</script>
+{% endblock%}

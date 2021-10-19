@@ -16,7 +16,7 @@
                   <div class="col-lg-6 col-xl-4 mb-4">
                     <div class="card">
                         <div class="card-header">
-                          <a class="text-primary stretched-link">{{ item.nombres_alumno }} {{ item.apellidos_alumno }}</a>
+                          <a href="{% url 'educacion:alumno_detail' item.id  %}" class="text-primary stretched-link">{{ item.nombres_alumno }} {{ item.apellidos_alumno }}</a>
                           <div class="text-primary"><i class="fas fa-angle-right"></i></div>
                         </div>
                       </div>
@@ -47,7 +47,7 @@
                           </div>
                         </div>
                         <div class="card-footer">
-                          <a href="{% url 'educacion:alumno_edit' item.id %}" class="btn btn-outline-yellow" role="button">Editar</a>
+                          <a href="{% url 'educacion:prueba_alumno' item.id %}" class="btn btn-outline-yellow" role="button">Editar</a>
                           <a href="{% url 'educacion:alumno_del' item.id %}" class="btn btn-outline-red" role="button">Eliminar</a>
                         </div>
                       </div>

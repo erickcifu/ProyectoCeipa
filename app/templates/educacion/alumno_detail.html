@@ -1,0 +1,330 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Detalle alumno
+      </div>
+      <div class="card-body">
+            <div class="row">
+                  <div class="col-lg-6 col-xl-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                          <h2 class="text-primary">Datos del alumno</h2>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img class="card-img-top" src="{{item.foto_url|default_if_none:'ceipa/default.png'}}">
+                        <div class="card-body">
+                            <div class="card-header">
+                                {{ item.nombres_alumno }} {{ item.apellidos_alumno }}
+                            </div>
+                          <label><b>ID: </b>{{ item.id }}</label>
+                          <br/>
+                          <label><b>CUI: </b>{{ item.cui }}</label>
+                          <label><b>Codigo MINEDUC: </b>{{ item.codigo_mineduc }}</label>
+                          <label><b>Fecha de nacimiento: </b>{{ item.fecha_nacimiento|date:"d M, Y" }}</label>
+                          <label><b>Ingreso familiar: Q.</b>{{ item.ingreso_familiar }}</label>
+                          <label><b>direcciòn: </b>{{ item.direccion_alumno }}</label>
+                          <label><b>No. Telefono: </b>{{ item.telefono }}</label>
+                          <label><b>Ocupaciòn: </b>{{ item.ocup }}</label>
+                          <label><b>Etnia: </b>{{ item.etni }}</label>
+                          <label><b>Idioma: </b>{{ item.idiome }}</label>
+                          <label><b>Municipio: </b>{{ item.muni }}</label>
+                          <label><b>Gènero: </b>{{ item.gen }}</label>
+                          <label><b>Ultimo grado: </b>{{ item.estudios_anteriores }}</label>
+                          <label><b>Tutor: </b>{{ item.tutor }}</label>
+                          <div class="text-lg fw-bold">
+                            {% if item.estado_alumno is True %}
+                              <span class="badge bg-green-soft text-green">Activo </span>
+                            {% else %}
+                              <span class="badge bg-red-soft text-red">Inactivo</span>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                  {%if tutor%}
+                  
+                    <div class="col-lg-6 col-xl-4 mb-4">
+                      <div class="card">
+                          <div class="card-header">
+                            <h2 class="text-primary">Tutor</h2>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <img class="card-img-top" src="{{tutor.foto_url|default_if_none:'ceipa/default.png'}}">
+                          <div class="card-body">
+                              <div class="card-header">
+                                  {{ tutor.nombres_tutor }} {{ tutor.apellidos_tutor }}
+                              </div>
+                            <label><b>ID: </b>{{ tutor.id }}</label>
+                            <br/>
+                            <label><b>Parentesco: </b>{{ tutor.parentesco }}</label>
+                            <label><b>CUI: </b>{{ tutor.DPI }}</label>
+                            <label><b>Fecha de nacimiento: </b>{{ tutor.fecha_nacimiento|date:"d M, Y" }}</label>
+                            <label><b>direcciòn: </b>{{ tutor.direccion_tutor }}</label>
+                            <label><b>Municipio: </b>{{ tutor.muni }}</label>
+                            <label><b>Gènero: </b>{{ tutor.genero }}</label>
+
+                            <div class="text-lg fw-bold">
+                              {% if tutor.estado_tutor is True %}
+                                <span class="badge bg-green-soft text-green">Activo </span>
+                              {% else %}
+                                <span class="badge bg-red-soft text-red">Inactivo</span>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    
+                    
+                    {%endif%}
+                    
+                    {%if estudiosAnt%}
+                  
+                    <div class="col-lg-6 col-xl-4 mb-4">
+                      <div class="card">
+                          <div class="card-header">
+                            <h2 class="text-primary">Estudios Anteriores</h2>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-body">
+                              <div class="card-header">
+                                  {{ estudiosAnt.grado }}
+                              </div>
+                            <label><b>ID: </b>{{ estudiosAnt.id }}</label>
+                            <br/>
+                            <label><b>Grado: </b>{{ estudiosAnt.grado }}</label>
+                            <label><b>Telefono: </b>{{ estudiosAnt.telefono }}</label>
+
+                            <div class="text-lg fw-bold">
+                              {% if estudiosAnt.repitente is True %}
+                                <span class="badge bg-green-soft text-green">Repitente </span>
+                              {% else %}
+                                <span class="badge bg-red-soft text-red">No repitente</span>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    
+                    
+                    {%endif%}
+
+                    {%if relig%}
+                    
+                        <div class="col-lg-6 col-xl-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="text-primary">religion Alumno</h2>
+                            </div>
+                            </div>
+                            <div class="card">
+                            <div class="card-body">
+                                <div class="card-header">
+                                    {{ relig.religion }}
+                                </div>
+                                <label><b>ID: </b>{{ relig.id }}</label>
+                                <br/>
+                                <label><b>nombre: </b>{{ relig.nombre_iglesia  }}</label>
+
+                                <div class="text-lg fw-bold">
+                                {% if relig.estado_religionalumno  is True %}
+                                    <span class="badge bg-green-soft text-green">Activo </span>
+                                {% else %}
+                                    <span class="badge bg-red-soft text-red">Inactivo</span>
+                                {% endif %}
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        
+                    {%endif%}
+
+                    {%if psic%}
+                    
+                        <div class="col-lg-6 col-xl-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="text-primary">Analisis psicológico</h2>
+                            </div>
+                            </div>
+                            <div class="card">
+                            <div class="card-body">
+                                <div class="card-header">
+                                    {{ psic.Analisis_psicologico }}
+                                </div>
+                                <label><b>ID: </b>{{ psic.id }}</label>
+                                <br/>
+                                <label><b>Tratameinto: </b>{{ psic.tratamiento  }}</label>
+                                <label><b>Fecha de analisis: </b>{{ psic.fecha_Analisis|date:"d, M, Y" }}</label>
+                                <label><b>Entrevistador: </b>{{ psic.Entrevistador  }}</label>
+                                <div class="text-lg fw-bold">
+                                {% if psic.estado_psicologico%}
+                                    <span class="badge bg-green-soft text-green">Activo </span>
+                                {% else %}
+                                    <span class="badge bg-red-soft text-red">Inactivo</span>
+                                {% endif %}
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                      
+                    {%endif%}
+
+                    {%if viv%}
+                    
+                        <div class="col-lg-6 col-xl-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="text-primary">vivienda</h2>
+                            </div>
+                            </div>
+                            <div class="card">
+                            <div class="card-body">
+                                <div class="card-header">
+                                    Personas: {{ viv.cantidad_personas }}
+                                </div>
+                                <label><b>ID: </b>{{ viv.id }}</label>
+                                <br/>
+                                <label><b>habitaciones: </b>{{ viv.cantidad_ambientes  }}</label>
+                                <label><b>techo: </b>{{ viv.techo  }}</label>
+                                <label><b>categoria: </b>{{ viv.categoria  }}</label>
+                                <label><b>piso: </b>{{ viv.piso  }}</label>
+                                <label><b>muro: </b>{{ viv.muro  }}</label>
+                                <label><b>servicio: </b>{{ viv.servicio  }}</label>
+                                <label><b>Entrevistador: </b>{{ psic.Entrevistador  }}</label>
+                                <div class="text-lg fw-bold">
+                                    {% if viv.energia_electrica%}
+                                        <span class="badge bg-green-soft text-green">Con energía electrica </span>
+                                    {% else %}
+                                        <span class="badge bg-red-soft text-red">sin energía electrica</span>
+                                    {% endif %}
+                                </div>
+                                <div class="text-lg fw-bold">
+                                    {% if viv.servicio_sanitario%}
+                                        <span class="badge bg-green-soft text-green">Con servicio sanitario </span>
+                                    {% else %}
+                                        <span class="badge bg-red-soft text-red">sin servicio sanitario</span>
+                                    {% endif %}
+                                </div>
+                                <div class="text-lg fw-bold">
+                                    {% if viv.estado_vivienda%}
+                                        <span class="badge bg-green-soft text-green">activo </span>
+                                    {% else %}
+                                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                  </div>
+                    {%endif%}
+      </div>
+
+      <div class="card card-header-actions">
+        <div class="card-header">
+            Convivientes
+        </div>
+        <div class="card mb-4">
+        <div class="card-body">
+            {% if not conviv %}
+            <div class="alert alert-info">No hay convivientes</div>
+            {% else %}
+            <table id="datatablesSimple">
+                <thead>
+                    <th>Id</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>fecha de nacimiento</th>
+                    <th>Vivienda</th>
+                    <th>Parentesco</th>
+                    <th>Estado</th>
+                </thead>
+                <tbody>
+                    {% for item in conviv %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.nombres_conviviente }}</td>
+                        <td>{{ item.apellidos_conviviente }}</td>
+                        <td>{{ item.fecha_nacimiento }}</td>
+                        <td>{{ item.vivienda }}</td>
+                        <td>{{ item.parentesco }}</td>
+                        <td>{{ item.estado_conviviente|yesno:"Activo,Inactivo" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+      </div>
+      </div>
+
+      <div class="card card-header-actions">
+        <div class="card-header">
+            Padecimientos
+        </div>
+        <div class="card mb-4">
+        <div class="card-body">
+            {% if not padec %}
+            <div class="alert alert-info">No hay padecimientos</div>
+            {% else %}
+            <table id="datatablesSimple1">
+                <thead>
+                    <th>Id</th>
+                    <th>Alumno</th>
+                    <th>Padecimiento</th>
+                    <th>tratamiento</th>
+                    <th>Estado</th>
+                </thead>
+                <tbody>
+                    {% for item in padec %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.alumno }} {{ item.alumno.apellidos_alumno }}</td>
+                        <td>{{ item.padecimiento }}</td>
+                        <td>{{ item.tratamiento }}</td>
+                        <td>
+                          {% if item.estado_Alpadecimiento is True %}
+                            <span class="badge bg-green-soft text-green">Activo </span>
+                          {% else %}
+                            <span class="badge bg-red-soft text-red">Inactivo</span>
+                          {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+      </div>
+      </div>
+
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+
+</script>
+<script >
+  function eliminar(id){
+  swal.fire({
+    "titulo":"Esta seguro",
+    "text":"esta accion no se puede deshacer",
+    "icon":"question",
+    "showCancelButton":true
+  })
+  }
+</script>
+{% endblock%}

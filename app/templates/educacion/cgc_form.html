@@ -20,18 +20,15 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col-15">
-                              <div class="input-group">
-                                  {{ form.maestro }}
-                              </div>
-                              <div class="input-group">
-                                 {{ form.curso }}
-                             </div>
-                              <div class="input-group">
-                                 {{ form.seccion }}
-                             </div>
-                             <div class="input-group">
-                                {{ form.ciclo_grado }}
-                            </div>
+                                <div id="div_id_grado_ciclo" class="form-group">
+                                    <label for="id_grado_ciclo" class="requiredField">
+                                        Grado ciclo
+                                    </label>
+                                    <div class>
+                                        <input type="text" name="ciclo_grado" class="form-control" value="{{obj_grado_ciclo.grado.nombre_grado}}-{{obj_grado_ciclo.seccion.nombre_seccion}}-{{obj_grado_ciclo.ciclo.anio}}" id="id_grado_ciclo" disabled>
+                                    </div>
+                                </div>
+                              {{form | crispy}}
                             </div>
                             <div class="col-3">
                                 <div class="form-group">

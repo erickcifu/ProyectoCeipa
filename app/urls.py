@@ -1,4 +1,5 @@
 from django.urls import path, include
+from app.viewsets.educacionViewset.Reportes import ReportesAlumnos
 from rest_framework.authtoken.views import obtain_auth_token
 from django.conf.urls import  url
 from app import viewsets
@@ -55,6 +56,14 @@ urlpatterns = [
     path('Padecimiento/edit/<int:pk>', viewsets.PadEdit.as_view(), name='pad_edit'),
     path('Padecimiento/delete/<int:pk>', viewsets.PadDel.as_view(), name='pad_del'),
 
+    #pruba alumno
+    path('prueba/alumno/edit/<int:pk>', viewsets.AlumnoDetailAndCreate.as_view(), name='prueba_alumno'),
+    path('prueba/alumno/convivientes/vivienda/<int:pk>/', viewsets.AlumnoEditViviendaConvivientes.as_view(), name='alumno_list_convivientes'),
+
+    #prueba ciclos
+    path('prueba/ciclos/', viewsets.CiclosForCreateGradeandCourseView.as_view(), name='prueba_ciclos'),
+
+
     path('AlumnoPadecimiento/', viewsets.APadView.as_view(), name='apad_list'),
     path('AlumnoPadecimiento/new', viewsets.APadNew.as_view(), name='apad_new'),
     path('AlumnoPadecimiento/edit/<int:pk>', viewsets.APadEdit.as_view(), name='apad_edit'),
@@ -81,6 +90,7 @@ urlpatterns = [
     path('genero/delete/<int:pk>', viewsets.GeneroDel.as_view(), name='genero_del'),
 
     path('grados/', viewsets.GradosView.as_view(), name='grados_list'),
+    path('grados/por_centro_educacion/', viewsets.ListarGradosPorCentroEducacion.as_view(), name='grados_por_centro_educacion'),
     path('grados/new', viewsets.GradosNew.as_view(), name='grados_new'),
     path('grados/edit/<int:pk>', viewsets.GradosEdit.as_view(), name='grados_edit'),
     path('grados/delete/<int:pk>', viewsets.GradosDel.as_view(), name='grados_del'),
@@ -91,6 +101,7 @@ urlpatterns = [
     path('idioma/delete/<int:pk>', viewsets.IdiomaDel.as_view(), name='idioma_del'),
 
     path('personal/', viewsets.PersonalView.as_view(), name='personal_list'),
+    path('personal/por_centro_educativo', viewsets.ListarPersonalEducativoPorCentroEducativo.as_view(), name='listado_personal_por_centro_educativo'),
     path('personal/new', viewsets.PersonalNew.as_view(), name='personal_new'),
     path('personal/edit/<int:pk>', viewsets.PersonalEdit.as_view(), name='personal_edit'),
     path('personal/delete/<int:pk>', viewsets.PersonalDel.as_view(), name='personal_del'),
@@ -146,11 +157,14 @@ urlpatterns = [
     path('tutor/delete/<int:pk>', viewsets.TutorDel.as_view(), name='tutor_del'),
 
     path('alumno/', viewsets.AlumnoView.as_view(), name='alumno_list'),
+    path('alumno/list/centro_educativo', viewsets.ListarAlumnosPorCentroEducativo.as_view(), name='alumno_list_por_centro_educativo'),
     path('alumno/new', viewsets.AlumnoNew.as_view(), name='alumno_new'),
     path('alumno/edit/<int:pk>', viewsets.AlumnoEdit.as_view(), name='alumno_edit'),
+    path('alumno/detail/<int:pk>/', viewsets.AlumnoDetail.as_view(), name='alumno_detail'),
     path('alumno/delete/<int:pk>', viewsets.AlumnoDel.as_view(), name='alumno_del'),
 
     path('CentrtoPersona/', viewsets.CentPerView.as_view(), name='centper_list'),
+    path('CentrtoPersona/new/por_centro_educativo/<int:pk>', viewsets.AsignarPersonalEducativoCentroPersona.as_view(), name='centro_persona_por_centro_educativo'),
     path('CentrtoPersona/new', viewsets.CentPerNew.as_view(), name='centper_new'),
     path('CentrtoPersona/edit/<int:pk>', viewsets.CentPerEdit.as_view(), name='centper_edit'),
     path('CentrtoPersona/delete/<int:pk>', viewsets.CentPerDel.as_view(), name='centper_del'),
@@ -161,17 +175,25 @@ urlpatterns = [
     path('EstudiosAnteriores/delete/<int:pk>', viewsets.EstAntDel.as_view(), name='estant_del'),
 
     path('CicloGrado/', viewsets.CGView.as_view(), name='cg_list'),
-    path('CicloGrado/new', viewsets.CGNew.as_view(), name='cg_new'),
+    path('CicloGrado/inscripcion_alumno/<int:id_centro_educativo>', viewsets.ListarGradosParaInscribirAlumnos.as_view(), name='cg_list_para_inscribir_alumnos'),
+    path('CicloGrado/new/', viewsets.CGNew.as_view(), name='cg_new'),
+    path('CicloGrado/new/<int:pk>', viewsets.CGNew.as_view(), name='cg_new'),
     path('CicloGrado/edit/<int:pk>', viewsets.CGEdit.as_view(), name='cg_edit'),
     path('CicloGrado/delete/<int:pk>', viewsets.CGDel.as_view(), name='cg_del'),
 
     path('CicloGradoCurso/', viewsets.CGCView.as_view(), name='cgc_list'),
+    path('CicloGradoCurso/<int:id_grado>/<int:id_centro_educativo>', viewsets.Listar_Por_Centro_educativo_y_Por_Grado.as_view(), name='listar_Por_Centro_educativo_y_Por_Grado'),
+    path('CicloGradoCurso/por_personal_centro_educativo/<int:id_maestro>/<int:id_centro_educativo>', viewsets.Listar_cursos_y_Grados_Por_Personal_y_Centro_Educativo.as_view(), name='listar_curso_y_grado_por_centro_educativo_y_personal'),
     path('CicloGradoCurso/new', viewsets.CGCNew.as_view(), name='cgc_new'),
+    path('CicloGradoCurso/new/<int:pk>', viewsets.CGCNew.as_view(), name='cgc_new'),
+    path('CicloGradoCurso/por_personal_educativo/new/<int:pk>', viewsets.Agregar_cursos_por_personal.as_view(), name='agregar_cursos_por_maestro'),
     path('CicloGradoCurso/edit/<int:pk>', viewsets.CGCEdit.as_view(), name='cgc_edit'),
     path('CicloGradoCurso/delete/<int:pk>', viewsets.CGCDel.as_view(), name='cgc_del'),
+    path('cursos/alumnos/<int:pk>', viewsets.CGDelAlumno.as_view(), name='cursos_alumnos'),
 
     path('inscripsion/', viewsets.InsView.as_view(), name='ins_list'),
     path('inscripsion/new', viewsets.InsNew.as_view(), name='ins_new'),
+    path('inscripsion/centro_educativo/grado/<int:id_centro_educativo>/<int:id_grado>', viewsets.InscribirAlumnos.as_view(), name='inscripcion_centro_educativo_grado'),
     path('inscripsion/edit/<int:pk>', viewsets.InsEdit.as_view(), name='ins_edit'),
     path('inscripsion/delete/<int:pk>', viewsets.InsDel.as_view(), name='ins_del'),
 
@@ -179,6 +201,8 @@ urlpatterns = [
     path('Vivienda/new', viewsets.VivNew.as_view(), name='viv_new'),
     path('Vivienda/edit/<int:pk>', viewsets.VivEdit.as_view(), name='viv_edit'),
     path('Vivienda/delete/<int:pk>', viewsets.VivDel.as_view(), name='viv_del'),
+
+    path('reportes/alumnos/', viewsets.ReportesAlumnos.as_view(), name='reportes_alumnos'),
     #Municipalizacion
 
     path('area/', viewsets.AreaView.as_view(), name='area_list'),

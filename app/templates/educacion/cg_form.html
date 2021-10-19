@@ -19,6 +19,22 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
+                            <label for="ciclo">ciclo</label>
+                            <select name="ciclo" id="ciclo" class="form-control" {%if id_ciclo%}disabled{%endif%}>
+                                <option value selected>---------</option>
+                                {%if ciclos%}
+                                  {%for ciclo in ciclos%}
+                                    {%if id_ciclo == ciclo.id%}
+                                        <option value="{{ciclo.id}}" selected>{{ciclo.anio}}</option>
+                                    {%else%}
+                                    <option value="{{ciclo.id}}">{{ciclo.anio}}</option>
+
+                                    {%endif%}
+                                    
+                                  {%endfor%}
+                                {%endif%}
+                            </select>
+                              
                             {{ form | crispy }}
                         </div>
                         <div class="dropdown-divider"></div>
