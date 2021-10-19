@@ -7,7 +7,7 @@ class AlumnoForm(forms.ModelForm):
     estado_alumno = forms.BooleanField()
     class Meta:
         model = Alumno
-        fields = ['nombres_alumno', 'apellidos_alumno', 'cui', 'codigo_mineduc', 'fecha_nacimiento', 'muni', 'ingreso_familiar', 'direccion_alumno', 'telefono', 'fotografia', 'ocup', 'gen', 'etni', 'idiome',  'estado_alumno']
+        fields = ['nombres_alumno', 'apellidos_alumno', 'cui','edad', 'codigo_mineduc', 'fecha_nacimiento', 'muni', 'ingreso_familiar', 'direccion_alumno', 'telefono', 'fotografia', 'ocup', 'gen', 'etni', 'idiome',  'estado_alumno']
         labels = {'nombres_alumno':'Nombres',
             'apellidos_alumno':'Apellidos',
             'cui':"CUI",
@@ -22,7 +22,8 @@ class AlumnoForm(forms.ModelForm):
             'idiome':"Idioma que habla",
             'gen':'Genero',
             'muni':'Municipio',
-            'estado_alumno':'Estado'
+            'estado_alumno':'Estado',
+            'edad':'Edad'
         }
 
         widget = {'nombres_alumno', forms.TextInput,

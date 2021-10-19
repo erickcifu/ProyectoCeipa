@@ -1,0 +1,108 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            {%if id_centro_educativo%}
+                <h2>personal del {{id_centro_educativo.nombre_centro}}</h2>
+              {%else%}
+                <h2>Personal Educativo</h2>
+            {%endif%}
+
+            
+            {%if id_centro_educativo%}
+                <form method="GET" class="form-inline">
+                  <select name="id_centro_educativo" id="id_centro_educativo">
+                    {%if centros_educativos%}
+                      {%for centro in centros_educativos%}
+                          {%if id_centro_educativo.id == centro.id%}
+                            <option value="{{centro.id}}" selected>{{centro.nombre_centro}}</option>
+                          {%else%}
+                            <option value="{{centro.id}}">{{centro.nombre_centro}}</option>
+                          {%endif%}
+                      {%endfor%}
+                    {%endif%}
+                  </select>
+                  <button type="submit" class="btn btn-success"> buscar </button>
+              </form>
+            {%else%}
+                <form method="GET" class="form-inline">
+                    <select name="id_centro_educativo" id="id_centro_educativo">
+                    {%if centros_educativos%}
+                        {%for centro in centros_educativos%}
+                            <option value="{{centro.id}}">{{centro.nombre_centro}}</option>
+                        {%endfor%}
+                    {%endif%}
+                    </select>
+                    <button type="submit" class="btn btn-success"> buscar </button>
+                </form>
+            {%endif%}
+
+        </div>
+        <div class="card-header">
+          {%if id_centro_educativo%}
+              <a href="{%url 'educacion:centro_persona_por_centro_educativo' id_centro_educativo.id %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar personal educativo</a>
+            {%else%}
+          {%endif%}
+          <a href="{%url 'educacion:personal_new'%}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Nuevo personal</a>
+          <a href="{%url 'educacion:centedu_new'%}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Nuevo centro educativo</a>
+
+      </div>
+        <div class="card-body">
+            {% if not obj %}
+            <div class="alert alert-info">No hay datos</div>
+            {% else %}
+            <table id="datatablesSimple">
+                <thead>
+                    <th>Id</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>telefono_personal</th>
+                    <th>Correo</th>
+                    <th>fecha de nacimiento</th>
+                    <th>Direccion</th>
+                    <th>Estado</th>
+                    <th class="all">ver Grados</th>
+                </thead>
+                <tbody>
+                    {% for item in obj %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.nombres }}</td>
+                        <td>{{ item.apellidos }}</td>
+                        <td>{{ item.telefono_personal }}</td>
+                        <td>{{ item.email_personal }}</td>
+                        <td>{{ item.fechaNac_personal|date:"d, M, Y" }}</td>
+                        <td>{{ item.direccion_personal }}</td>
+                        
+                        {% if item.estado_personal is True %}
+                        <td>
+                          <span class="badge bg-green-soft text-green">Activo</span>
+                        </td>
+                        {% else %}
+                        <td>
+                          <span class="badge bg-red-soft text-red">Inactivo</span>
+                        </td>
+                        {% endif %}
+                        {%if id_centro_educativo%}
+                        <td>
+                          <a href="{% url 'educacion:listar_curso_y_grado_por_centro_educativo_y_personal' item.id id_centro_educativo.id%}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                        </td>
+                        {%endif%}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}

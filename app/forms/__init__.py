@@ -23,15 +23,15 @@ from .educacionForms.techoForm import TechoForm
 from .educacionForms.paredForm import ParedForm
 from .educacionForms.etniaForm import EtniaForm
 from .educacionForms.serviaguaForm import ServiaguaForm
-from .educacionForms.convivienteForm import ConvivienteForm
+from .educacionForms.convivienteForm import ConvivienteForm, ConvivienteFormEdit
 from .educacionForms.tutorForm import TutorForm
 from .educacionForms.alumnoForm import AlumnoForm
-from .educacionForms.centroPerForm import CentPerForm
+from .educacionForms.centroPerForm import CentPerForm, CentPerPorCentroEducativoForm
 from .educacionForms.estantForm import EstAntForm
-from .educacionForms.cgForm import CGForm
-from .educacionForms.cgcForm import CGCForm
+from .educacionForms.cgForm import CGForm, CGFormCreate, CFCicloFormCreate
+from .educacionForms.cgcForm import CGCForm, CGCFormCreate, CGCFormCreateForPersonal
 from .educacionForms.insForm import InsForm
-from .educacionForms.viviendaForm import VivForm
+from .educacionForms.viviendaForm import VivForm, VivFormEdit
 #Municipalizacion
 from .muniForms.areaForm import AreaForm
 from .muniForms.cargrupForm import CarGForm

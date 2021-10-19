@@ -13,9 +13,9 @@ from .educacionViewset.homeViewset import Home
 from .educacionViewset.cicloViewset import CicloView, CicloNew, CicloEdit, CicloDel
 from .educacionViewset.cursoViewset import CursoView, CursoNew, CursoEdit, CursoDel
 from .educacionViewset.generoViewset import GeneroView, GeneroNew, GeneroEdit, GeneroDel
-from .educacionViewset.gradosViewset import GradosView, GradosNew, GradosEdit, GradosDel
+from .educacionViewset.gradosViewset import GradosView, GradosNew, GradosEdit, GradosDel, ListarGradosPorCentroEducacion
 from .educacionViewset.idiomaViewset import IdiomaView, IdiomaNew, IdiomaEdit, IdiomaDel
-from .educacionViewset.personalViewset import PersonalView, PersonalNew, PersonalEdit, PersonalDel
+from .educacionViewset.personalViewset import PersonalView, PersonalNew, PersonalEdit, PersonalDel, ListarPersonalEducativoPorCentroEducativo
 from .educacionViewset.religionViewset import ReligionView, ReligionNew, ReligionEdit, ReligionDel
 from .educacionViewset.tareaViewset import TareaView, TareaNew, TareaEdit, TareaDel
 from .educacionViewset.gradoViewset import GradoView, GradoNew, GradoEdit, GradoDel
@@ -26,14 +26,27 @@ from .educacionViewset.etniaViewset import EtniaView, EtniaNew, EtniaEdit, Etnia
 from .educacionViewset.serviaguaViewset import ServiaguaView, ServiaguaNew, ServiaguaEdit, ServiaguaDel
 from .educacionViewset.convivienteViewset import ConvivienteView, ConvivienteNew, ConvivienteEdit, ConvivienteDel
 from .educacionViewset.tutorViewset import TutorView, TutorNew, TutorEdit, TutorDel
-from .educacionViewset.alumnoViewset import AlumnoView, AlumnoNew, AlumnoEdit, AlumnoDel
-from .educacionViewset.centperViewset import CentPerView, CentPerNew, CentPerEdit, CentPerDel
+from .educacionViewset.alumnoViewset import (AlumnoView, AlumnoNew, AlumnoEdit, AlumnoDel,
+                                    AlumnoDetail, AlumnoDetailAndCreate,
+                                    AlumnoEditViviendaConvivientes
+                                    )
+from .educacionViewset.centperViewset import CentPerView, CentPerNew, CentPerEdit, CentPerDel, AsignarPersonalEducativoCentroPersona
 from .educacionViewset.estantViewset import EstAntView, EstAntNew, EstAntEdit, EstAntDel
-from .educacionViewset.cgViewset import CGView, CGNew, CGEdit, CGDel
-from .educacionViewset.cgcViewset import CGCView, CGCNew, CGCEdit, CGCDel
-from .educacionViewset.insViewset import InsView, InsNew, InsEdit, InsDel
+from .educacionViewset.cgViewset import CGView, CGNew, CGEdit, CGDel, CiclosForCreateGradeandCourseView
+from .educacionViewset.cgcViewset import (CGCView, CGCNew, CGCEdit, CGCDel,
+                                    Listar_Por_Centro_educativo_y_Por_Grado,
+                                    Listar_cursos_y_Grados_Por_Personal_y_Centro_Educativo,
+                                    Agregar_cursos_por_personal,
+                                    CGDelAlumno)
+from .educacionViewset.insViewset import (InsView, InsNew, InsEdit, InsDel,
+                                ListarAlumnosPorCentroEducativo,
+                                ListarGradosParaInscribirAlumnos,
+                                InscribirAlumnos)
 from .educacionViewset.viviendaViewset import VivView, VivNew, VivEdit, VivDel
 from .educacionViewset.educacionViewset import HomeEducacion
+from .educacionViewset.Reportes import (AlumnosPorEdad, AlumnosPorOcupacion, CantidadAlumnosPorCentro,
+                                        CantidadAlumnosPorGenero, ReportesAlumnos)
+
 #Municipalizacion
 from .MunicViewset.municipalizacionViewset import HomeMunicipalizacion
 from .MunicViewset.areaViewset import AreaView, AreaNew, AreaEdit, AreaDel

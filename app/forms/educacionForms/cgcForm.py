@@ -17,3 +17,35 @@ class CGCForm(forms.ModelForm):
                 self.fields['maestro'].empty_label = "Seleccione un maestro"
                 self.fields['curso'].empty_label = "Seleccione un curso"
                 self.fields['ciclo_grado'].empty_label = "Seleccione un Ciclo Grado"
+
+class CGCFormCreate(forms.ModelForm):
+    class Meta:
+        model = Ciclo_grado_curso
+        fields = ['maestro', 'curso','estado_cgc']
+        labels = {'maestro':'Maestro','ciclo_grado':'CicloG', 'curso':'Curso', 'estado_cgc':'Estado'}
+        widget = {'maestro', forms.TextInput}
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for field in iter(self.fields):
+                self.fields[field].widget.attrs.update({
+                    'class':'form-control'
+                })
+                self.fields['maestro'].empty_label = "Seleccione un maestro"
+                self.fields['curso'].empty_label = "Seleccione un curso"
+                self.fields['ciclo_grado'].empty_label = "Seleccione un Ciclo Grado"
+
+class CGCFormCreateForPersonal(forms.ModelForm):
+    class Meta:
+        model = Ciclo_grado_curso
+        fields = ['curso','estado_cgc']
+        labels = {'ciclo_grado':'CicloG', 'curso':'Curso', 'estado_cgc':'Estado'}
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for field in iter(self.fields):
+                self.fields[field].widget.attrs.update({
+                    'class':'form-control'
+                })
+                self.fields['curso'].empty_label = "Seleccione un curso"
+                self.fields['ciclo_grado'].empty_label = "Seleccione un Ciclo Grado"

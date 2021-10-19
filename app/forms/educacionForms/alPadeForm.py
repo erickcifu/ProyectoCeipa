@@ -1,8 +1,9 @@
 from django import forms
-from app.models import Apadecimiento
+from app.models import Apadecimiento,Padecimiento
 
 
 class APadeForm(forms.ModelForm):
+    #padecimiento = forms.ModelMultipleChoiceField(queryset=Padecimiento.objects.all())
     class Meta:
         model = Apadecimiento
         fields = ['padecimiento','tratamiento', 'estado_Alpadecimiento']

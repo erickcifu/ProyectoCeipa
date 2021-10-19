@@ -1,0 +1,70 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+{% load crispy_forms_tags %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-6 col-md-6 mb-6">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            agregar un curso al maestro <b>{{maestro.nombres}} {{maestro.nombres}}</b>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col-15">
+                                <div id="div_id_maestro" class="form-group">
+                                    <label for="id_maestro" class="requiredField">
+                                        Meastro
+                                    </label>
+                                    <div class>
+                                        <input type="text" name="maestro" class="form-control" value="{{maestro.nombres}} {{maestro.apellidos}}" id="id_grado_ciclo" disabled>
+                                    </div>
+                                </div>
+                                <div id="div_id_grado_ciclo" class="form-group">
+                                    <label for="id_grado_ciclo" id=" requiredField">grado, ciclo y seccion</label>
+                                    <select name="ciclo_grado" id="id_grado_ciclo" class="form-control select form-control" {%if id_ciclo%}disabled{%endif%}>
+                                        <option value selected>---------</option>
+                                        {%if grado_ciclo%}
+                                          {%for g in grado_ciclo%}
+                                            <option value="{{g.id}}">{{g.grado.nombre_grado}} {{g.seccion.nombre_seccion}} {{g.ciclo.anio}}</option>
+                                          {%endfor%}
+                                        {%endif%}
+                                    </select>
+                                </div>
+                                {{form | crispy}}
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="id_estado_cgc">Estado</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="estado_cgc" class="form-control" id="id_estado_cgc" type="checkbox"  {% if obj.estado_cgc %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- {{form.as_p}} -->
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'educacion:cgc_list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}

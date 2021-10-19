@@ -5,7 +5,13 @@
     <div class="card card-header-actions">
       <div class="card-header">
             Ciclo grado curso
-            <a href="{% url 'educacion:cgc_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+            {%if id_grado_ciclo%}
+                <a href="{% url 'educacion:cgc_new' id_grado_ciclo %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+
+            {%else%}
+                <a href="{% url 'educacion:cgc_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+
+            {%endif%}
       </div>
       <div class="card-body">
           {% if not obj %}

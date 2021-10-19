@@ -1,0 +1,99 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            {%if id_centro_educativo%}
+                <h2>Grados del {{id_centro_educativo.nombre_centro}}</h2>
+              {%else%}
+                <h2>Ciclo Escolar</h2>
+
+            {%endif%}
+
+            {%if id_centro_educativo%}
+                <form method="GET" class="form-inline">
+                  <select name="id_centro_educativo" id="id_centro_educativo">
+                    {%if centros_educativos%}
+                      {%for centro in centros_educativos%}
+                          {%if id_centro_educativo.id == centro.id%}
+                            <option value="{{centro.id}}" selected>{{centro.nombre_centro}}</option>
+                          {%else%}
+                            <option value="{{centro.id}}">{{centro.nombre_centro}}</option>
+                          {%endif%}
+                      {%endfor%}
+                    {%endif%}
+                  </select>
+                  <button type="submit" class="btn btn-success"> buscar </button>
+              </form>
+            {%else%}
+                <form method="GET" class="form-inline">
+                    <select name="id_centro_educativo" id="id_centro_educativo">
+                    {%if centros_educativos%}
+                        {%for centro in centros_educativos%}
+                            <option value="{{centro.id}}">{{centro.nombre_centro}}</option>
+                        {%endfor%}
+                    {%endif%}
+                    </select>
+                    <button type="submit" class="btn btn-success"> buscar </button>
+                </form>
+            {%endif%}
+
+        </div>
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos de Grados</div>
+          {% else %}
+          <div class="row">
+          {% for item in obj %}
+          <div class="col-lg-6 col-xl-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                  {%if id_centro_educativo%}
+                    <a class="text-primary stretched-link" href="{% url 'educacion:listar_Por_Centro_educativo_y_Por_Grado' item.id id_centro_educativo.id%}">{{ item.grado }} -> ver cursos</a>
+                    <div class="text-primary"><i class="fas fa-angle-right"></i></div>
+                  {%endif%}
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <label><b>Grado:</b> {{item.grado.nombre_grado}}</label>
+                  <br/>
+                  <label><b>Seccion:</b> {{item.seccion.nombre_seccion}}</label>
+                  <br/>
+                  <label><b>Ciclo:</b> {{item.ciclo.anio}}</label>
+
+                  <div class="text-lg fw-bold">
+                    {% if item.estado_cg is True %}
+                      <span class="badge bg-green-soft text-green">Activo </span>
+                    {% else %}
+                      <span class="badge bg-red-soft text-red">Inactivo</span>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <a href="{% url 'educacion:cg_edit' item.id %}" class="btn btn-outline-yellow" role="button">Editar</a>
+                  <a href="{% url 'educacion:cg_del' item.id %}" class="btn btn-outline-red" role="button">Eliminar</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+          {% endif %}
+          <div class="dropdown-divider"></div>
+          <div class="row">
+              <div class="col">
+                  <a href="{% url 'educacion:ciclo_list' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+              </div>
+          </div>
+      </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}

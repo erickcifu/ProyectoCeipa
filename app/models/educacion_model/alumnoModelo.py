@@ -1,4 +1,6 @@
 from django.db import models
+
+from app.models.educacion_model.padecimientoModel import Padecimiento
 from .ocupacion import ocupacion
 from .tutor import Tutor
 from .etnia import etnia
@@ -26,6 +28,7 @@ class Alumno(models.Model):
     direccion_alumno = models.CharField(max_length=80, null=True, blank=True)
     telefono = models.CharField(max_length=8, null=True, blank=True)
     fotografia = models.ImageField(upload_to='ceipa', blank=True, null=True)
+    edad = models.IntegerField(null=True, default=None, blank=True)
 
     @property
     def foto_url(self):
