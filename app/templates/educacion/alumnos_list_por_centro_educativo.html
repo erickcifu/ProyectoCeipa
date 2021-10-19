@@ -56,7 +56,7 @@
                     <th>Direccion</th>
                     <th>Estudios Ant</th>
                     <th>Estado</th>
-                    <th class="all">ver Grados</th>
+                    <th class="all">ver Grados</th>  
                 </thead>
                 <tbody>
                     {% for item in obj %}
@@ -65,7 +65,7 @@
                         <td>{{ item.nombres_alumno }}</td>
                         <td>{{ item.apellidos_alumno }}</td>
                         <td>{{ item.telefono }}</td>
-                        <td>{{ item.item.fecha_nacimiento|date:"d, M, Y" }}</td>
+                        <td>{{ item.fecha_nacimiento|date:"d, M, Y" }}</td>
                         <td>{{ item.direccion_alumno }}</td>
                         <td>{{ item.estudios_anteriores }}</td>
                         {% if item.estado_alumno is True %}
@@ -77,11 +77,12 @@
                           <span class="badge bg-red-soft text-red">Inactivo</span>
                         </td>
                         {% endif %}
-                        {%if id_centro_educativo%}
+                        {% if id_centro_educativo %}
                         <td>
                           <a href="{% url 'educacion:cursos_alumnos' item.id%}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
                         </td>
-                        {%endif%}
+                        {% endif %}
+                      
                     </tr>
                     {% endfor %}
                 </tbody>

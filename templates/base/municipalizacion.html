@@ -89,15 +89,8 @@
                             </a>
                             <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
                               <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="{% url 'municipalizacion:idiomaMuni_list' %}">Idioma</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:area_list' %}">Area</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:muni_list' %}">Municipio</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:depto_list' %}">Departamento</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:etniamuni_list' %}">Etnia</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:estmuni_list' %}">Estudios Anteriores</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:padmuni_list' %}">Padecimiento</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:generomuni_list' %}">Genero</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:ocupmuni_list' %}">Ocupación</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:municipio_list' %}">Municipio</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:carg_list' %}">Cargo Grupo</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:prof_list' %}">Profesion</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:disc_list' %}">Discapacidad</a>
@@ -105,26 +98,22 @@
                                     <a class="nav-link" href="{% url 'municipalizacion:com_list' %}">Comision</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:establecimiento_list' %}">Establecimientos</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:partidopolitic_list' %}">Partidos Politicos</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:Gorg_list' %}">Grupo Organizado</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:programas_list' %}">Programas CEIPA</a>
                                     </nav>
                                 </div>
 
                                 <div class="sidenav-menu-heading">Inscripción y asignación</div>
-                                <!--<a class="nav-link" href="{% url 'municipalizacion:idper_list' %}">Idioma Persona</a>
-                                <a class="nav-link" href="{% url 'municipalizacion:per_list' %}">Persona</a>-->
-                                <a class="nav-link" href="{% url 'municipalizacion:ben_list' %}">Beneficiados</a>
-                                <a class="nav-link" href="{% url 'municipalizacion:maes_list' %}">Maestros</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:idper_list' %}">Idioma Persona</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:per_list' %}">Persona</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:ben_list' %}">Beneficiado</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:maes_list' %}">Maestro</a>
                                 <a class="nav-link" href="{% url 'municipalizacion:ausbenefi_list' %}">Ausencia del beneficiado</a>
-                                <a class="nav-link" href="{% url 'municipalizacion:lidercomuni_list' %}">Lideres comunitarios</a>
-                                <a class="nav-link" href="{% url 'municipalizacion:mediocomu_list' %}">Medios de Comunicación</a>
-                                <a class="nav-link" href="{% url 'municipalizacion:comisionNA_list' %}">Comision NA</a>
-                                <!--<a class="nav-link" href="{% url 'municipalizacion:tutormuni_list' %}">Tutor</a>-->
-                                <!--<a class="nav-link" href="{% url 'municipalizacion:padper_list' %}">Padecimiento Persona</a>-->
+                                <a class="nav-link" href="{% url 'municipalizacion:lidercomuni_list' %}">Lider Comunitario</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:mediocomu_list' %}">Medio de Comunicación</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:tutormuni_list' %}">Tutor</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:padper_list' %}">Padecimiento Persona</a>
                                 <a class="nav-link" href="{% url 'municipalizacion:padfam_list' %}">Padres de Familia</a>
-                                <a class="nav-link" href="{% url 'municipalizacion:benefar_list' %}">Asignacion de beneficiados</a>
-                                <!--<a class="nav-link" href="{% url 'municipalizacion:aus_list' %}">Ausencia</a>-->
-                                <a class="nav-link" href="{% url 'municipalizacion:corpmuni_list' %}">Corporaciones Municipales</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:benefar_list' %}">Beneficiado Area</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:aus_list' %}">Ausencia</a>
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
                     {% block footer %}
