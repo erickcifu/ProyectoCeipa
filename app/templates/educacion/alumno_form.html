@@ -3,7 +3,7 @@
 {% block page_content %}
 {% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
-<form method="POST" class="form-inline">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
@@ -179,7 +179,7 @@
                                                   {%endfor%}
                                             </div>
                                             <br/>
-                                            
+
                                             <div class="d-flex justify-content-between">
                                               <button class="btn btn-primary" role="button" onclick="agregar_form_apadecimiento();">
                                                 nuevo form
@@ -270,7 +270,7 @@
       //funcion para agregar mas formularios para los padecimientos
       function agregar_form_apadecimiento(){
         const $total_forms = document.getElementById('id_apadecimientos-TOTAL_FORMS')
-        
+
         let $label_pad = document.createElement('label')
         $label_pad.innerHTML = 'AlumPad'
         let $input_padeci = document.querySelector('#id_apadecimientos-0-padecimiento').cloneNode(true)
@@ -301,10 +301,10 @@
         document.getElementById('formularios_padecimientos').appendChild($input_estado_pad)
 
         $total_forms.value = parseInt($total_forms.value) + 1
-        
+
       }
-      
-      
+
+
       //formatear los formularios si en caso se cambió el valor de los convivientes
       function agregar_forms_viviendas() {
         const $cantidad_de_personas = document.querySelector('#id_cantidad_personas')
@@ -318,11 +318,11 @@
               let $nombre_hijo = document.getElementById(`hijo_formulario_conviviente_${i}`)
               $nombre_hijo.remove()
             }
-            
+
             $total_forms_convivientes.value = 1
         }
 
-        //agregando la cantidad de formularios dependiendo de la cantidad de personas de la vivienda 
+        //agregando la cantidad de formularios dependiendo de la cantidad de personas de la vivienda
         for (let i = 1; i < $cantidad_de_personas.value; i++) {
             // nombre
           let $label_nombre = document.createElement('label')
@@ -338,7 +338,7 @@
           let $input_apellidos = document.querySelector('#id_convivientes-0-apellidos_conviviente').cloneNode(true)
           $input_apellidos.name = "convivientes-"+$total_forms_convivientes.value+"-apellidos_conviviente"
           $input_apellidos.id =  "id_convivientes-"+$total_forms_convivientes.value+"-apellidos_conviviente"
-          
+
           //fecha
           let $label_fecha = document.createElement('label')
           $label_fecha.innerHTML = 'fecha de nacimiento'
@@ -372,7 +372,7 @@
           $formualio_hijo.appendChild($label_estado)
           $formualio_hijo.appendChild($input_estado)
 
-          
+
           document.getElementById('formularios_convivientes').appendChild($formualio_hijo)
           $total_forms_convivientes.value = parseInt($total_forms_convivientes.value)+1
         }

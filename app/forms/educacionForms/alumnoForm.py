@@ -3,8 +3,25 @@ from app.models import Alumno, municipio, genero
 
 class AlumnoForm(forms.ModelForm):
 
-    fecha_nacimiento = forms.DateField()
-    estado_alumno = forms.BooleanField()
+    fecha_nacimiento = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        )
+    )
+    estado_alumno = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
+    edad = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'hidden':True,
+            }
+        ), required=False
+    )
     class Meta:
         model = Alumno
         fields = ['nombres_alumno', 'apellidos_alumno', 'cui','edad', 'codigo_mineduc', 'fecha_nacimiento', 'muni', 'ingreso_familiar', 'direccion_alumno', 'telefono', 'fotografia', 'ocup', 'gen', 'etni', 'idiome',  'estado_alumno']

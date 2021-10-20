@@ -2,6 +2,18 @@ from django import forms
 from app.models import personalEducativo
 
 class PersonalForm(forms.ModelForm):
+    fechaNac_personal = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        )
+    )
+    estado_personal = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = personalEducativo
         fields = ['nombres', 'apellidos', 'telefono_personal', 'email_personal', 'fechaNac_personal', 'direccion_personal', 'certificadoRenas_personal', 'estado_personal']
