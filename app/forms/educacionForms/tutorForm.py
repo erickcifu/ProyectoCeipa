@@ -10,6 +10,18 @@ class TutorForm(forms.ModelForm):
         queryset = Parentesco.objects.filter(estado_parentesco=True)
         .order_by('nombre_parentesco')
     )
+    fecha_nacimiento = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        )
+    )
+    estado_tutor = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = Tutor
         fields = ['nombres_tutor', 'apellidos_tutor', 'DPI', 'fecha_nacimiento', 'direccion_tutor', 'telefono', 'correo', 'fotografia', 'muni', 'genero', 'parentesco', 'estado_tutor']

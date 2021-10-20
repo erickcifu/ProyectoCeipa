@@ -3,6 +3,18 @@ from app.models import psicologico
 
 
 class PsicoForm(forms.ModelForm):
+    fecha_Analisis = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        )
+    )
+    estado_psicologico = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = psicologico
         fields = ['Analisis_psicologico', 'fecha_Analisis','tratamiento', 'Entrevistador','estado_psicologico']

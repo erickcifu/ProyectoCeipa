@@ -20,6 +20,9 @@ class vivienda(models.Model):
     estudiante = models.ForeignKey(Alumno, on_delete=models.CASCADE, related_name="estudiante_vivieda")
     estado_vivienda = models.BooleanField(default=True)
 
+    def __str__(self):
+        return str(self.estudiante)
+        
     def delete(self, *args):
         self.estado_vivienda = False
         self.save()

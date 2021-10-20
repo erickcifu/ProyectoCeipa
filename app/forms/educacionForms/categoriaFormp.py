@@ -3,6 +3,13 @@ from app.models import Categoria
 
 
 class CategoriaForm(forms.ModelForm):
+    estado_categoria = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = Categoria
         fields = ['nombre_categoria', 'estado_categoria']

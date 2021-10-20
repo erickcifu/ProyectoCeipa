@@ -7,6 +7,18 @@ class ConvivienteForm(forms.ModelForm):
         queryset = Parentesco.objects.filter(estado_parentesco=True)
         .order_by('nombre_parentesco')
     )
+    fecha_nacimiento = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        )
+    )
+    estado_conviviente = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = Conviviente
         fields = ['nombres_conviviente', 'apellidos_conviviente', 'fecha_nacimiento', 'parentesco', 'estado_conviviente']
@@ -27,6 +39,11 @@ class ConvivienteFormEdit(forms.ModelForm):
     parentesco = forms.ModelChoiceField(
         queryset = Parentesco.objects.filter(estado_parentesco=True)
         .order_by('nombre_parentesco')
+    )
+    fecha_nacimiento = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        )
     )
     class Meta:
         model = Conviviente
