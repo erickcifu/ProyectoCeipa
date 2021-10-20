@@ -68,8 +68,7 @@ class BenNew(LoginRequiredMixin, generic.CreateView):
         except IntegrityError:
             handle_exception()
 
-
-class  BenEdit(LoginRequiredMixin, generic.UpdateView):
+class BenEdit(LoginRequiredMixin, generic.UpdateView):
     template_name = "municipalizacion/beneficiado_form.html"
     success_url = reverse_lazy("municipalizacion:ben_list")
     context_object_name = "obj"
