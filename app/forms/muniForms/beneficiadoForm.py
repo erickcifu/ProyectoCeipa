@@ -12,8 +12,8 @@ class BenForm(forms.ModelForm):
     )
     class Meta:
         model = Beneficiado
-        fields = ['ocup', 'establecimiento', 'estado_beneficiado']
-        labels = {'ocup':'Ocupación','establecimiento':'Establecimiento donde estudia','estado_beneficiado':"Activo/Inactivo"}
+        fields = ['ocup','gen', 'establecimiento', 'estado_beneficiado']
+        labels = {'ocup':'Ocupación','gen':'genero','establecimiento':'Establecimiento donde estudia','estado_beneficiado':"Activo/Inactivo"}
         widget = {'estado_beneficiado': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

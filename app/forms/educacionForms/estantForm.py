@@ -2,6 +2,13 @@ from django import forms
 from app.models import EstudiosAnt
 
 class EstAntForm(forms.ModelForm):
+    estado_estudiosant = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = EstudiosAnt
         fields = ['grado','nombre_establecimiento', 'telefono','repitente','estado_estudiosant']

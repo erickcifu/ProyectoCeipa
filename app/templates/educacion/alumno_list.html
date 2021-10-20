@@ -25,9 +25,9 @@
               <tbody>
                   {% for item in obj %}
                   <tr>
-                      <td><a href="{% url 'educacion:alumno_detail' item.id  %}">{{ item.id }}</a></td>
+                      <td>{{ item.id }}</td>
                       <td>{{ item.codigo_mineduc }}</td>
-                      <td>{{ item.nombres_alumno }} {{ item.apellidos_alumno }}</td>
+                      <td><a href="{% url 'educacion:alumno_detail' item.id  %}">{{ item.nombres_alumno }} {{ item.apellidos_alumno }}</a></td>
                       <td>{{ item.fecha_nacimiento|date:"d M, Y"  }}</td>
                       <td>{{ item.tutor }}</td>
                       <td>{% if item.estado_alumno is True %}

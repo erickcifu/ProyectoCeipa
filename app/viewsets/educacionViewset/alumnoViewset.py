@@ -49,7 +49,7 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
         if 'form4' not in context:
             context['form4'] = self.four_form_class(self.request.GET)
         if 'form5' not in context:
-            
+
             context['form5'] = self.five_form_class(prefix = 'apadecimientos')
         if 'form6' not in context:
             context['form6'] = self.six_form_class(self.request.GET)
@@ -67,9 +67,9 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
         try:
             with transaction.atomic():
                 self.object = self.get_object
-                form = self.form_class(request.POST)
+                form = self.form_class(request.POST,request.FILES)
                 form2 = self.second_form_class(request.POST)
-                form3 = self.third_form_class(request.POST)
+                form3 = self.third_form_class(request.POST,request.FILES)
                 form4 = self.four_form_class(request.POST)
                 form5 = self.five_form_class(request.POST, prefix = 'apadecimientos')
                 form6 = self.six_form_class(request.POST)
@@ -141,9 +141,9 @@ class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
         religion_alumno = alumno.R_alumno.first()
         analisis_psicologico = alumno.A_alumno.first()
 
-        form = self.form_class(request.POST, instance = tutor)
+        form = self.form_class(request.POST, request.FILES, instance = tutor)
         form2 = self.second_form_class(request.POST, instance= estudios_anteriores)
-        form3 = self.third_form_class(request.POST, instance = alumno)
+        form3 = self.third_form_class(request.POST, request.FILES, instance = alumno)
         form4 = self.four_form_class(request.POST, instance = religion_alumno)
         form6 = self.six_form_class(request.POST, instance = analisis_psicologico)
 
@@ -174,14 +174,14 @@ class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
             formApa = formset_factory(APadeForm, extra=0)
             listadoApa = []
             apadecimientos = Apadecimiento.objects.filter(alumno=alumno)
-            
+
             for a in apadecimientos:
                 listadoApa.append({
                     'padecimiento':a.padecimiento.id,
                     'tratamiento':a.tratamiento,
                     'estado_Alpadecimiento':a.estado_Alpadecimiento
                 })
-            formSetApa = formApa(initial=listadoApa, prefix = 'apadecimientos') 
+            formSetApa = formApa(initial=listadoApa, prefix = 'apadecimientos')
         except:
             print('ocurró un error')
             return HttpResponseRedirect(self.success_url)
@@ -200,11 +200,11 @@ class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
             context['form6'] = self.six_form_class(instance = analisis_psicologico)
         if 'form7' not in context:
             context['form7'] = self.seven_form_class(instance = vivienda)
-        
+
         context['obj'] = ''
         context['alumno'] = self.get_object()
 
-        return render(request, self.template_name, context)   
+        return render(request, self.template_name, context)
 
 class AlumnoEditViviendaConvivientes(LoginRequiredMixin, generic.UpdateView):
     template_name = "prueba/alumnoEditViviendaConvivientes.html"
@@ -216,14 +216,14 @@ class AlumnoEditViviendaConvivientes(LoginRequiredMixin, generic.UpdateView):
     def get(self, request, *args, **kwargs):
         alumno = self.get_object()
         vivienda = alumno.estudiante_vivieda.first()
-        convivientes = Conviviente.objects.filter(vivienda=vivienda)  
+        convivientes = Conviviente.objects.filter(vivienda=vivienda)
         context = {}
         context['form_viv'] = self.form_viv(instance = vivienda)
         context['convivientes'] = convivientes
         context['alumno'] = self.get_object()
         context['convivientes_form'] = self.form_convivientes(prefix = 'convivientes')
 
-        return render(request, self.template_name, context)   
+        return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         alumno = self.get_object()
