@@ -24,8 +24,10 @@ class AlumnoForm(forms.ModelForm):
     )
     class Meta:
         model = Alumno
-        fields = ['nombres_alumno', 'apellidos_alumno', 'cui','edad', 'codigo_mineduc', 'fecha_nacimiento', 'muni', 'ingreso_familiar', 'direccion_alumno', 'telefono', 'fotografia', 'ocup', 'gen', 'etni', 'idiome',  'estado_alumno']
-        labels = {'nombres_alumno':'Nombres',
+        fields = ['ocup','nombres_alumno', 'apellidos_alumno', 'cui','edad', 'codigo_mineduc', 'fecha_nacimiento', 'muni', 'ingreso_familiar', 'direccion_alumno', 'telefono', 'fotografia', 'gen', 'etni', 'idiome',  'estado_alumno']
+        labels = {
+            'ocup':'Ocupacion',
+            'nombres_alumno':'Nombres',
             'apellidos_alumno':'Apellidos',
             'cui':"CUI",
             'codigo_mineduc':'Codigo Mineduc',
@@ -34,7 +36,6 @@ class AlumnoForm(forms.ModelForm):
             'direccion_alumno':"Direccion",
             'telefono':"Telefono",
             'fotografia':"Fotografia",
-            'ocup':"Ocupacion",
             'etni':"Etnia",
             'idiome':"Idioma que habla",
             'gen':'Genero',
@@ -52,8 +53,6 @@ class AlumnoForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-        #self.fields['municipio'].empty_label = "Seleccione municipio"
-        #self.fields['genero'].empty_label = "Seleccione Genero"
-        self.fields['ocup'].empty_label = "Seleccione ocupacion"
+        self.fields['ocup'].empty_label = "Seleccione ocupación"
         self.fields['etni'].empty_label = "Seleccione etnia"
-        self.fields['idiome'].empty_label = "Seleccione ocupacion"
+        self.fields['idiome'].empty_label = "Seleccione idioma"

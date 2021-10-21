@@ -1,17 +1,14 @@
 from django.db import models
 from .tutor_muni import TutorMuni
 from .persona import Persona
-from app.models.educacion_model.genero import genero
 from app.models.educacion_model.ocupacion import ocupacion
 from .establecimiento import Establecimiento
 
 class Beneficiado(models.Model):
     tutor = models.ForeignKey(TutorMuni, on_delete=models.CASCADE, related_name="B_tutor")
-    gen = models.ForeignKey(genero, on_delete=models.CASCADE, related_name="B_genero")
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name="B_persona")
     ocup = models.ForeignKey(ocupacion, on_delete=models.CASCADE, related_name="B_ocupacion")
     establecimiento = models.ForeignKey(Establecimiento, on_delete=models.CASCADE, related_name="B_establecimiento")
-
     estado_beneficiado = models.BooleanField(default=True)
 
     def __str__(self):

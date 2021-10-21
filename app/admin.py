@@ -61,6 +61,7 @@ from .models.municipalizacionModel.padresFamilia import PadresFamilia
 from .models.municipalizacionModel.corporacionMuni import CorporacionMunicipal
 from .models.municipalizacionModel.discapacidad import Discapacidad
 from .models.municipalizacionModel.gradoAcademico import GradoAcademico
+from .models.educacion_model.aspectosLaborales import AspectosLab
 
 admin.site.register(ocupacion)
 admin.site.register(religion)
@@ -124,3 +125,4 @@ admin.site.register(PadresFamilia)
 admin.site.register(CorporacionMunicipal)
 admin.site.register(Discapacidad)
 admin.site.register(GradoAcademico)
+admin.site.register(AspectosLab)

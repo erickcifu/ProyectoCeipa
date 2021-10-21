@@ -21,6 +21,7 @@ class ReportesAlumnos(LoginRequiredMixin, generic.ListView):
         context['ocupacion'] = ocupacion.objects.annotate(cantidad=Count('O_ocupacion__id'))
         context['alumnos_por_centro_educativo'] = centro_educativo.objects.annotate(cantidad = Count('C_educativo__alumno__id'))
         return context
+
 class CantidadAlumnosPorGenero(LoginRequiredMixin, generic.ListView):
     model = Alumno
     template_name = 'educacion/reportes/canditadAlumnosPorGenero.html'
@@ -44,7 +45,6 @@ class AlumnosPorOcupacion(LoginRequiredMixin, generic.ListView):
     model = ocupacion
     template_name = 'educacion/reportes/canditadAlumnosPorGenero.html'
     context_object_name = 'obj'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['ocupacion'] = self.model.objects.annotate(cantidad=Count('O_ocupacion__id'))

@@ -11,8 +11,8 @@ class EstAntForm(forms.ModelForm):
     )
     class Meta:
         model = EstudiosAnt
-        fields = ['grado','nombre_establecimiento', 'telefono','repitente','estado_estudiosant']
-        labels = {'nombre_establecimiento':"Establecimiento anterior", 'repitente':"Repitente",'estado_estudiosant':"Estado"}
+        fields = ['grado','nombre_establecimiento', 'telefono','repitente','apoyo_ong','nombre_ong','estado_estudiosant']
+        labels = {'nombre_establecimiento':"Establecimiento anterior", 'repitente':"Repitente",'apoyo_ong':'Recibe apoyo de alguna ONG', 'nombre_ong':'Nombre de la ONG','telefono':'Telefono de la organización','estado_estudiosant':"Estado"}
         widget = {'nombre_establecimiento': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

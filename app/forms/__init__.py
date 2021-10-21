@@ -58,3 +58,4 @@ from .muniForms.CorMuniForm import CorpMuniForm
 from .muniForms.GOrgForm import GOrgForm
 from .muniForms.ComisionNAForm import Comision_NAForm
 from .muniForms.programasForm import ProgramaCForm
+from .educacionForms.laboralForm import LaboralForm

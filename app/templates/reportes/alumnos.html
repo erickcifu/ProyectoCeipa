@@ -1,8 +1,9 @@
 {% extends 'base/base3.html' %}
 {% block page_content %}
+
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
-      <div class="card-header">     
+      <div class="card-header">
             Reportes de los alumno
         </div>
       <div class="card-body">
@@ -42,7 +43,7 @@
     {% endif %}
     </div>
 
-        {% if not ocupacion%}
+      <!--{% if not ocupacion%}
           <div class="alert alert-info">No hay datos de Grados</div>
           {% else %}
             <div class="row">
@@ -58,9 +59,9 @@
               </div>
             </div>
           {% endfor %}
-            
+
           {% endif %}
-         
+
         {% if not Alumnos_por_edad %}
           <div class="alert alert-info">No hay alumnos</div>
           {% else %}
@@ -72,7 +73,7 @@
                 </div>
             </div>
             {% for item in Alumnos_por_edad %}
-                
+
                 <div class="card">
                     <div class="card-body">
                     <label><b>Edad {{item.edad}}</b> {{item.cantidad}}</label>

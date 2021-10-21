@@ -37,8 +37,8 @@
                         {% endif %}
                       </td>
                       <td>
-                        <a href="{% url 'educacion:prueba_alumno' item.id %}" class="btn btn-outline-yellow" role="button">Editar</a>
-                        <a href="{% url 'educacion:alumno_del' item.id %}" class="btn btn-outline-red" role="button">Eliminar</a>
+                        <a href="{% url 'educacion:prueba_alumno' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i class="far fa-edit"></i></a>
+                        <a href="{% url 'educacion:alumno_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i class="far fa-trash-alt"></i></a>
                       </td>
                   </tr>
                   {% endfor %}

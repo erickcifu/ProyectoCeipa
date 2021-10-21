@@ -1,7 +1,7 @@
 from django.db import models
 
 class Cargo(models.Model):
-    nombre_cargo= models.CharField(max_length=55,null=False)
+    nombre_cargo= models.CharField(max_length=55)
     estado_cargo = models.BooleanField(default=True)
 
     def __str__(self):
