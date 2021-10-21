@@ -8,8 +8,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from app.forms.educacionForms.convivienteForm import ConvivienteFormEdit
 from app.forms.educacionForms.viviendaForm import VivFormEdit
-from app.models import Alumno, EstudiosAnt, Tutor, Religion_alumno, Apadecimiento, psicologico, vivienda, Conviviente
-from app.forms import AlumnoForm, TutorForm, EstAntForm, ReligionAlumnoForm, APadeForm, PsicoForm, VivForm, ConvivienteForm
+from app.models import Alumno, EstudiosAnt, Tutor, Religion_alumno, Apadecimiento, psicologico, vivienda, Conviviente, AspectosLab
+from app.forms import AlumnoForm, TutorForm, EstAntForm, ReligionAlumnoForm, APadeForm, PsicoForm, VivForm, ConvivienteForm, LaboralForm
 from django.db import IntegrityError, transaction
 from django.forms import formset_factory
 from django.shortcuts import redirect
@@ -35,6 +35,7 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
     six_form_class = PsicoForm
     seven_form_class = VivForm
     eight_form_class = formset_factory(ConvivienteForm, extra=1)
+    nine_form_class = LaboralForm
     success_url = reverse_lazy("educacion:alumno_list")
     login_url = 'app:login'
 
@@ -57,6 +58,8 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
             context['form7'] = self.seven_form_class(self.request.GET)
         if 'form8' not in context:
             context['form8'] = self.eight_form_class(prefix = 'convivientes')
+        if 'form9' not in context:
+            context['form9'] = self.nine_form_class(self.request.GET)
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -75,12 +78,16 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
                 form6 = self.six_form_class(request.POST)
                 form7 = self.seven_form_class(request.POST)
                 form8 = self.eight_form_class(request.POST, prefix='convivientes')
+                form9 = self.nine_form_class(request.POST)
 
-                if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid() and form7.is_valid() and form8.is_valid():
+                if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid() and form7.is_valid() and form8.is_valid() and form9.is_valid():
                     alumno = form3.save(commit=False)
                     alumno.estudios_anteriores = form2.save()
                     alumno.tutor = form.save()
                     alumno.save()
+                    asplab = form9.save(commit=False)
+                    asplab.alumno = alumno
+                    asplab.save()
                     areligion = form4.save(commit=False)
                     areligion.alumno = alumno
                     areligion.save()
@@ -101,7 +108,7 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
                         con.save()
                     return HttpResponseRedirect(self.get_success_url())
                 else:
-                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8))
+                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8, form9=form9))
         except IntegrityError:
             handle_exception()
 

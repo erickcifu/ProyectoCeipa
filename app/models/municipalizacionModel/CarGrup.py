@@ -1,7 +1,7 @@
 from django.db import models
 
 class CargoGrupo(models.Model):
-    nombre_cg= models.CharField(max_length=55,null=False)
+    nombre_cg= models.CharField(max_length=55)
     estado_cg = models.BooleanField(default=True)
 
     def __str__(self):

@@ -1,5 +1,4 @@
 from django.db import models
-
 from app.models.educacion_model.padecimientoModel import Padecimiento
 from .ocupacion import ocupacion
 from .tutor import Tutor
@@ -18,9 +17,9 @@ class Alumno(models.Model):
     estudios_anteriores = models.ForeignKey(EstudiosAnt, on_delete=models.CASCADE, related_name="EA_estudios")
     muni = models.ForeignKey(municipio, on_delete=models.CASCADE, related_name="M_muni")
     gen = models.ForeignKey(genero, on_delete=models.CASCADE, related_name="G_genero")
-    nombres_alumno = models.CharField(max_length=50,null=False)
-    cui = models.IntegerField()
-    apellidos_alumno = models.CharField(max_length=100,null=True)
+    nombres_alumno = models.CharField(max_length=100)
+    cui = models.CharField(max_length=13)
+    apellidos_alumno = models.CharField(max_length=100)
     codigo_mineduc = models.IntegerField()
     estado_alumno = models.BooleanField(default=True)
     fecha_nacimiento = models.DateField()
@@ -34,7 +33,7 @@ class Alumno(models.Model):
     def foto_url(self):
         if self.fotografia and hasattr(self.fotografia, 'url'):
             return self.fotografia.url
-        
+
 
     def __str__(self):
         return self.nombres_alumno

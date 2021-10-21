@@ -6,6 +6,8 @@ class EstudiosAnt(models.Model):
     nombre_establecimiento = models.CharField(max_length=100,null=False)
     repitente= models.BooleanField(default=True)
     telefono = models.CharField(max_length=8)
+    apoyo_ong = models.BooleanField(default=False)
+    nombre_ong = models.CharField(max_length=100, null=True, blank=True)
     estado_estudiosant = models.BooleanField(default=True)
 
     def __str__(self):

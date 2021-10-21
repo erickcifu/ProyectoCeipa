@@ -60,3 +60,4 @@ from .municipalizacionModel.padresFamilia import PadresFamilia
 from .municipalizacionModel.corporacionMuni import CorporacionMunicipal
 from .municipalizacionModel.discapacidad import Discapacidad
 from .municipalizacionModel.gradoAcademico import GradoAcademico
+from .educacion_model.aspectosLaborales import AspectosLab

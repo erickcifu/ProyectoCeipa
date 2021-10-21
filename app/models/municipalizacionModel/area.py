@@ -1,7 +1,7 @@
 from django.db import models
 
 class Area(models.Model):
-    nombre_area= models.CharField(max_length=55,null=False)
+    nombre_area= models.CharField(max_length=55)
     estado_area = models.BooleanField(default=True)
 
     def __str__(self):

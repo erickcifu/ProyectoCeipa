@@ -3,7 +3,7 @@ from django.db import models
 class Ausencia(models.Model):
     iniciof = models.DateTimeField()
     finf = models.DateTimeField()
-    razon = models.CharField(max_length=255,null=False)
+    razon = models.CharField(max_length=255)
     estado_ausencia = models.BooleanField(default=True)
 
     def delete(self, *args):
