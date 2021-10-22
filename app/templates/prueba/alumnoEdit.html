@@ -22,7 +22,7 @@
                             <a class="btn btn-primary" href="{% url 'educacion:alumno_list_convivientes' alumno.id%}">edicion vivienda</a>
                           </div>
                     </div>
-                    
+
                   </div>
                 <!--Wizzard-->
                         <div class="card">
@@ -34,6 +34,14 @@
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Alumno</div>
                                   <div class="wizard-step-text-details">Infomaciòn general del alumno</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 9-->
+                              <a class="nav-item nav-link" id="wizard9-tab" href="#wizard9" data-bs-toggle="tab" role="tab" aria-controls="wizard9" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Aspectos Laborales</div>
+                                  <div class="wizard-step-text-details">Aspectos laborales del alumno</div>
                                 </div>
                               </a>
                               <!--Wizard item 2-->
@@ -76,7 +84,7 @@
                                   <div class="wizard-step-text-details">Informaciòn sobre el analicis psicologicos</div>
                                 </div>
                               </a>
-                              
+
                             <div class="card-body">
                               <!--Wizard Body-->
                                 <div class="tab-content" id="cardTabContent">
@@ -86,9 +94,48 @@
                                         <h3 class="text-primary">Paso 1</h3>
                                         <h5 class="card-title mb-4">Ingrese la informaciòn personal del alumno </h5>
                                         <!--Inicio Formulario-->
-                                          <div class="row gx-3">
-                                                {{ form3 |crispy  }}
-                                          </div>
+                                        <div class="row gx-3">
+                                              {{ form3.nombres_alumno | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.apellidos_alumno | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.cui | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.codigo_mineduc | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.fecha_nacimiento | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.ingreso_familiar | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.direccion_alumno | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.telefono | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.fotografia | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.etni | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.idiome | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.muni | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.gen | as_crispy_field  }}
+                                        </div>
+                                        <div class="row gx-3">
+                                              {{ form3.estado_alumno | as_crispy_field  }}
+                                        </div>
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
                                             <button class="btn btn-ligth" type="button">Anterior</button>
@@ -98,6 +145,28 @@
                                       </div>
                                     </div>
                                   </div>
+                                  <!--Tab item 9-->
+                                    <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard9" role="tabpanel" aria-labelledby="wizard9-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 2</h3>
+                                          <h5 class="card-title mb-4">Ingrese la información laboral del alumno </h5>
+                                          <!--Inicio Formulario-->
+                                          <div class="row gx-3">
+                                                {{ form3.ocup | as_crispy_field  }}
+                                          </div>
+                                            <div class="row gx-3">
+                                                  {{ form9 |crispy  }}
+                                            </div>
+                                            <hr class="my-4"/>
+                                            <div class="d-flex justify-content-between">
+                                              <button class="btn btn-ligth" type="button">Anterior</button>
+                                              <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                            </div>
+                                          <!--Fin Formulario-->
+                                        </div>
+                                      </div>
+                                    </div>
 
                                   <!--Tab item 2-->
                                   <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
@@ -167,7 +236,7 @@
                                                   {%endfor%}
                                             </div>
                                             <br/>
-                                            
+
                                             <div class="d-flex justify-content-between">
                                               <button class="btn btn-primary" role="button" onclick="agregar_form();">
                                                 nuevo form
@@ -191,7 +260,7 @@
                                                 {{ form6 | crispy  }}
                                             </div>
                                             <hr class="my-4"/>
-                                            
+
                                             <div class="d-flex justify-content-between">
                                               <a class="btn btn-ligth" href="{% url 'educacion:alumno_list' %}">Cancelar</a>
                                               <button type="submit" class="btn btn-success"">Guardar</button>
@@ -199,7 +268,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                    
+
                                     <!--Tab fin -->
 
                                 </div>
@@ -217,7 +286,7 @@
   <script>
       function agregar_form(){
         const $total_forms = document.getElementById('id_form-TOTAL_FORMS')
-        
+
         let $label_pad = document.createElement('label')
         $label_pad.innerHTML = 'AlumPad'
         let $input_padeci = document.querySelector('#id_form-0-padecimiento').cloneNode(true)
@@ -249,7 +318,7 @@
 
         $total_forms.value = parseInt($total_forms.value) + 1
         console.log($total_forms)
-        
+
       }
   </script>
 {% endblock %}

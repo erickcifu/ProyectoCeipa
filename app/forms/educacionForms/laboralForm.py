@@ -5,7 +5,7 @@ class LaboralForm(forms.ModelForm):
     estado_laborales = forms.BooleanField(
         widget = forms.CheckboxInput(
             attrs={'checked':True}
-        ), label="Activo/Inactivo"
+        ), required=False, label="Activo/Inactivo"
     )
     hora_entrada = forms.TimeField()
     hora_salida = forms.TimeField(

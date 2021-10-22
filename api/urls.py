@@ -22,7 +22,8 @@ urlpatterns = [
     path('', include(('app.urls', 'app'), namespace='app')),
     path('ceipa/', include(('app.urls', 'app'), namespace='ceipa')),
     path('', include(('app.urls', 'app'), namespace='educacion')),
-     path('', include(('app.urls', 'app'), namespace='municipalizacion')),
+    path('', include(('app.urls', 'app'), namespace='municipalizacion')),
+    path('', include(('app.urls', 'app'), namespace='socioproductivo')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns+=static(settings.STATIC_URL,documentacion_root=settings.STATIC_ROOT)
