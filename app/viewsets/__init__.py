@@ -83,5 +83,6 @@ from .MunicViewset.programasView import ProgramasView, ProgramasNew, ProgramasEd
 from .MunicViewset.comisionNAView import ComisionNAView, ComisionNANew, ComisionNAEdit, ComisionNADel
 
 #SocioProductivo
-from .sociopViewset.tipo_EmpView import TipoEmpView, TipoEmpNew, TipoEmpEdit, TipoEmpDel
 from .sociopViewset.HomeSocioproductivo import HomeSocioproductivo
+from .sociopViewset.tipo_EmpView import TipoEmpView, TipoEmpNew, TipoEmpEdit, TipoEmpDel
+from .sociopViewset.electView import ElectView, ElectNew, ElectEdit, ElectDel
