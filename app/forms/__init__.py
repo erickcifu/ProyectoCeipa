@@ -62,3 +62,5 @@ from .educacionForms.laboralForm import LaboralForm
 
 #SocioProductivo
 from .sociopForms.tipo_EmpForm import TipoEmpForm
+from .sociopForms.gfForms import GastFamForm
+from .sociopForms.ElectroForms import ElectroForm

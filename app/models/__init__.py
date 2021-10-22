@@ -64,3 +64,5 @@ from .educacion_model.aspectosLaborales import AspectosLab
 
 #SocioProductivo
 from .socioproductivoModel.tipo_emprendimiento import TipoEmp
+from .socioproductivoModel.gasto_familiar import GastoFamiliar
+from .socioproductivoModel.electrodomesticos import Electrodomesticos

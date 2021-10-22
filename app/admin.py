@@ -62,6 +62,10 @@ from .models.municipalizacionModel.corporacionMuni import CorporacionMunicipal
 from .models.municipalizacionModel.discapacidad import Discapacidad
 from .models.municipalizacionModel.gradoAcademico import GradoAcademico
 from .models.educacion_model.aspectosLaborales import AspectosLab
+#SocioProductivo
+from .models.socioproductivoModel.electrodomesticos import Electrodomesticos
+from .models.socioproductivoModel.gasto_familiar import GastoFamiliar
+from .models.socioproductivoModel.tipo_emprendimiento import TipoEmp
 
 admin.site.register(ocupacion)
 admin.site.register(religion)
@@ -126,3 +130,7 @@ admin.site.register(CorporacionMunicipal)
 admin.site.register(Discapacidad)
 admin.site.register(GradoAcademico)
 admin.site.register(AspectosLab)
+#SocioProductivo
+admin.site.register(Electrodomesticos)
+admin.site.register(GastoFamiliar)
+admin.site.register(TipoEmp)
