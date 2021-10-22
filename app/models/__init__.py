@@ -61,3 +61,6 @@ from .municipalizacionModel.corporacionMuni import CorporacionMunicipal
 from .municipalizacionModel.discapacidad import Discapacidad
 from .municipalizacionModel.gradoAcademico import GradoAcademico
 from .educacion_model.aspectosLaborales import AspectosLab
+
+#SocioProductivo
+from .socioproductivoModel.tipo_emprendimiento import TipoEmp

@@ -115,6 +115,57 @@
 
                     {%endif%}
 
+                    {%if laboral %}
+
+                    <div class="col-lg-6 col-xl-4 mb-4">
+                      <div class="card">
+                          <div class="card-header">
+                            <h2 class="text-primary">Aspectos Laborales</h2>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-body">
+                              <div class="card-header">
+                                  {{ laboral.area_trabaja }}
+                              </div>
+                            <label><b>Empleador: </b>{{ laboral.empleador }}</label>
+                            <label><b>No. Telefono: </b>{{ laboral.tel_empleador }}</label>
+                            <label><b>Jornada laboral </b>{{ laboral.jornada }}</label>
+                            <label><b>Dias de trabajo: </b>{{ laboral.dias_trabajo }}</label>
+                            <label><b>Hora de entrada: </b>{{ laboral.hora_entrada }}</label>
+                            <label><b>Hora de salida: </b>{{ laboral.hora_salida }}</label>
+                            <br/>
+                            <label>
+                              {% if laboral.i_diario is True %}
+                              <span class="badge bg-green-soft text-green">Ingreso diario</span>
+                              {% elif laboral.i_semanal is True %}
+                              <span class="badge bg-green-soft text-green">Ingreso semanal</span>
+                              {% elif laboral.i_quincenal is True %}
+                              <span class="badge bg-green-soft text-green">Ingreso quincenal</span>
+                              {% elif laboral.i_mensual %}
+                              <span class="badge bg-green-soft text-green">Ingreso mensual</span>
+                              {% else %}
+                              <span class="badge bg-red-soft text-red">Sin ingresos</span>
+                              {% endif %}
+                            </label>
+                            <label><b>Ingresos Totales: </b>Q.{{ laboral.total_ingreso }}</label>
+                            <label><b>Destino de los ingresos: </b>{{ laboral.destino_ingreso }}</label>
+                            <label><b>Edad de inicio laboral: </b>{{ laboral.edad_inicio_trabajo }}</label>
+                            <div class="text-lg fw-bold">
+                            {% if relig.estado_laborales  is True %}
+                                <span class="badge bg-green-soft text-green">Activo </span>
+                            {% else %}
+                                <span class="badge bg-red-soft text-red">Inactivo</span>
+                            {% endif %}
+                            </div>
+                            <br/>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    {%endif%}
+
                     {%if relig%}
 
                         <div class="col-lg-6 col-xl-4 mb-4">

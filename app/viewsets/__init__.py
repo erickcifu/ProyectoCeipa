@@ -24,7 +24,7 @@ from .educacionViewset.techoViewset import TechoView, TechoNew, TechoEdit, Techo
 from .educacionViewset.paredViewset import ParedView, ParedNew, ParedEdit, ParedDel
 from .educacionViewset.etniaViewset import EtniaView, EtniaNew, EtniaEdit, EtniaDel
 from .educacionViewset.serviaguaViewset import ServiaguaView, ServiaguaNew, ServiaguaEdit, ServiaguaDel
-from .educacionViewset.convivienteViewset import ConvivienteView, ConvivienteNew, ConvivienteEdit, ConvivienteDel
+from .educacionViewset.convivienteViewset import ConvivienteView, ConvivienteNew, ConvivienteEdit, ConvivienteDel, ConvivienteAlumnoEdit
 from .educacionViewset.tutorViewset import TutorView, TutorNew, TutorEdit, TutorDel
 from .educacionViewset.alumnoViewset import (AlumnoView, AlumnoNew, AlumnoEdit, AlumnoDel,
                                     AlumnoDetail, AlumnoDetailAndCreate,
@@ -32,7 +32,7 @@ from .educacionViewset.alumnoViewset import (AlumnoView, AlumnoNew, AlumnoEdit, 
                                     )
 from .educacionViewset.centperViewset import CentPerView, CentPerNew, CentPerEdit, CentPerDel, AsignarPersonalEducativoCentroPersona
 from .educacionViewset.estantViewset import EstAntView, EstAntNew, EstAntEdit, EstAntDel
-from .educacionViewset.cgViewset import CGView, CGNew, CGEdit, CGDel, CiclosForCreateGradeandCourseView
+from .educacionViewset.cgViewset import CGView, CGNew, CGEdit, CGDel, CiclosForCreateGradeandCourseView, CG_Del_Alumno
 from .educacionViewset.cgcViewset import (CGCView, CGCNew, CGCEdit, CGCDel,
                                     Listar_Por_Centro_educativo_y_Por_Grado,
                                     Listar_cursos_y_Grados_Por_Personal_y_Centro_Educativo,
@@ -81,3 +81,7 @@ from .MunicViewset.corpmuniviewet import CorpMuniView, CorpMuniNew, CorpMuniEdit
 from .MunicViewset.goView import GrupoOrganizadoView, GrupoOrganizadoNew, GrupoOrganizadoEdit, GrupoOrganizadoDel
 from .MunicViewset.programasView import ProgramasView, ProgramasNew, ProgramasEdit, ProgramasDel
 from .MunicViewset.comisionNAView import ComisionNAView, ComisionNANew, ComisionNAEdit, ComisionNADel
+
+#SocioProductivo
+from .sociopViewset.tipo_EmpView import TipoEmpView, TipoEmpNew, TipoEmpEdit, TipoEmpDel
+from .sociopViewset.HomeSocioproductivo import HomeSocioproductivo

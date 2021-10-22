@@ -133,6 +133,7 @@ class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
     six_form_class = PsicoForm
     seven_form_class = VivForm
     eight_form_class = ConvivienteForm
+    nine_form_class = LaboralForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -147,27 +148,30 @@ class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
         estudios_anteriores = alumno.estudios_anteriores
         religion_alumno = alumno.R_alumno.first()
         analisis_psicologico = alumno.A_alumno.first()
+        laboral = alumno.aspect_alumn.first()
 
         form = self.form_class(request.POST, request.FILES, instance = tutor)
         form2 = self.second_form_class(request.POST, instance= estudios_anteriores)
         form3 = self.third_form_class(request.POST, request.FILES, instance = alumno)
         form4 = self.four_form_class(request.POST, instance = religion_alumno)
         form6 = self.six_form_class(request.POST, instance = analisis_psicologico)
+        form9 = self.nine_form_class(request.POST, instance = laboral)
 
         with transaction.atomic():
             for apadecimiento in apadecimientos:
                 form5 = self.five_form_class(request.POST, instance = apadecimiento, prefix='apadecimientos')
                 if form5.is_valid():
                     form5.save()
-            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form6.is_valid():
+            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form6.is_valid() and form9.is_valid():
                 form3.save()
                 form2.save()
                 form.save()
                 form4.save()
                 form6.save()
+                form9.save()
                 return HttpResponseRedirect(self.success_url)
             else:
-                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6))
+                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form9 = form9))
 
     def get(self, request, *args, **kwargs):
         alumno = self.get_object()
@@ -176,6 +180,7 @@ class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
         religion_alumno = alumno.R_alumno.first()
         analisis_psicologico = alumno.A_alumno.first()
         vivienda = alumno.estudiante_vivieda.first()
+        laboral = alumno.aspect_alumn.first()
 
         try:
             formApa = formset_factory(APadeForm, extra=0)
@@ -207,6 +212,8 @@ class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
             context['form6'] = self.six_form_class(instance = analisis_psicologico)
         if 'form7' not in context:
             context['form7'] = self.seven_form_class(instance = vivienda)
+        if 'form9' not in context:
+            context['form9'] = self.nine_form_class(instance = laboral)
 
         context['obj'] = ''
         context['alumno'] = self.get_object()
@@ -272,7 +279,7 @@ class AlumnoDetail(LoginRequiredMixin, generic.DetailView):
         context['viv'] = vivienda
         context['conviv'] = self.get_convivientes(vivienda)
         context['padec'] = self.get_apadecimientos(alumno)
-
+        context['laboral'] = alumno.aspect_alumn.first()
         return context
 
 

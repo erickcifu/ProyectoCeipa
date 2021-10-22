@@ -48,7 +48,7 @@ class ListarAlumnosPorCentroEducativo(LoginRequiredMixin, generic.ListView):
 
         return Alumno.objects.filter(A_alumnos__centro_educativo_id__in=centro_educativo.objects.filter(estado_centro=True).values_list('id'))
 
-    
+
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
         context['centros_educativos'] = centro_educativo.objects.all()
@@ -67,6 +67,12 @@ class ListarGradosParaInscribirAlumnos(LoginRequiredMixin, generic.ListView):
     login_url = 'app:login'
     queryset = Ciclo_grado.objects.order_by('ciclo', 'seccion')
 
+    def get_queryset(self):
+        existe_ciclo = Ciclo.objects.filter(estado_ciclo=True, anio = datetime.now().year).first()
+        if existe_ciclo:
+            return Ciclo_grado.objects.filter(estado_cg=True, ciclo=existe_ciclo).order_by('ciclo','seccion')
+        return None
+        
     def get_object(self):
         id_centro_educativo = self.kwargs.get('id_centro_educativo')
         if id_centro_educativo:
@@ -75,7 +81,7 @@ class ListarGradosParaInscribirAlumnos(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        
+
         context['id_centro_educativo'] =  self.get_object()
         return context
 
@@ -90,13 +96,13 @@ class InscribirAlumnos(LoginRequiredMixin, generic.CreateView):
         if id_centro_educativo:
             return centro_educativo.objects.filter(id=int(id_centro_educativo)).first()
         return None
-    
+
     def get_grado(self):
         id_grado = self.kwargs.get('id_grado')
         if id_grado:
             return Ciclo_grado.objects.filter(id=int(id_grado)).first()
         return None
-    
+
     def get(self, request, *args, **kwargs):
         id_centro = self.get_centro_educativo()
         id_grado = self.get_grado()
@@ -104,7 +110,7 @@ class InscribirAlumnos(LoginRequiredMixin, generic.CreateView):
         context['id_centro_educativo'] =  id_centro
         context['id_grado'] = id_grado
         context['alumnos'] = Alumno.objects.filter(estado_alumno=True).exclude(A_alumnos__centro_educativo_id = id_centro.id, A_alumnos__ciclo_grado_id = id_grado.id)
-        
+
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
@@ -115,6 +121,3 @@ class InscribirAlumnos(LoginRequiredMixin, generic.CreateView):
             fecha = datetime.now().strftime('%Y-%m-%d')
             Inscripcion.objects.create(centro_educativo=id_centro,ciclo_grado=id_grado,alumno_id=int(alumnos), Fecha_inscripcion=fecha)
             return redirect('educacion:cg_list_para_inscribir_alumnos', id_centro_educativo=id_centro.id)
-        
-
-    

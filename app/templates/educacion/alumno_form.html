@@ -108,7 +108,46 @@
                                         <h5 class="card-title mb-4">Ingrese la informaciòn personal del alumno </h5>
                                         <!--Inicio Formulario-->
                                           <div class="row gx-3">
-                                                {{ form3 |crispy  }}
+                                                {{ form3.nombres_alumno | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.apellidos_alumno | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.cui | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.codigo_mineduc | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.fecha_nacimiento | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.ingreso_familiar | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.direccion_alumno | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.telefono | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.fotografia | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.etni | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.idiome | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.muni | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.gen | as_crispy_field  }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.estado_alumno | as_crispy_field  }}
                                           </div>
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
@@ -127,6 +166,9 @@
                                           <h3 class="text-primary">Paso 2</h3>
                                           <h5 class="card-title mb-4">Ingrese la información laboral del alumno </h5>
                                           <!--Inicio Formulario-->
+                                          <div class="row gx-3">
+                                                {{ form3.ocup | as_crispy_field  }}
+                                          </div>
                                             <div class="row gx-3">
                                                   {{ form9 |crispy  }}
                                             </div>

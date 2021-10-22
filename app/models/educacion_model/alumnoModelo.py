@@ -20,7 +20,7 @@ class Alumno(models.Model):
     nombres_alumno = models.CharField(max_length=100)
     cui = models.CharField(max_length=13)
     apellidos_alumno = models.CharField(max_length=100)
-    codigo_mineduc = models.IntegerField()
+    codigo_mineduc = models.CharField(max_length=13)
     estado_alumno = models.BooleanField(default=True)
     fecha_nacimiento = models.DateField()
     ingreso_familiar = models.FloatField(null=True, blank=True)

@@ -59,3 +59,6 @@ from .muniForms.GOrgForm import GOrgForm
 from .muniForms.ComisionNAForm import Comision_NAForm
 from .muniForms.programasForm import ProgramaCForm
 from .educacionForms.laboralForm import LaboralForm
+
+#SocioProductivo
+from .sociopForms.tipo_EmpForm import TipoEmpForm

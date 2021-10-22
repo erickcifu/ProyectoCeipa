@@ -148,6 +148,7 @@ urlpatterns = [
 
     path('conviviente/', viewsets.ConvivienteView.as_view(), name='conviviente_list'),
     path('conviviente/new', viewsets.ConvivienteNew.as_view(), name='conviviente_new'),
+    path('conviviente/alumno/edit/<int:pk>', viewsets.ConvivienteAlumnoEdit.as_view(), name='conviviente_alumno_edit'),
     path('conviviente/edit/<int:pk>', viewsets.ConvivienteEdit.as_view(), name='conviviente_edit'),
     path('conviviente/delete/<int:pk>', viewsets.ConvivienteDel.as_view(), name='conviviente_del'),
 
@@ -175,6 +176,7 @@ urlpatterns = [
     path('EstudiosAnteriores/delete/<int:pk>', viewsets.EstAntDel.as_view(), name='estant_del'),
 
     path('CicloGrado/', viewsets.CGView.as_view(), name='cg_list'),
+    path('CicloGrado/alumno/<int:pk>', viewsets.CG_Del_Alumno.as_view(), name='cg_del_alumno'),
     path('CicloGrado/inscripcion_alumno/<int:id_centro_educativo>', viewsets.ListarGradosParaInscribirAlumnos.as_view(), name='cg_list_para_inscribir_alumnos'),
     path('CicloGrado/new/', viewsets.CGNew.as_view(), name='cg_new'),
     path('CicloGrado/new/<int:pk>', viewsets.CGNew.as_view(), name='cg_new'),
@@ -365,9 +367,16 @@ urlpatterns = [
     path('Comisiona_NA/edit/<int:pk>', viewsets.ComisionNAEdit.as_view(), name='comisionNA_edit'),
     path('Comisiona_NA/delete/<int:pk>', viewsets.ComisionNADel.as_view(), name='comisionNA_del'),
 
+    #SocioProductivo
+    path('tipo_emprendimiento/', viewsets.TipoEmpView.as_view(), name='TipoEmp_list'),
+    path('tipo_emprendimiento/new', viewsets.TipoEmpNew.as_view(),name='TipoEmp_new'),
+    path('tipo_emprendimiento/edit/<int:pk>', viewsets.TipoEmpEdit.as_view(), name='TipoEmp_edit'),
+    path('tipo_emprendimiento/delete/<int:pk>', viewsets.TipoEmpDel.as_view(), name='TipoEmp_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),
+    path('socioproductivo/', viewsets.HomeSocioproductivo.as_view(), name='socioproductivo'),
     path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),
 ]
