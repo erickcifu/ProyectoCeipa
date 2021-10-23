@@ -64,3 +64,7 @@ from .educacionForms.laboralForm import LaboralForm
 from .sociopForms.tipo_EmpForm import TipoEmpForm
 from .sociopForms.gfForms import GastFamForm
 from .sociopForms.ElectroForms import ElectroForm
+from .sociopForms.jornadaEsForm import JornadaesForm
+from .sociopForms.padresForm import PadresForm
+from .sociopForms.grupoNAForm import GrupoNAForm
+from .sociopForms.ocupTutorForm import OcupTutorForm

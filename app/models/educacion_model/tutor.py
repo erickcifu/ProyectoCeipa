@@ -14,13 +14,13 @@ class Tutor(models.Model):
     fecha_nacimiento = models.DateField()
     direccion_tutor = models.CharField(max_length=80, null=True, blank=True)
     telefono = models.CharField(max_length=8)
-    fotografia = models.ImageField(upload_to='ceipa', null=True, blank=True)
+    fotografia_t = models.ImageField(upload_to='ceipa', null=True, blank=True)
     correo = models.EmailField(max_length=80, null=True, blank=True)
 
     @property
     def foto_url(self):
-        if self.fotografia and hasattr(self.fotografia, 'url'):
-            return self.fotografia.url
+        if self.fotografia_t and hasattr(self.fotografia_t, 'url'):
+            return self.fotografia_t.url
 
     def __str__(self):
         return self.nombres_tutor
