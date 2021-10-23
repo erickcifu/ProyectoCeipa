@@ -378,6 +378,20 @@ urlpatterns = [
     path('electrodomestico/edit/<int:pk>', viewsets.ElectEdit.as_view(), name='elect_edit'),
     path('electrodomestico/delete/<int:pk>', viewsets.ElectDel.as_view(), name='elect_del'),
 
+    path('jornada_estudio/', viewsets.JornadaEsView.as_view(), name='jornadaes_list'),
+    path('jornada_estudio/new', viewsets.JornadaEsNew.as_view(),name='jornadaes_new'),
+    path('jornada_estudio/edit/<int:pk>', viewsets.JornadaEsEdit.as_view(), name='jornadaes_edit'),
+    path('jornada_estudio/delete/<int:pk>', viewsets.JornadaEsDel.as_view(), name='jornadaes_del'),
+
+    path('grupo_na/', viewsets.GrupoNAView.as_view(), name='grupona_list'),
+    path('grupo_na/new', viewsets.GrupoNANew.as_view(),name='grupona_new'),
+    path('grupo_na/edit/<int:pk>', viewsets.GrupoNAEdit.as_view(), name='grupona_edit'),
+    path('grupo_na/delete/<int:pk>', viewsets.GrupoNADel.as_view(), name='grupona_del'),
+
+    path('ocupacion_t/', viewsets.OcupTutorView.as_view(), name='ocupTutor_list'),
+    path('ocupacion_t/new', viewsets.OcupTutorNew.as_view(),name='ocupTutor_new'),
+    path('ocupacion_t/edit/<int:pk>', viewsets.OcupTutorEdit.as_view(), name='ocupTutor_edit'),
+    path('ocupacion_t/delete/<int:pk>', viewsets.OcupTutorDel.as_view(), name='ocupTutor_del'),
 
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),

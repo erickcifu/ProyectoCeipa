@@ -66,3 +66,7 @@ from .educacion_model.aspectosLaborales import AspectosLab
 from .socioproductivoModel.tipo_emprendimiento import TipoEmp
 from .socioproductivoModel.gasto_familiar import GastoFamiliar
 from .socioproductivoModel.electrodomesticos import Electrodomesticos
+from .socioproductivoModel.jornada_estudio import JornadaEstudios
+from .socioproductivoModel.padres_familia import PadresSociop
+from .socioproductivoModel.grupo_na import GrupoNA
+from .socioproductivoModel.ocupacionTutor import OcupacionTutor

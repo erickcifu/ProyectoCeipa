@@ -66,6 +66,9 @@ from .models.educacion_model.aspectosLaborales import AspectosLab
 from .models.socioproductivoModel.electrodomesticos import Electrodomesticos
 from .models.socioproductivoModel.gasto_familiar import GastoFamiliar
 from .models.socioproductivoModel.tipo_emprendimiento import TipoEmp
+from .models.socioproductivoModel.jornada_estudio import JornadaEstudios
+from .models.socioproductivoModel.padres_familia import PadresSociop
+from .models.socioproductivoModel.ocupacionTutor import OcupacionTutor
 
 admin.site.register(ocupacion)
 admin.site.register(religion)
@@ -134,3 +137,6 @@ admin.site.register(AspectosLab)
 admin.site.register(Electrodomesticos)
 admin.site.register(GastoFamiliar)
 admin.site.register(TipoEmp)
+admin.site.register(JornadaEstudios)
+admin.site.register(PadresSociop)
+admin.site.register(OcupacionTutor)

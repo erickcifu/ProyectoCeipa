@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
 
-from app.models import Inscripcion, Alumno, centro_educativo, Ciclo_grado
+from app.models import Inscripcion, Alumno, centro_educativo, Ciclo_grado, Ciclo
 from app.forms import InsForm
 from datetime import datetime
 
@@ -72,7 +72,7 @@ class ListarGradosParaInscribirAlumnos(LoginRequiredMixin, generic.ListView):
         if existe_ciclo:
             return Ciclo_grado.objects.filter(estado_cg=True, ciclo=existe_ciclo).order_by('ciclo','seccion')
         return None
-        
+
     def get_object(self):
         id_centro_educativo = self.kwargs.get('id_centro_educativo')
         if id_centro_educativo:
