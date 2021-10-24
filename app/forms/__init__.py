@@ -68,3 +68,7 @@ from .sociopForms.jornadaEsForm import JornadaesForm
 from .sociopForms.padresForm import PadresForm
 from .sociopForms.grupoNAForm import GrupoNAForm
 from .sociopForms.ocupTutorForm import OcupTutorForm
+from .sociopForms.gradoactForm import GradoactForm
+from .sociopForms.infoEcoForm import InfoecoForm
+from .sociopForms.electVivView import ElectvivForm
+from .sociopForms.clabForm import ClabForm

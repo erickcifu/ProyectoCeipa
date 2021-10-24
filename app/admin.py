@@ -69,6 +69,10 @@ from .models.socioproductivoModel.tipo_emprendimiento import TipoEmp
 from .models.socioproductivoModel.jornada_estudio import JornadaEstudios
 from .models.socioproductivoModel.padres_familia import PadresSociop
 from .models.socioproductivoModel.ocupacionTutor import OcupacionTutor
+from .models.socioproductivoModel.grado_actual import Grado_actual
+from .models.socioproductivoModel.info_economica import InfoEconomica
+from .models.socioproductivoModel.elect_vivienda import ElectVivienda
+from .models.socioproductivoModel.caract_laborales import Caract_laborales
 
 admin.site.register(ocupacion)
 admin.site.register(religion)
@@ -140,3 +144,7 @@ admin.site.register(TipoEmp)
 admin.site.register(JornadaEstudios)
 admin.site.register(PadresSociop)
 admin.site.register(OcupacionTutor)
+admin.site.register(Grado_actual)
+admin.site.register(InfoEconomica)
+admin.site.register(ElectVivienda)
+admin.site.register(Caract_laborales)

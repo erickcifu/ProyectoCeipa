@@ -71,3 +71,5 @@ from .socioproductivoModel.padres_familia import PadresSociop
 from .socioproductivoModel.grupo_na import GrupoNA
 from .socioproductivoModel.ocupacionTutor import OcupacionTutor
 from .socioproductivoModel.grado_actual import Grado_actual
+from .socioproductivoModel.info_economica import InfoEconomica
+from .socioproductivoModel.caract_laborales import Caract_laborales
