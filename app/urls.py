@@ -403,6 +403,26 @@ urlpatterns = [
     path('elect_vivienda/edit/<int:pk>', viewsets.ElectvivEdit.as_view(), name='electviv_edit'),
     path('elect_vivienda/delete/<int:pk>', viewsets.ElectvivDel.as_view(), name='electviv_del'),
 
+        path('aspectos_salud/', viewsets.AspectosSaludView.as_view(), name='aspectos_salud_list'),
+    path('aspectos_salud/new', viewsets.AspectosSaludNew.as_view(),name='aspectosalud_new'),
+    path('aspectos_salud/edit/<int:pk>', viewsets.AspectosSaludEdit.as_view(), name='aspectosalud_edit'),
+    path('aspectos_salud/delete/<int:pk>', viewsets.AspectosSaludDel.as_view(), name='aspectosalud_del'),
+
+    path('talleres', viewsets.TallerView.as_view(), name='talleres_list'),
+    path('talleres/new', viewsets.TallerNew.as_view(),name='talleres_new'),
+    path('talleres/edit/<int:pk>', viewsets.TallerEdit.as_view(), name='talleres_edit'),
+    path('talleres/delete/<int:pk>', viewsets.TallerDel.as_view(), name='talleres_del'),
+
+    path('informacion_educacion', viewsets.InfoEducacionView.as_view(), name='infoeducacion_list'),
+    path('informacion_educacion/new', viewsets.InfoEducacionNew.as_view(),name='infoeducacion_new'),
+    path('informacion_educacion/edit/<int:pk>', viewsets.InfoEducacionEdit.as_view(), name='infoeducacion_edit'),
+    path('informacion_educacion/delete/<int:pk>', viewsets.InfoEducacionDel.as_view(), name='infoeducacion_del'),
+
+    path('persona-socio', viewsets.PersonaBasicaView.as_view(), name='personabasica_list'),
+    path('persona-socio/new', viewsets.PersonaBasicaNew.as_view(),name='personabasica_new'),
+    path('persona-socio/edit/<int:pk>', viewsets.PersonaBasicaEdit.as_view(), name='personabasica_edit'),
+    path('persona-socio/delete/<int:pk>', viewsets.PersonaBasicaDel.as_view(), name='personabasica_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),

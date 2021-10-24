@@ -73,3 +73,8 @@ from .socioproductivoModel.ocupacionTutor import OcupacionTutor
 from .socioproductivoModel.grado_actual import Grado_actual
 from .socioproductivoModel.info_economica import InfoEconomica
 from .socioproductivoModel.caract_laborales import Caract_laborales
+from .socioproductivoModel.aspectos_salud import AspectosSalud
+from .socioproductivoModel.elect_vivienda import ElectVivienda
+from .socioproductivoModel.talleres import Taller
+from .socioproductivoModel.info_educacion import InfoEducacion
+from .socioproductivoModel.persona_basica import PersonaBasica

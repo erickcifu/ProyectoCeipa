@@ -1,0 +1,83 @@
+{% extends 'base/socioproductivo.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Informacion de Educación
+          <a href="{% url 'socioproductivo:infoeducacion_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+      </div>
+      <div class="card mb-4">
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos</div>
+          {% else %}
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>Nombre de Establecimiento</th>
+                  <th>Direccion de Establecimiento</th>
+                  <th>Jornada de Estudio</th>
+                  <th>Grado Actual</th>
+                  <th>Nombre del Maestro</th>
+                  <th>Telefono del Maestro</th>
+                  <th>Participacion en un Grupo de niñez y adolecencia</th>
+                  <th>Nombre del Grupo</th>
+                  <th>Descripción del Grupo</th>
+                  <th>Por qué has recibido Formación de derechos humanos</th>
+                  <th>Conocimiento a Derechos Humanos</th>
+                  <th>Conocimiento a Leyes</th>
+                  <th>Importancia de Organización</th>
+                  <th>Motivación a Participar en consejo municipal</th>
+                  <th>Qué esperas al participar en el consejo Municipal de Niñez y Adolecencia</th>
+                  <th>Estado</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.nombre_establecimiento }}</td>
+                      <td>{{ item.direccion_establecimiento }}</td>
+                      <td>{{ item.jornada_estudio }}</td>
+                      <!-- <td>{{ item.grado_actual }}</td> -->
+                      <td>{{ item.nombre_maestro }}</td>
+                      <td>{{ item.tel_maestro }}</td>
+                      <!-- <td>{{ item.grupo_nin_adole }}</td> -->
+                      <td>{{ item.nombre_grupo }}</td>
+                      <td>{{ item.descripcion_grupo }}</td>
+                      <td>{{ item.recibido_formacion }}</td>
+                      <td>{{ item.conocimiento_derechoshumanos }}</td>
+                      <td>{{ item.conocimiento_leyes }}</td>
+                      <td>{{ item.importancia_organizacion }}</td>
+                      <td>{{ item.te_motiva_participar }}</td>
+                      <td>{{ item.que_esperas_participar }}</td>
+                      {% if item.estado_info_educacion is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Activo</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                      <td>
+                          <a href="{% url 'socioproductivo:infoeducacion_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                          <a href="{% url 'socioproductivo:infoeducacion_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+    </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}

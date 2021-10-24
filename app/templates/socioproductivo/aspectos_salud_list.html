@@ -1,0 +1,75 @@
+{% extends 'base/socioproductivo.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Aspectos de Salud
+          <a href="{% url 'socioproductivo:aspectosalud_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+      </div>
+      <div class="card mb-4">
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos</div>
+          {% else %}
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>Fractura</th>
+                  <th>Descripción de Fractura</th>
+                  <th>Operación</th>
+                  <th>Descripción Operación</th>
+                  <th>Padecimiento</th>
+                  <th>Descripción de Enfermedad</th>
+                  <th>Tratamiento que recibe</th>
+                  <th>Descripción de Tratamiento</th>
+                  <th>Nombre de Medicamento</th>
+                  <th>Limitación Física</th>
+                  <th>Descripción de Limitaciónes</th>
+                  <th>Estado</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.fractura }}</td>
+                      <td>{{ item.descripcion_fractura }}</td>
+                      <td>{{ item.operacion }}</td>
+                      <td>{{ item.descripcion_operacion }}</td>
+                      <td>{{ item.padecimiento }}</td>
+                      <td>{{ item.descripcion_enfermedad }}</td>
+                      <td>{{ item.recibe_tratamiento }}</td>
+                      <td>{{ item.descripcion_tratamiento }}</td>
+                      <td>{{ item.nombre_medicamento }}</td>
+                      <td>{{ item.limitacion_fisica }}</td>
+                      <td>{{ item.descripcion_limitacion }}</td>
+                      {% if item.estado_aspectosalud is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Activo</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                      <td>
+                          <a href="{% url 'socioproductivo:aspectosalud_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                          <a href="{% url 'socioproductivo:aspectosalud_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+    </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}
