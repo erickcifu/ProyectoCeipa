@@ -70,3 +70,4 @@ from .socioproductivoModel.jornada_estudio import JornadaEstudios
 from .socioproductivoModel.padres_familia import PadresSociop
 from .socioproductivoModel.grupo_na import GrupoNA
 from .socioproductivoModel.ocupacionTutor import OcupacionTutor
+from .socioproductivoModel.grado_actual import Grado_actual
