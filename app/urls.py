@@ -393,6 +393,16 @@ urlpatterns = [
     path('ocupacion_t/edit/<int:pk>', viewsets.OcupTutorEdit.as_view(), name='ocupTutor_edit'),
     path('ocupacion_t/delete/<int:pk>', viewsets.OcupTutorDel.as_view(), name='ocupTutor_del'),
 
+    path('grado_actual/', viewsets.GradoactView.as_view(), name='gradoact_list'),
+    path('grado_actual/new', viewsets.GradoactNew.as_view(),name='gradoact_new'),
+    path('grado_actual/edit/<int:pk>', viewsets.GradoactEdit.as_view(), name='gradoact_edit'),
+    path('grado_actual/delete/<int:pk>', viewsets.GradoactDel.as_view(), name='gradoact_del'),
+
+    path('elect_vivienda/', viewsets.ElectvivView.as_view(), name='electviv_list'),
+    path('elect_vivienda/new', viewsets.ElectvivNew.as_view(),name='electviv_new'),
+    path('elect_vivienda/edit/<int:pk>', viewsets.ElectvivEdit.as_view(), name='electviv_edit'),
+    path('elect_vivienda/delete/<int:pk>', viewsets.ElectvivDel.as_view(), name='electviv_del'),
+
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
     path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),

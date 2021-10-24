@@ -89,3 +89,5 @@ from .sociopViewset.electView import ElectView, ElectNew, ElectEdit, ElectDel
 from .sociopViewset.jornadaesView import JornadaEsView, JornadaEsNew, JornadaEsEdit, JornadaEsDel
 from .sociopViewset.grupoNAView import GrupoNAView, GrupoNANew, GrupoNAEdit, GrupoNADel
 from .sociopViewset.ocupTutorView import OcupTutorView,OcupTutorNew, OcupTutorEdit,OcupTutorDel
+from .sociopViewset.gradoactView import GradoactView, GradoactNew, GradoactEdit, GradoactDel
+from .sociopViewset.electVivView import ElectvivView, ElectvivNew, ElectvivEdit, ElectvivDel
