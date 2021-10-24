@@ -70,5 +70,9 @@ from .sociopForms.grupoNAForm import GrupoNAForm
 from .sociopForms.ocupTutorForm import OcupTutorForm
 from .sociopForms.gradoactForm import GradoactForm
 from .sociopForms.infoEcoForm import InfoecoForm
-from .sociopForms.electVivView import ElectvivForm
+from .sociopForms.electVivForm import ElectvivForm
 from .sociopForms.clabForm import ClabForm
+from .sociopForms.aspectosaludForm import AspectosSaludForm
+from .sociopForms.tallerForm import TallerForm
+from .sociopForms.infoeducacionForm import InfoEducacionForm
+from .sociopForms.personabasicaForm import PersonaBForm

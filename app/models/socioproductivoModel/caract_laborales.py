@@ -18,7 +18,7 @@ class Caract_laborales(models.Model):
     estado_claborales = models.BooleanField(default=True)
 
     def __str__(self):
-        if self.empleador_p
+        return self.empleador_p
 
     def delete(self, *args):
         self.estado_claborales = False

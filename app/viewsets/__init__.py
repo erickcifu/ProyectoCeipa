@@ -91,3 +91,7 @@ from .sociopViewset.grupoNAView import GrupoNAView, GrupoNANew, GrupoNAEdit, Gru
 from .sociopViewset.ocupTutorView import OcupTutorView,OcupTutorNew, OcupTutorEdit,OcupTutorDel
 from .sociopViewset.gradoactView import GradoactView, GradoactNew, GradoactEdit, GradoactDel
 from .sociopViewset.electVivView import ElectvivView, ElectvivNew, ElectvivEdit, ElectvivDel
+from .sociopViewset.aspectos_saludView import AspectosSaludView, AspectosSaludNew, AspectosSaludEdit, AspectosSaludDel
+from .sociopViewset.talleresView import TallerView, TallerNew, TallerEdit, TallerDel
+from .sociopViewset.infoeducacionView import InfoEducacionView, InfoEducacionNew, InfoEducacionEdit, InfoEducacionDel
+from .sociopViewset.personabasicaView import PersonaBasicaView, PersonaBasicaNew, PersonaBasicaEdit, PersonaBasicaDel
