@@ -76,3 +76,6 @@ from .sociopForms.aspectosaludForm import AspectosSaludForm
 from .sociopForms.tallerForm import TallerForm
 from .sociopForms.infoeducacionForm import InfoEducacionForm
 from .sociopForms.personabasicaForm import PersonaBForm
+from .sociopForms.VivSoForm import ViviendaSForm
+from .sociopForms.encargadoForm import EncargadoForm
+from .sociopForms.emprenForm import EmprenForm

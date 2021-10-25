@@ -1,0 +1,77 @@
+{% extends 'base/socioproductivo.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          ViviendaSocio
+          <a href="{% url 'socioproductivo:viviendSo_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+      </div>
+      <div class="card mb-4">
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos</div>
+          {% else %}
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>Numero de habitantes </th>
+                  <th>Otra vivienda</th>
+                  <th>Descripsion otra vivienda</th>
+                  <th>Telefono</th>
+                  <th>Nivel Economico</th>
+                  <th>Estado</th>
+              </thead>
+              <tbody>
+                    {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.numero_habitantes }}</td>
+                      {% if item.otra_Viv is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Si</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-yellow">No</span>
+                      </td>
+                      {% endif %}
+                      <td>{{ item.desc_Otra_Viv }}</td>
+                      <td>{{ item.Telefono }}</td>
+                      {% if nivel_Eco_Alto is True %}
+                        <td><span class="badge badge-primary">Alto</span></td>
+                      {% elif nivel_Eco_medio is True %}
+                        <td><span class="badge badge-primary">Medio</span></td>
+                      {% else %}
+                        <td><span class="badge badge-primary">Bajo</span></td>
+                      {% endif %}
+                      {% if item.estado_vivsocio is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Activo</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                      <td>
+                          <a href="{% url 'socioproductivo:viviendSo_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                          <a href="{% url 'socioproductivo:viviendSo_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+    </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}

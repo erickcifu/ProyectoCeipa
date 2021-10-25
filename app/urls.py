@@ -418,10 +418,26 @@ urlpatterns = [
     path('informacion_educacion/edit/<int:pk>', viewsets.InfoEducacionEdit.as_view(), name='infoeducacion_edit'),
     path('informacion_educacion/delete/<int:pk>', viewsets.InfoEducacionDel.as_view(), name='infoeducacion_del'),
 
-    path('persona-socio', viewsets.PersonaBasicaView.as_view(), name='personabasica_list'),
-    path('persona-socio/new', viewsets.PersonaBasicaNew.as_view(),name='personabasica_new'),
-    path('persona-socio/edit/<int:pk>', viewsets.PersonaBasicaEdit.as_view(), name='personabasica_edit'),
-    path('persona-socio/delete/<int:pk>', viewsets.PersonaBasicaDel.as_view(), name='personabasica_del'),
+    path('persona_socio', viewsets.PersonaBasicaView.as_view(), name='personabasica_list'),
+    path('persona_socio/new', viewsets.PersonaBasicaNew.as_view(),name='personabasica_new'),
+    path('persona_socio/edit/<int:pk>', viewsets.PersonaBasicaEdit.as_view(), name='personabasica_edit'),
+    path('persona_socio/delete/<int:pk>', viewsets.PersonaBasicaDel.as_view(), name='personabasica_del'),
+
+    path('vivienda', viewsets.ViviendSoView.as_view(), name='viviendSo_list'),
+    path('vivienda/new', viewsets.ViviendSoNew.as_view(),name='viviendSo_new'),
+    path('vivienda/edit/<int:pk>', viewsets.ViviendSoEdit.as_view(), name='viviendSo_edit'),
+    path('vivienda/delete/<int:pk>', viewsets.ViviendSoDel.as_view(), name='viviendSo_del'),
+
+    path('encargado', viewsets.EncargadoView.as_view(), name='Encar_list'),
+    path('encargado/new', viewsets.EncargadoNew.as_view(),name='Encar_new'),
+    path('encargado/edit/<int:pk>', viewsets.EncargadoEdit.as_view(), name='Encar_edit'),
+    path('encargado/delete/<int:pk>', viewsets.EncargadoDel.as_view(), name='Encar_del'),
+
+    path('emprendimiento', viewsets.EmprenView.as_view(), name='emprend_list'),
+    path('emprendimiento/new', viewsets.EmprenNew.as_view(),name='emprend_new'),
+    path('emprendimiento/edit/<int:pk>', viewsets.EmprenEdit.as_view(), name='emprend_edit'),
+    path('emprendimiento/delete/<int:pk>', viewsets.EmprenDel.as_view(), name='emprend_del'),
+
 
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),

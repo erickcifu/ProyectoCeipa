@@ -78,3 +78,6 @@ from .socioproductivoModel.elect_vivienda import ElectVivienda
 from .socioproductivoModel.talleres import Taller
 from .socioproductivoModel.info_educacion import InfoEducacion
 from .socioproductivoModel.persona_basica import PersonaBasica
+from .socioproductivoModel.ViviendaSocio import ViviendaSocio
+from .socioproductivoModel.encargado import Encargado
+from .socioproductivoModel.emprendimiento import Emprendimiento
