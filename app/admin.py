@@ -73,6 +73,9 @@ from .models.socioproductivoModel.grado_actual import Grado_actual
 from .models.socioproductivoModel.info_economica import InfoEconomica
 from .models.socioproductivoModel.elect_vivienda import ElectVivienda
 from .models.socioproductivoModel.caract_laborales import Caract_laborales
+from .models.socioproductivoModel.emprendimiento import Emprendimiento
+from .models.socioproductivoModel.encargado import Encargado
+from .models.socioproductivoModel.ViviendaSocio import ViviendaSocio
 
 admin.site.register(ocupacion)
 admin.site.register(religion)
@@ -148,3 +151,6 @@ admin.site.register(Grado_actual)
 admin.site.register(InfoEconomica)
 admin.site.register(ElectVivienda)
 admin.site.register(Caract_laborales)
+admin.site.register(Emprendimiento)
+admin.site.register(Encargado)
+admin.site.register(ViviendaSocio)
