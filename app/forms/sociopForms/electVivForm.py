@@ -5,7 +5,7 @@ class ElectvivForm(forms.ModelForm):
     class Meta:
         model = ElectVivienda
         fields = ['elect']
-        labels = {'elect':'Electrodomestico',}
+        labels = {'elect':'Electrodomestico'}
         widget = {
             'elect': forms.TextInput,
         }
