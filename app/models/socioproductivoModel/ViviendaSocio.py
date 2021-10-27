@@ -26,9 +26,9 @@ class ViviendaSocio(models.Model):
     Extemadamente_pobre = models.BooleanField(default=False)
     estado_vivsocio = models.BooleanField(default=True)
 
-    @property
+
     def __str__(self):
-        return self.numero_habitantes
+        return str(self.numero_habitantes)
 
     def delete(self, *args):
         self.estado_vivsocio = False

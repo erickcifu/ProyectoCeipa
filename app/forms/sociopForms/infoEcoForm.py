@@ -6,7 +6,7 @@ class InfoecoForm(forms.ModelForm):
         model = InfoEconomica
         fields = ['pariente','cantidad_mensual','procedencia_ingreso', 'observacion', 'estado_infoeco']
         labels = {
-            'pariente':'Nombre del grado',
+            'pariente':'Nombre del pariente',
             'cantidad_mensual':'Cantidad de ingresos mensuales',
             'procedencia_ingreso':'Procedencia del ingreso',
             'observacion':'Observaciones',

@@ -1,4 +1,4 @@
-{% extends 'base/base3.html' %}
+{% extends 'base/socioproductivo.html' %}
 
 {% block page_content %}
 {% load crispy_forms_tags %}
@@ -161,7 +161,7 @@
                                                   <div id="formularios_ElectViviendas" class="row">
                                                     {{ f | crispy}}
                                                   </div>
-                                                  <br>
+
                                                   <br>
                                                 {%endfor%}
                                           </div>
@@ -170,7 +170,7 @@
                                           <div class="d-flex justify-content-between">
                                             <button class="btn btn-primary" role="button" onclick="agregar_form_ElectVivienda();">
                                               nuevo form
-                                          </button>
+                                            </button>
                                           </div>
                                             <hr class="my-4"/>
                                             <div class="d-flex justify-content-between">
@@ -281,7 +281,7 @@
                                                       {{ f | crispy}}
                                                     </div>
                                                     <br>
-                                                    <br>
+
                                                   {%endfor%}
                                             </div>
                                             <br/>
@@ -313,7 +313,7 @@
                                                     {{ f | crispy}}
                                                   </div>
                                                   <br>
-                                                  <br>
+
                                                 {%endfor%}
                                                 <br/>
                                                 <div class="d-flex justify-content-between">
@@ -345,15 +345,15 @@
 {% block js_page %}
   <script>
 
-      //funcion para agregar mas formularios para los padecimientos
+      //funcion para agregar mas formularios para los electro
       function agregar_form_ElectVivienda(){
         const $total_forms = document.getElementById('id_ElectViviendas-TOTAL_FORMS')
 
         let $label_pad = document.createElement('label')
         $label_pad.innerHTML = 'Electrodomestico'
-        let $input_padeci = document.querySelector('#id_ElectViviendas-0-ElectVivienda').cloneNode(true)
-        $input_padeci.name = 'ElectViviendas-'+$total_forms.value+'-ElectVivienda'
-        $input_padeci.id = 'id_ElectViviendas-'+$total_forms.value+'-ElectVivienda'
+        let $input_padeci = document.querySelector('#id_ElectViviendas-0-elect').cloneNode(true)
+        $input_padeci.name = 'ElectViviendas-'+$total_forms.value+'-elect'
+        $input_padeci.id = 'id_ElectViviendas-'+$total_forms.value+'-elect'
 
         console.log('label_pad', $label_pad)
         console.log('input_pad', $input_padeci)
@@ -367,25 +367,92 @@
       }
 
 
-      //formatear los formularios si en caso se cambió el valor de los convivientes
-      function agregar_forms_viviendas() {
-        const $cantidad_de_personas = document.querySelector('#id_cantidad_personas')
+      //funcion para agregar mas formulartios para gasto familiar
 
-        if(!$cantidad_de_personas.value)return null
+      function agregar_form_GastoFamiliar(){
+        const $total_forms = document.getElementById('id_GastoFamiliars-TOTAL_FORMS')
 
-        const $total_forms_convivientes = document.querySelector('#id_convivientes-TOTAL_FORMS')
-        const $formulario_convivientes = document.getElementById('formularios_convivientes')
-        if($formulario_convivientes.childElementCount > 1){
-            for (let i = 1; i <= $formulario_convivientes.childElementCount; i++) {
-              let $nombre_hijo = document.getElementById(`hijo_formulario_conviviente_${i}`)
-              $nombre_hijo.remove()
-            }
+        let $label_servicio = document.createElement('label')
+        $label_servicio.innerHTML = 'Nombre servicio'
+        let $input_servicio = document.querySelector('#id_GastoFamiliars-0-servicio').cloneNode(true)
+        $input_servicio.name = 'GastoFamiliars-'+$total_forms.value+'-servicio'
+        $input_servicio.id = 'id_GastoFamiliars-'+$total_forms.value+'-servicio'
 
-            $total_forms_convivientes.value = 1
-        }
+        let $label_cantidad = document.createElement('label')
+        $label_cantidad.innerHTML = 'Cantidad por servicio'
+        let $input_cantidad = document.querySelector('#id_GastoFamiliars-0-cantidad_servicio').cloneNode(true)
+        $input_cantidad.name = 'GastoFamiliars-'+$total_forms.value+'-cantidad_servicio'
+        $input_cantidad.id = 'id_GastoFamiliars-'+$total_forms.value+'-cantidad_servicio'
 
-        //agregando la cantidad de formularios dependiendo de la cantidad de personas de la vivienda
-        
+        let $label_gasto = document.createElement('label')
+        $label_gasto.innerHTML = 'Activo/Inactivo'
+        let $input_gasto = document.querySelector('#id_GastoFamiliars-0-estado_gastofamiliar').cloneNode(true)
+        $input_gasto.name = 'GastoFamiliars-'+$total_forms.value+'-estado_gastofamiliar'
+        $input_gasto.id = 'id_GastoFamiliars-'+$total_forms.value+'-estado_gastofamiliar'
+
+        console.log('label_pad', $label_servicio)
+        console.log('input_pad', $input_servicio)
+
+        document.getElementById('formularios_GastoFamiliars').appendChild($label_servicio)
+        document.getElementById('formularios_GastoFamiliars').appendChild($input_servicio)
+        document.getElementById('formularios_GastoFamiliars').appendChild($label_cantidad)
+        document.getElementById('formularios_GastoFamiliars').appendChild($input_cantidad)
+        document.getElementById('formularios_GastoFamiliars').appendChild($label_gasto)
+        document.getElementById('formularios_GastoFamiliars').appendChild($input_gasto)
+
+
+
+        $total_forms.value = parseInt($total_forms.value) + 1
+      }
+      //funcion para agregar mas formulartios para gasto familiar
+
+      function agregar_form_GastoFamiliar(){
+        const $total_forms = document.getElementById('id_InfoEconomicas-TOTAL_FORMS')
+
+        let $label_pariente = document.createElement('label')
+        $label_pariente.innerHTML = 'Nombre del pariente'
+        let $input_pariente = document.querySelector('#id_InfoEconomicas-0-pariente').cloneNode(true)
+        $input_pariente.name = 'InfoEconomicas-'+$total_forms.value+'-pariente'
+        $input_pariente.id = 'id_InfoEconomicas-'+$total_forms.value+'-pariente'
+
+        let $label_cant = document.createElement('label')
+        $label_cant.innerHTML = 'Cantidad de ingresos mensuales'
+        let $input_cant = document.querySelector('#id_InfoEconomicas-0-cantidad_mensual').cloneNode(true)
+        $input_cant.name = 'InfoEconomicas-'+$total_forms.value+'-cantidad_mensual'
+        $input_cant.id = 'id_InfoEconomicas-'+$total_forms.value+'-cantidad_mensual'
+
+        let $label_proc = document.createElement('label')
+        $label_proc.innerHTML = 'Procedencia del ingreso'
+        let $input_proc = document.querySelector('#id_InfoEconomicas-0-procedencia_ingreso').cloneNode(true)
+        $input_proc.name = 'InfoEconomicas-'+$total_forms.value+'-procedencia_ingreso'
+        $input_proc.id = 'id_InfoEconomicas-'+$total_forms.value+'-procedencia_ingreso'
+
+        let $label_obs = document.createElement('label')
+        $label_obs.innerHTML = 'Observaciones'
+        let $input_obs = document.querySelector('#id_InfoEconomicas-0-observacion').cloneNode(true)
+        $input_obs.name = 'InfoEconomicas-'+$total_forms.value+'-observacion'
+        $input_obs.id = 'id_InfoEconomicas-'+$total_forms.value+'-observacion'
+
+        let $label_est = document.createElement('label')
+        $label_est.innerHTML = 'Activo/Inactivo'
+        let $input_est = document.querySelector('#id_InfoEconomicas-0-estado_infoeco').cloneNode(true)
+        $input_est.name = 'InfoEconomicas-'+$total_forms.value+'-estado_infoeco'
+        $input_est.id = 'id_InfoEconomicas-'+$total_forms.value+'-estado_infoeco'
+
+        console.log('label_pad', $label_pariente)
+        console.log('input_pad', $input_servicio)
+
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_pariente)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_pariente)
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_cant)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_cant)
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_obs)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_obs)
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_est)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_est)
+
+        $total_forms.value = parseInt($total_forms.value) + 1
+
       }
   </script>
 {% endblock %}

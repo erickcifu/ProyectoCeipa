@@ -14,13 +14,13 @@ from django.shortcuts import redirect
 
 class PersonaBasicaView(LoginRequiredMixin, generic.ListView):
     model = PersonaBasica
-    template_name = 'municipalizacion/personabasica_list.html'
+    template_name = 'socioproductivo/personabasica_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
 class PersonaBasicaNew(LoginRequiredMixin, generic.CreateView):
     model = PersonaBasica
-    template_name = 'municipalizacion/personabasica_form.html'
+    template_name = 'socioproductivo/personabasica_form.html'
     context_object_name = "obj"
     form_class = PersonaBForm
     second_form_class = formset_factory(GastFamForm, extra=1)
@@ -32,7 +32,7 @@ class PersonaBasicaNew(LoginRequiredMixin, generic.CreateView):
     eight_form_class = EncargadoForm
     nine_form_class = InfoEducacionForm
     ten_form_class = ClabForm
-    success_url = reverse_lazy("municipalizacion:personabasica_list")
+    success_url = reverse_lazy("socioproductivo:personabasica_list")
     login_url = 'app:login'
 
     def get_context_data(self, **kwargs):

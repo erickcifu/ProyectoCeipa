@@ -2,6 +2,11 @@ from django import forms
 from app.models import PersonaBasica
 
 class PersonaBForm(forms.ModelForm):
+    fecha_nacimiento = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        )
+    )
     class Meta:
         model = PersonaBasica
         fields = [
@@ -19,17 +24,10 @@ class PersonaBForm(forms.ModelForm):
             'municipio',
             'etnia',
             'genero',
-            #'vivienda_socio',
-            'info_educacion',
-            #'caracteristicas_laborales',
-            'aspectos_salud',
             'razon',
-            #'info_economica',
             'ingreso_total',
             'total_gastos',
             'edad',
-            #'tutor_socio',
-            'padres',
             'estado_persona_basica'
             ]
 
@@ -48,17 +46,10 @@ class PersonaBForm(forms.ModelForm):
             'municipio':'Municipio',
             'etnia':'Etnia',
             'genero':'Género',
-            #'vivienda_socio':'Vivienda',
-            'info_educacion':'Información de Educación',
-            #'caracteristicas_laborales':'Caracteristicas Laborales',
-            'aspectos_salud':'Aspectos de Salud',
             'razon':'Razón',
-            #'info_economica':'Información Económica',
             'ingreso_total':'Ingreso Total',
             'total_gastos':'Total de Gastos',
             'edad':'Edad',
-            #'tutor_socio':'Tutor',
-            'padres':'Padres',
             'estado_persona_basica':'Activo/Inactivo'}
         widget = {
             'nombres': forms.TextInput,
