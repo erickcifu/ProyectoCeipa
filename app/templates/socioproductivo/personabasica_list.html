@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Listado de Personas en el Programa de Socio-Productivo
+          Listado de Personas en el Programa de Socio Productivo
           <a href="{% url 'socioproductivo:personabasica_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
@@ -26,51 +26,23 @@
                   <th>Cantidad de personas con las que vive</th>
                   <th>Con quien vive</th>
                   <th>Fotografía</th>
-                  <th>Municipio</th>
-                  <th>Etnia</th>
-                  <th>Género</th>
-                  <!--<th>Vivienda</th>-->
-                  <th>Información de Educación</th>
-                  <!--<th>Caracteristicas Laborales</th>-->
-                  <th>Aspectos de Salud</th>
-                  <th>Razón</th>
-                  <!--<th>Información Economica</th>-->
-                  <th>Ingreso total</th>
-                  <th>Total de gastos</th>
-                  <th>Edad</th>
-                  <!--<th>Tutor</th>-->
-                  <th>Padres</th>
                   <th>Estado</th>
               </thead>
               <tbody>
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.nombres }}</td>
+                      <td>{{ item.nombresp }}</td>
                       <td>{{ item.apellidos }}</td>
                       <td>{{ item.fecha_nacimiento }}</td>
-                      <td>{{ item.DPI_CUI }}</td>
+                      <td>{{ item.DPIP }}</td>
                       <td>{{ item.direccion }}</td>
                       <td>{{ item.tel_casa }}</td>
                       <td>{{ item.tel_cel }}</td>
                       <td>{{ item.email }}</td>
                       <td>{{ item.cantidad_convivientes }}</td>
                       <td>{{ item.conquien_vive }}</td>
-                      <td>{{ item.fotografia }}</td>
-                      <td>{{ item.municipio }}</td>
-                      <td>{{ item.etnia }}</td>
-                      <td>{{ item.genero }}</td>
-                      <!--<td>{{ itemv.vivienda_socio }}</td>-->
-                      <td>{{ item.info_educacion }}</td>
-                      <!--<td>{{ item.caracteristicas_laborales }}</td>-->
-                      <td>{{ item.aspectos_salud }}</td>
-                      <td>{{ item.razon }}</td>
-                      <!--<td>{{ item.info_economica }}</td>-->
-                      <td>{{ item.ingreso_total }}</td>
-                      <td>{{ item.total_gastos }}</td>
-                      <td>{{ item.edad }}</td>
-                      <!--<td>{{ item.tutor_socio }}</td>-->
-                      <td>{{ item.padres }}</td>
+                      <td>{{ item.fotografiaP }}</td>
                       {% if item.estado_persona_basica is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>
