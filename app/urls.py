@@ -403,7 +403,7 @@ urlpatterns = [
     path('elect_vivienda/edit/<int:pk>', viewsets.ElectvivEdit.as_view(), name='electviv_edit'),
     path('elect_vivienda/delete/<int:pk>', viewsets.ElectvivDel.as_view(), name='electviv_del'),
 
-        path('aspectos_salud/', viewsets.AspectosSaludView.as_view(), name='aspectos_salud_list'),
+    path('aspectos_salud/', viewsets.AspectosSaludView.as_view(), name='aspectos_salud_list'),
     path('aspectos_salud/new', viewsets.AspectosSaludNew.as_view(),name='aspectosalud_new'),
     path('aspectos_salud/edit/<int:pk>', viewsets.AspectosSaludEdit.as_view(), name='aspectosalud_edit'),
     path('aspectos_salud/delete/<int:pk>', viewsets.AspectosSaludDel.as_view(), name='aspectosalud_del'),
