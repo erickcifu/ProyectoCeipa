@@ -55,7 +55,6 @@ class PersonaBasicaNew(LoginRequiredMixin, generic.CreateView):
             context['form8'] = self.eight_form_class(self.request.GET)
         if 'form9' not in context:
             context['form9'] = self.nine_form_class(self.request.GET)
-        return context
         if 'form10' not in context:
             context['form10'] = self.ten_form_class(self.request.GET)
         return context
@@ -80,16 +79,11 @@ class PersonaBasicaNew(LoginRequiredMixin, generic.CreateView):
                 form10 = self.ten_form_class(request.POST)
                 if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid() and form7.is_valid() and form8.is_valid() and form9.is_valid() and form10.is_valid():
                     personab = form.save(commit=False)
-                    personab.vivienda_socio = form5.save()
-                    #personab.aspectos_salud =form4.save()
-                    #personab.padres = form7.save()
-                    #personab.tutor_socio = form8.save()
-                    #personab.info_economica= form9.save()
-                    #personab.c_laborales = form10.save()
-                    for form_pad in form6:
+                    personab.vivienda_socio = form5.save(commit=False)
+                    for form6_pad in form6:
                         ElectVivienda=form6_pad.save(commit=False)
                         print('ElectVivienda-----',ElectVivienda)
-                        ElectVivienda.vivienda_socio = personab.vivienda_socio
+                        ElectVivienda.vivienda_socio = form5.save()
                         ElectVivienda.save()
                     personab.aspectos_salud =form4.save()
                     personab.padres = form7.save()
@@ -97,12 +91,12 @@ class PersonaBasicaNew(LoginRequiredMixin, generic.CreateView):
                     personab.info_educacion= form9.save()
                     personab.c_laborales = form10.save()
                     personab.save()
-                    for form_pad in form2:
+                    for form2_pad in form2:
                         Gastofamiliar=form2_pad.save(commit=False)
                         print('GastoFamiliar-----',GastoFamiliar)
                         GastoFamiliar.personab = personab
                         GastoFamiliar.save()
-                    for form_pad in form3:
+                    for form3_pad in form3:
                         InfoEconomica=form3_pad.save(commit=False)
                         print('InfoEconomica-----',InfoEconomica)
                         InfoEconomica.personab = personab

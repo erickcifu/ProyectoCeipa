@@ -5,7 +5,7 @@ class Electrodomesticos(models.Model):
     estado_electro = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.servicio
+        return self.Nombre_electro
 
     def delete(self, *args):
         self.estado_electro = False

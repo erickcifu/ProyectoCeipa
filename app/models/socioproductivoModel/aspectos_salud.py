@@ -15,7 +15,7 @@ class AspectosSalud(models.Model):
     estado_aspectosalud = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.aspectos_salud
+        return str(self.fractura)
 
     def delete(self, *args):
         self.estado_aspectosalud = False
