@@ -76,6 +76,12 @@ from .models.socioproductivoModel.caract_laborales import Caract_laborales
 from .models.socioproductivoModel.emprendimiento import Emprendimiento
 from .models.socioproductivoModel.encargado import Encargado
 from .models.socioproductivoModel.ViviendaSocio import ViviendaSocio
+from .models.socioproductivoModel.grupo_na import GrupoNA
+from .models.socioproductivoModel.aspectos_salud import AspectosSalud
+from .models.socioproductivoModel.talleres import Taller
+from .models.socioproductivoModel.info_educacion import InfoEducacion
+from .models.socioproductivoModel.persona_basica import PersonaBasica
+
 
 admin.site.register(ocupacion)
 admin.site.register(religion)
@@ -154,3 +160,7 @@ admin.site.register(Caract_laborales)
 admin.site.register(Emprendimiento)
 admin.site.register(Encargado)
 admin.site.register(ViviendaSocio)
+admin.site.register(GrupoNA)
+admin.site.register(AspectosSalud)
+admin.site.register(InfoEducacion)
+admin.site.register(PersonaBasica)
