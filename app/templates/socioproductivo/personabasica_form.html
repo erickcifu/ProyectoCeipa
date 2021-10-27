@@ -60,7 +60,7 @@
                               </a>
                               <!--Wizard item 7-->
                               <a class="nav-item nav-link" id="wizard7-tab" href="#wizard7" data-bs-toggle="tab" role="tab" aria-controls="wizard7" aria-selected="true">
-                                <div class="wizard-step-icon">7</div>
+                                <div class="wizard-step-icon">5</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">padres</div>
                                   <div class="wizard-step-text-details">Informaciòn sobre Padres de Familia</div>
@@ -68,7 +68,7 @@
                               </a>
                               <!--Wizard item 8-->
                               <a class="nav-item nav-link" id="wizard8-tab" href="#wizard8" data-bs-toggle="tab" role="tab" aria-controls="wizard8" aria-selected="true">
-                                <div class="wizard-step-icon">8</div>
+                                <div class="wizard-step-icon">6</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Encargado</div>
                                   <div class="wizard-step-text-details">Informaciòn sobre el encargado </div>
@@ -76,7 +76,7 @@
                               </a>
                               <!--Wizard item 9-->
                               <a class="nav-item nav-link" id="wizard9-tab" href="#wizard9" data-bs-toggle="tab" role="tab" aria-controls="wizard9" aria-selected="true">
-                                <div class="wizard-step-icon">9</div>
+                                <div class="wizard-step-icon">7</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Insformacion educacion</div>
                                   <div class="wizard-step-text-details">Informaciòn educacion de la persona</div>
@@ -84,7 +84,7 @@
                               </a>
                               <!--Wizard item 10-->
                               <a class="nav-item nav-link" id="wizard10-tab" href="#wizard10" data-bs-toggle="tab" role="tab" aria-controls="wizard10" aria-selected="true">
-                                <div class="wizard-step-icon">10</div>
+                                <div class="wizard-step-icon">8</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">caracteristicas laborales</div>
                                   <div class="wizard-step-text-details">Informaciòn sus caracteristicas laborales </div>
@@ -92,7 +92,7 @@
                               </a>
                               <!--Wizard item 3-->
                               <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
-                                <div class="wizard-step-icon">3</div>
+                                <div class="wizard-step-icon">9</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Gasto Familiar</div>
                                   <div class="wizard-step-text-details">Informaciòn sobre el Gasto Familiar</div>
@@ -100,7 +100,7 @@
                               </a>
                               <!--Wizard item 2-->
                               <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
-                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-icon">10</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">informacion economica</div>
                                   <div class="wizard-step-text-details">Informaciòn economica de la persona</div>
@@ -116,7 +116,7 @@
                                         <h5 class="card-title mb-4">Ingrese la informaciòn personal del alumno </h5>
                                         <!--Inicio Formulario-->
                                           <div class="row gx-3">
-                                                  {{ form |crispy  }}
+                                                  {{ form | crispy  }}
                                           </div>
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
@@ -128,7 +128,7 @@
                                     </div>
                                   </div>
                                   <!--Tab item 5-->
-                                  <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard5" role="tabpanel" aria-labelledby="wizard5-tab">
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard5" role="tabpanel" aria-labelledby="wizard5-tab">
                                     <div class="row justify-content-center">
                                       <div class="col-xxl-6 col-xl-8">
                                         <h3 class="text-primary">Paso 2</h3>
@@ -149,7 +149,7 @@
                                   </div>
 
                                   <!--Tab item 6-->
-                                    <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard6" role="tabpanel" aria-labelledby="wizard6-tab">
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard6" role="tabpanel" aria-labelledby="wizard6-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
                                           <h3 class="text-primary">Paso 3</h3>
@@ -157,12 +157,12 @@
                                           <!--Inicio Formulario-->
                                           <div class="row gx-3" >
                                               {{form6.management_form}}
-                                                {%for f in form6%}
+                                                {%for f in form6 %}
                                                   <div id="formularios_ElectViviendas" class="row">
                                                     {{ f | crispy}}
                                                   </div>
-
-                                                  <br>
+                                                  <br/>
+                                                  <br/>
                                                 {%endfor%}
                                           </div>
                                           <br/>
@@ -204,7 +204,7 @@
                                     <div class="row justify-content-center">
                                       <div class="col-xxl-6 col-xl-8">
                                         <h3 class="text-primary">Paso 5</h3>
-                                        <h5 class="card-title mb-4">Ingrese informaciòn Pdres de familia</h5>
+                                        <h5 class="card-title mb-4">Ingrese informaciòn Padres de familia</h5>
                                             <div class="row gx-3">
                                                 {{ form7 | crispy }}
                                               </div>
@@ -217,7 +217,7 @@
                                       </div>
                                     </div>
                                     <!--Tab item 8-->
-                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard8" role="tabpanel" aria-labelledby="wizard8-tab">
+                                    <div class="tab-pane py-5 py-xl-10 fade"  id="wizard8" role="tabpanel" aria-labelledby="wizard8-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
                                           <h3 class="text-primary">Paso 6</h3>
@@ -247,6 +247,7 @@
                                               <button class="btn btn-ligth" type="button">Anterior</button>
                                               <a class="btn btn-primary next-step" role="button">Siguiente</a>
                                             </div>
+                                            <!--Fin Formulario-->
                                         </div>
                                       </div>
                                     </div>
@@ -264,11 +265,12 @@
                                               <button class="btn btn-ligth" type="button">Anterior</button>
                                               <a class="btn btn-primary next-step" role="button">Siguiente</a>
                                             </div>
+                                            <!--Fin Formulario-->
                                         </div>
                                       </div>
                                     </div>
                                     <!--Tab item 3-->
-                                      <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
+                                      <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
                                         <div class="row justify-content-center">
                                           <div class="col-xxl-6 col-xl-8">
                                             <h3 class="text-primary">Paso 9</h3>
@@ -276,11 +278,11 @@
                                             <!--Inicio Formulario-->
                                             <div class="row gx-3" >
                                                 {{form3.management_form}}
-                                                  {%for f in form3%}
+                                                  {%for f in form3 %}
                                                     <div id="formularios_InfoEconomicas" class="row">
                                                       {{ f | crispy}}
                                                     </div>
-                                                    <br>
+                                                    <br/>
 
                                                   {%endfor%}
                                             </div>
@@ -308,16 +310,16 @@
                                           <h5 class="card-title mb-4">Ingrese informaciòn de el Gasto familiar</h5>
                                             <div class="row gx-3">
                                               {{form2.management_form}}
-                                                {%for f in form2%}
+                                                {%for f in form2 %}
                                                   <div id="formularios_GastoFamiliars" class="row">
                                                     {{ f | crispy}}
                                                   </div>
-                                                  <br>
+                                                  <br/>
 
                                                 {%endfor%}
                                                 <br/>
                                                 <div class="d-flex justify-content-between">
-                                                  <button class="btn btn-primary" role="button" onclick="InfoEconomica();">
+                                                  <button class="btn btn-primary" role="button" onclick="agregar_form_GastoFamiliar();">
                                                     nuevo form
                                                 </button>
                                                 </div>
@@ -406,7 +408,7 @@
       }
       //funcion para agregar mas formulartios para gasto familiar
 
-      function agregar_form_GastoFamiliar(){
+      function agregar_form_InfoEconomica(){
         const $total_forms = document.getElementById('id_InfoEconomicas-TOTAL_FORMS')
 
         let $label_pariente = document.createElement('label')
@@ -438,9 +440,6 @@
         let $input_est = document.querySelector('#id_InfoEconomicas-0-estado_infoeco').cloneNode(true)
         $input_est.name = 'InfoEconomicas-'+$total_forms.value+'-estado_infoeco'
         $input_est.id = 'id_InfoEconomicas-'+$total_forms.value+'-estado_infoeco'
-
-        console.log('label_pad', $label_pariente)
-        console.log('input_pad', $input_servicio)
 
         document.getElementById('formularios_InfoEconomicas').appendChild($label_pariente)
         document.getElementById('formularios_InfoEconomicas').appendChild($input_pariente)
