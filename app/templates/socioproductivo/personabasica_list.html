@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Listado de Personas en el Programa de Socio Productivo
+          Beneficiados
           <a href="{% url 'socioproductivo:personabasica_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
@@ -20,29 +20,17 @@
                   <th>Fecha de nacimiento</th>
                   <th>DPI/CUI</th>
                   <th>Dirección</th>
-                  <th>No. Teléfono de casa</th>
-                  <th>No. Celular</th>
-                  <th>Email</th>
-                  <th>Cantidad de personas con las que vive</th>
-                  <th>Con quien vive</th>
-                  <th>Fotografía</th>
                   <th>Estado</th>
               </thead>
               <tbody>
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.nombresp }}</td>
+                      <td><a href="{% url 'socioproductivo:personabasica_detail' item.id %}">{{ item.nombresp }}</a></td>
                       <td>{{ item.apellidos }}</td>
                       <td>{{ item.fecha_nacimiento }}</td>
                       <td>{{ item.DPIP }}</td>
                       <td>{{ item.direccion }}</td>
-                      <td>{{ item.tel_casa }}</td>
-                      <td>{{ item.tel_cel }}</td>
-                      <td>{{ item.email }}</td>
-                      <td>{{ item.cantidad_convivientes }}</td>
-                      <td>{{ item.conquien_vive }}</td>
-                      <td>{{ item.fotografiaP }}</td>
                       {% if item.estado_persona_basica is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

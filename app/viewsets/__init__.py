@@ -94,7 +94,7 @@ from .sociopViewset.electVivView import ElectvivView, ElectvivNew, ElectvivEdit,
 from .sociopViewset.aspectos_saludView import AspectosSaludView, AspectosSaludNew, AspectosSaludEdit, AspectosSaludDel
 from .sociopViewset.talleresView import TallerView, TallerNew, TallerEdit, TallerDel
 from .sociopViewset.infoeducacionView import InfoEducacionView, InfoEducacionNew, InfoEducacionEdit, InfoEducacionDel
-from .sociopViewset.personabasicaView import PersonaBasicaView, PersonaBasicaNew, PersonaBasicaEdit, PersonaBasicaDel
+from .sociopViewset.personabasicaView import PersonaBasicaView, PersonaBasicaNew, PersonaBasicaEdit, PersonaBasicaDel, personabDetail
 from .sociopViewset.viviSoView import ViviendSoView, ViviendSoNew, ViviendSoEdit, ViviendSoDel
 from .sociopViewset.encargadoView import EncargadoView, EncargadoNew, EncargadoEdit, EncargadoDel
 from .sociopViewset.empreView import EmprenView, EmprenNew, EmprenEdit, EmprenDel
