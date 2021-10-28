@@ -2,6 +2,13 @@ from django import forms
 from app.models import ViviendaSocio
 
 class ViviendaSForm(forms.ModelForm):
+    estado_vivsocio = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = ViviendaSocio
         fields = [
@@ -44,14 +51,7 @@ class ViviendaSForm(forms.ModelForm):
             'no_pobre':'no pobre',
             'Extemadamente_pobre':'Extemadamente pobre',
             'estado_vivsocio':'Activo/Inactivo'}
-        widget = {
-            'numero_habitantes': forms.TextInput,
-            'estado_vivsocio': forms.CheckboxInput(
-                attrs = {
-                    'checked':True,
-                }
-            )
-        }
+        widget = { 'numero_habitantes': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -63,3 +63,4 @@ class ViviendaSForm(forms.ModelForm):
             self.fields['tipopiso'].empty_label = "Seleccione un Piso"
             self.fields['tipomuro'].empty_label = "Seleccione un muro"
             self.fields['tipovivienda'].empty_label = "Seleccione una tipo de vivienda"
+            self.fields['numero_habitantes'].required = False
