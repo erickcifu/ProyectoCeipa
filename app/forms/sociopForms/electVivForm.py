@@ -4,8 +4,8 @@ from app.models import ElectVivienda
 class ElectvivForm(forms.ModelForm):
     class Meta:
         model = ElectVivienda
-        fields = ['elect']
-        labels = {'elect':'Electrodomestico'}
+        fields = ['elect',]
+        labels = {'elect':'Electrodomestico',}
         widget = {
             'elect': forms.TextInput,
         }
