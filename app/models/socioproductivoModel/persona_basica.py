@@ -6,7 +6,6 @@ from app.models.educacion_model.genero import genero
 from .info_educacion import InfoEducacion
 from .caract_laborales import Caract_laborales
 from .aspectos_salud import AspectosSalud
-from .info_economica import InfoEconomica
 from .encargado import Encargado
 from .padres_familia import PadresSociop
 from .ViviendaSocio import ViviendaSocio
@@ -31,12 +30,11 @@ class PersonaBasica(models.Model):
     caract_laborales = models.ForeignKey(Caract_laborales, on_delete=models.CASCADE, related_name="PB_Carac_laborales")
     aspectos_salud = models.ForeignKey(AspectosSalud, on_delete=models.CASCADE, related_name="PB_aspectos_salud")
     razon = models.CharField(max_length=200)
-    info_economica = models.ForeignKey(InfoEconomica, on_delete=models.CASCADE, related_name="PB_info_economica")
     ingreso_total = models.FloatField()
     total_gastos = models.FloatField(null=True, blank=True)
     edad = models.IntegerField(null=True, default=None, blank=True)
     tutor_socio = models.ForeignKey(Encargado, on_delete=models.CASCADE, related_name="PB_tutor_socio")
-    padres = models.ForeignKey(PadresSociop, on_delete=models.CASCADE, related_name="PB_padres")
+    padres = models.ForeignKey(PadresSociop, on_delete=models.CASCADE, related_name="PB_padres", null=True, blank=True)
     estado_persona_basica = models.BooleanField(default="True")
 
     @property
@@ -46,7 +44,7 @@ class PersonaBasica(models.Model):
 
 
     def __str__(self):
-        return self.persona_basica
+        return self.nombresp
 
     def delete(self, *args):
         self.estado_persona_basica = False

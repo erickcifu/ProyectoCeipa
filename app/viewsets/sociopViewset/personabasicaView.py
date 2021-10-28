@@ -64,49 +64,49 @@ class PersonaBasicaNew(LoginRequiredMixin, generic.CreateView):
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
-        #try:
-        with transaction.atomic():
-            self.object = self.get_object
-            form = self.form_class(request.POST,request.FILES)
-            form2 = self.second_form_class(request.POST, prefix = 'GastoFamiliars')
-            form3 = self.third_form_class(request.POST, prefix = 'InfoEconomicas')
-            form4 = self.four_form_class(request.POST)
-            form5 = self.five_form_class(request.POST)
-            form6 = self.six_form_class(request.POST, prefix = 'ElectViviendas')
-            form7 = self.seven_form_class(request.POST)
-            form8 = self.eight_form_class(request.POST)
-            form9 = self.nine_form_class(request.POST)
-            form10 = self.ten_form_class(request.POST)
-            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid() and form7.is_valid() and form8.is_valid() and form9.is_valid() and form10.is_valid():
-                personab = form.save(commit=False)
-                personab.vivienda_socio = form5.save()
-                for form6_pad in form6:
-                    ElectVivienda=form6_pad.save(commit=False)
-                    print('ElectVivienda-----',ElectVivienda)
-                    ElectVivienda.vivienda_socio = personab.vivienda_socio
-                    ElectVivienda.save()
-                personab.aspectos_salud =form4.save()
-                personab.padres = form7.save()
-                personab.tutor_socio = form8.save()
-                personab.info_educacion= form9.save()
-                personab.c_laborales = form10.save()
-                personab.save()
-                for form2_pad in form2:
-                    Gastofamiliar=form2_pad.save(commit=False)
-                    print('GastoFamiliar-----',GastoFamiliar)
-                    GastoFamiliar.personab = personab
-                    GastoFamiliar.save()
-                for form3_pad in form3:
-                    InfoEconomica=form3_pad.save(commit=False)
-                    print('InfoEconomica-----',InfoEconomica)
-                    InfoEconomica.personab = personab
-                    InfoEconomica.save()
+        try:
+            with transaction.atomic():
+                self.object = self.get_object
+                form = self.form_class(request.POST,request.FILES)
+                form2 = self.second_form_class(request.POST, prefix = 'GastoFamiliars')
+                form3 = self.third_form_class(request.POST, prefix = 'InfoEconomicas')
+                form4 = self.four_form_class(request.POST)
+                form5 = self.five_form_class(request.POST)
+                form6 = self.six_form_class(request.POST, prefix = 'ElectViviendas')
+                form7 = self.seven_form_class(request.POST)
+                form8 = self.eight_form_class(request.POST)
+                form9 = self.nine_form_class(request.POST)
+                form10 = self.ten_form_class(request.POST)
+                if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid() and form7.is_valid() and form8.is_valid() and form9.is_valid() and form10.is_valid():
+                    personab = form.save(commit=False)
+                    personab.vivienda_socio = form5.save()
+                    for form6_pad in form6:
+                        ElectVivienda=form6_pad.save(commit=False)
+                        print('ElectVivienda-----',ElectVivienda)
+                        ElectVivienda.vivienda = personab.vivienda_socio
+                        ElectVivienda.save()
+                    personab.aspectos_salud =form4.save()
+                    personab.padres = form7.save()
+                    personab.tutor_socio = form8.save()
+                    personab.info_educacion= form9.save()
+                    personab.caract_laborales = form10.save()
+                    personab.save()
+                    for form2_pad in form2:
+                        gasto=form2_pad.save(commit=False)
+                        print('GastoFamiliar-----',GastoFamiliar)
+                        gasto = GastoFamiliar(**form2_pad.cleaned_data, gasto_persona = personab)
+                        gasto.save()
+                    for form3_pad in form3:
+                        InfoEconomica=form3_pad.save(commit=False)
+                        print('InfoEconomica-----',InfoEconomica)
+                        InfoEconomica.eco_persona = personab
+                        InfoEconomica.save()
 
-                return HttpResponseRedirect(self.get_success_url())
-            else:
-                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8, form9=form9 , form10=form10))
-        #except IntegrityError:
-            #handle_exception()
+                    return HttpResponseRedirect(self.get_success_url())
+                else:
+                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8, form9=form9 , form10=form10))
+        except IntegrityError:
+            handle_exception()
 
 
 class PersonaBasicaEdit(LoginRequiredMixin, generic.UpdateView):
