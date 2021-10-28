@@ -24,3 +24,4 @@ class BenForm(forms.ModelForm):
             })
             self.fields['ocup'].empty_label = "Seleccione su ocupacion"
             self.fields['establecimiento'].empty_label = "Seleccione su establecimiento"
+            self.fields['ocup'].required = False

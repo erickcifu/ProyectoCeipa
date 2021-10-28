@@ -135,9 +135,54 @@
                                         <h5 class="card-title mb-4">Ingrese la información de la  vivienda</h5>
                                         <!--Inicio Formulario-->
 
-                                          <div class="row gx-3">
-                                                {{ form5 |crispy  }}
-                                          </div>
+                                        <div class="row gx-3">
+                                          {{ form5.numero_habitantes | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.otra_Viv | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.desc_Otra_Viv | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.Telefono | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.tipopiso | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.tipotecho | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.tipomuro | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.tipovivienda | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.agua_potable | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.energia_elect | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.dreaje | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          <h4>la vivienda pertenece al nivel economico:</h4>
+                                          {{ form5.nivel_Eco_Alto | as_crispy_field }}
+                                          {{ form5.nivel_Eco_medio | as_crispy_field }}
+                                          {{ form5.nivel_Eco_bajo | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          <h4>usted se consideras economicamente:</h4>
+                                          {{ form5.pobre | as_crispy_field }}
+                                          {{ form5.no_pobre | as_crispy_field }}
+                                          {{ form5.Extemadamente_pobre | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.estado_vivsocio | as_crispy_field }}
+                                        </div>
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
                                             <button class="btn btn-ligth" type="button">Anterior</button>

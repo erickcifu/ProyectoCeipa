@@ -56,3 +56,5 @@ class AlumnoForm(forms.ModelForm):
         self.fields['ocup'].empty_label = "Seleccione ocupación"
         self.fields['etni'].empty_label = "Seleccione etnia"
         self.fields['idiome'].empty_label = "Seleccione idioma"
+        self.fields['nombres_alumno'].required = False
+        self.fields['apellidos_alumno'].required = False
