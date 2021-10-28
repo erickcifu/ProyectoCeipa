@@ -117,6 +117,34 @@ class PersonaBasicaEdit(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy("socioproductivo:personabasica_list")
     login_url = 'app:login'
 
+class personabDetail(LoginRequiredMixin, generic.DetailView):
+    template_name = "educacion/personab_detail.html"
+    model = PersonaBasica
+
+    def get_ElectVivienda(self, personab):
+        return ElectVivienda.objects.filter(personab=personab)
+
+    def get_InfoEconomica(self, personab):
+        return InfoEconomica.objects.filter(personab=personab)
+
+    def get_GastoFamiliar(self, personab):
+        return GastoFamiliar.objects.filter(personab=personab)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        personab = self.get_object()
+        vivienda = personab.vivienda_socio.first()
+        context['item'] = personab
+        context['padres'] = personab.padres
+        context['info_educacion'] =  persona.info_educacion
+        context['caract_laborales'] = personab.PB_Carac_laborales.first()
+        context['tutor_socio'] = alumno.PB_tutor_socio.first()
+        context['viv'] = vivienda
+        context['conviv'] = self.get_convivientes(vivienda)
+        context['padec'] = self.get_apadecimientos(alumno)
+        context['laboral'] = alumno.aspect_alumn.first()
+        return context
+
 class PersonaBasicaDel(LoginRequiredMixin, generic.DeleteView):
     model = PersonaBasica
     template_name = "socioproductivo/catalogos_del.html"
