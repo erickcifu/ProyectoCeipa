@@ -3,13 +3,13 @@ from django.db import models
 from app.models.educacion_model.municipioModel import municipio
 from app.models.educacion_model.etnia import etnia
 from app.models.educacion_model.genero import genero
-from .ViviendaSocio import ViviendaSocio
 from .info_educacion import InfoEducacion
 from .caract_laborales import Caract_laborales
 from .aspectos_salud import AspectosSalud
 from .info_economica import InfoEconomica
 from .encargado import Encargado
 from .padres_familia import PadresSociop
+from .ViviendaSocio import ViviendaSocio
 
 class PersonaBasica(models.Model):
     nombresp = models.CharField(max_length=100)
@@ -26,9 +26,9 @@ class PersonaBasica(models.Model):
     municipio = models.ForeignKey(municipio, on_delete=models.CASCADE, related_name="PB_municipio")
     etnia = models.ForeignKey(etnia, on_delete=models.CASCADE, related_name="PB_etnia")
     genero = models.ForeignKey(genero, on_delete=models.CASCADE, related_name="PB_genero")
-    vivienda_socio = models.ForeignKey(ViviendaSocio, on_delete=models.CASCADE, related_name="PB_viviendasocio")
+    vivienda_socio = models.ForeignKey(ViviendaSocio, on_delete=models.CASCADE, related_name="PB_1viviendasocio")
     info_educacion = models.ForeignKey(InfoEducacion, on_delete=models.CASCADE, related_name="PB_info_educacion")
-    c_laborales = models.ForeignKey(Caract_laborales, on_delete=models.CASCADE, related_name="PB_CaracteristicasLaborales")
+    caract_laborales = models.ForeignKey(Caract_laborales, on_delete=models.CASCADE, related_name="PB_Carac_laborales")
     aspectos_salud = models.ForeignKey(AspectosSalud, on_delete=models.CASCADE, related_name="PB_aspectos_salud")
     razon = models.CharField(max_length=200)
     info_economica = models.ForeignKey(InfoEconomica, on_delete=models.CASCADE, related_name="PB_info_economica")

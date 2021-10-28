@@ -29,7 +29,7 @@
                               <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
                                 <div class="wizard-step-icon">1</div>
                                 <div class="wizard-step-text">
-                                  <div class="wizard-step-text-name">Perrsona</div>
+                                  <div class="wizard-step-text-name">Persona</div>
                                   <div class="wizard-step-text-details">Infomaciòn general de la persona</div>
                                 </div>
                               </a>
@@ -274,12 +274,12 @@
                                         <div class="row justify-content-center">
                                           <div class="col-xxl-6 col-xl-8">
                                             <h3 class="text-primary">Paso 9</h3>
-                                            <h5 class="card-title mb-4">Ingrese la información economica</h5>
+                                            <h5 class="card-title mb-4">Ingrese informaciòn de el Gasto familiar</h5>
                                             <!--Inicio Formulario-->
                                             <div class="row gx-3" >
-                                                {{form3.management_form}}
-                                                  {%for f in form3 %}
-                                                    <div id="formularios_InfoEconomicas" class="row">
+                                                {{form2.management_form}}
+                                                  {%for f in form2 %}
+                                                    <div id="formularios_GastoFamiliars" class="row">
                                                       {{ f | crispy}}
                                                     </div>
                                                     <br/>
@@ -289,7 +289,7 @@
                                             <br/>
 
                                             <div class="d-flex justify-content-between">
-                                              <button class="btn btn-primary" role="button" onclick="agregar_form_InfoEconomica();">
+                                              <button class="btn btn-primary" role="button" onclick="agregar_form_GastoFamiliar();">
                                                 nuevo form
                                             </button>
                                             </div>
@@ -303,15 +303,15 @@
                                         </div>
                                       </div>
                                     <!--Tab item 8-->
-                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard8" role="tabpanel" aria-labelledby="wizard8-tab">
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
                                           <h3 class="text-primary">Paso 10</h3>
-                                          <h5 class="card-title mb-4">Ingrese informaciòn de el Gasto familiar</h5>
+                                          <h5 class="card-title mb-4">Ingrese la información economica</h5>
                                             <div class="row gx-3">
-                                              {{form2.management_form}}
-                                                {%for f in form2 %}
-                                                  <div id="formularios_GastoFamiliars" class="row">
+                                              {{form3.management_form}}
+                                                {%for f in form3 %}
+                                                  <div id="formularios_InfoEconomicas" class="row">
                                                     {{ f | crispy}}
                                                   </div>
                                                   <br/>
@@ -319,7 +319,7 @@
                                                 {%endfor%}
                                                 <br/>
                                                 <div class="d-flex justify-content-between">
-                                                  <button class="btn btn-primary" role="button" onclick="agregar_form_GastoFamiliar();">
+                                                  <button class="btn btn-primary" role="button" onclick="agregar_form_InfoEconomica();">
                                                     nuevo form
                                                 </button>
                                                 </div>
@@ -445,6 +445,8 @@
         document.getElementById('formularios_InfoEconomicas').appendChild($input_pariente)
         document.getElementById('formularios_InfoEconomicas').appendChild($label_cant)
         document.getElementById('formularios_InfoEconomicas').appendChild($input_cant)
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_proc)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_proc)
         document.getElementById('formularios_InfoEconomicas').appendChild($label_obs)
         document.getElementById('formularios_InfoEconomicas').appendChild($input_obs)
         document.getElementById('formularios_InfoEconomicas').appendChild($label_est)
