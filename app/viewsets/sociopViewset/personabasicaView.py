@@ -118,31 +118,32 @@ class PersonaBasicaEdit(LoginRequiredMixin, generic.UpdateView):
     login_url = 'app:login'
 
 class personabDetail(LoginRequiredMixin, generic.DetailView):
-    template_name = "educacion/personab_detail.html"
+    template_name = "socioproductivo/personab_detail.html"
     model = PersonaBasica
 
-    def get_ElectVivienda(self, personab):
-        return ElectVivienda.objects.filter(personab=personab)
+    def get_ElectVivienda(self, vivienda):
+        return ElectVivienda.objects.filter(vivienda=vivienda)
 
     def get_InfoEconomica(self, personab):
-        return InfoEconomica.objects.filter(personab=personab)
+        return InfoEconomica.objects.filter(eco_persona=personab)
 
     def get_GastoFamiliar(self, personab):
-        return GastoFamiliar.objects.filter(personab=personab)
+        return GastoFamiliar.objects.filter(gasto_persona=personab)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         personab = self.get_object()
-        vivienda = personab.vivienda_socio.first()
+        vivienda = personab.vivienda_socio
         context['item'] = personab
         context['padres'] = personab.padres
-        context['info_educacion'] =  persona.info_educacion
-        context['caract_laborales'] = personab.PB_Carac_laborales.first()
-        context['tutor_socio'] = alumno.PB_tutor_socio.first()
+        context['aspect_salud'] = personab.aspectos_salud
+        context['info_educacion'] =  personab.info_educacion
+        context['caract_laborales'] = personab.caract_laborales
+        context['tutor_socio'] = personab.tutor_socio
         context['viv'] = vivienda
-        context['conviv'] = self.get_convivientes(vivienda)
-        context['padec'] = self.get_apadecimientos(alumno)
-        context['laboral'] = alumno.aspect_alumn.first()
+        context['electrodomesticos_vivienda'] = self.get_ElectVivienda(vivienda)
+        context['info_eco'] = self.get_InfoEconomica(personab)
+        context['gasto_familiar'] = self.get_GastoFamiliar(personab)
         return context
 
 class PersonaBasicaDel(LoginRequiredMixin, generic.DeleteView):

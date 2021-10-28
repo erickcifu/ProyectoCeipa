@@ -421,6 +421,7 @@ urlpatterns = [
     path('persona_socio', viewsets.PersonaBasicaView.as_view(), name='personabasica_list'),
     path('persona_socio/new', viewsets.PersonaBasicaNew.as_view(),name='personabasica_new'),
     path('persona_socio/edit/<int:pk>', viewsets.PersonaBasicaEdit.as_view(), name='personabasica_edit'),
+    path('persona_socio/detail/<int:pk>/', viewsets.personabDetail.as_view(), name='personabasica_detail'),
     path('persona_socio/delete/<int:pk>', viewsets.PersonaBasicaDel.as_view(), name='personabasica_del'),
 
     path('vivienda', viewsets.ViviendSoView.as_view(), name='viviendSo_list'),

@@ -39,8 +39,8 @@ class PersonaBasica(models.Model):
 
     @property
     def foto_url(self):
-        if self.fotografia and hasattr(self.fotografia, 'url'):
-            return self.fotografia.url
+        if self.fotografiaP and hasattr(self.fotografiaP, 'url'):
+            return self.fotografiaP.url
 
 
     def __str__(self):

@@ -13,7 +13,6 @@ class Encargado(models.Model):
     octutor = models.ForeignKey(OcupacionTutor, on_delete=models.CASCADE, related_name="E_OcupacionTutor")
     estado_Encargado = models.BooleanField(default=True)
 
-    @property
     def __str__(self):
         return self.nombres_encar
 
