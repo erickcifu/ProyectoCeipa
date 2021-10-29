@@ -4,8 +4,7 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Encargado
-          <a href="{% url 'socioproductivo:Encar_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+          Emprendimientos
       </div>
       <div class="card mb-4">
       <div class="card-body">
@@ -15,11 +14,11 @@
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>Nombre encargado </th>
-                  <th>Fecha de nacimiento</th>
-                  <th>Telefono</th>
-                  <th>Parentesco</th>
-                  <th>ocupacion</th>
+                  <th>Emprendimiento</th>
+                  <th>Capital</th>
+                  <th>Fecha de inicio</th>
+                  <th>Lugar</th>
+                  <th>Dueño</th>
                   <th>Estado</th>
               </thead>
               <tbody>
@@ -30,7 +29,7 @@
                       <td>{{ item.Monto_Capital }}</td>
                       <td>{{ item.fecha_inicio }}</td>
                       <td>{{ item.muni }}</td>
-
+                      <td>{{ item.persona }}</td>
                       {% if item.estado_Emprendimiento is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

@@ -35,7 +35,8 @@ class PersonaBasica(models.Model):
     edad = models.IntegerField(null=True, default=None, blank=True)
     tutor_socio = models.ForeignKey(Encargado, on_delete=models.CASCADE, related_name="PB_tutor_socio")
     padres = models.ForeignKey(PadresSociop, on_delete=models.CASCADE, related_name="PB_padres", null=True, blank=True)
-    estado_persona_basica = models.BooleanField(default="True")
+    certificado_taller = models.BooleanField(default=False)
+    estado_persona_basica = models.BooleanField(default=True)
 
     @property
     def foto_url(self):
@@ -48,7 +49,7 @@ class PersonaBasica(models.Model):
 
     def delete(self, *args):
         self.estado_persona_basica = False
-        if self.fotografia is not  None:
-            self.fotografia.delete()
+        if self.fotografiaP is not  None:
+            self.fotografiaP.delete()
         self.save()
         return True

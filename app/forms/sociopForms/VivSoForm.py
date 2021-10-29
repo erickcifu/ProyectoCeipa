@@ -33,7 +33,7 @@ class ViviendaSForm(forms.ModelForm):
             ]
 
         labels = {
-            'numero_habitantes':'numero habitantes',
+            'numero_habitantes':'numero habitacione en la vivienda',
             'otra_Viv':'Tiene otra vivienda',
             'desc_Otra_Viv':'Descrpcion de la otra Vivienda',
             'Telefono':'Telefono de la vivienda',

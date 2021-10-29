@@ -18,6 +18,7 @@ class ViviendaSocio(models.Model):
     agua_potable = models.BooleanField(default=False)
     energia_elect = models.BooleanField(default=False)
     dreaje = models.BooleanField(default=False)
+    servicio_telefono = models.BooleanField(default=False)
     nivel_Eco_Alto = models.BooleanField(default=False)
     nivel_Eco_medio = models.BooleanField(default=False)
     nivel_Eco_bajo = models.BooleanField(default=False)

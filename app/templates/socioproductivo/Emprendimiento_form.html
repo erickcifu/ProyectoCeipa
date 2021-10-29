@@ -18,7 +18,23 @@
                             {% if obj %} Editar {% else %} Nuevo {% endif %} Emprendimiento
                         </div>
                         <div class="dropdown-divider"></div>
+
                         <div class="row">
+                          <label for="persona">Persona</label>
+                          <select name="persona" id="persona" class="form-control" {%if id_persona %}disabled{% endif %}>
+                              <option value selected>---------</option>
+                              {%if personas %}
+                                {%for p in personas %}
+                                  {%if id_persona == p.id%}
+                                      <option value="{{p.id}}" selected>{{ p.nombresp }}</option>
+                                  {%else%}
+                                  <option value="{{p.id}}">{{ p.nombresp }}</option>
+
+                                  {%endif%}
+
+                                {%endfor%}
+                              {%endif%}
+                          </select>
                             {{ form | crispy }}
                         </div>
                         <div class="dropdown-divider"></div>

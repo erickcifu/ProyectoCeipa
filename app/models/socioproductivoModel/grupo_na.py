@@ -5,7 +5,7 @@ class GrupoNA(models.Model):
     estado_grupona = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.nombre_grupo
+        return self.nombre_grupona
 
     def delete(self, *args):
         self.estado_grupona = False
