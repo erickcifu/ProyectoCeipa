@@ -81,3 +81,4 @@ from .socioproductivoModel.persona_basica import PersonaBasica
 from .socioproductivoModel.ViviendaSocio import ViviendaSocio
 from .socioproductivoModel.encargado import Encargado
 from .socioproductivoModel.emprendimiento import Emprendimiento
+from .socioproductivoModel.inscripcionp import Inscripcionp

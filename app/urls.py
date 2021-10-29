@@ -435,7 +435,7 @@ urlpatterns = [
     path('encargado/delete/<int:pk>', viewsets.EncargadoDel.as_view(), name='Encar_del'),
 
     path('emprendimiento', viewsets.EmprenView.as_view(), name='emprend_list'),
-    path('emprendimiento/new', viewsets.EmprenNew.as_view(),name='emprend_new'),
+    path('emprendimiento/new/<int:pk>/', viewsets.EmprenNew.as_view(),name='emprend_new'),
     path('emprendimiento/edit/<int:pk>', viewsets.EmprenEdit.as_view(), name='emprend_edit'),
     path('emprendimiento/delete/<int:pk>', viewsets.EmprenDel.as_view(), name='emprend_del'),
 

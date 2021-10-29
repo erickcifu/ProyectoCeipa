@@ -7,30 +7,29 @@ class InfoEducacionForm(forms.ModelForm):
         fields = ['nombre_establecimiento',
         'direccion_establecimiento',
         'jornada_estudio',
-        #'grado_actual',
+        'grado_actual',
         'nombre_maestro',
         'tel_maestro',
-        #'grupo_nin_adole',
-        'nombre_grupo',
-        'descripcion_grupo', 'recibido_formacion',
-        'conocimiento_derechoshumanos', 'conocimiento_leyes', 'importancia_organizacion', 'te_motiva_participar', 'que_esperas_participar', 'estado_info_educacion']
+        'participacion_grupo',
+        'grupo_nin_adole',
+        'recibido_formacion',
+        'conocimiento_derechoshumanos', 'conocimiento_leyes', 'importancia_organizacion', 'te_motiva_participar',  'estado_info_educacion']
         labels = {
             'nombre_establecimiento':'Nombre de Establecimiento',
             'direccion_establecimiento':'Direccion de Establecimiento',
             'jornada_estudio':'Jornada de Estudio',
-            #'grado_actual':'Grado Actual',
+            'grado_actual':'Grado Actual',
             'nombre_maestro':'Nombre del Maestro',
             'tel_maestro':'Telefono del Maestro',
-            #'grupo_nin_adole':'Participacion en un Grupo de niñez y adolecencia',
-            'nombre_grupo':'Nombre del Grupo',
-            'descripcion_grupo':'Descripción del Grupo',
-            'recibido_formacion':'Por qué has recibido Formación de derechos humanos',
-            'conocimiento_derechoshumanos':'Conocimiento a Derechos Humanos',
-            'conocimiento_leyes':'Conocimiento a Leyes',
-            'importancia_organizacion':'Importancia de Organización',
-            'te_motiva_participar':'Motivación a Participar en consejo municipal',
-            'que_esperas_participar':'Qué esperas al participar en el consejo Municipal de Niñez y Adolecencia',
-            'estado_info_educacion':'Activo/Inactivo'}
+            'participacion_grupo':'¿Participa en algun grupo de niñez y adolescencia?',
+            'grupo_nin_adole':'¿en que grupo de niñez y adolecencia?',
+            'recibido_formacion':'¿Has recibido formación en derechos humanos de la niñez, adolecencia y juventud?',
+            'conocimiento_derechoshumanos':'¿Qué sabes sobre derechos humanos de la niñez, adolescencia y juventud?',
+            'conocimiento_leyes':'¿Conoces las leyes que protegen a la niñez y adolescencia?',
+            'importancia_organizacion':'¿Crees que es importante que la niñez, adolescencia y juventud se organice y participe?',
+            'te_motiva_participar':'¿Tienes motivación para participar en algún grupo de consejo municipal?',
+            'estado_info_educacion':'Activo/Inactivo'
+            }
         widget = {
             'nombre_establecimiento': forms.TextInput,
             'estado_info_educacion': forms.CheckboxInput(

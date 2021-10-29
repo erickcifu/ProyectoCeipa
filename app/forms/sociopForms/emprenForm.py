@@ -21,6 +21,7 @@ class EmprenForm(forms.ModelForm):
             'nombres_emp',
             'Monto_Capital',
             'fecha_inicio',
+            'Tipoemp',
             'muni',
             'estado_Emprendimiento'
             ]
@@ -29,6 +30,7 @@ class EmprenForm(forms.ModelForm):
                 'nombres_emp':"Nombre del emprendimiento:",
                 'Monto_Capital':"Monto del capital en Q",
                 'fecha_inicio':"Fecha de inicio del emprendimiento",
+                'Tipoemp':"Tipo de emprendimiento",
                 'muni':"Municipio",
                 'estado_Emprendimiento':'Activo/Inactivo'}
         widget = {
@@ -47,3 +49,4 @@ class EmprenForm(forms.ModelForm):
                 'class':'form-control'
             })
             self.fields['muni'].empty_label = "Seleccione un municipio"
+            self.fields['Tipoemp'].empty_label = "Seleccione tipo de emprendimiento"
