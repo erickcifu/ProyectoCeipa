@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Corporacion Municipal
+          Corporación Municipal
           <a href="{% url 'municipalizacion:corpmuni_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
@@ -15,13 +15,10 @@
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>Nombre</th>
-                  <th>comision</th>
-                  <th>partido</th>
-                  <th>grupo</th>
-                  <th>cargo</th>
-                  <th>vacuna</th>
-                  <th>participacion</th>
+                  <th>Representante</th>
+                  <th>Comisión</th>
+                  <th>Correo electrónico</th>
+                  <th>Vacuna contra COVID-19</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -29,13 +26,18 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</td>
+                      <td><a href="{% url 'municipalizacion:corpmuni_detail' item.id %}">{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</a></td>
                       <td>{{ item.comision }}</td>
-                      <td>{{ item.partido }}</td>
-                      <td>{{ item.grupo }}</td>
-                      <td>{{ item.cargo }}</td>
-                      <td>{{ item.vacuna }}</td>
-                      <td>{{ item.participacion }}</td>
+                      <td>{{ item.correo_corporacion }}</td>
+                      {% if item.vacuna is True %}
+                        <td>
+                          <span class="badge bg-purple-soft text-purple">Sí tiene</span>
+                        </td>
+                      {% else %}
+                        <td>
+                          <span class="badge bg-purple-soft text-purple">No tiene</span>
+                        </td>
+                      {% endif %}
                       {% if item.estado_corporacion is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

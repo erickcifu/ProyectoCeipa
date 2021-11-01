@@ -1,10 +1,11 @@
 {% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
+{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -18,33 +19,23 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                            <div class="col-10">
-                              <div class="input-group">
-                                  {{ form.area}}
-                              </div>
-                              <div class="input-group">
-                                  {{ form.programa}}
-                              </div>
-                              <div class="input-group">
-                                  {{ form.beneficiado}}
-                              </div>
-                              <div class="input-group">
-                                <input type="text" name="observacion" maxlength="255" class="form-control" required id="id_observacion"
-                                placeholder="Observacion" value="{% if obj %} {{ obj.observacion }} {% endif %}">
-                              </div>
-                              <div class="input-group">
-                                <input type="date" name="fecha" maxlength="255" class="form-control" required id="id_fecha"
-                                placeholder="fecha" value="{% if obj %} {{ obj.fecha }} {% endif %}">
-                              </div>
+                          <label for="area">Area de niñez, adolescencia y juventud</label>
+                          <select name="area" id="area" class="form-control" {%if id_area%}disabled{%endif%}>
+                              <option value selected>---------</option>
+                              {%if areas%}
+                                {%for area in areas%}
+                                  {%if id_area == area.id%}
+                                      <option value="{{area.id}}" selected>{{area.nombre_area}}</option>
+                                  {%else%}
+                                  <option value="{{area.id}}">{{area.nombre_area}}</option>
+
+                                  {%endif%}
+
+                                {%endfor%}
+                              {%endif%}
+                          </select>
+                            {{ form | crispy }}
                             </div>
-                            <div class="col-3">
-                                    <label for="id_estado_ba">Estado</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="estado_ba" class="form-control" id="id_estado_ba" type="checkbox"  {% if obj.estado_ba %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- {{form.as_p}} -->
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">

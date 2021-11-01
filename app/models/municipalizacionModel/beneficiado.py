@@ -7,6 +7,7 @@ from .establecimiento import Establecimiento
 class Beneficiado(models.Model):
     tutor = models.ForeignKey(TutorMuni, on_delete=models.CASCADE, related_name="B_tutor")
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name="B_persona")
+    fecha_nacimiento_benef = models.DateField()
     ocup = models.ForeignKey(ocupacion, on_delete=models.CASCADE, related_name="B_ocupacion")
     establecimiento = models.CharField(max_length=100, null=True, blank=True)
     establecimiento_privado = models.BooleanField(default=False)

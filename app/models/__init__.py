@@ -46,7 +46,7 @@ from .municipalizacionModel.partidopolitic import PartidoPolitic
 from .municipalizacionModel.lider_comunitario import LiderComunitario
 from .municipalizacionModel.ausen_beneficiado import AusenBeneficiado
 from .municipalizacionModel.beneficiado import Beneficiado
-from .municipalizacionModel.cargo import Cargo
+from .municipalizacionModel.tipo_medio import Tipo_medio
 from .municipalizacionModel.CarGrup import CargoGrupo
 from .municipalizacionModel.comision import Comision
 from .municipalizacionModel.idioPer import IdiomaPersona

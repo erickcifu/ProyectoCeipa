@@ -47,7 +47,6 @@ from .models.municipalizacionModel.partidopolitic import PartidoPolitic
 from .models.municipalizacionModel.lider_comunitario import LiderComunitario
 from .models.municipalizacionModel.ausen_beneficiado import AusenBeneficiado
 from .models.municipalizacionModel.beneficiado import Beneficiado
-from .models.municipalizacionModel.cargo import Cargo
 from .models.municipalizacionModel.CarGrup import CargoGrupo
 from .models.municipalizacionModel.comision import Comision
 from .models.municipalizacionModel.idioPer import IdiomaPersona
@@ -62,6 +61,7 @@ from .models.municipalizacionModel.corporacionMuni import CorporacionMunicipal
 from .models.municipalizacionModel.discapacidad import Discapacidad
 from .models.municipalizacionModel.gradoAcademico import GradoAcademico
 from .models.educacion_model.aspectosLaborales import AspectosLab
+from .models.municipalizacionModel.tipo_medio import Tipo_medio
 #SocioProductivo
 from .models.socioproductivoModel.electrodomesticos import Electrodomesticos
 from .models.socioproductivoModel.gasto_familiar import GastoFamiliar
@@ -131,7 +131,6 @@ admin.site.register(PartidoPolitic)
 admin.site.register(LiderComunitario)
 admin.site.register(AusenBeneficiado)
 admin.site.register(Beneficiado)
-admin.site.register(Cargo)
 admin.site.register(CargoGrupo)
 admin.site.register(Comision)
 admin.site.register(IdiomaPersona)
@@ -146,6 +145,7 @@ admin.site.register(CorporacionMunicipal)
 admin.site.register(Discapacidad)
 admin.site.register(GradoAcademico)
 admin.site.register(AspectosLab)
+admin.site.register(Tipo_medio)
 #SocioProductivo
 admin.site.register(Electrodomesticos)
 admin.site.register(GastoFamiliar)

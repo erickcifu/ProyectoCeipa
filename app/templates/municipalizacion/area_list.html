@@ -1,5 +1,5 @@
 {% extends 'base/municipalizacion.html' %}
-
+{% load custom_tags %}
 {% block page_content %}
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
@@ -12,40 +12,35 @@
           {% if not obj %}
           <div class="alert alert-info">No hay datos de Area</div>
           {% else %}
-          <table id="datatablesSimple">
-              <thead>
-                  <th>Id</th>
-                  <th>Nombre Area</th>
-                  <th>Estado</th>
-                  <th class="all">Acciones</th>
-              </thead>
-              <tbody>
-                  {% for item in obj %}
-                  <tr>
-                      <td>{{ item.id }}</td>
-                      <td>{{ item.nombre_area }}</td>
-                      {% if item.estado_area is True %}
-                      <td>
-                        <span class="badge bg-green-soft text-green">Activo</span>
-                      </td>
-                      {% else %}
-                      <td>
-                        <span class="badge bg-red-soft text-red">Inactivo</span>
-                      </td>
-                      {% endif %}
-                      <td>
-                        <a href="{% url 'municipalizacion:area_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
-                        <a href="{% url 'municipalizacion:area_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
 
-                          <!--<a href="{% url 'municipalizacion:area_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                          <a href="{% url 'municipalizacion:area_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
-                          -->
-
-                      </td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
+          <div class="row">
+          {% for item in obj %}
+          {% set_variable item.id as var %}
+          <div class="col-lg-6 col-xl-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                  <a class="text-primary stretched-link" href="{% url 'municipalizacion:benefar_list' %}?lang={{var}}">{{ item.nombre_area }}</a>
+                  <div class="text-primary"><i class="fas fa-angle-right"></i></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="text-lg fw-bold">
+                    {% if item.estado_area is True %}
+                      <span class="badge bg-green-soft text-green">Activo </span>
+                    {% else %}
+                      <span class="badge bg-red-soft text-red">Inactivo</span>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <a href="{% url 'municipalizacion:area_edit' item.id %}" class="btn btn-outline-yellow" role="button">Editar</a>
+                  <a href="{% url 'municipalizacion:area_del' item.id %}" class="btn btn-outline-red" role="button">Eliminar</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
           {% endif %}
       </div>
     </div>

@@ -1,0 +1,263 @@
+{% extends 'base/municipalizacion.html' %}
+
+{% block page_content %}
+{% load crispy_forms_tags %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-xl-12 col-md-12 mb-12">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          <div class="col-12 col-md-6 offset-md-3">
+                            <h4> Editar comisión NA </h4>
+                          </div>
+                    </div>
+                </div>
+                <!--Wizzard-->
+                        <div class="card">
+                          <div class="card-header border-bottom">
+                            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                              <!--Wizard item 1-->
+                              <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                <div class="wizard-step-icon">1</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Representante</div>
+                                  <div class="wizard-step-text-details">Infomaciòn general del representante</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 2-->
+                              <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Comision</div>
+                                  <div class="wizard-step-text-details">Informaciòn de la comision</div>
+                                </div>
+                              </a>
+                            <!--Wizard Body-->
+                                <div class="tab-content" id="cardTabContent">
+                                  <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 1</h3>
+                                        <h5 class="card-title mb-4">Ingrese la informaciòn personal del representante</h5>
+
+                                        <div class="row gx-12">
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.persona | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.apellidos_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.cui | as_crispy_field }}
+                                            </div>
+                                          </div>
+
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.direccion_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.telefono | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.telefonoc | as_crispy_field }}
+                                            </div>
+                                          </div>
+
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form2.correo_personacna | as_crispy_field }}
+                                            </div>
+                                          </div>
+
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.fotografia_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form2.participacion_comina | as_crispy_field }}
+                                            </div>
+                                          </div>
+
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form2.gorg_comision | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form2.cg_comision | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.muni | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.etni | as_crispy_field }}
+                                            </div>
+                                          </div>
+
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.estudios_anteriores | as_crispy_field }}
+                                            </div>
+                                          </div>
+
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.gen | as_crispy_field }}
+                                            </div>
+                                          </div>
+
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.disc | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.estado_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                          <div class="mb-3 col-md-12">
+                                              {{ form2.vacuna_comision | as_crispy_field }}
+                                          </div>
+                                          </div>
+                                          <br/>
+                                          <br/>
+                                          <!--IDIOMA FORMSET-->
+                                          <div class="row gx-6">
+                                              <div class="row gx-3">
+                                                {{form3.management_form}}
+                                                {%for f in form3 %}
+                                                  <div id="formularios_idiomas_na" class="row">
+                                                      {{ f | crispy }}
+                                                  </div>
+                                                  <br/>
+                                                  <br/>
+                                                {% endfor %}
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <div class="d-flex justify-content-between">
+                                                  <button class="btn btn-light" role="button" onclick="agregar_idiomas_na();">
+                                                      <i class="me-2" data-feather="plus-circle"></i>Agregar idioma</button>
+                                                </div>
+                                            </div>
+                                          <!--IDOMA FORMSET FIN-->
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                          </div>
+                                        <!--Fin Formulario-->
+                                      </div>
+                                      </div>
+                                      </div>
+                                    </div>
+
+
+                                  <!--Tab item 2-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 2</h3>
+                                        <h5 class="card-title mb-4">Ingrese informaciòn de la comision</h5>
+                                        <div class="row gx-12">
+                                        <div class="row gx-3">
+                                          <div class="mb-3 col-md-12">
+                                              {{ form2.nombre_instit | as_crispy_field }}
+                                          </div>
+                                        </div>
+
+                                        <div class="row gx-3">
+                                        <div class="mb-3 col-md-6">
+                                            {{ form2.correo_instit | as_crispy_field }}
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            {{ form2.tel_instit | as_crispy_field }}
+                                        </div>
+                                      </div>
+
+
+                                        <div class="row gx-3">
+                                          <label><b>La institución es: </b></label>
+                                          <div class="mb-3 col-md-6">
+
+                                              {{ form2.inst_publica | as_crispy_field }}
+                                          </div>
+                                          <div class="mb-3 col-md-6">
+                                              {{ form2.inst_gobierno | as_crispy_field }}
+                                          </div>
+                                        </div>
+                                        <div class="row gx-3">
+                                          <div class="mb-3 col-md-12">
+                                              {{ form2.estado_comision | as_crispy_field }}
+                                          </div>
+                                        </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <button type="submit" class="btn btn-success"">Guardar</button>
+                                          </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+<script>
+    function agregar_idiomas_na(){
+      const $total_forms = document.getElementById('id_form_na-TOTAL_FORMS')
+
+      let $label_idioma = document.createElement('label')
+      $label_idioma.innerHTML = 'Idioma'
+      let $input_idioma = document.querySelector('#id_form_na-0-idioma').cloneNode(true)
+      $input_idioma.name = 'form_na-'+$total_forms.value+'-idioma'
+      $input_idioma.id = 'id_form_na-'+$total_forms.value+'-idioma'
+
+      let $label_estado_idper = document.createElement('label')
+      $label_estado_idper.innerHTML = 'Activo/Inactivo'
+      let $input_estado_idper = document.querySelector('#id_form_na-0-estado_ip').cloneNode(true)
+      $input_estado_idper.name = 'form_na-'+$total_forms.value+'-estado_ip'
+      $input_estado_idper.id = 'id_form_na-'+$total_forms.value+'-estado_ip'
+
+      document.getElementById('formularios_idiomas_na').appendChild($label_idioma)
+      document.getElementById('formularios_idiomas_na').appendChild($input_idioma)
+      document.getElementById('formularios_idiomas_na').appendChild($label_estado_idper)
+      document.getElementById('formularios_idiomas_na').appendChild($input_estado_idper)
+
+      $total_forms.value = parseInt($total_forms.value) + 1
+    }
+</script>
+{% endblock %}

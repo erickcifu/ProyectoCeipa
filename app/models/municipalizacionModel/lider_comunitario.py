@@ -15,6 +15,7 @@ class LiderComunitario(models.Model):
     periodo = models.CharField(max_length=50,null=True, blank=True)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
+    correo_lideres = models.EmailField(max_length=150, null=True, blank=True)
     estado = models.BooleanField(default=True)
 
     def delete(self, *args):

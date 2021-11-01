@@ -12,8 +12,22 @@ class CorpMuniForm(forms.ModelForm):
     )
     class Meta:
         model = CorporacionMunicipal
-        fields = ['comision','partido','participacion','grupo','cargo','vacuna', 'estado_corporacion']
-        labels = {'comision':'Comision minicipal a la que pertenece', 'partido':'Partido político al que pertenece', 'participacion':'Participa en algun grupo', 'grupo':'Grupo en el que participa', 'cargo':'Cargo que ocupa enel grupo', 'vacuna':'Vacunado contra COVID19', 'estado_corporacion':"Estado"}
+        fields = ['comision',
+        'partido',
+        'partido_actual',
+        'correo_corporacion',
+        'participacion',
+        'grupo',
+        'cargo','vacuna', 'estado_corporacion']
+        labels = {'comision':'Comision a la que pertenece',
+        'partido':'Partido político con el que entró a la corporación',
+        'partido_actual':'Partido político actual',
+        'participacion':'Participa en algun grupo',
+        'correo_corporacion':'Correo electrónico',
+        'grupo':'Grupo en el que participa',
+        'cargo':'Cargo que ocupa en el grupo',
+        'vacuna':'Vacunado contra COVID-19',
+        'estado_corporacion':"Estado"}
         widget = {'comision': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

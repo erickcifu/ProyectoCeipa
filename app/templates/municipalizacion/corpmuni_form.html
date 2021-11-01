@@ -3,7 +3,7 @@
 {% block page_content %}
 {% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
-<form method="POST" class="form-inline">
+<form method="POST" class="form-inline", enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
@@ -16,7 +16,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                           <div class="col-12 col-md-6 offset-md-3">
-                            <h4>{% if obj %} Editar {% else %} Nuevo {% endif %} Registro de corporacion municipalizacion
+                            <h4>Nuevo registro de corporación municipal
                             </h4>
                           </div>
                     </div>
@@ -41,14 +41,6 @@
                                   <div class="wizard-step-text-details">Informaciòn de corporacion municipal</div>
                                 </div>
                               </a>
-                              <!--Wizard item 3-->
-                              <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
-                                <div class="wizard-step-icon">3</div>
-                                <div class="wizard-step-text">
-                                  <div class="wizard-step-text-name">Idioma</div>
-                                  <div class="wizard-step-text-details">Informaciòn de idiomas</div>
-                                </div>
-                              </a>
 
                             <!--Wizard Body-->
                                 <div class="tab-content" id="cardTabContent">
@@ -61,11 +53,26 @@
                                           <div class="row gx-3">
                                                 {{ form | crispy }}
                                           </div>
-                                          <hr class="my-4"/>
-                                          <div class="d-flex justify-content-between">
-                                            <button class="btn btn-ligth" type="button">Anterior</button>
-                                            <a class="btn btn-primary next-step"  role="button">Siguiente</a>
-                                          </div>
+                                          <!--IDIOMA FORMSET-->
+                                          <div class="row gx-6">
+                                              <div class="row gx-3">
+                                                {{form3.management_form}}
+                                                {%for f in form3 %}
+                                                  <div id="formularios_idiomas_corp" class="row">
+                                                      {{ f | crispy }}
+                                                  </div>
+                                                  <br/>
+                                                  <br/>
+                                                {% endfor %}
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <div class="d-flex justify-content-between">
+                                                  <button class="btn btn-light" role="button" onclick="agregar_idiomas_corp();">
+                                                      <i class="me-2" data-feather="plus-circle"></i>Agregar idioma</button>
+                                                </div>
+                                            </div>
+                                          <!--IDOMA FORMSET FIN-->
                                         <!--Fin Formulario-->
                                       </div>
                                     </div>
@@ -82,31 +89,12 @@
                                           </div>
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
-                                            <button class="btn btn-ligth" type="button">Anterior</button>
-                                            <a class="btn btn-primary next-step" role="button">Siguiente</a>
+                                            <button class="btn btn-ligth" type="button">Cancelar</button>
+                                            <button type="submit" class="btn btn-success"">Guardar</button>
                                           </div>
                                       </div>
                                     </div>
                                   </div>
-                                  <!--Tab item 3-->
-                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
-                                    <div class="row justify-content-center">
-                                      <div class="col-xxl-6 col-xl-8">
-                                        <h3 class="text-primary">Paso 3</h3>
-                                        <h5 class="card-title mb-4">Ingrese idiomas</h5>
-                                            <div class="row gx-3">
-                                                {{ form3 | crispy }}
-                                              </div>
-                                          <hr class="my-4"/>
-                                          <div class="d-flex justify-content-between">
-                                            <button class="btn btn-ligth" type="button">Anterior</button>
-                                            <a class="btn btn-ligth" href="{% url 'municipalizacion:corpmuni_list' %}">Cancelar</a>
-                                            <button type="submit" class="btn btn-success"">Guardar</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <!--Tab fin -->
                                 </div>
                               </div>
                             </div>
@@ -119,4 +107,27 @@
 </div>
 {% endblock %}
 {% block js_page %}
+<script>
+    function agregar_idiomas_corp(){
+      const $total_forms_corp = document.getElementById('id_idiomas_corp-TOTAL_FORMS')
+
+      let $label_idioma_corp = document.createElement('label')
+      $label_idioma_corp.innerHTML = 'Idioma'
+      let $input_idioma_corp = document.querySelector('#id_idiomas_corp-0-idioma').cloneNode(true)
+      $input_idioma_corp.name = 'idiomas_corp-'+$total_forms_corp.value+'-idioma'
+      $input_idioma_corp.id = 'id_idiomas_corp-'+$total_forms_corp.value+'-idioma'
+
+      let $label_estado_idper_corp = document.createElement('label')
+      $label_estado_idper_corp.innerHTML = 'Activo/Inactivo'
+      let $input_estado_idper_corp = document.querySelector('#id_idiomas_corp-0-estado_ip').cloneNode(true)
+      $input_estado_idper_corp.name = 'idiomas_corp-'+$total_forms_corp.value+'-estado_ip'
+      $input_estado_idper_corp.id = 'id_idiomas_corp-'+$total_forms_corp.value+'-estado_ip'
+
+      document.getElementById('formularios_idiomas_corp').appendChild($label_idioma_corp)
+      document.getElementById('formularios_idiomas_corp').appendChild($input_idioma_corp)
+      document.getElementById('formularios_idiomas_corp').appendChild($label_estado_idper_corp)
+      document.getElementById('formularios_idiomas_corp').appendChild($input_estado_idper_corp)
+      $total_forms_corp.value = parseInt($total_forms_corp.value) + 1
+    }
+</script>
 {% endblock %}

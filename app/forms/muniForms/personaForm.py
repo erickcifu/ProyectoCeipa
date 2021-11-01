@@ -3,11 +3,6 @@ from app.models import Persona
 
 
 class PersonaForm(forms.ModelForm):
-    fecha_nacimiento = forms.DateField(
-        widget = forms.TextInput(
-            attrs={'type':'date'}
-        )
-    )
     estado_persona = forms.BooleanField(
         widget = forms.CheckboxInput(
             attrs={
@@ -17,14 +12,25 @@ class PersonaForm(forms.ModelForm):
     )
     class Meta:
         model = Persona
-        fields = ['persona', 'apellidos_persona','fecha_nacimiento','direccion_persona','telefono','telefonoc','cui', 'fotografia','muni', 'etni', 'estudios_anteriores', 'gen', 'disc','estado_persona']
+        fields = ['persona',
+        'apellidos_persona',
+        'direccion_persona',
+        'telefono',
+        'telefonoc',
+        'cui',
+        'fotografia_persona',
+        'muni',
+        'etni',
+        'estudios_anteriores',
+        'gen', 'disc','estado_persona']
         labels = {
         'persona':'Nombres',
         'apellidos_persona':'Apellidos',
-        'fecha_nacimiento':'Fecha de nacimiento',
         'direccion_persona':'Direcciòn',
         'telefono':'Telefono personal',
         'telefonoc':'Telefono de casa',
+        'cui':'CUI',
+        'fotografia_persona':'Fotografía del participante',
         'muni':'Municipio',
         'etni':'Etnia',
         'estudios_anteriores':'Ultimos grado cursado',
