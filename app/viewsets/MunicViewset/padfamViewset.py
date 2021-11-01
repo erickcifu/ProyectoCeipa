@@ -41,26 +41,25 @@ class PadFamNew(LoginRequiredMixin, generic.CreateView):
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
-        try:
-            with transaction.atomic():
-                self.object = self.get_object
-                form = self.form_class(request.POST)
-                form2 = self.second_form_class(request.POST)
-                form3 = self.third_form_class(request.POST)
 
-                if form.is_valid() and form2.is_valid() and form3.is_valid():
-                    persona = form.save()
-                    padfam = form2.save(commit=False)
-                    padfam.persona = persona
-                    padfam.save()
-                    idioma = form3.save(commit=False)
-                    idioma.persona = persona
-                    idioma.save()
-                    return HttpResponseRedirect(self.get_success_url())
-                else:
-                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
-        except IntegrityError:
-            handle_exception()
+        with transaction.atomic():
+            self.object = self.get_object
+            form = self.form_class(request.POST)
+            form2 = self.second_form_class(request.POST)
+            form3 = self.third_form_class(request.POST)
+
+            if form.is_valid() and form2.is_valid() and form3.is_valid():
+                persona = form.save()
+                padfam = form2.save(commit=False)
+                padfam.persona = persona
+                padfam.save()
+                idioma = form3.save(commit=False)
+                idioma.persona = persona
+                idioma.save()
+                return HttpResponseRedirect(self.get_success_url())
+            else:
+                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
+
 
 class PadFamEdit(LoginRequiredMixin, generic.UpdateView):
     template_name = "municipalizacion/padfam_form.html"

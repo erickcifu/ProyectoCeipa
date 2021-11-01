@@ -1,6 +1,7 @@
 {% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
+{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
@@ -26,6 +27,7 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1">Departamento</label>
                                 {{ form.dep }}
+                              
                             </div>
                         </form>
                             <div class="col-5">

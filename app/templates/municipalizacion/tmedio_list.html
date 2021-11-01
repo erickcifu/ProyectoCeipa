@@ -4,18 +4,18 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Cargo Grupo
-          <a href="{% url 'municipalizacion:carg_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+          Tipos de medio
+          <a href="{% url 'municipalizacion:tmedio_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay datos de Cargo Grupo</div>
+          <div class="alert alert-info">No hay datos</div>
           {% else %}
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>Nombre Cargo Grupo</th>
+                  <th>Tipo de difusión del medio</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -23,8 +23,8 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.nombre_cg }}</td>
-                      {% if item.estado_cg is True %}
+                      <td>{{ item.tipo_medio }}</td>
+                      {% if item.estado_tmedio is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>
                       </td>
@@ -34,8 +34,8 @@
                       </td>
                       {% endif %}
                       <td>
-                        <a href="{% url 'municipalizacion:carg_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
-                        <a href="{% url 'municipalizacion:carg_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                        <a href="{% url 'municipalizacion:tmedio_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                        <a href="{% url 'municipalizacion:tmedio_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
 
                           <!--<a href="{% url 'municipalizacion:area_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
                           <a href="{% url 'municipalizacion:area_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>

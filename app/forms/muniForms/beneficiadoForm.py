@@ -3,6 +3,11 @@ from app.models import Beneficiado
 
 
 class BenForm(forms.ModelForm):
+    fecha_nacimiento_benef = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        )
+    )
     estado_beneficiado = forms.BooleanField(
         widget = forms.CheckboxInput(
             attrs={
@@ -12,8 +17,24 @@ class BenForm(forms.ModelForm):
     )
     class Meta:
         model = Beneficiado
-        fields = ['ocup', 'establecimiento', 'estado_beneficiado']
-        labels = {'ocup':'Ocupación','establecimiento':'Establecimiento donde estudia','estado_beneficiado':"Activo/Inactivo"}
+        fields = ['ocup',
+        'fecha_nacimiento_benef',
+        'establecimiento',
+        'establecimiento_privado',
+        'establecimiento_publico',
+        'nivel_primario',
+        'nivel_secundario',
+        'nivel_universitario',
+        'estado_beneficiado']
+        labels = {'ocup':'Ocupación del beneficiado',
+        'fecha_nacimiento':'Fecha de nacimiento',
+        'establecimiento':'Nombre del establecimiento donde estudia',
+        'establecimiento_privado':'Privado',
+        'establecimiento_publico':'Público',
+        'nivel_primario':'Primaria',
+        'nivel_secundario':'Secundaria',
+        'nivel_universitario':'Universidad',
+        'estado_beneficiado':"Activo/Inactivo"}
         widget = {'estado_beneficiado': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
@@ -22,6 +43,5 @@ class BenForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-            self.fields['ocup'].empty_label = "Seleccione su ocupacion"
-            self.fields['establecimiento'].empty_label = "Seleccione su establecimiento"
+            self.fields['ocup'].empty_label = "Seleccione ocupacion"
             self.fields['ocup'].required = False

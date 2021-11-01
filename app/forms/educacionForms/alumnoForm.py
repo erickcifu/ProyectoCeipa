@@ -1,6 +1,7 @@
 from django import forms
 from app.models import Alumno, municipio, genero
 
+
 class AlumnoForm(forms.ModelForm):
 
     fecha_nacimiento = forms.DateField(

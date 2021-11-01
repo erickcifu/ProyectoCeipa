@@ -15,10 +15,10 @@
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>Establecimiento</th>
                   <th>Maestro</th>
-                  <th>Grupo Organizado</th>
-                  <th>Cargo Grupo</th>
+                  <th>Establecimiento</th>
+                  <th>Correo electrónico</th>
+                  <th>Teléfono</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -26,10 +26,10 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
+                      <td>{{ item.persona_maestro.persona }} {{ item.persona_maestro.apellidos_persona }}</td>  
                       <td>{{ item.establecimiento }}</td>
-                      <td>{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</td>
-                      <td>{{ item.gruporg }}</td>
-                      <td>{{ item.cargogrup }}</td>
+                      <td>{{ item.correo_maestro }}</td>
+                      <td>{{ item.persona_maestro.telefono }}</td>
                       {% if item.estado_maestro is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

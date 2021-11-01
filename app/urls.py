@@ -227,10 +227,11 @@ urlpatterns = [
     path('persona/edit/<int:pk>', viewsets.PerEdit.as_view(), name='per_edit'),
     path('persona/delete/<int:pk>', viewsets.PerDel.as_view(), name='per_del'),
 
-    path('beneficiado/', viewsets.BenView.as_view(), name='ben_list'),
-    path('beneficiado/new', viewsets.BenNew.as_view(), name='ben_new'),
-    path('beneficiado/edit/<int:pk>', viewsets.BenEdit.as_view(), name='ben_edit'),
-    path('beneficiado/delete/<int:pk>', viewsets.BenDel.as_view(), name='ben_del'),
+    path('participantes/', viewsets.BenView.as_view(), name='ben_list'),
+    path('participante/new', viewsets.BenNew.as_view(), name='ben_new'),
+    path('participante/edit/<int:pk>', viewsets.BenEdit.as_view(), name='ben_edit'),
+    path('participante/detail/<int:pk>/', viewsets.BenDetail.as_view(), name='ben_detail'),
+    path('participante/delete/<int:pk>', viewsets.BenDel.as_view(), name='ben_del'),
 
     path('maestro/', viewsets.MaesView.as_view(), name='maes_list'),
     path('maestro/new', viewsets.MaesNew.as_view(), name='maes_new'),
@@ -247,10 +248,10 @@ urlpatterns = [
     path('discapacidad/edit/<int:pk>', viewsets.DiscEdit.as_view(), name='disc_edit'),
     path('discapacidad/delete/<int:pk>', viewsets.DiscDel.as_view(), name='disc_del'),
 
-    path('cargo/', viewsets.CarView.as_view(), name='cargo_list'),
-    path('cargo/new', viewsets.CarNew.as_view(), name='cargo_new'),
-    path('cargo/edit/<int:pk>', viewsets.CarEdit.as_view(), name='cargo_edit'),
-    path('cargo/delete/<int:pk>', viewsets.CarDel.as_view(), name='cargo_del'),
+    path('tipo_medio/', viewsets.TmedioView.as_view(), name='tmedio_list'),
+    path('tipo_medio/new', viewsets.TmedioNew.as_view(), name='tmedio_new'),
+    path('tipo_medio/edit/<int:pk>', viewsets.TmedioEdit.as_view(), name='tmedio_edit'),
+    path('tipo_medio/delete/<int:pk>', viewsets.TmedioDel.as_view(), name='tmedio_del'),
 
     path('comision/', viewsets.ComView.as_view(), name='com_list'),
     path('comision/new', viewsets.ComNew.as_view(), name='com_new'),
@@ -299,6 +300,7 @@ urlpatterns = [
 
     path('benefeciadoare/', viewsets.BenefArView.as_view(), name='benefar_list'),
     path('benefeciadoare/new', viewsets.BenefArNew.as_view(), name='benefar_new'),
+    path('benefeciadoare/new/<int:pk>', viewsets.BenefArNew.as_view(), name='benefar_new'),
     path('benefeciadoare/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
     path('benefeciadoare/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
 
@@ -350,6 +352,7 @@ urlpatterns = [
     path('corporacionmunicipal/', viewsets.CorpMuniView.as_view(), name='corpmuni_list'),
     path('corporacionmunicipal/new', viewsets.CorpMuniNew.as_view(), name='corpmuni_new'),
     path('corporacionmunicipal/edit/<int:pk>', viewsets.CorpMuniEdit.as_view(), name='corpmuni_edit'),
+    path('corporacionmunicipal/detail/<int:pk>/', viewsets.CorpMuniDetail.as_view(), name='corpmuni_detail'),
     path('corporacionmunicipal/delete/<int:pk>', viewsets.CorpMuniDel.as_view(), name='corpmuni_del'),
 
     path('Grupo_organizado/', viewsets.GrupoOrganizadoView.as_view(), name='Gorg_list'),
@@ -365,6 +368,7 @@ urlpatterns = [
     path('Comisiona_NA/', viewsets.ComisionNAView.as_view(), name='comisionNA_list'),
     path('Comisiona_NA/new', viewsets.ComisionNANew.as_view(), name='comisionNA_new'),
     path('Comisiona_NA/edit/<int:pk>', viewsets.ComisionNAEdit.as_view(), name='comisionNA_edit'),
+    path('Comisiona_NA/detail/<int:pk>/', viewsets.ComisionNADetail.as_view(), name='comisionNA_detail'),
     path('Comisiona_NA/delete/<int:pk>', viewsets.ComisionNADel.as_view(), name='comisionNA_del'),
 
     #SocioProductivo

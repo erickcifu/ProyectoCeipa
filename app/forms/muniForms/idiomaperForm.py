@@ -13,8 +13,9 @@ class IdPerForm(forms.ModelForm):
     class Meta:
         model = IdiomaPersona
         fields = ['idioma', 'estado_ip']
-        labels = {'idioma':"idioma", 'estado_ip':"Activo/Inactivo"}
-        widget = {'estado_ip': forms.TextInput}
+        labels = {'idioma':"Idioma",
+        'estado_ip':"Activo/Inactivo"}
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

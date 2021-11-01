@@ -8,9 +8,14 @@ class TutorMuni(models.Model):
     fecha_nacimiento = models.DateField()
     direccion_tutor = models.CharField(max_length=80, null=True, blank=True)
     telefono = models.CharField(max_length=8, null=True, blank=True)
-    fotografia = models.ImageField(upload_to='ceipa', null=True, blank=True)
+    fotografia_tutor = models.ImageField(upload_to='ceipa', null=True, blank=True)
     parentesco = models.ForeignKey(Parentesco, on_delete=models.CASCADE, related_name="T_parentesco")
     estado_tutor = models.BooleanField(default=True)
+
+    @property
+    def foto_url(self):
+        if self.fotografia_tutor and hasattr(self.fotografia_tutor, 'url'):
+            return self.fotografia_tutor.url
 
     def __str__(self):
         return self.nombres_tutor

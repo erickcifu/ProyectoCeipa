@@ -4,13 +4,13 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Comision NA
+          Comisión de niñez y adolescencia
           <a href="{% url 'municipalizacion:comisionNA_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay datos de comisiones na</div>
+          <div class="alert alert-info">No hay datos</div>
           {% else %}
           <table id="datatablesSimple">
               <thead>
@@ -25,15 +25,15 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</td>
-                      <td>{{ item.institucion }}</td>
-                      {% if item.participacion is True %}
+                      <td><a href="{% url 'municipalizacion:comisionNA_detail' item.id %}">{{ item.persona_cna.persona }} {{ item.persona_cna.apellidos_persona }}</a></td>
+                      <td>{{ item.nombre_instit }}</td>
+                      {% if item.vacuna_comision is True %}
                       <td>
-                        <span class="badge bg-green-soft text-green">Si participa</span>
+                        <span class="badge bg-green-soft text-green">Vacunado</span>
                       </td>
                       {% else %}
                       <td>
-                        <span class="badge bg-red-soft text-red">No participa</span>
+                        <span class="badge bg-red-soft text-red">No vacunado</span>
                       </td>
                       {% endif %}
                       {% if item.estado_comision is True %}

@@ -16,7 +16,7 @@ class TutorMuniForm(forms.ModelForm):
     )
     class Meta:
         model = TutorMuni
-        fields = ['nombres_tutor', 'apellidos_tutor', 'parentesco','DPI', 'fecha_nacimiento', 'direccion_tutor', 'telefono', 'fotografia', 'estado_tutor']
+        fields = ['nombres_tutor', 'apellidos_tutor', 'parentesco','DPI', 'fecha_nacimiento', 'direccion_tutor', 'telefono', 'fotografia_tutor', 'estado_tutor']
         labels = {'nombres_tutor':'Nombres',
         'apellidos_tutor':'Apellidos',
         'parentesco':'Parentesco que tiene con el beneficiado',
@@ -24,8 +24,7 @@ class TutorMuniForm(forms.ModelForm):
         'fecha_nacimiento':'Fecha de nacimiento',
         'direccion_tutor':'Direccion',
         'telefono':"No. Telefono",
-        'correo':"Correo electrónico",
-        'fotografia':"Fotografia",
+        'fotografia_tutor':"Fotografia",
         'estado_tutor':'Activo/Inactivo'}
         widget = {'nombres_tutor', forms.TextInput}
 

@@ -1,0 +1,140 @@
+{% extends 'base/municipalizacion.html' %}
+
+{% block page_content %}
+{% load crispy_forms_tags %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-xl-12 col-md-12 mb-12">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          <div class="col-12 col-md-6 offset-md-3">
+                            <h4>Editar Registro de maestro
+                            </h4>
+                          </div>
+                    </div>
+                </div>
+                <!--Wizzard-->
+                        <div class="card">
+                          <div class="card-header border-bottom">
+                            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                              <!--Wizard item 1-->
+                              <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                <div class="wizard-step-icon">1</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">General</div>
+                                  <div class="wizard-step-text-details">Infomaciòn general</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 2-->
+                              <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Maestro</div>
+                                  <div class="wizard-step-text-details">Informaciòn maestro</div>
+                                </div>
+                              </a>
+
+                            <!--Wizard Body-->
+                                <div class="tab-content" id="cardTabContent">
+                                  <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 1</h3>
+                                        <h5 class="card-title mb-4">Ingrese la informaciòn personal del Personal</h5>
+                                        <!--Inicio Formulario-->
+                                          <div class="row gx-3">
+                                                {{ form | crispy }}
+                                          </div>
+                                          <!--IDIOMA FORMSET-->
+                                          <div class="row gx-6">
+                                              <div class="row gx-3">
+                                                {{form3.management_form}}
+                                                {%for f in form3 %}
+                                                  <div id="formularios_idiomas_maestro" class="row">
+                                                      {{ f | crispy }}
+                                                  </div>
+                                                  <br/>
+                                                  <br/>
+                                                {% endfor %}
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <div class="d-flex justify-content-between">
+                                                  <button class="btn btn-light" role="button" onclick="idiomas_maestro();">
+                                                      <i class="me-2" data-feather="plus-circle"></i>Agregar idioma
+                                                </button>
+                                                </div>
+                                            </div>
+                                          <!--IDOMA FORMSET FIN-->
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                          </div>
+                                        <!--Fin Formulario-->
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!--Tab item 2-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 2</h3>
+                                        <h5 class="card-title mb-4">Ingrese informaciòn del Maestro</h5>
+                                          <div class="row gx-3">
+                                              {{ form2 | crispy }}
+                                          </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <a class="btn btn-ligth" href="{% url 'municipalizacion:maes_list' %}">Cancelar</a>
+                                            <button type="submit" class="btn btn-success"">Guardar</button>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+<script>
+    function idiomas_maestro(){
+      const $total_forms_maestro = document.getElementById('id_form_maestro-TOTAL_FORMS')
+
+      let $label_idioma_maestro = document.createElement('label')
+      $label_idioma_maestro.innerHTML = 'Idioma'
+      let $input_idioma_maestro = document.querySelector('#id_form_maestro-0-idioma').cloneNode(true)
+      $input_idioma_maestro.name = 'form_maestro-'+$total_forms_maestro.value+'-idioma'
+      $input_idioma_maestro.id = 'id_form_maestro-'+$total_forms_maestro.value+'-idioma'
+
+      let $label_estado_idper_maestro = document.createElement('label')
+      $label_estado_idper_maestro.innerHTML = 'Activo/Inactivo'
+      let $input_estado_idper_maestro = document.querySelector('#id_form_maestro-0-estado_ip').cloneNode(true)
+      $input_estado_idper_maestro.name = 'form_maestro-'+$total_forms_maestro.value+'-estado_ip'
+      $input_estado_idper_maestro.id = 'id_form_maestro-'+$total_forms_maestro.value+'-estado_ip'
+
+      document.getElementById('formularios_idiomas_maestro').appendChild($label_idioma_maestro)
+      document.getElementById('formularios_idiomas_maestro').appendChild($input_idioma_maestro)
+      document.getElementById('formularios_idiomas_maestro').appendChild($label_estado_idper_maestro)
+      document.getElementById('formularios_idiomas_maestro').appendChild($input_estado_idper_maestro)
+
+      $total_forms_maestro.value = parseInt($total_forms_maestro.value) + 1
+    }
+</script>
+{% endblock %}

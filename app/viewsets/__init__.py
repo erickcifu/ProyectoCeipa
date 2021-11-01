@@ -53,11 +53,11 @@ from .MunicViewset.areaViewset import AreaView, AreaNew, AreaEdit, AreaDel
 from .MunicViewset.curgradViewset import CarGView, CarGNew, CarGEdit, CarGDel
 from .MunicViewset.idperViewset import IdPerView, IdPerNew, IdPerEdit, IdPerDel
 from .MunicViewset.personaViewset import PerView, PerNew, PerEdit, PerDel
-from .MunicViewset.benefViewset import BenView, BenNew, BenEdit, BenDel
+from .MunicViewset.benefViewset import BenView, BenNew, BenEdit, BenDel, BenDetail
 from .MunicViewset.maestroViewset import MaesView, MaesNew, MaesEdit, MaesDel
 from .MunicViewset.ProfesionViewset import ProfView, ProfNew, ProfEdit, ProfDel
 from .MunicViewset.discViewset import DiscView, DiscNew, DiscEdit, DiscDel
-from .MunicViewset.cargoViewset import CarView, CarNew, CarEdit, CarDel
+from .MunicViewset.tmedioViewset import TmedioView, TmedioNew, TmedioEdit, TmedioDel
 from .MunicViewset.comisionViewset import ComView, ComNew, ComEdit, ComDel
 from .MunicViewset.ausbenefiViewset import AusenBeneficiadoView, AusenBeneficiadoNew, AusenBeneficiadoEdit, AusenBeneficiadoDel
 from .MunicViewset.establecimientoViewset import EstablecimientoView, EstablecimientoNew, EstablecimientoEdit, EstablecimientoDel
@@ -77,10 +77,10 @@ from .MunicViewset.estantMuniView import EstMuniView, EstMuniNew, EstMuniEdit, E
 from .MunicViewset.PadecMuniView import PadMuniView, PadMuniNew, PadMuniEdit, PadMuniDel
 from .MunicViewset.generoMuniView import GeneroMuniView, GeneroMuniNew, GeneroMuniEdit, GeneroMuniDel
 from .MunicViewset.ocupMuniView import OcupacionMuniView, OcupacionMuniNew, OcupacionMuniEdit, OcupacionMuniDel
-from .MunicViewset.corpmuniviewet import CorpMuniView, CorpMuniNew, CorpMuniEdit, CorpMuniDel
+from .MunicViewset.corpmuniviewet import CorpMuniView, CorpMuniNew, CorpMuniEdit, CorpMuniDel, CorpMuniDetail
 from .MunicViewset.goView import GrupoOrganizadoView, GrupoOrganizadoNew, GrupoOrganizadoEdit, GrupoOrganizadoDel
 from .MunicViewset.programasView import ProgramasView, ProgramasNew, ProgramasEdit, ProgramasDel
-from .MunicViewset.comisionNAView import ComisionNAView, ComisionNANew, ComisionNAEdit, ComisionNADel
+from .MunicViewset.comisionNAView import ComisionNAView, ComisionNANew, ComisionNAEdit, ComisionNADel, ComisionNADetail
 
 #SocioProductivo
 from .sociopViewset.HomeSocioproductivo import HomeSocioproductivo

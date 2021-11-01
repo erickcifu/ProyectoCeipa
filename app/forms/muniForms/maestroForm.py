@@ -11,9 +11,29 @@ class MaestroForm(forms.ModelForm):
     )
     class Meta:
         model = Maestro
-        fields = ['establecimiento', 'gruporg', 'cargogrup', 'estado_maestro']
-        labels = {'establecimiento':'Establecimiento', 'estado_maestro':"Estado"}
-        widget = {'persona': forms.TextInput}
+        fields = ['establecimiento',
+        'area_rural',
+        'area_urbana',
+        'est_publico',
+        'est_privado',
+        'participa_maestro',
+        'correo_maestro',
+        'gruporg',
+        'cargogrup',
+        'estado_maestro'
+        ]
+
+        labels = {'establecimiento':'Establecimiento',
+        'area_rural':'Rural',
+        'area_urbana':'Urbana',
+        'est_publico':'Público',
+        'est_privado':'Privado',
+        'participa_maestro':'¿Participa en algun grupo organizado?',
+        'correo_maestro':'Correo electrónico',
+        'gruporg':'Cargo en el grupo organizado',
+        'cargogrup':'Grupo organizado al que pertenece',
+        'estado_maestro':"Activo/Inactivo"}
+        widget = {'establecimiento': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -22,5 +42,5 @@ class MaestroForm(forms.ModelForm):
                 'class':'form-control'
             })
             self.fields['establecimiento'].empty_label = "Seleccione un Establecimiento"
-            self.fields['gruporg'].empty_label = "Seleccione su Grupo Organizado"
-            self.fields['cargogrup'].empty_label = "Seleccione su Cargo Grupo"
+            self.fields['gruporg'].empty_label = "Seleccione su cargo"
+            self.fields['cargogrup'].empty_label = "Seleccione grupo"

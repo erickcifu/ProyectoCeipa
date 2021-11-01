@@ -3,7 +3,7 @@
 {% block page_content %}
 {% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
-<form method="POST" class="form-inline">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
@@ -16,7 +16,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                           <div class="col-12 col-md-6 offset-md-3">
-                            <h4>{% if obj %} Editar {% else %} Nuevo {% endif %} Registro de beneficiado
+                            <h4>{% if obj %} Editar {% else %} Nuevo {% endif %} Participante
                             </h4>
                           </div>
                     </div>
@@ -30,23 +30,15 @@
                                 <div class="wizard-step-icon">1</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Persona</div>
-                                  <div class="wizard-step-text-details">Infomaciòn general de la Persona</div>
+                                  <div class="wizard-step-text-details">Infomaciòn general </div>
                                 </div>
                               </a>
                               <!--Wizard item 2-->
                               <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
                                 <div class="wizard-step-icon">2</div>
                                 <div class="wizard-step-text">
-                                  <div class="wizard-step-text-name">Beneficiado</div>
-                                  <div class="wizard-step-text-details">Informaciòn Beneficiado</div>
-                                </div>
-                              </a>
-                              <!--Wizard item 3-->
-                              <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
-                                <div class="wizard-step-icon">3</div>
-                                <div class="wizard-step-text">
-                                  <div class="wizard-step-text-name">Idioma</div>
-                                  <div class="wizard-step-text-details">Informaciòn de idiomas</div>
+                                  <div class="wizard-step-text-name">Participante</div>
+                                  <div class="wizard-step-text-details">Informaciòn del participante</div>
                                 </div>
                               </a>
                               <!--Wizard item 4-->
@@ -54,7 +46,7 @@
                                 <div class="wizard-step-icon">4</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Tutor</div>
-                                  <div class="wizard-step-text-details">Informaciòn informacio de  tutor</div>
+                                  <div class="wizard-step-text-details">Informaciòn de tutor</div>
                                 </div>
                               </a>
                             <!--Wizard Body-->
@@ -65,15 +57,99 @@
                                         <h3 class="text-primary">Paso 1</h3>
                                         <h5 class="card-title mb-4">Ingrese la informaciòn personal del Personal </h5>
                                         <!--Inicio Formulario-->
+                                        <div class="row gx-12">
                                           <div class="row gx-3">
-                                                {{ form | crispy }}
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.persona | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.apellidos_persona | as_crispy_field }}
+                                            </div>
                                           </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              {{ form2.fecha_nacimiento_benef | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.cui | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.direccion_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.telefono | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.telefonoc | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.fotografia_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.muni | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.etni | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.estudios_anteriores | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.gen | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.disc | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.estado_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <br/>
+                                          <br/>
+                                          <!--IDIOMA FORMSET-->
+                                          <div class="row gx-6">
+                                              <div class="row gx-3">
+                                                {{form3.management_form}}
+                                                {%for f in form3 %}
+                                                  <div id="formularios_idiomas" class="row">
+                                                      {{ f | crispy }}
+                                                  </div>
+                                                  <br/>
+                                                  <br/>
+                                                {% endfor %}
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <div class="d-flex justify-content-between">
+                                                  <button class="btn btn-light" role="button" onclick="agregar_form_idiomas();">
+                                                      <i class="me-2" data-feather="plus-circle"></i>Agregar idioma
+                                                </button>
+                                                </div>
+                                            </div>
+                                          <!--IDOMA FORMSET FIN-->
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
                                             <button class="btn btn-ligth" type="button">Anterior</button>
                                             <a class="btn btn-primary next-step"  role="button">Siguiente</a>
                                           </div>
                                         <!--Fin Formulario-->
+                                      </div>
                                       </div>
                                     </div>
                                   </div>
@@ -84,8 +160,32 @@
                                       <div class="col-xxl-6 col-xl-8">
                                         <h3 class="text-primary">Paso 2</h3>
                                         <h5 class="card-title mb-4">Ingrese informaciòn del Beneficiado</h5>
-                                          <div class="row gx-3">
-                                              {{ form2 | crispy }}
+                                          <div class="row gx-6">
+                                            <div class="row gx-3">
+                                              {{ form2.ocup | as_crispy_field }}
+                                            </div>
+                                            <div class="row gx-3">
+                                              {{ form2.establecimiento | as_crispy_field }}
+                                            </div>
+                                            <div class="row gx-3">
+                                              <h4>Estudia en un establecimiento: </h4>
+                                              {{ form2.establecimiento_privado | as_crispy_field }}
+                                            </div>
+                                            <div class="row gx-3">
+                                              {{ form2.establecimiento_publico | as_crispy_field }}
+                                            </div>
+                                            <div class="row gx-3">
+                                                <h4>Nivel educativo: </h4>
+                                              {{ form2.nivel_primario | as_crispy_field }}
+                                            </div>
+                                            <div class="row gx-3">
+                                              {{ form2.nivel_secundario | as_crispy_field }}
+                                            </div>
+                                            <div class="row gx-3">
+                                              {{ form2.nivel_universitario | as_crispy_field }}
+                                            </div>
+                                            <div class="row gx-3">
+                                              {{ form2.estado_beneficiado | as_crispy_field }}
                                           </div>
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
@@ -95,29 +195,13 @@
                                       </div>
                                     </div>
                                   </div>
-                                  <!--Tab item 3-->
-                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
-                                    <div class="row justify-content-center">
-                                      <div class="col-xxl-6 col-xl-8">
-                                        <h3 class="text-primary">Paso 3</h3>
-                                        <h5 class="card-title mb-4">Ingrese idiomas</h5>
-                                            <div class="row gx-3">
-                                                {{ form3 | crispy }}
-                                              </div>
-                                          <hr class="my-4"/>
-                                          <div class="d-flex justify-content-between">
-                                            <button class="btn btn-ligth" type="button">Anterior</button>
-                                            <a class="btn btn-ligth" href="{% url 'municipalizacion:maes_list' %}">Cancelar</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
+                                  </div>
                                     <!--Tab item 4-->
                                     <div class="tab-pane py-5 py-xl-10 fade" id="wizard4" role="tabpanel" aria-labelledby="wizard4-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
                                           <h3 class="text-primary">Paso 3</h3>
-                                          <h5 class="card-title mb-4">Ingrese infomracion tutor</h5>
+                                          <h5 class="card-title mb-4">Ingrese informaciòn tutor</h5>
                                               <div class="row gx-3">
                                                   {{ form4 | crispy }}
                                                 </div>
@@ -143,4 +227,28 @@
 </div>
 {% endblock %}
 {% block js_page %}
+<script>
+    function agregar_form_idiomas(){
+      const $total_forms = document.getElementById('id_idiomas-TOTAL_FORMS')
+
+      let $label_idioma = document.createElement('label')
+      $label_idioma.innerHTML = 'Idioma'
+      let $input_idioma = document.querySelector('#id_idiomas-0-idioma').cloneNode(true)
+      $input_idioma.name = 'idiomas-'+$total_forms.value+'-idioma'
+      $input_idioma.id = 'id_idiomas-'+$total_forms.value+'-idioma'
+
+      let $label_estado_idper = document.createElement('label')
+      $label_estado_idper.innerHTML = 'Activo/Inactivo'
+      let $input_estado_idper = document.querySelector('#id_idiomas-0-estado_ip').cloneNode(true)
+      $input_estado_idper.name = 'idiomas-'+$total_forms.value+'-estado_ip'
+      $input_estado_idper.id = 'id_idiomas-'+$total_forms.value+'-estado_ip'
+
+      document.getElementById('formularios_idiomas').appendChild($label_idioma)
+      document.getElementById('formularios_idiomas').appendChild($input_idioma)
+      document.getElementById('formularios_idiomas').appendChild($label_estado_idper)
+      document.getElementById('formularios_idiomas').appendChild($input_estado_idper)
+
+      $total_forms.value = parseInt($total_forms.value) + 1
+    }
+</script>
 {% endblock %}

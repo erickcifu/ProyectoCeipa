@@ -1,15 +1,22 @@
 from django import forms
-from app.models import MedioComuni, Persona, Cargo
+from app.models import MedioComuni, Persona
 
 class MedioComuniForm(forms.ModelForm):
-    cargo = forms.ModelChoiceField(
-        queryset = Cargo.objects.filter(estado_cargo=True)
-        .order_by('nombre_cargo')
-    )
     class Meta:
         model = MedioComuni
-        fields = ['nombre_medio', 'correo', 'telefono', 'cargo', 'estado']
-        labels = {'nombre_medio':'Nombres de el medio', 'correo':'Correo', 'telefono':"Telefono",  'cargo':'Cargo', 'estado':'Estado'}
+        fields = ['nombre_medio',
+        'correo',
+        'vacuna_medio',
+        'telefono',
+        'cargo',
+        't_medio',
+        'estado']
+        labels = {'nombre_medio':'Nombres de el medio',
+        'correo':'Correo',
+        'vacuna_medio':'Vacunado contra COVID-19',
+        'telefono':"Telefono",  'cargo':'Cargo',
+        't_medio':'Tipo de distribución del medio de comunicación',
+        'estado':'Estado'}
         widget = {'nombre_medio', forms.TextInput}
 
     def __init__(self, *args, **kwargs):
