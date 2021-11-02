@@ -18,6 +18,9 @@ class LiderComunitario(models.Model):
     correo_lideres = models.EmailField(max_length=150, null=True, blank=True)
     estado = models.BooleanField(default=True)
 
+    def __str__(self):
+        return str(self.persona)
+        
     def delete(self, *args):
         self.estado = False
         self.save()

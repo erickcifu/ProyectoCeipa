@@ -27,7 +27,7 @@ class BenForm(forms.ModelForm):
         'nivel_universitario',
         'estado_beneficiado']
         labels = {'ocup':'Ocupación del beneficiado',
-        'fecha_nacimiento':'Fecha de nacimiento',
+        'fecha_nacimiento_benef':'Fecha de nacimiento',
         'establecimiento':'Nombre del establecimiento donde estudia',
         'establecimiento_privado':'Privado',
         'establecimiento_publico':'Público',

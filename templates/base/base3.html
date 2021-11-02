@@ -10,7 +10,7 @@
         <title>CEIPA</title>
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
-        
+
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
         <link href="{% static 'base/dist/css/styles.css' %}" rel="stylesheet" />
@@ -20,7 +20,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-        
+
     </head>
     <body class="nav-fixed">
         {% block top_bar %}
@@ -121,14 +121,14 @@
                                   </nav>
                                 </div>
 
-                                <div class="sidenav-menu-heading">Inscripción y asignación</div>                     
+                                <div class="sidenav-menu-heading">Inscripción y asignación</div>
                                 <a class="nav-link" href={% url 'educacion:personal_list' %}>Personal Educativo</a>
                                 <a class="nav-link" href={% url 'educacion:alumno_list' %}>Registro de Alumnos</a>
-                                <a class="nav-link" href={% url 'educacion:grados_por_centro_educacion' %}>grados por centro educativo</a>
-                                <a class="nav-link" href={% url 'educacion:listado_personal_por_centro_educativo' %}>Maestros por centro</a>
-                                <a class="nav-link" href={% url 'educacion:alumno_list_por_centro_educativo' %}>Alumnos por centro</a>
-                                <a class="nav-link" href={% url 'educacion:cg_list' %}>Ciclo Grado</a>
-                          
+                                <a class="nav-link" href={% url 'educacion:grados_por_centro_educacion' %}>Grados por centro educativo</a>
+                                <a class="nav-link" href={% url 'educacion:listado_personal_por_centro_educativo' %}>Asignación de maestros por centro educativo</a>
+                                <a class="nav-link" href={% url 'educacion:alumno_list_por_centro_educativo' %}>Inscripción de alumnos</a>
+                                <a class="nav-link" href={% url 'educacion:cg_list' %}>Ciclo y Grado</a>
+
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
                     {% block footer %}

@@ -6,7 +6,7 @@ class CGForm(forms.ModelForm):
     class Meta:
         model = Ciclo_grado
         fields = ['grado','ciclo','seccion', 'estado_cg']
-        labels = {'ciclo':'Ciclo',  'grado':'Grado', 'seccion':'Seccion', 'estado_cg':'Estado'}
+        labels = {'ciclo':'Ciclo',  'grado':'Grado', 'seccion':'Sección', 'estado_cg':'Estado'}
         widget = {'estado_cg', forms.TextInput}
 
         def __init__(self, *args, **kwargs):
@@ -35,6 +35,6 @@ class CGFormCreate(forms.ModelForm):
                 self.fields['grado'].empty_label = "Seleccione un Grado"
                 self.fields['ciclo'].empty_label = "Seleccione un Ciclo"
                 self.fields['seccion'].empty_label = "Seleccione una Seccion"
-                
+
 class CFCicloFormCreate(forms.Form):
     ciclo = forms.ModelChoiceField(queryset=Ciclo.objects.all())
