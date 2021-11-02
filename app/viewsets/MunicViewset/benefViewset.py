@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-from app.models import Beneficiado, Persona, IdiomaPersona, TutorMuni
+from app.models import Beneficiado, Persona, IdiomaPersona, TutorMuni, Area
 from app.forms import BenForm, PersonaForm, IdPerForm, TutorMuniForm
 from django.forms import formset_factory
 from django.db import IntegrityError, transaction
@@ -167,3 +167,28 @@ class BenDel(LoginRequiredMixin, generic.DeleteView):
     template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"
     success_url = reverse_lazy("municipalizacion:ben_list")
+
+
+#Listado de participantes por area
+class ListarPorArea(LoginRequiredMixin, generic.ListView):
+    model = Beneficiado
+    template_name = "municipalizacion/listar_ben_por_area.html"
+    context_object_name = 'obj'
+
+    def get_queryset(self):
+        id_area = self.request.GET.get("id_area")
+        if id_area:
+            return Beneficiado.objects.filter(ba_benef__area_id = int(id_area))
+
+        return Beneficiado.objects.filter(ba_benef__area_id__in=Area.objects.filter(estado_area=True).values_list('id'))
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['areas'] = Area.objects.all()
+        id_area = None
+        try:
+            id_area = Area.objects.filter(id=int(self.request.GET.get("id_area"))).first()
+        except:
+            id_area = None
+        context['id_area'] = id_area
+        return context

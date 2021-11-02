@@ -85,7 +85,7 @@ class MaesEdit(LoginRequiredMixin, generic.UpdateView):
         maestro = self.get_object()
         persona_maestro = maestro.persona_maestro
         idioma = IdiomaPersona.objects.filter(persona=persona_maestro)
-        
+
         form = self.form_class(request.POST, instance = persona_maestro)
         form2 = self.second_form_class(request.POST, instance = maestro)
 
@@ -97,7 +97,6 @@ class MaesEdit(LoginRequiredMixin, generic.UpdateView):
             if form.is_valid() and form2.is_valid():
                 form.save()
                 form2.save()
-                form3.save()
                 return HttpResponseRedirect(self.success_url)
             else:
                 return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
@@ -112,8 +111,8 @@ class MaesEdit(LoginRequiredMixin, generic.UpdateView):
             idiom_maestro = IdiomaPersona.objects.filter(persona=persona_maestro)
             for id_ma in idiom_maestro:
                 listado_idmaestro.append({
-                    'idioma':i.idioma.id,
-                    'estado_ip':i.estado_ip
+                    'idioma':id_ma.idioma.id,
+                    'estado_ip':id_ma.estado_ip
                 })
             formset_idmaestro = formid_maestro(initial=listado_idmaestro, prefix='idiomas_maestro')
         except:
@@ -121,7 +120,7 @@ class MaesEdit(LoginRequiredMixin, generic.UpdateView):
             return HttpResponseRedirect(self.success_url)
         context = {}
         if 'form' not in context:
-            context['form'] = self.form_class(instance = persona)
+            context['form'] = self.form_class(instance = persona_maestro)
         if 'form2' not in context:
             context['form2'] = self.second_form_class(instance = maestro)
         if 'form3' not in context:
@@ -130,6 +129,22 @@ class MaesEdit(LoginRequiredMixin, generic.UpdateView):
         context['persona'] = self.get_object()
 
         return render(request, self.template_name, context)
+
+class MaesDetail(LoginRequiredMixin, generic.DetailView):
+    template_name = "municipalizacion/maestro_detail.html"
+    model = Maestro
+
+    def get_idioma(self, persona_maestro):
+        return IdiomaPersona.objects.filter(persona=persona_maestro)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        maestro = self.get_object()
+        persona_maestro = maestro.persona_maestro
+        context['item'] = maestro
+        context['persona_maestro'] = persona_maestro
+        context['idioma_maestro'] = self.get_idioma(persona_maestro)
+        return context
 
 class MaesDel(LoginRequiredMixin, generic.DeleteView):
     model = Maestro

@@ -236,6 +236,7 @@ urlpatterns = [
     path('maestro/', viewsets.MaesView.as_view(), name='maes_list'),
     path('maestro/new', viewsets.MaesNew.as_view(), name='maes_new'),
     path('maestro/edit/<int:pk>', viewsets.MaesEdit.as_view(), name='maes_edit'),
+    path('maestro/detail/<int:pk>/', viewsets.MaesDetail.as_view(), name='maes_detail'),
     path('maestro/delete/<int:pk>', viewsets.MaesDel.as_view(), name='maes_del'),
 
     path('profesion/', viewsets.ProfView.as_view(), name='prof_list'),
@@ -286,6 +287,7 @@ urlpatterns = [
     path('lidercomunitario/', viewsets.LiderComunitarioMuniView.as_view(), name='lidercomuni_list'),
     path('lidercomunitario/new', viewsets.LiderComunitarioNew.as_view(), name='lidercomuni_new'),
     path('lidercomunitario/edit/<int:pk>', viewsets.LiderComunitarioEdit.as_view(), name='lidercomuni_edit'),
+    path('lidercomunitario/detil/<int:pk>/', viewsets.LiderComunitarioDetail.as_view(), name='lidercomuni_detail'),
     path('lidercomunitario/delete/<int:pk>', viewsets.LiderComunitarioDel.as_view(), name='lidercomuni_del'),
 
     path('padecimientopersona/', viewsets.PadPerView.as_view(), name='padper_list'),
@@ -298,11 +300,13 @@ urlpatterns = [
     path('padresfamilia/edit/<int:pk>', viewsets.PadFamEdit.as_view(), name='padfam_edit'),
     path('padresfamilia/delete/<int:pk>', viewsets.PadFamDel.as_view(), name='padfam_del'),
 
-    path('benefeciadoare/', viewsets.BenefArView.as_view(), name='benefar_list'),
-    path('benefeciadoare/new', viewsets.BenefArNew.as_view(), name='benefar_new'),
-    path('benefeciadoare/new/<int:pk>', viewsets.BenefArNew.as_view(), name='benefar_new'),
-    path('benefeciadoare/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
-    path('benefeciadoare/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
+    path('participantes/', viewsets.BenefArView.as_view(), name='benefar_list'),
+    path('participantes/por_area/', viewsets.ListarPorArea.as_view(), name='benefar_por_area'),
+    path('participantes/new/por_area/<int:pk>', viewsets.Area_beneficiado.as_view(), name='area_ben_por_area'),
+    path('participante/new/', viewsets.BenefArNew.as_view(), name='benefar_new'),
+    path('participante/new/<int:pk>', viewsets.BenefArNew.as_view(), name='benefar_new'),
+    path('participante/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
+    path('participante/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
 
     path('ausencia/', viewsets.AusView.as_view(), name='aus_list'),
     path('ausencia/new', viewsets.AusNew.as_view(), name='aus_new'),

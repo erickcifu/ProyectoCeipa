@@ -16,15 +16,9 @@
               <thead>
                   <th>Id</th>
                   <th>Nombre</th>
-                  <th>Grupo organizado</th>
-                  <th>Cargo</th>
                   <th>Programa en CEIPA</th>
-                  <th>Sabe leer</th>
-                  <th>Sabe escribir</th>
-                  <th>Vacuna contra el Covid</th>
+                  <th>Correo electrónico</th>
                   <th>Periodo de Lider Comunitario</th>
-                  <th>Fecha de inicio de periodo</th>
-                  <th>Fecha final de periodo</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -32,40 +26,10 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</td>
-                      <td>{{ item.cargo_grupo }}</td>
-                      <td>{{ item.grupo_orga }}</td>
+                      <td><a href="{% url 'municipalizacion:lidercomuni_detail' item.id %}">{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</a></td>
+                      <td>{{ item.correo_lideres}}</td>
                       <td>{{ item.programa_c}}</td>
-                      {% if item.leer is True %}
-                      <td>
-                        <span class="badge rounded-pill bg-light text-dark">Sabe leer</span>
-                      </td>
-                      {% else %}
-                      <td>
-                        <span class="badge rounded-pill bg-light text-dark">No sabe leer</span>
-                      </td>
-                      {% endif %}
-                      {% if item.escribir is True %}
-                      <td>
-                        <span class="badge rounded-pill bg-light text-dark">Sabe escribir</span>
-                      </td>
-                      {% else %}
-                      <td>
-                        <span class="badge rounded-pill bg-light text-dark">No sabe escribir</span>
-                      </td>
-                      {% endif %}
-                      {% if item.vacunaCovid is True %}
-                      <td>
-                        <span class="badge rounded-pill bg-light text-dark">Vacunado</span>
-                      </td>
-                      {% else %}
-                      <td>
-                        <span class="badge rounded-pill bg-light text-dark">No vacunado</span>
-                      </td>
-                      {% endif %}
                       <td>{{ item.periodo }}</td>
-                      <td>{{ item.fecha_inicio|date:"d, M, Y" }}</td>
-                      <td>{{ item.fecha_fin|date:"d, M, Y" }}</td>
                       {% if item.estado is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

@@ -5,52 +5,47 @@
     <div class="card card-header-actions">
       <div class="card-header">
         {% if id_area %}
-          Beneficiados de {{ id_area.nombre_area }}
+          Participantes de {{ id_area.nombre_area }}
           <a href="{% url 'municipalizacion:benefar_new' id_area.id %}" class="btn btn-sm btn-light text-success" role="button" align="left"><i class="me-2" data-feather="plus-circle"></i>Agregar beneficiado</a>
         {% else %}
-          <h2>Beneficiados</h2>
+          <h2>Participantes</h2>
           <a href="{% url 'municipalizacion:benefar_new'  %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
         {% endif %}
 
         {% if id_area %}
-        <form class="form-inline" method="GET">
-
-        <!--  <select class="form-select form-select-sm" id="nombre_area" name="nombre_area">
+        <form method="GET" class="form-inline">
+          <select class="form-select form-select-sm" id="area" name="nombre_area">
             {% if areas %}
               {% for a in areas %}
                 {% if id_area.id == a.id %}
                   <option value="{{a.id}}" selected>{{a.nombre_area}}</option>
                   {% else %}
-                    <option value="{{a.id}}" selected>{{a.nombre_area}}</option>
+                    <option value="{{a.id}}">{{a.nombre_area}}</option>
                 {% endif %}
 
               {% endfor %}
             {% endif %}
           </select>
-          <button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="search"></i></button>-->
+          <button type="submit" class="btn btn-sm btn-success"><i data-feather="search"></i></button>
 
         </form>
         {% else %}
-        <form class="form-inline"  method="GET">
-
-              <select name="nombre_area" id="nombre_area">
+        <form  method="GET" class="form-inline">
+              <select name="nombre_area" id="area">
                 {% if areas %}
                   {% for a in areas %}
                     <option value="{{a.id}}">{{a.nombre_area}}</option>
                   {% endfor %}
                 {% endif %}
               </select>
-
-
-                <button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="search"></i></button>
-
+              <button type="submit" class="btn btn-sm btn-success"><i data-feather="search"></i></button>
         </form>
         {% endif %}
       </div>
       <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay datos </div>
+          <div class="alert alert-info">No hay datos</div>
           {% else %}
           <table id="datatablesSimple">
               <thead>

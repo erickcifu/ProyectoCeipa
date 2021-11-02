@@ -10,9 +10,12 @@ class BenefArForm(forms.ModelForm):
     )
     class Meta:
         model = BeneficiadoArea
-        fields = ['programa','beneficiado', 'observacion','fecha', 'estado_ba']
-        labels = {'area':'area','programa':'programa', 'beneficiado':'Participante', 'estado_ba':"Activo/Inactivo"}
-        widget = {'beneficiado': forms.TextInput}
+        fields = ['programa','beneficiado','fecha', 'estado_ba']
+        labels = {'area':'area',
+        'programa':'Programa en el que participa dentro de CEIPA',
+         'beneficiado':'Participante',
+          'estado_ba':"Activo/Inactivo"}
+        widget = {'estado_ba': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,7 +24,7 @@ class BenefArForm(forms.ModelForm):
                 'class':'form-control'
             })
             self.fields['programa'].empty_label = "Programa al que pertenece en CEIPA"
-            self.fields['beneficiado'].empty_label = "Seleccione al beneficiado"
+            self.fields['beneficiado'].empty_label = "Seleccione al participante"
 
 class BenefAr_EditForm(forms.ModelForm):
     class Meta:
