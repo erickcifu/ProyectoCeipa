@@ -1,0 +1,155 @@
+{% extends 'base/municipalizacion.html' %}
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            Reportes de corporaciones municipales
+        </div>
+      <div class="card-body">
+          <div class="row">
+            <div class="card">
+            <div class="card-body">
+              <!--Totales-->
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Corporaciones municipales registradas</h5>
+                        <p class="card-text">{{ total_corp }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Representantes vacunados contra COVID-19</h5>
+                        <p class="card-text">{{ total_vacunados_corp }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <!--Fin totales-->
+                <br/>
+              <!--Inicio por genero-->
+              {% if not corporacion_por_genero %}
+                <div class="alert alert-info">Representantes de corporación por genero: No hay datos</div>
+              {% else %}
+              <caption><b>Total de representantes por género</b></caption>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Género</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for gen_corp in corporacion_por_genero %}
+                    <tr>
+                      <td>{{ gen_corp.genero }}</td>
+                      <td>{{ gen_corp.corp_genero }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por genero-->
+              <br/>
+              <!--Inicio por etnia-->
+              {% if not corp_por_etnia %}
+                <div class="alert alert-info">Representantes de corporación por grupo étnico: No hay datos</div>
+              {% else %}
+              <caption><b>Total de representantes por grupo étnico</b></caption>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Étnia</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for etnia_corp in corp_por_etnia %}
+                    <tr>
+                      <td>{{ etnia_corp.nombre_etnia }}</td>
+                      <td>{{ etnia_corp.corp_etnia }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por etnia-->
+              <br/>
+              <!--Inicio por grupos organizados-->
+              {% if not part_por_grupo %}
+                <div class="alert alert-info">Representantes de corporación municipal por grupo organizado: No hay datos</div>
+              {% else %}
+              <caption><b>Total de representantes por grupo organizado</b></caption>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Grupo Organizado</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for corp_grupo in part_por_grupo %}
+                    <tr>
+                      <td>{{ corp_grupo.nombre_grupo }}</td>
+                      <td>{{ corp_grupo.corp_grupo }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td><b>Total</b></td>
+                    <td>{{total_part_gorg}}</td>
+                  </tr>
+                </tfoot>
+              </table>
+              {% endif %}
+              <!--Fin por grupos organizados-->
+                <br/>
+                <!--Inicio por  partido politico-->
+                {% if not por_part_politico %}
+                  <div class="alert alert-info">Representantes de corporación municipal por partido politico: No hay datos</div>
+                {% else %}
+                <caption><b>Total de representantes por partido político con el que ingresó</b></caption>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Partido político</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for corp_partido in por_part_politico %}
+                      <tr>
+                        <td>{{ corp_partido.nombre_partido }}</td>
+                        <td>{{ corp_partido.corp_partido }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+                <!--Fin por grupos organizados-->
+
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'municipalizacion:municipalizacion' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+            </div>
+        </div>
+          </div>
+      </div>
+      </div>
+</div>
+{% endblock %}
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}

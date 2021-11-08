@@ -17,7 +17,6 @@ from .educacionViewset.gradosViewset import GradosView, GradosNew, GradosEdit, G
 from .educacionViewset.idiomaViewset import IdiomaView, IdiomaNew, IdiomaEdit, IdiomaDel
 from .educacionViewset.personalViewset import PersonalView, PersonalNew, PersonalEdit, PersonalDel, ListarPersonalEducativoPorCentroEducativo
 from .educacionViewset.religionViewset import ReligionView, ReligionNew, ReligionEdit, ReligionDel
-from .educacionViewset.tareaViewset import TareaView, TareaNew, TareaEdit, TareaDel
 from .educacionViewset.gradoViewset import GradoView, GradoNew, GradoEdit, GradoDel
 from .educacionViewset.religionalumViewset import Religion_alumnoView, Religion_alumnoNew, Religion_alumnoEdit, Religion_alumnoDel
 from .educacionViewset.techoViewset import TechoView, TechoNew, TechoEdit, TechoDel
@@ -56,32 +55,26 @@ from .MunicViewset.personaViewset import PerView, PerNew, PerEdit, PerDel
 from .MunicViewset.benefViewset import BenView, BenNew, BenEdit, BenDel, BenDetail, ListarPorArea
 from .MunicViewset.maestroViewset import MaesView, MaesNew, MaesEdit, MaesDel, MaesDetail
 from .MunicViewset.ProfesionViewset import ProfView, ProfNew, ProfEdit, ProfDel
-from .MunicViewset.discViewset import DiscView, DiscNew, DiscEdit, DiscDel
 from .MunicViewset.tmedioViewset import TmedioView, TmedioNew, TmedioEdit, TmedioDel
 from .MunicViewset.comisionViewset import ComView, ComNew, ComEdit, ComDel
-from .MunicViewset.ausbenefiViewset import AusenBeneficiadoView, AusenBeneficiadoNew, AusenBeneficiadoEdit, AusenBeneficiadoDel
-from .MunicViewset.establecimientoViewset import EstablecimientoView, EstablecimientoNew, EstablecimientoEdit, EstablecimientoDel
 from .MunicViewset.lidercomuniViewset import LiderComunitarioMuniView, LiderComunitarioNew, LiderComunitarioEdit, LiderComunitarioDel, LiderComunitarioDetail
 from .MunicViewset.mediocomuViewset import MedioComuniView, MedioComuniNew, MedioComuniEdit, MedioComuniDel
 from .MunicViewset.partidopoliticViewset import PartidoPoliticView, PartidoPoliticNew, PartidoPoliticEdit, PartidoPoliticDel
 from .MunicViewset.tutormuniViewset import TutorMuniView, TutorMuniNew, TutorMuniEdit, TutorMuniDel
-from .MunicViewset.padperViewset import PadPerView, PadPerNew, PadPerEdit, PadPerDel
 from .MunicViewset.padfamViewset import PadFamView, PadFamNew, PadFamEdit, PadFamDel
 from .MunicViewset.benefarViewset import BenefArView, BenefArNew, BenefArEdit, BenefArDel, Area_beneficiado
-from .MunicViewset.ausenciaViewset import AusView, AusNew, AusEdit, AusDel
 from .MunicViewset.idioma_MuniView import IdiomaMuniView, IdiomaMuniNew, IdiomaMuniEdit, IdiomaMuniDel
 from .MunicViewset.MuniView import MunicView, MuniNew, MuniEdit, MuniDel
 from .MunicViewset.DepView import DeptoView, DeptoNew, DeptoEdit, DeptoDel
 from .MunicViewset.EtniaMuniView import EtnMuniView, EtniaMuniNew, EtniaMuniEdit, EtniaMuniDel
 from .MunicViewset.estantMuniView import EstMuniView, EstMuniNew, EstMuniEdit, EstMuniDel
-from .MunicViewset.PadecMuniView import PadMuniView, PadMuniNew, PadMuniEdit, PadMuniDel
 from .MunicViewset.generoMuniView import GeneroMuniView, GeneroMuniNew, GeneroMuniEdit, GeneroMuniDel
 from .MunicViewset.ocupMuniView import OcupacionMuniView, OcupacionMuniNew, OcupacionMuniEdit, OcupacionMuniDel
 from .MunicViewset.corpmuniviewet import CorpMuniView, CorpMuniNew, CorpMuniEdit, CorpMuniDel, CorpMuniDetail
 from .MunicViewset.goView import GrupoOrganizadoView, GrupoOrganizadoNew, GrupoOrganizadoEdit, GrupoOrganizadoDel
 from .MunicViewset.programasView import ProgramasView, ProgramasNew, ProgramasEdit, ProgramasDel
 from .MunicViewset.comisionNAView import ComisionNAView, ComisionNANew, ComisionNAEdit, ComisionNADel, ComisionNADetail
-
+from .MunicViewset.reportes_muni import AlumnosporDepto, total_comisiones, total_corporaciones, total_maestros, Total_lideres, Total_medios, Total_padres
 #SocioProductivo
 from .sociopViewset.HomeSocioproductivo import HomeSocioproductivo
 from .sociopViewset.tipo_EmpView import TipoEmpView, TipoEmpNew, TipoEmpEdit, TipoEmpDel

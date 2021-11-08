@@ -7,7 +7,7 @@ from app.models.educacion_model.municipioModel import municipio
 
 class Emprendimiento(models.Model):
     nombres_emp = models.CharField(max_length=255)
-    Monto_Capital = models.IntegerField()
+    Monto_Capital = models.FloatField()
     fecha_inicio = models.DateField()
 
     persona = models.ForeignKey(PersonaBasica, on_delete=models.CASCADE, related_name="Em_Persona")

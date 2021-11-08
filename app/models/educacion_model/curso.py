@@ -3,8 +3,8 @@ from .grado import Grado
 
 class Curso(models.Model):
     nombre_curso = models.CharField(max_length=100, null=False)
-    descripcion_curso = models.CharField(max_length=255)
-    grado = models.ForeignKey(Grado, on_delete=models.CASCADE, related_name="curso_grado")
+    descripcion_curso = models.CharField(max_length=255, null=True, blank=True)
+    grado = models.ForeignKey(Grado, on_delete=models.CASCADE, related_name="curso_grado", null=True, blank=True)
     estado_curso = models.BooleanField(default=True)
 
     def __str__(self):

@@ -1,0 +1,148 @@
+{% extends 'base/municipalizacion.html' %}
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            Reportes de lideres comunitarios
+        </div>
+      <div class="card-body">
+          <div class="row">
+            <div class="card">
+            <div class="card-body">
+              <!--Totales-->
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Lideres comunitarios registrados</h5>
+                        <p class="card-text">{{ total_lideres }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Lideres comunitarios vacunados contra COVID-19</h5>
+                        <p class="card-text">{{ total_lideres_vacunados }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <!--Fin totales-->
+              <br/>
+              <!--Inicio por genero-->
+              {% if not lideres_por_genero %}
+                <div class="alert alert-info">Lideres comunitarios por genero: No hay datos</div>
+              {% else %}
+              <caption><b>Total de lideres comunitarios por género</b></caption>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Género</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for gen_lider in lideres_por_genero %}
+                    <tr>
+                      <td>{{ gen_lider.genero }}</td>
+                      <td>{{ gen_lider.lideres_genero }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por genero-->
+                <br/>
+                <!--Inicio por etnia-->
+                {% if not lideres_por_etnia %}
+                  <div class="alert alert-info">Lideres comunitarios por grupo étnico: No hay datos</div>
+                {% else %}
+                <caption><b>Total de lideres comunitarios por grupo étnico</b></caption>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Étnia</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for etnia_lider in lideres_por_etnia %}
+                      <tr>
+                        <td>{{ etnia_lider.nombre_etnia }}</td>
+                        <td>{{ etnia_lider.lideres_etnia }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+                <!--Fin por etnia-->
+                <br/>
+                <!--Inicio por grupo-->
+                {% if not total_lideres_por_grupo %}
+                  <div class="alert alert-info">Lideres comunitarios por grupo organizado: No hay datos</div>
+                {% else %}
+                <caption><b>Total de lideres comunitarios por grupo organizado</b></caption>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Grupo organizado</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for grupo_lider in total_lideres_por_grupo %}
+                      <tr>
+                        <td>{{ grupo_lider.nombre_grupo }}</td>
+                        <td>{{ grupo_lider.lideres_grupo }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+                <!--Fin por grupo-->
+                <br/>
+                <!--Inicio por cargo en grupo-->
+                {% if not total_lideres_por_cargo %}
+                  <div class="alert alert-info">Lideres comunitarios por cargo en grupo organizado: No hay datos</div>
+                {% else %}
+                <caption><b>Total de lideres comunitarios por cargo en grupo organizado</b></caption>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Cargo en grupo organizado</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for cargo_lider in total_lideres_por_cargo %}
+                      <tr>
+                        <td>{{ cargo_lider.nombre_cg }}</td>
+                        <td>{{ cargo_lider.lideres_cargo }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+                <!--Fin por grupo-->
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'municipalizacion:municipalizacion' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+            </div>
+        </div>
+          </div>
+      </div>
+      </div>
+</div>
+{% endblock %}
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}
