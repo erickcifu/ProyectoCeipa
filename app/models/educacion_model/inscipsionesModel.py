@@ -10,6 +10,8 @@ class Inscripcion(models.Model):
     alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE, related_name="A_alumnos")
     ciclo_grado = models.ForeignKey(Ciclo_grado, on_delete=models.CASCADE, related_name="ciclo_grado")
     Fecha_inscripcion = models.DateTimeField()
+    alumno_promovido = models.BooleanField(default=False)
+    alumno_retirado = models.BooleanField(default=False)
     estado_incpripsion = models.BooleanField(default=True)
 
     def __str__(self):

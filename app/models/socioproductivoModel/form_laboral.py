@@ -3,6 +3,7 @@ from .persona_basica import PersonaBasica
 
 class FormacionLab(models.Model):
     fecha_inicio = models.DateField()
+    fecha_fin_formacion = models.DateField()
     persona_formacion = models.ForeignKey(PersonaBasica, on_delete=models.CASCADE, related_name="form_Persona")
     horas_formacion = models.PositiveIntegerField(null=True, blank=True)
     estado_formación = models.BooleanField(default=True)

@@ -1,5 +1,4 @@
 from django.db import models
-from .discapacidad import Discapacidad
 from app.models.educacion_model.etnia import etnia
 from .gradoAcademico import GradoAcademico
 from app.models.educacion_model.municipioModel import municipio

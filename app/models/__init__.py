@@ -2,9 +2,7 @@ from .educacion_model.ocupacion import ocupacion
 from .educacion_model.religion import religion
 from .educacion_model.grados import grados
 from .educacion_model.genero import genero
-from .educacion_model.tarea import tarea
 from .educacion_model.personalEducativo import personalEducativo
-from .educacion_model.tarea_alumno import tarea_alumno
 from .educacion_model.vivienda import vivienda
 from .educacion_model.departamento import departamento
 from .educacion_model.centro_educativo import centro_educativo
@@ -33,32 +31,28 @@ from .educacion_model.padecimientoModel import Padecimiento
 from .educacion_model.alumnopadecimiento import Apadecimiento
 from .educacion_model.inscipsionesModel  import Inscripcion
 from .educacion_model.etnia import etnia
+from .educacion_model.inscripcion_etapa import Inscripcion_etapa
+from .educacion_model.etapa import Etapa
 #Municipalizacion
 from .municipalizacionModel.area import Area
-from .municipalizacionModel.ausencia import Ausencia
 from .municipalizacionModel.Gorganizado import GOrganizado
-from .municipalizacionModel.institucion import Institucion
 from .municipalizacionModel.programaC import ProgramaC
 from .municipalizacionModel.tutor_muni import TutorMuni
-from .municipalizacionModel.establecimiento import Establecimiento
 from .municipalizacionModel.mediocomu import MedioComuni
 from .municipalizacionModel.partidopolitic import PartidoPolitic
 from .municipalizacionModel.lider_comunitario import LiderComunitario
-from .municipalizacionModel.ausen_beneficiado import AusenBeneficiado
 from .municipalizacionModel.beneficiado import Beneficiado
 from .municipalizacionModel.tipo_medio import Tipo_medio
 from .municipalizacionModel.CarGrup import CargoGrupo
 from .municipalizacionModel.comision import Comision
 from .municipalizacionModel.idioPer import IdiomaPersona
 from .municipalizacionModel.maestro import Maestro
-from .municipalizacionModel.padper import PadPer
 from .municipalizacionModel.persona import Persona
 from .municipalizacionModel.profesion import Profesion
 from .municipalizacionModel.comisionNA import ComisionNA
 from .municipalizacionModel.benefArea import BeneficiadoArea
 from .municipalizacionModel.padresFamilia import PadresFamilia
 from .municipalizacionModel.corporacionMuni import CorporacionMunicipal
-from .municipalizacionModel.discapacidad import Discapacidad
 from .municipalizacionModel.gradoAcademico import GradoAcademico
 from .educacion_model.aspectosLaborales import AspectosLab
 

@@ -14,7 +14,7 @@ class Alumno(models.Model):
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name="T_tutor")
     etni = models.ForeignKey(etnia, on_delete=models.CASCADE, related_name="E_etnia")
     idiome = models.ForeignKey(idioma, on_delete=models.CASCADE, related_name="I_idioma")
-    estudios_anteriores = models.ForeignKey(EstudiosAnt, on_delete=models.CASCADE, related_name="EA_estudios")
+    estudios_anteriores = models.ForeignKey(EstudiosAnt, on_delete=models.CASCADE, related_name="EA_estudios",null=True, blank=True)
     muni = models.ForeignKey(municipio, on_delete=models.CASCADE, related_name="M_muni")
     gen = models.ForeignKey(genero, on_delete=models.CASCADE, related_name="G_genero")
     nombres_alumno = models.CharField(max_length=100)

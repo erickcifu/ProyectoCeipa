@@ -16,7 +16,6 @@ from .educacionForms.gradosForm import GradosForm
 from .educacionForms.idiomaForm import IdiomaForm
 from .educacionForms.personalForms import PersonalForm
 from .educacionForms.religionForm import ReligionForm
-from .educacionForms.tareaForm import TareaForm
 from .educacionForms.gradoForm import GradoForm
 from .educacionForms.religionalumForm import ReligionAlumnoForm
 from .educacionForms.techoForm import TechoForm
@@ -40,19 +39,14 @@ from .muniForms.personaForm import PersonaForm
 from .muniForms.beneficiadoForm import BenForm
 from .muniForms.maestroForm import MaestroForm
 from .muniForms.profecionForm import ProfesionForm
-from .muniForms.discapacidadForm import DiscForm
 from .muniForms.tmedioForm import TmedioForm
 from .muniForms.comisionForm import ComisionForm
-from .muniForms.ausbenefiForm import AusenBeneficiadoForm
-from .muniForms.establecimientoForm import EstablecimientoForm
 from .muniForms.lidercomuniForm import LiderComuniMuniForm
 from .muniForms.mediocomuForm import MedioComuniForm
 from .muniForms.partidopoliticForm import PartidoPoliticForm
 from .muniForms.tutormuniForm import TutorMuniForm
-from .muniForms.padperForm import PadPerForm
 from .muniForms.padfamForm import PadFamForm
 from .muniForms.benareForm import BenefArForm
-from .muniForms.ausenciaForm import AusenciaForm
 from .muniForms.idiomaForm import IdiomaMuniForm
 from .muniForms.CorMuniForm import CorpMuniForm
 from .muniForms.GOrgForm import GOrgForm

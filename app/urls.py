@@ -111,11 +111,6 @@ urlpatterns = [
     path('religion/edit/<int:pk>', viewsets.ReligionEdit.as_view(), name='religion_edit'),
     path('religion/delete/<int:pk>', viewsets.ReligionDel.as_view(), name='religion_del'),
 
-    path('tarea/', viewsets.TareaView.as_view(), name='tarea_list'),
-    path('tarea/new', viewsets.TareaNew.as_view(), name='tarea_new'),
-    path('tarea/edit/<int:pk>', viewsets.TareaEdit.as_view(), name='tarea_edit'),
-    path('tarea/delete/<int:pk>', viewsets.TareaDel.as_view(), name='tarea_del'),
-
     path('grado/', viewsets.GradoView.as_view(), name='grado_list'),
     path('grado/new', viewsets.GradoNew.as_view(), name='grado_new'),
     path('grado/edit/<int:pk>', viewsets.GradoEdit.as_view(), name='grado_edit'),
@@ -205,6 +200,15 @@ urlpatterns = [
     path('Vivienda/delete/<int:pk>', viewsets.VivDel.as_view(), name='viv_del'),
 
     path('reportes/alumnos/', viewsets.ReportesAlumnos.as_view(), name='reportes_alumnos'),
+    #inicio agregado
+    path('reportes/municipalización/', viewsets.AlumnosporDepto.as_view(), name='reportes_participantes'),
+    path('reportes/comisiones/',viewsets.total_comisiones.as_view(), name='reporte_comisiones'),
+    path('reportes/corporaciones/',viewsets.total_corporaciones.as_view(), name='reporte_corporaciones'),
+    path('reportes/maestros/',viewsets.total_maestros.as_view(), name='reporte_maestros'),
+    path('reportes/lideres/',viewsets.Total_lideres.as_view(), name='reporte_lideres'),
+    path('reportes/medios/',viewsets.Total_medios.as_view(), name='reporte_medios'),
+    path('reportes/padres_y_madres/',viewsets.Total_padres.as_view(), name='reporte_padres'),
+    #Fin agregado
     #Municipalizacion
 
     path('area/', viewsets.AreaView.as_view(), name='area_list'),
@@ -244,11 +248,6 @@ urlpatterns = [
     path('profesion/edit/<int:pk>', viewsets.ProfEdit.as_view(), name='prof_edit'),
     path('profesion/delete/<int:pk>', viewsets.ProfDel.as_view(), name='prof_del'),
 
-    path('discapacidad/', viewsets.DiscView.as_view(), name='disc_list'),
-    path('discapacidad/new', viewsets.DiscNew.as_view(), name='disc_new'),
-    path('discapacidad/edit/<int:pk>', viewsets.DiscEdit.as_view(), name='disc_edit'),
-    path('discapacidad/delete/<int:pk>', viewsets.DiscDel.as_view(), name='disc_del'),
-
     path('tipo_medio/', viewsets.TmedioView.as_view(), name='tmedio_list'),
     path('tipo_medio/new', viewsets.TmedioNew.as_view(), name='tmedio_new'),
     path('tipo_medio/edit/<int:pk>', viewsets.TmedioEdit.as_view(), name='tmedio_edit'),
@@ -258,11 +257,6 @@ urlpatterns = [
     path('comision/new', viewsets.ComNew.as_view(), name='com_new'),
     path('comision/edit/<int:pk>', viewsets.ComEdit.as_view(), name='com_edit'),
     path('comision/delete/<int:pk>', viewsets.ComDel.as_view(), name='com_del'),
-
-    path('establecimiento/', viewsets.EstablecimientoView.as_view(), name='establecimiento_list'),
-    path('establecimiento/new', viewsets.EstablecimientoNew.as_view(), name='establecimiento_new'),
-    path('establecimiento/edit/<int:pk>', viewsets.EstablecimientoEdit.as_view(), name='establecimiento_edit'),
-    path('establecimiento/delete/<int:pk>', viewsets.EstablecimientoDel.as_view(), name='establecimiento_del'),
 
     path('partidopolitico/', viewsets.PartidoPoliticView.as_view(), name='partidopolitic_list'),
     path('partidopolitico/new', viewsets.PartidoPoliticNew.as_view(), name='partidopolitic_new'),
@@ -274,11 +268,6 @@ urlpatterns = [
     path('mediodecomunicacion/edit/<int:pk>', viewsets.MedioComuniEdit.as_view(), name='mediocomu_edit'),
     path('mediodecomunicacion/delete/<int:pk>', viewsets.MedioComuniDel.as_view(), name='mediocomu_del'),
 
-    path('ausenciabeneficiado/', viewsets.AusenBeneficiadoView.as_view(), name='ausbenefi_list'),
-    path('ausenciabeneficiado/new', viewsets.AusenBeneficiadoNew.as_view(), name='ausbenefi_new'),
-    path('ausenciabeneficiado/edit/<int:pk>', viewsets.AusenBeneficiadoEdit.as_view(), name='ausbenefi_edit'),
-    path('ausenciabeneficiado/delete/<int:pk>', viewsets.AusenBeneficiadoDel.as_view(), name='ausbenefi_del'),
-
     path('tutormuni/', viewsets.TutorMuniView.as_view(), name='tutormuni_list'),
     path('tutormuni/new', viewsets.TutorMuniNew.as_view(), name='tutormuni_new'),
     path('tutormuni/edit/<int:pk>', viewsets.TutorMuniEdit.as_view(), name='tutormuni_edit'),
@@ -289,11 +278,6 @@ urlpatterns = [
     path('lidercomunitario/edit/<int:pk>', viewsets.LiderComunitarioEdit.as_view(), name='lidercomuni_edit'),
     path('lidercomunitario/detil/<int:pk>/', viewsets.LiderComunitarioDetail.as_view(), name='lidercomuni_detail'),
     path('lidercomunitario/delete/<int:pk>', viewsets.LiderComunitarioDel.as_view(), name='lidercomuni_del'),
-
-    path('padecimientopersona/', viewsets.PadPerView.as_view(), name='padper_list'),
-    path('padecimientopersona/new', viewsets.PadPerNew.as_view(), name='padper_new'),
-    path('padecimientopersona/edit/<int:pk>', viewsets.PadPerEdit.as_view(), name='padper_edit'),
-    path('padecimientopersona/delete/<int:pk>', viewsets.PadPerDel.as_view(), name='padper_del'),
 
     path('padresfamilia/', viewsets.PadFamView.as_view(), name='padfam_list'),
     path('padresfamilia/new', viewsets.PadFamNew.as_view(), name='padfam_new'),
@@ -307,11 +291,6 @@ urlpatterns = [
     path('participante/new/<int:pk>', viewsets.BenefArNew.as_view(), name='benefar_new'),
     path('participante/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
     path('participante/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
-
-    path('ausencia/', viewsets.AusView.as_view(), name='aus_list'),
-    path('ausencia/new', viewsets.AusNew.as_view(), name='aus_new'),
-    path('ausencia/edit/<int:pk>', viewsets.AusEdit.as_view(), name='aus_edit'),
-    path('ausencia/delete/<int:pk>', viewsets.AusDel.as_view(), name='aus_del'),
 
     path('idioma_m/', viewsets.IdiomaMuniView.as_view(), name='idiomaMuni_list'),
     path('idioma_m/new', viewsets.IdiomaMuniNew.as_view(), name='idiomaMuni_new'),
@@ -337,11 +316,6 @@ urlpatterns = [
     path('estant_m/new', viewsets.EstMuniNew.as_view(), name='estmuni_new'),
     path('estant_m/edit/<int:pk>', viewsets.EstMuniEdit.as_view(), name='estmuni_edit'),
     path('estant_m/delete/<int:pk>', viewsets.EstMuniDel.as_view(), name='estmuni_del'),
-
-    path('padecimiento_m/', viewsets.PadMuniView.as_view(), name='padmuni_list'),
-    path('padecimiento_m/new', viewsets.PadMuniNew.as_view(), name='padmuni_new'),
-    path('padecimiento_m/edit/<int:pk>', viewsets.PadMuniEdit.as_view(), name='padmuni_edit'),
-    path('padecimiento_m/delete/<int:pk>', viewsets.PadMuniDel.as_view(), name='padmuni_del'),
 
     path('genero_m/', viewsets.GeneroMuniView.as_view(), name='generomuni_list'),
     path('genero_m/new', viewsets.GeneroMuniNew.as_view(), name='generomuni_new'),

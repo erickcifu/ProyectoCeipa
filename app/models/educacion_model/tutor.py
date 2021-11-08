@@ -13,9 +13,10 @@ class Tutor(models.Model):
     estado_tutor = models.BooleanField(default=True)
     fecha_nacimiento = models.DateField()
     direccion_tutor = models.CharField(max_length=80, null=True, blank=True)
-    telefono = models.CharField(max_length=8)
+    telefono = models.CharField(max_length=8, blank=True, null=True)
     fotografia_t = models.ImageField(upload_to='ceipa', null=True, blank=True)
     correo = models.EmailField(max_length=80, null=True, blank=True)
+    ocupacion_tutor = models.CharField(max_length=100, null=True,blank=True)
 
     @property
     def foto_url(self):
