@@ -89,37 +89,17 @@
                             </a>
                             <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
                               <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="{% url 'socioproductivo:TipoEmp_list' %}">Tipo de emprendimiento</a>
-                                    <a class="nav-link" href="{% url 'socioproductivo:elect_list' %}">Electrodomesticos</a>
-                                    <a class="nav-link" href="{% url 'socioproductivo:jornadaes_list' %}">Jornada de estudios</a>
-                                    <a class="nav-link" href="{% url 'socioproductivo:grupona_list' %}">Grupos de niñez y adolescencia</a>
-                                    <a class="nav-link" href="{% url 'socioproductivo:ocupTutor_list' %}">Ocupación Encargado</a>
-                                    <a class="nav-link" href="{% url 'socioproductivo:viviendSo_list' %}">Vivienda</a>
-                                    <a class="nav-link" href="{% url 'socioproductivo:Encar_list' %}">Encargado</a>
-                                      <a class="nav-link" href="{% url 'socioproductivo:emprend_list' %}">Emprendimiento</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:TipoEmp_new' %}">crear Tipo de emprendimiento</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:elect_new' %}">crear Electrodomesticos</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:jornadaes_new' %}">crear Jornada de estudios</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:grupona_new' %}">crear Grupos de niñez y adolescencia</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:ocupTutor_new' %}">crear Ocupación Encargado</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:viviendSo_new' %}">crear Vivienda</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:Encar_new' %}">crear Encargado</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:emprend_new' %}">crear Emprendimiento</a>  
                               </nav>
-                            </div>
-                            <!--inscripsion -->
-                            <div class="sidenav-menu-heading">Gestion de Usuarios</div>
-                            <!-- Sidenav Accordion (Dashboard)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseCatalogos">
-                              Usuarios
-                              <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseUsuarios" data-bs-parent="#accordionSidenav">
-                              <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                  <a class="nav-link" href="{% url 'socioproductivo:crear_asistente_equipo_socio' %}">Crear usuarios</a>
-                                  <a class="nav-link" href="{% url 'socioproductivo:listar_usuarios_socioproductivos' %}">listar usuarios</a>
-
-                             </nav>
-                           </div>
-
-                           <!--inscripsion -->
-                            <div class="sidenav-menu-heading">Inscripción y asignación</div>
-                                  <a class="nav-link" href="{% url 'socioproductivo:personabasica_list' %}">Registro de beneficiado</a>
-                                  <a class="nav-link" href="{% url 'socioproductivo:emprend_list' %}">Emprendimientos</a>
-
-
+                            </div> 
+                            
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
                     {% block footer %}
@@ -168,7 +148,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-xl-8 col-xxl-12">
                                                 <div class="text-center text-xl-start text-xxl-center mb-4 mb-xl-0 mb-xxl-4">
-                                                    <h1 class="text-primary">Bienvenido/a al espacio de trabajo</h1>
+                                                    <h1 class="text-primary">Bienvenido/a al espacio de trabajo Equipo Tecnico socioproductivo</h1>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="{% static 'base/dist/assets/img/Ceipa_Logo.jpeg' %}" style="max-width: 15rem" /></div>

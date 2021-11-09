@@ -101,14 +101,30 @@
                                     <a class="nav-link" href="{% url 'municipalizacion:prof_list' %}">Profesion</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:tmedio_list' %}">Tipos de medio de comunicación</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:programas_list' %}">Programas dentro de CEIPA</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:establecimiento_list' %}">Establecimientos</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:partidopolitic_list' %}">Partidos Politicos</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:per_list' %}">Persona</a>
                                     </nav>
                                 </div>
 
+                                <!-- Usuarios -->
+                                <div class="sidenav-menu-heading">Gestion de Usuarios</div>
+                                <!-- Sidenav Accordion (Dashboard)-->
+                                <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseCatalogos">
+                                  Usuarios
+                                  <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseUsuarios" data-bs-parent="#accordionSidenav">
+                                  <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                    <a class="nav-link" href="{% url 'municipalizacion:crear_asistente_equipo_municipal' %}">Crear nuevo usuario</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:listar_asistente_equipo_municipal' %}">listar usuarios</a>
+                                  </nav>
+                                </div>
+
+                                <!-- inscripsion -->
                                 <div class="sidenav-menu-heading">Inscripción y asignación</div>
                                 <a class="nav-link" href="{% url 'municipalizacion:ben_list' %}">Registro de niñez, adolescencia y juventud</a>
-                                <a class="nav-link" href="{% url 'municipalizacion:benefar_por_area' %}">Asignación a áreas de niñez, adolescencia y juventud</a>
+                                <a class="nav-link" href="{% url 'municipalizacion:benefar_list' %}">Asignación a áreas de niñez, adolescencia y juventud</a>
                                 <a class="nav-link" href="{% url 'municipalizacion:comisionNA_list' %}">Registro de comisión de niñez y adolescencia</a>
                                 <a class="nav-link" href="{% url 'municipalizacion:corpmuni_list' %}">Registro de corporación municipal</a>
                                 <a class="nav-link" href="{% url 'municipalizacion:maes_list' %}">Registro de maestros</a>
@@ -174,129 +190,129 @@
                                     </div>
                                 </div>
                             </div>
-                        <!-- Inicio agregado-->
-                        <!-- Example Colored Cards for Dashboard Demo-->
-                        <div class="row">
-                            <div class="col-lg-6 col-xl-3 mb-4">
-                                <div class="card bg-primary text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 small">Participantes niñez adolescencia y juventud</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="users"></i>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between small">
-                                        <a class="text-white stretched-link" href="{% url 'municipalizacion:reportes_participantes' %}">Ver reporte</a>
-                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-xl-3 mb-4">
-                                <div class="card bg-warning text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 small">Comisiones de niñez y adolescencia</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="users"></i>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between small">
-                                        <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_comisiones' %}">Ver reporte</a>
-                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-xl-3 mb-4">
-                                <div class="card bg-danger text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 small">Corporaciones municipales</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="users"></i>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between small">
-                                        <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_corporaciones' %}">Ver reporte</a>
-                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-xl-3 mb-4">
-                                <div class="card bg-primary text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 small">Maestros</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="users"></i>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between small">
-                                        <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_maestros' %}">Ver reporte</a>
-                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Example Colored Cards for Dashboard Demo-->
+                      <div class="row">
+                          <div class="col-lg-6 col-xl-3 mb-4">
+                              <div class="card bg-primary text-white h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="me-3">
+                                              <div class="text-white-75 small">Participantes niñez adolescencia y juventud</div>
+                                          </div>
+                                          <i class="feather-xl text-white-50" data-feather="users"></i>
+                                      </div>
+                                  </div>
+                                  <div class="card-footer d-flex align-items-center justify-content-between small">
+                                      <a class="text-white stretched-link" href="{% url 'municipalizacion:reportes_participantes' %}">Ver reporte</a>
+                                      <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-xl-3 mb-4">
+                              <div class="card bg-warning text-white h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="me-3">
+                                              <div class="text-white-75 small">Comisiones de niñez y adolescencia</div>
+                                          </div>
+                                          <i class="feather-xl text-white-50" data-feather="users"></i>
+                                      </div>
+                                  </div>
+                                  <div class="card-footer d-flex align-items-center justify-content-between small">
+                                      <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_comisiones' %}">Ver reporte</a>
+                                      <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-xl-3 mb-4">
+                              <div class="card bg-danger text-white h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="me-3">
+                                              <div class="text-white-75 small">Corporaciones municipales</div>
+                                          </div>
+                                          <i class="feather-xl text-white-50" data-feather="users"></i>
+                                      </div>
+                                  </div>
+                                  <div class="card-footer d-flex align-items-center justify-content-between small">
+                                      <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_corporaciones' %}">Ver reporte</a>
+                                      <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-xl-3 mb-4">
+                              <div class="card bg-primary text-white h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="me-3">
+                                              <div class="text-white-75 small">Maestros</div>
+                                          </div>
+                                          <i class="feather-xl text-white-50" data-feather="users"></i>
+                                      </div>
+                                  </div>
+                                  <div class="card-footer d-flex align-items-center justify-content-between small">
+                                      <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_maestros' %}">Ver reporte</a>
+                                      <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                  </div>
+                              </div>
+                          </div>
 
-                            <div class="col-lg-6 col-xl-3 mb-4">
-                                <div class="card bg-warning text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 small">Lideres comunitarios</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="users"></i>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between small">
-                                        <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_lideres' %}">Ver reporte</a>
-                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+                          <div class="col-lg-6 col-xl-3 mb-4">
+                              <div class="card bg-warning text-white h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="me-3">
+                                              <div class="text-white-75 small">Lideres comunitarios</div>
+                                          </div>
+                                          <i class="feather-xl text-white-50" data-feather="users"></i>
+                                      </div>
+                                  </div>
+                                  <div class="card-footer d-flex align-items-center justify-content-between small">
+                                      <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_lideres' %}">Ver reporte</a>
+                                      <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                  </div>
+                              </div>
+                          </div>
 
 
-                            <div class="col-lg-6 col-xl-3 mb-4">
-                                <div class="card bg-danger text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 small">Medios de comunicación</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="users"></i>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between small">
-                                        <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_medios' %}">Ver reporte</a>
-                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+                          <div class="col-lg-6 col-xl-3 mb-4">
+                              <div class="card bg-danger text-white h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="me-3">
+                                              <div class="text-white-75 small">Medios de comunicación</div>
+                                          </div>
+                                          <i class="feather-xl text-white-50" data-feather="users"></i>
+                                      </div>
+                                  </div>
+                                  <div class="card-footer d-flex align-items-center justify-content-between small">
+                                      <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_medios' %}">Ver reporte</a>
+                                      <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                  </div>
+                              </div>
+                          </div>
 
-                            <div class="col-lg-6 col-xl-3 mb-4">
-                                <div class="card bg-primary text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 small">Padres de familia</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="users"></i>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between small">
-                                        <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_padres' %}">Ver reporte</a>
-                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+                          <div class="col-lg-6 col-xl-3 mb-4">
+                              <div class="card bg-primary text-white h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="me-3">
+                                              <div class="text-white-75 small">Padres de familia</div>
+                                          </div>
+                                          <i class="feather-xl text-white-50" data-feather="users"></i>
+                                      </div>
+                                  </div>
+                                  <div class="card-footer d-flex align-items-center justify-content-between small">
+                                      <a class="text-white stretched-link" href="{% url 'municipalizacion:reporte_padres' %}">Ver reporte</a>
+                                      <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                  </div>
+                              </div>
+                          </div>
 
-                        </div>
-                        <!-- Example Charts for Dashboard Demo-->
-                        <!--Fin agregado-->
+                      </div>
+                      <!-- Example Charts for Dashboard Demo-->
+
+
                 </main>
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
