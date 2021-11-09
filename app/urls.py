@@ -70,6 +70,7 @@ urlpatterns = [
     path('AlumnoPadecimiento/delete/<int:pk>', viewsets.APadDel.as_view(), name='apad_del'),
 
     path('CentroEducativo/', viewsets.CenEdView.as_view(), name='centedu_list'),
+    path('CentroEducativo/maestro/list/', viewsets.ListarCentroEducativoPorMaestro.as_view(), name='centro_educativo_por_maestro'),
     path('CentroEducativo/new', viewsets.CenEdNew.as_view(), name='centedu_new'),
     path('CentroEducativo/edit/<int:pk>', viewsets.CenEdEdit.as_view(), name='centedu_edit'),
     path('CentroEducativo/delete/<int:pk>', viewsets.CenEdDel.as_view(), name='centedu_del'),
@@ -101,10 +102,13 @@ urlpatterns = [
     path('idioma/delete/<int:pk>', viewsets.IdiomaDel.as_view(), name='idioma_del'),
 
     path('personal/', viewsets.PersonalView.as_view(), name='personal_list'),
+    path('personal/centro/', viewsets.ListarPersonalEnCadaCentro.as_view(), name='listado_personal_centro'),
     path('personal/por_centro_educativo', viewsets.ListarPersonalEducativoPorCentroEducativo.as_view(), name='listado_personal_por_centro_educativo'),
     path('personal/new', viewsets.PersonalNew.as_view(), name='personal_new'),
     path('personal/edit/<int:pk>', viewsets.PersonalEdit.as_view(), name='personal_edit'),
     path('personal/delete/<int:pk>', viewsets.PersonalDel.as_view(), name='personal_del'),
+    path('personal/maestro/new/', viewsets.PersonalMaestroNew.as_view(), name='personal_maestro_new'),
+    path('personal/director/new/', viewsets.PersonalDirectorCentroNew.as_view(), name='personal_director_new'),
 
     path('religion/', viewsets.ReligionView.as_view(), name='religion_list'),
     path('religion/new', viewsets.ReligionNew.as_view(), name='religion_new'),
@@ -154,14 +158,18 @@ urlpatterns = [
 
     path('alumno/', viewsets.AlumnoView.as_view(), name='alumno_list'),
     path('alumno/list/centro_educativo', viewsets.ListarAlumnosPorCentroEducativo.as_view(), name='alumno_list_por_centro_educativo'),
+    path('alumno/list/centro/', viewsets.ListarAlumnosDeCadaCentro.as_view(), name='alumno_list_cada_centro'),
+    path('alumno/list/maestro/<int:pk>/', viewsets.AlumnosDeCadaCurso.as_view(), name='alumnos_de_cada_curso'),
     path('alumno/new', viewsets.AlumnoNew.as_view(), name='alumno_new'),
     path('alumno/edit/<int:pk>', viewsets.AlumnoEdit.as_view(), name='alumno_edit'),
     path('alumno/detail/<int:pk>/', viewsets.AlumnoDetail.as_view(), name='alumno_detail'),
     path('alumno/delete/<int:pk>', viewsets.AlumnoDel.as_view(), name='alumno_del'),
 
     path('CentrtoPersona/', viewsets.CentPerView.as_view(), name='centper_list'),
+    path('CentrtoPersona/list', viewsets.ListarDirectoresPorCentroEducativo.as_view(), name='centper_director_list'),
     path('CentrtoPersona/new/por_centro_educativo/<int:pk>', viewsets.AsignarPersonalEducativoCentroPersona.as_view(), name='centro_persona_por_centro_educativo'),
     path('CentrtoPersona/new', viewsets.CentPerNew.as_view(), name='centper_new'),
+    path('CentrtoPersona/director/new/<int:pk>/', viewsets.AsignarDirectorACentroEducativo.as_view(), name='centper_director_new'),
     path('CentrtoPersona/edit/<int:pk>', viewsets.CentPerEdit.as_view(), name='centper_edit'),
     path('CentrtoPersona/delete/<int:pk>', viewsets.CentPerDel.as_view(), name='centper_del'),
 
@@ -172,6 +180,7 @@ urlpatterns = [
 
     path('CicloGrado/', viewsets.CGView.as_view(), name='cg_list'),
     path('CicloGrado/alumno/<int:pk>', viewsets.CG_Del_Alumno.as_view(), name='cg_del_alumno'),
+    path('CicloGrado/inscripcion_alumno/centro/', viewsets.ListarGradosParaInscribirAlumnosDeCadaCentro.as_view(), name='cg_list_para_inscribir_alumnos_por_cada_centro'),
     path('CicloGrado/inscripcion_alumno/<int:id_centro_educativo>', viewsets.ListarGradosParaInscribirAlumnos.as_view(), name='cg_list_para_inscribir_alumnos'),
     path('CicloGrado/new/', viewsets.CGNew.as_view(), name='cg_new'),
     path('CicloGrado/new/<int:pk>', viewsets.CGNew.as_view(), name='cg_new'),
@@ -179,11 +188,14 @@ urlpatterns = [
     path('CicloGrado/delete/<int:pk>', viewsets.CGDel.as_view(), name='cg_del'),
 
     path('CicloGradoCurso/', viewsets.CGCView.as_view(), name='cgc_list'),
+    path('CicloGradoCurso/list/maestro/', viewsets.Listar_cursos_por_maestro.as_view(), name='cgc_list_por_maestro'),
     path('CicloGradoCurso/<int:id_grado>/<int:id_centro_educativo>', viewsets.Listar_Por_Centro_educativo_y_Por_Grado.as_view(), name='listar_Por_Centro_educativo_y_Por_Grado'),
+    path('CicloGradoCurso/por_personal/centro/<int:id_maestro>/<int:id_centro_educativo>', viewsets.Listar_cursos_del_personal_de_cada_centro.as_view(), name='listar_cursos_del_personal_por_centro'),
     path('CicloGradoCurso/por_personal_centro_educativo/<int:id_maestro>/<int:id_centro_educativo>', viewsets.Listar_cursos_y_Grados_Por_Personal_y_Centro_Educativo.as_view(), name='listar_curso_y_grado_por_centro_educativo_y_personal'),
     path('CicloGradoCurso/new', viewsets.CGCNew.as_view(), name='cgc_new'),
     path('CicloGradoCurso/new/<int:pk>', viewsets.CGCNew.as_view(), name='cgc_new'),
     path('CicloGradoCurso/por_personal_educativo/new/<int:pk>', viewsets.Agregar_cursos_por_personal.as_view(), name='agregar_cursos_por_maestro'),
+    path('CicloGradoCurso/por_personal_educativo/centro/new/<int:pk>/', viewsets.Asignar_curso_maestro_Rol_Director.as_view(), name='agregar_cursos_por_maestro_por_centro'),
     path('CicloGradoCurso/edit/<int:pk>', viewsets.CGCEdit.as_view(), name='cgc_edit'),
     path('CicloGradoCurso/delete/<int:pk>', viewsets.CGCDel.as_view(), name='cgc_del'),
     path('cursos/alumnos/<int:pk>', viewsets.CGDelAlumno.as_view(), name='cursos_alumnos'),
@@ -191,6 +203,7 @@ urlpatterns = [
     path('inscripsion/', viewsets.InsView.as_view(), name='ins_list'),
     path('inscripsion/new', viewsets.InsNew.as_view(), name='ins_new'),
     path('inscripsion/centro_educativo/grado/<int:id_centro_educativo>/<int:id_grado>', viewsets.InscribirAlumnos.as_view(), name='inscripcion_centro_educativo_grado'),
+    path('inscripsion/centro_educativo/grado/centro/<int:id_centro_educativo>/<int:id_grado>/', viewsets.InscribirAlumnosPorCadaCentro.as_view(), name='inscripcion_alumno_por_centro'),
     path('inscripsion/edit/<int:pk>', viewsets.InsEdit.as_view(), name='ins_edit'),
     path('inscripsion/delete/<int:pk>', viewsets.InsDel.as_view(), name='ins_del'),
 
@@ -200,7 +213,8 @@ urlpatterns = [
     path('Vivienda/delete/<int:pk>', viewsets.VivDel.as_view(), name='viv_del'),
 
     path('reportes/alumnos/', viewsets.ReportesAlumnos.as_view(), name='reportes_alumnos'),
-    #inicio agregado
+    #Municipalizacion
+
     path('reportes/municipalización/', viewsets.AlumnosporDepto.as_view(), name='reportes_participantes'),
     path('reportes/comisiones/',viewsets.total_comisiones.as_view(), name='reporte_comisiones'),
     path('reportes/corporaciones/',viewsets.total_corporaciones.as_view(), name='reporte_corporaciones'),
@@ -208,8 +222,6 @@ urlpatterns = [
     path('reportes/lideres/',viewsets.Total_lideres.as_view(), name='reporte_lideres'),
     path('reportes/medios/',viewsets.Total_medios.as_view(), name='reporte_medios'),
     path('reportes/padres_y_madres/',viewsets.Total_padres.as_view(), name='reporte_padres'),
-    #Fin agregado
-    #Municipalizacion
 
     path('area/', viewsets.AreaView.as_view(), name='area_list'),
     path('area/new', viewsets.AreaNew.as_view(), name='area_new'),
@@ -240,13 +252,17 @@ urlpatterns = [
     path('maestro/', viewsets.MaesView.as_view(), name='maes_list'),
     path('maestro/new', viewsets.MaesNew.as_view(), name='maes_new'),
     path('maestro/edit/<int:pk>', viewsets.MaesEdit.as_view(), name='maes_edit'),
-    path('maestro/detail/<int:pk>/', viewsets.MaesDetail.as_view(), name='maes_detail'),
     path('maestro/delete/<int:pk>', viewsets.MaesDel.as_view(), name='maes_del'),
 
     path('profesion/', viewsets.ProfView.as_view(), name='prof_list'),
     path('profesion/new', viewsets.ProfNew.as_view(), name='prof_new'),
     path('profesion/edit/<int:pk>', viewsets.ProfEdit.as_view(), name='prof_edit'),
     path('profesion/delete/<int:pk>', viewsets.ProfDel.as_view(), name='prof_del'),
+
+    path('cargo/', viewsets.CarView.as_view(), name='cargo_list'),
+    path('cargo/new', viewsets.CarNew.as_view(), name='cargo_new'),
+    path('cargo/edit/<int:pk>', viewsets.CarEdit.as_view(), name='cargo_edit'),
+    path('cargo/delete/<int:pk>', viewsets.CarDel.as_view(), name='cargo_del'),
 
     path('tipo_medio/', viewsets.TmedioView.as_view(), name='tmedio_list'),
     path('tipo_medio/new', viewsets.TmedioNew.as_view(), name='tmedio_new'),
@@ -257,6 +273,11 @@ urlpatterns = [
     path('comision/new', viewsets.ComNew.as_view(), name='com_new'),
     path('comision/edit/<int:pk>', viewsets.ComEdit.as_view(), name='com_edit'),
     path('comision/delete/<int:pk>', viewsets.ComDel.as_view(), name='com_del'),
+
+    path('establecimiento/', viewsets.EstablecimientoView.as_view(), name='establecimiento_list'),
+    path('establecimiento/new', viewsets.EstablecimientoNew.as_view(), name='establecimiento_new'),
+    path('establecimiento/edit/<int:pk>', viewsets.EstablecimientoEdit.as_view(), name='establecimiento_edit'),
+    path('establecimiento/delete/<int:pk>', viewsets.EstablecimientoDel.as_view(), name='establecimiento_del'),
 
     path('partidopolitico/', viewsets.PartidoPoliticView.as_view(), name='partidopolitic_list'),
     path('partidopolitico/new', viewsets.PartidoPoliticNew.as_view(), name='partidopolitic_new'),
@@ -276,7 +297,6 @@ urlpatterns = [
     path('lidercomunitario/', viewsets.LiderComunitarioMuniView.as_view(), name='lidercomuni_list'),
     path('lidercomunitario/new', viewsets.LiderComunitarioNew.as_view(), name='lidercomuni_new'),
     path('lidercomunitario/edit/<int:pk>', viewsets.LiderComunitarioEdit.as_view(), name='lidercomuni_edit'),
-    path('lidercomunitario/detil/<int:pk>/', viewsets.LiderComunitarioDetail.as_view(), name='lidercomuni_detail'),
     path('lidercomunitario/delete/<int:pk>', viewsets.LiderComunitarioDel.as_view(), name='lidercomuni_del'),
 
     path('padresfamilia/', viewsets.PadFamView.as_view(), name='padfam_list'),
@@ -284,13 +304,11 @@ urlpatterns = [
     path('padresfamilia/edit/<int:pk>', viewsets.PadFamEdit.as_view(), name='padfam_edit'),
     path('padresfamilia/delete/<int:pk>', viewsets.PadFamDel.as_view(), name='padfam_del'),
 
-    path('participantes/', viewsets.BenefArView.as_view(), name='benefar_list'),
-    path('participantes/por_area/', viewsets.ListarPorArea.as_view(), name='benefar_por_area'),
-    path('participantes/new/por_area/<int:pk>', viewsets.Area_beneficiado.as_view(), name='area_ben_por_area'),
-    path('participante/new/', viewsets.BenefArNew.as_view(), name='benefar_new'),
-    path('participante/new/<int:pk>', viewsets.BenefArNew.as_view(), name='benefar_new'),
-    path('participante/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
-    path('participante/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
+    path('benefeciadoare/', viewsets.BenefArView.as_view(), name='benefar_list'),
+    path('benefeciadoare/new', viewsets.BenefArNew.as_view(), name='benefar_new'),
+    path('benefeciadoare/new/<int:pk>', viewsets.BenefArNew.as_view(), name='benefar_new'),
+    path('benefeciadoare/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
+    path('benefeciadoare/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
 
     path('idioma_m/', viewsets.IdiomaMuniView.as_view(), name='idiomaMuni_list'),
     path('idioma_m/new', viewsets.IdiomaMuniNew.as_view(), name='idiomaMuni_new'),
@@ -417,15 +435,40 @@ urlpatterns = [
     path('encargado/delete/<int:pk>', viewsets.EncargadoDel.as_view(), name='Encar_del'),
 
     path('emprendimiento', viewsets.EmprenView.as_view(), name='emprend_list'),
-    path('emprendimiento/new/<int:pk>/', viewsets.EmprenNew.as_view(),name='emprend_new'),
+    path('emprendimiento/new', viewsets.EmprenNew.as_view(),name='emprend_new'),
     path('emprendimiento/edit/<int:pk>', viewsets.EmprenEdit.as_view(), name='emprend_edit'),
     path('emprendimiento/delete/<int:pk>', viewsets.EmprenDel.as_view(), name='emprend_del'),
 
-
+#login views
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
-    path('municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),
-    path('socioproductivo/', viewsets.HomeSocioproductivo.as_view(), name='socioproductivo'),
-    path('login/', auth_views.LoginView.as_view(template_name='app/login.html'), name='login'),
+
+    path('login/', viewsets.Login2.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='app/login.html'), name = 'logout'),
+
+    # homes
+    path('home/directorGeneral/', viewsets.HomeDirectorGeneral.as_view(), name = 'home_director_general'),
+    path('home/coordinadorEducacion/', viewsets.HomeCoordinadorEducacion.as_view(), name = 'home_coordinador_general'),
+    path('home/directorCentro/', viewsets.HomeDirectorCentro.as_view(), name = 'home_director_centro'),
+    path('home/maestro/', viewsets.HomeMaestro.as_view(), name = 'home_maestro'),
+    path('home/municipalizacion/', viewsets.HomeMunicipalizacion.as_view(), name='municipalizacion'),
+    path('home/equipoMunicipal/', viewsets.HomeEquipoMunicipal.as_view(), name='home_equipo_municipal'),
+    path('home/socioproductivo/', viewsets.HomeCoordinadorSocioproductivo.as_view(), name='home_coordinador_socioproductivo'),
+    path('home/equipoSocioproductivo/', viewsets.HomeEquipoSocioproductivo.as_view(), name='home_equipo_socioproductivo'),
+
+    #users
+    path('coordinadorGeneral/new/', viewsets.CrearCoordinador.as_view(), name = 'crear_coordinador'),
+    path('coordinadorGeneral/list/', viewsets.ListarCoordinadores.as_view(), name = 'listar_coordinador'),
+    path('directorGeneral/new/', viewsets.CrearDirectorGeneral.as_view(), name = 'crear_director_o_asistente_general'),
+    path('personalMaestro/new/', viewsets.CrearMaestroDeCadaCentro.as_view(), name = 'crear_maestro'),
+
+    path('usuarios/coordinadorEducacion/new', viewsets.CrearAsistenteMaestroDirectorCentro.as_view(), name = 'crear_maestro_director_centro'),
+    path('usuarios/coordinadorEducacion/list', viewsets.ListarAsistentesMaestrosDirectorCentro.as_view(), name = 'listar_maestro_director_centro'),
+    path('usuarios/coordinadorMunicipal/new', viewsets.CrearEquipoMunicipalYAsistenteMunicipal.as_view(), name = 'crear_asistente_equipo_municipal'),
+    path('usuarios/coordinadorMunicipal/list', viewsets.ListarPersonalEquipoMunicipalAsistenteMunicipal.as_view(), name = 'listar_asistente_equipo_municipal'),
+    path('usuarios/coordinadorSocio/new', viewsets.CrearAsistenteSocioproductivoEquipoSocio.as_view(), name = 'crear_asistente_equipo_socio'),
+    path('usuarios/coordinadorSocio/list', viewsets.ListarAsistenteSocioproductivoEquipoSocio.as_view(), name = 'listar_usuarios_socioproductivos'),
+
+    #prueba roles
+
 ]
