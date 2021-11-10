@@ -11,7 +11,7 @@ class MunicipioForm(forms.ModelForm):
     class Meta:
         model = municipio
         fields = ['dep', 'nombre_municipio', 'estado_municipio']
-        labels = {'nombre_municipio':"Municipio", 'estado_municipio':"Activo"}
+        labels = {'nombre_municipio':"Municipio", 'estado_municipio':"Estado"}
         widget = {'nombre_municipio': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

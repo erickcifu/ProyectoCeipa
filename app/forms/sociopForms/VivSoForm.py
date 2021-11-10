@@ -33,23 +33,23 @@ class ViviendaSForm(forms.ModelForm):
             ]
 
         labels = {
-            'numero_habitantes':'numero habitacione en la vivienda',
-            'otra_Viv':'Tiene otra vivienda',
-            'desc_Otra_Viv':'Descrpcion de la otra Vivienda',
-            'Telefono':'Telefono de la vivienda',
+            'numero_habitantes':'Cantidad de habitaciones en la vivienda',
+            'otra_Viv':'Sus padres tienen otra vivienda',
+            'desc_Otra_Viv':'Descripciòn de la otra Vivienda',
+            'Telefono':'Telèfono',
             'tipopiso':'Tipo de piso',
             'tipotecho':'tipo de techo',
-            'tipomuro':'Tipo de muro',
-            'tipovivienda':'tipo de vivienda',
-            'agua_potable':'agua potable',
-            'energia_elect':'energia electrica',
-            'dreaje':'dreaje',
-            'nivel_Eco_Alto':'nivel economico Alto',
-            'nivel_Eco_medio':'nivel Economico medio',
-            'nivel_Eco_bajo':'nivel Economico bajo',
-            'pobre':'pobre',
-            'no_pobre':'no pobre',
-            'Extemadamente_pobre':'Extemadamente pobre',
+            'tipomuro':'Tipo de pared',
+            'tipovivienda':'La vivienda en la que habita es',
+            'agua_potable':'Agua potable',
+            'energia_elect':'Energìa elèctrica',
+            'dreaje':'Dreaje',
+            'nivel_Eco_Alto':'Alto',
+            'nivel_Eco_medio':'Medio',
+            'nivel_Eco_bajo':'Bajo',
+            'pobre':'Pobre',
+            'no_pobre':'No pobre',
+            'Extemadamente_pobre':'Extremadamente pobre',
             'estado_vivsocio':'Activo/Inactivo'}
         widget = { 'numero_habitantes': forms.TextInput}
 

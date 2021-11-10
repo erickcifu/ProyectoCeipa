@@ -15,19 +15,19 @@ class InfoEducacionForm(forms.ModelForm):
         'recibido_formacion',
         'conocimiento_derechoshumanos', 'conocimiento_leyes', 'importancia_organizacion', 'te_motiva_participar',  'estado_info_educacion']
         labels = {
-            'nombre_establecimiento':'Nombre de Establecimiento',
-            'direccion_establecimiento':'Direccion de Establecimiento',
-            'jornada_estudio':'Jornada de Estudio',
-            'grado_actual':'Grado Actual',
-            'nombre_maestro':'Nombre del Maestro',
-            'tel_maestro':'Telefono del Maestro',
-            'participacion_grupo':'¿Participa en algun grupo de niñez y adolescencia?',
-            'grupo_nin_adole':'¿en que grupo de niñez y adolecencia?',
-            'recibido_formacion':'¿Has recibido formación en derechos humanos de la niñez, adolecencia y juventud?',
-            'conocimiento_derechoshumanos':'¿Qué sabes sobre derechos humanos de la niñez, adolescencia y juventud?',
-            'conocimiento_leyes':'¿Conoces las leyes que protegen a la niñez y adolescencia?',
-            'importancia_organizacion':'¿Crees que es importante que la niñez, adolescencia y juventud se organice y participe?',
-            'te_motiva_participar':'¿Tienes motivación para participar en algún grupo de consejo municipal?',
+            'nombre_establecimiento':'Nombre del establecimiento donde estudia actualmente',
+            'direccion_establecimiento':'Direcciòn des establecimiento donde estudia actualmente',
+            'jornada_estudio':'Jornada de estudios',
+            'grado_actual':'Grado que cursa actualmente',
+            'nombre_maestro':'Nombre del maestro(a) de grado',
+            'tel_maestro':'No. Telèfono del maestro(a) de grado',
+            'participacion_grupo':'¿Participa en algun grupo de niñez y adolescencia? (Cultural, deportivo, religioso)',
+            'grupo_nin_adole':'¿En que grupo de niñez y adolecencia participa?',
+            'recibido_formacion':'¿Ha recibido formación en derechos humanos de la niñez, adolecencia y juventud?',
+            'conocimiento_derechoshumanos':'¿Qué sabe sobre derechos humanos de la niñez, adolescencia y juventud?',
+            'conocimiento_leyes':'¿Conoce las leyes que protegen a la niñez y adolescencia?',
+            'importancia_organizacion':'¿Cree que es importante que la niñez, adolescencia y juventud se organice y participe?',
+            'te_motiva_participar':'¿Le motiva participar en el Concejo Municipal de Niñez y Adolescencia?',
             'estado_info_educacion':'Activo/Inactivo'
             }
         widget = {
