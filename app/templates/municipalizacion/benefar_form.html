@@ -1,62 +1,47 @@
-{% extends 'base/base4Multiselect.html' %}
+{% extends 'base/municipalizacion.html' %}
 
 {% block page_content %}
 {% load crispy_forms_tags %}
-<style>
-    .mul-select{
-        width: 100%;
-    }
-</style>
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class=" col-xl-10 col-md-6 mb-6 ">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
         <div class="card border-left-success shadow h-100 py-2">
         {% endif %}
-            <div class="card-body ">
+            <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Agregar participantes
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Beneficiado Area
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
+                          <label for="area">Area de niñez, adolescencia y juventud</label>
+                          <select name="area" id="area" class="form-control" {%if id_area%}disabled{%endif%}>
+                              <option value selected>---------</option>
+                              {%if areas%}
+                                {%for area in areas%}
+                                  {%if id_area == area.id%}
+                                      <option value="{{area.id}}" selected>{{area.nombre_area}}</option>
+                                  {%else%}
+                                  <option value="{{area.id}}">{{area.nombre_area}}</option>
 
-                                {%if id_area %}
-                                    <h2 class="text-muted">
-                                        {{id_area.nombre_area}}
-                                    </h2>
-                                {%endif%}
+                                  {%endif%}
 
-                        </div>
-                        <div class="container-fluid h-100 bg-light text-dark">
-                            <div class="row justify-content-center align-items-center">
-                                <h1>Elija</h1>
+                                {%endfor%}
+                              {%endif%}
+                          </select>
+                            {{ form | crispy }}
                             </div>
-                            <br>
-                            {%if beneficiados %}
-                            <div class="row justify-content-center align-items-center h-100">
-                                <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-12">
-                                    <div class="form-group">
-                                        <select name="beneficiados" class="form-select"  aria-label=" select example">
-                                            {%for beneficiado in beneficiados %}
-                                                <option value="{{beneficiado.id}}">{{beneficiado.persona}} {{beneficiado.persona.apellidos_persona }}</option>
-                                            {%endfor%}
-                                        </select>
-                                    </div>
-                               </div>
-                            </div>
-                            {%else%}
-                                <h1>No hay participantes</h1>
-                            {%endif%}
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-success">Agregar</button>
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'municipalizacion:benefar_list' %}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </div>
@@ -68,13 +53,4 @@
 </div>
 {% endblock %}
 {% block js_page %}
-    <script>
-        $(document).ready(function(){
-        $(".mul-select").select2({
-            placeholder: "select country", //placeholder
-            tags: true,
-            tokenSeparators: ['/',',',';'," "]
-        });
-    })
-    </script>
 {% endblock %}

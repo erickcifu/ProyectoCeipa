@@ -35,7 +35,6 @@ class PersonaBasica(models.Model):
     edad = models.IntegerField(null=True, default=None, blank=True)
     tutor_socio = models.ForeignKey(Encargado, on_delete=models.CASCADE, related_name="PB_tutor_socio", null=True, blank=True)
     padres = models.ForeignKey(PadresSociop, on_delete=models.CASCADE, related_name="PB_padres", null=True, blank=True)
-    certificado_taller = models.BooleanField(default=False)
     estado_persona_basica = models.BooleanField(default=True)
 
     @property

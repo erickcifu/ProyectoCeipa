@@ -1,0 +1,70 @@
+{% extends 'base/municipalizacion.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-12 col-md-12 mb-12">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Municipio
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Municipio</label>
+                                <input class="form-control" type="text" name="nombre_municipio" maxlength="50" class="form-control" required id="id_nombre_municipio"
+                                placeholder="Nombre del municipio" value="{% if obj %} {{ obj.nombre_municipio }} {% endif %}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Departamento</label>
+                                {{ form.dep }}
+                            </div>
+                        </form>
+
+                        <!-- <div class="row">
+                        <div class="col-10">
+                            <div class="input-group">
+                                {{ form.dep }}
+                            </div>
+                        </div><br><br>
+
+                        <div class="col-10">
+                            <div class="input-group">
+                                <input type="text" name="nombre_municipio" maxlength="50" class="form-control" required id="id_nombre_municipio"
+                                placeholder="Nombre del municipio" value="{% if obj %} {{ obj.nombre_municipio }} {% endif %}">
+                            </div>
+                        </div> -->
+                            <div class="col-5">
+                                <div class="form-group">
+                                    <label for="id_estado_departamento">Estado</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="estado_municipio" class="form-control" id="id_estado_municipio" type="checkbox"  {% if obj.estado_municipio is true %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-danger">Guardar</button>
+                                <a href="{% url 'educacion:municipio_list' %}" class="btn btn-success">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}

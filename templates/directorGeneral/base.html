@@ -10,7 +10,7 @@
         <title>CEIPA</title>
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
-        
+
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
         <link href="{% static 'base/dist/css/styles.css' %}" rel="stylesheet" />
@@ -20,7 +20,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-        
+
     </head>
     <body class="nav-fixed">
         {% block top_bar %}
@@ -85,7 +85,7 @@
                             <div class="sidenav-menu-heading">Menú PRONNAT</div>
                             <!-- Sidenav Accordion (Dashboard)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCatalogos" aria-expanded="false" aria-controls="collapseCatalogos">
-                              Catálogos
+                              Reportes
                               <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
@@ -95,10 +95,10 @@
                             </div>
 
                             <div class="sidenav-menu-heading">Inscripción y asignación</div>
-                            <a class="nav-link" href={% url 'educacion:crear_coordinador' %}>Crear nuevo Coordinador</a>
+                            <a class="nav-link" href={% url 'educacion:crear_coordinador' %}>Crear nuevo coordinador</a>
                             <a class="nav-link" href={% url 'educacion:listar_coordinador' %}>Listado de coordinadores</a>
-                            <a class="nav-link" href={% url 'educacion:crear_director_o_asistente_general' %}>crear Director General</a>
-                              
+                            <a class="nav-link" href={% url 'educacion:crear_director_o_asistente_general' %}>Crear nuevo director general</a>
+
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
                     {% block footer %}

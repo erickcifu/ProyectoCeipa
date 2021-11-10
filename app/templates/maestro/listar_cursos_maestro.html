@@ -1,0 +1,53 @@
+{% extends 'maestro/base.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            Cursos del maestro <b>{{personal.nombres}} {{personal.apellidos}}</b>
+      </div>
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No tienes ningún curso asignado</div>
+          {% else %}
+          <table class="table table-striped table-hover">
+              <thead>
+                  <th>Id</th>
+                  <th>Maestro</th>
+                  <th>Curso</th>
+                  <th>Grado</th>
+                  <th>Seccion</th>
+                  <th>Ciclo</th>
+                  <th>Estado</th>
+                  <th>Ver alumnos</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.maestro }}</td>
+                      <td>{{ item.curso }}</td>
+                      <td>{{ item.grado }}</td>
+                      <td>{{ item.seccion }}</td>
+                      <td>{{ item.ciclo }}</td>
+                      <td>{{ item.estado_cgc|yesno:"Activo,Inactivo" }}</td>
+                      <td>
+                        <a href="{%url 'educacion:alumnos_de_cada_curso' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}

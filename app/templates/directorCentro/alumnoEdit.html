@@ -1,0 +1,255 @@
+{% extends 'directorCentro/base.html' %}
+
+{% block page_content %}
+{% load crispy_forms_tags %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-12 col-md-12 mb-12">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="row mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          <div class="col-6 col-md-6 offset-md-6 text-left">
+                              <h2>Editar  Alumno</h2>
+                          </div>
+                          <div class="col-6 col-md-6">
+                            <a class="btn btn-primary" href="{% url 'educacion:alumno_list_convivientes' alumno.id%}">edicion vivienda</a>
+                          </div>
+                    </div>
+                    
+                  </div>
+                <!--Wizzard-->
+                        <div class="card">
+                          <div class="card-header border-bottom">
+                            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                              <!--Wizard item 1-->
+                              <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                <div class="wizard-step-icon">1</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Alumno</div>
+                                  <div class="wizard-step-text-details">Infomaciòn general del alumno</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 2-->
+                              <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Tutor</div>
+                                  <div class="wizard-step-text-details">Informaciòn personal de el tutor</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 3-->
+                              <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
+                                <div class="wizard-step-icon">3</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Estudios Anteriores</div>
+                                  <div class="wizard-step-text-details">Informaciòn sobre sus estudios anteriores</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 4-->
+                              <a class="nav-item nav-link" id="wizard4-tab" href="#wizard4" data-bs-toggle="tab" role="tab" aria-controls="wizard4" aria-selected="true">
+                                <div class="wizard-step-icon">4</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Religion</div>
+                                  <div class="wizard-step-text-details">Informaciòn sobre su religion</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 5-->
+                              <a class="nav-item nav-link" id="wizard5-tab" href="#wizard5" data-bs-toggle="tab" role="tab" aria-controls="wizard5" aria-selected="true">
+                                <div class="wizard-step-icon">5</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Padecimiento</div>
+                                  <div class="wizard-step-text-details">Informaciòn sobre sus padecimiento</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 6-->
+                              <a class="nav-item nav-link" id="wizard6-tab" href="#wizard6" data-bs-toggle="tab" role="tab" aria-controls="wizard6" aria-selected="true">
+                                <div class="wizard-step-icon">6</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Anàlisis Psicologico</div>
+                                  <div class="wizard-step-text-details">Informaciòn sobre el analicis psicologicos</div>
+                                </div>
+                              </a>
+                              
+                            <div class="card-body">
+                              <!--Wizard Body-->
+                                <div class="tab-content" id="cardTabContent">
+                                  <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 1</h3>
+                                        <h5 class="card-title mb-4">Ingrese la informaciòn personal del alumno </h5>
+                                        <!--Inicio Formulario-->
+                                          <div class="row gx-3">
+                                                {{ form3 |crispy  }}
+                                          </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                          </div>
+                                        <!--Fin Formulario-->
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!--Tab item 2-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 2</h3>
+                                        <h5 class="card-title mb-4">Ingrese informaciòn personal del tutor</h5>
+                                          <div class="row gx-3">
+                                              {{ form | crispy  }}
+                                          </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-primary next-step" role="button">Siguiente</a>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--Tab item 3-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 3</h3>
+                                        <h5 class="card-title mb-4">Ingrese informaciòn spbre sus estudios anteriores</h5>
+                                            <div class="row gx-3">
+                                                {{ form2 | crispy }}
+                                              </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-ligth" type="button">Anterior</button>
+                                            <a class="btn btn-primary next-step" role="button">Siguiente</a>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Tab item 4-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard4" role="tabpanel" aria-labelledby="wizard4-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 4</h3>
+                                          <h5 class="card-title mb-4">Ingrese informaciòn de la religionr</h5>
+                                            <div class="row gx-3">
+                                                {{ form4 | crispy }}
+                                            </div>
+                                            <hr class="my-4"/>
+                                            <div class="d-flex justify-content-between">
+                                              <button class="btn btn-ligth" type="button">Anterior</button>
+                                              <a class="btn btn-primary next-step" role="button">Siguiente</a>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Tab item 5-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard5" role="tabpanel" aria-labelledby="wizard5-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 5</h3>
+                                          <h5 class="card-title mb-4">Ingrese informaciòn de alumno padecimiento </h5>
+                                            <div class="row gx-3" >
+                                                {{form5.management_form}}
+                                                  {%for f in form5%}
+                                                    <div id="formularios_padecimientos" class="row">
+                                                      {{ f | crispy}}
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                  {%endfor%}
+                                            </div>
+                                            <br/>
+                                            
+                                            <div class="d-flex justify-content-between">
+                                              <button class="btn btn-primary" role="button" onclick="agregar_form();">
+                                                nuevo form
+                                            </button>
+                                            </div>
+                                            <hr class="my-4"/>
+                                            <div class="d-flex justify-content-between">
+                                              <button class="btn btn-ligth" type="button">Anterior</button>
+                                              <a class="btn btn-primary next-step" role="button">Siguiente</a>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Tab item 6-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard6" role="tabpanel" aria-labelledby="wizard6-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 6</h3>
+                                          <h5 class="card-title mb-4">Ingrese informaciòn de psicologicor</h5>
+                                            <div class="row gx-3">
+                                                {{ form6 | crispy  }}
+                                            </div>
+                                            <hr class="my-4"/>
+                                            
+                                            <div class="d-flex justify-content-between">
+                                              <a class="btn btn-ligth" href="{% url 'educacion:alumno_list' %}">Cancelar</a>
+                                              <button type="submit" class="btn btn-success"">Guardar</button>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    
+                                    <!--Tab fin -->
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+  <script>
+      function agregar_form(){
+        const $total_forms = document.getElementById('id_form-TOTAL_FORMS')
+        
+        let $label_pad = document.createElement('label')
+        $label_pad.innerHTML = 'AlumPad'
+        let $input_padeci = document.querySelector('#id_form-0-padecimiento').cloneNode(true)
+        $input_padeci.name = 'form-'+$total_forms.value+'-padecimiento'
+        $input_padeci.id = 'id_form-'+$total_forms.value+'-padecimiento'
+
+        console.log('label_pad', $label_pad)
+        console.log('input_pad', $input_padeci)
+
+
+        let $label_tratamiento = document.createElement('label')
+        $label_tratamiento.innerHTML = 'tratamiento'
+        let $input_tratamiento = document.querySelector('#id_form-0-tratamiento').cloneNode(true)
+        $input_tratamiento.name = 'form-'+$total_forms.value+'-tratamiento'
+        $input_tratamiento.id = 'id_form-'+$total_forms.value+'-tratamiento'
+
+        let $label_estado_pad = document.createElement('label')
+        $label_estado_pad.innerHTML = 'Estado'
+        let $input_estado_pad = document.querySelector('#id_form-0-estado_Alpadecimiento').cloneNode(true)
+        $input_estado_pad.name = 'form-'+$total_forms.value+'-estado_Alpadecimiento'
+        $input_estado_pad.id = 'id_form-'+$total_forms.value+'-estado_Alpadecimiento'
+
+        document.getElementById('formularios_padecimientos').appendChild($label_pad)
+        document.getElementById('formularios_padecimientos').appendChild($input_padeci)
+        document.getElementById('formularios_padecimientos').appendChild($label_tratamiento)
+        document.getElementById('formularios_padecimientos').appendChild($input_tratamiento)
+        document.getElementById('formularios_padecimientos').appendChild($label_estado_pad)
+        document.getElementById('formularios_padecimientos').appendChild($input_estado_pad)
+
+        $total_forms.value = parseInt($total_forms.value) + 1
+        console.log($total_forms)
+        
+      }
+  </script>
+{% endblock %}
