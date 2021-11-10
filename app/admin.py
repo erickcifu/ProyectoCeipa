@@ -19,7 +19,6 @@ from .models.educacion_model.seccionModelo import seccion
 from .models.educacion_model.categoriaModel import Categoria
 from .models.educacion_model.tipopisoModel import Tipo_piso
 from .models.educacion_model.centropersonaModel import Centropersona
-from .models.educacion_model.estudiosantModel import EstudiosAnt
 from .models.educacion_model.municipioModel import municipio
 from .models.educacion_model.religion_alumno import Religion_alumno
 from .models.educacion_model.grado import Grado
@@ -32,11 +31,14 @@ from .models.educacion_model.padecimientoModel import Padecimiento
 from .models.educacion_model.alumnopadecimiento import Apadecimiento
 from .models.educacion_model.inscipsionesModel  import Inscripcion
 from .models.educacion_model.etnia import etnia
+from .models.educacion_model.Perfil import Perfil
 #Municipalizacion
 from .models.municipalizacionModel.area import Area
 from .models.municipalizacionModel.Gorganizado import GOrganizado
+from .models.municipalizacionModel.institucion import Institucion
 from .models.municipalizacionModel.programaC import ProgramaC
 from .models.municipalizacionModel.tutor_muni import TutorMuni
+from .models.municipalizacionModel.establecimiento import Establecimiento
 from .models.municipalizacionModel.mediocomu import MedioComuni
 from .models.municipalizacionModel.partidopolitic import PartidoPolitic
 from .models.municipalizacionModel.lider_comunitario import LiderComunitario
@@ -51,6 +53,7 @@ from .models.municipalizacionModel.comisionNA import ComisionNA
 from .models.municipalizacionModel.benefArea import BeneficiadoArea
 from .models.municipalizacionModel.padresFamilia import PadresFamilia
 from .models.municipalizacionModel.corporacionMuni import CorporacionMunicipal
+
 from .models.municipalizacionModel.gradoAcademico import GradoAcademico
 from .models.educacion_model.aspectosLaborales import AspectosLab
 from .models.municipalizacionModel.tipo_medio import Tipo_medio
@@ -95,7 +98,6 @@ admin.site.register(seccion)
 admin.site.register(Categoria)
 admin.site.register(Tipo_piso)
 admin.site.register(Centropersona)
-admin.site.register(EstudiosAnt)
 admin.site.register(municipio)
 admin.site.register(Religion_alumno)
 admin.site.register(Grado)
@@ -108,11 +110,14 @@ admin.site.register(Padecimiento)
 admin.site.register(Apadecimiento)
 admin.site.register(Inscripcion)
 admin.site.register(etnia)
+admin.site.register(Perfil)
 #municipalizacion
 admin.site.register(Area)
 admin.site.register(GOrganizado)
+admin.site.register(Institucion)
 admin.site.register(ProgramaC)
 admin.site.register(TutorMuni)
+admin.site.register(Establecimiento)
 admin.site.register(MedioComuni)
 admin.site.register(PartidoPolitic)
 admin.site.register(LiderComunitario)

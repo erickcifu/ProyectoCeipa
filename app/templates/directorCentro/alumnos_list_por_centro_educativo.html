@@ -1,0 +1,70 @@
+{% extends 'directorCentro/base.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+        <div class="card-header">
+            {%if id_centro_educativo%}
+                <h2>alumnos del {{id_centro_educativo.nombre_centro}}</h2>
+                <a href="{%url 'educacion:cg_list_para_inscribir_alumnos_por_cada_centro' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Incribir nuevo estudiante</a>
+              {%else%}
+                <h2>Alumnos inscritos</h2>
+            {%endif%}
+            <a href="{%url 'educacion:alumno_list' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Nuevo estudiante</a>
+        </div>
+        <div class="card-body">
+            {% if not obj %}
+            <div class="alert alert-info">No hay datos</div>
+            {% else %}
+            <table id="datatablesSimple">
+                <thead>
+                    <th>CUI</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>telefono</th>
+                    <th>fecha de nacimiento</th>
+                    <th>Direccion</th>
+                    <th>Estudios Ant</th>
+                    <th>Estado</th>
+                    <th class="all">ver grados</th>
+                </thead>
+                <tbody>
+                    {% for item in obj %}
+                    <tr>
+                        <td>{{ item.cui }}</td>
+                        <td>{{ item.nombres_alumno }}</td>
+                        <td>{{ item.apellidos_alumno }}</td>
+                        <td>{{ item.telefono }}</td>
+                        <td>{{ item.fecha_nacimiento|date:"d, M, Y" }}</td>
+                        <td>{{ item.direccion_alumno }}</td>
+                        <td>{{ item.estudios_anteriores }}</td>
+                        {% if item.estado_alumno is True %}
+                        <td>
+                          <span class="badge bg-green-soft text-green">Activo</span>
+                        </td>
+                        {% else %}
+                        <td>
+                          <span class="badge bg-red-soft text-red">Inactivo</span>
+                        </td>
+                        {% endif %}
+                        {%if id_centro_educativo%}
+                          <td>
+                            <a href="{% url 'educacion:cg_del_alumno' item.id%}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                          </td>
+                        {%endif%}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}

@@ -9,8 +9,8 @@ from app.models.educacion_model.categoriaModel import Categoria
 class ViviendaSocio(models.Model):
     numero_habitantes = models.IntegerField()
     otra_Viv = models.BooleanField(default=False)
-    desc_Otra_Viv = models.CharField(max_length=100)
-    Telefono = models.CharField(max_length=8)
+    desc_Otra_Viv = models.CharField(max_length=100, null=True, blank=True)
+    Telefono = models.BooleanField(default=False)
     tipopiso = models.ForeignKey(Tipo_piso, on_delete=models.CASCADE, related_name="VS_Tipo_piso")
     tipotecho = models.ForeignKey(Tipo_techo, on_delete=models.CASCADE, related_name="Tipo_techo")
     tipomuro = models.ForeignKey(Tipo_muro, on_delete=models.CASCADE, related_name="VS_Tipo_muro")

@@ -9,6 +9,7 @@ class Inscripcionp(models.Model):
     lugar_inscripcion = models.ForeignKey(municipio, on_delete=models.CASCADE, related_name='muni_insc')
     inicio_taller = models.DateField()
     final_taller = models.DateField()
+    certificado_taller = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.insc_persona)

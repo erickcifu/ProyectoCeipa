@@ -1,0 +1,55 @@
+{% extends 'maestro/base.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Centros Educativo
+      </div>
+      <div class="card mb-4">
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos de Centros Educativos </div>
+          {% else %}
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>nombre_centro</th>
+                  <th>direccion_centro</th>
+                  <th>codigo_centro</th>
+                  <th>Estado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.nombre_centro }}</td>
+                      <td>{{ item.direccion_centro }}</td>
+                      <td>{{ item.codigo_centro }}</td>
+                      {% if item.estado_centro is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Activo</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+    </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}

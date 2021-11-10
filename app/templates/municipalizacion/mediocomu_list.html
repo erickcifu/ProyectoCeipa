@@ -16,9 +16,10 @@
               <thead>
                   <th>Id</th>
                   <th>Medio de Comunicación</th>
-                  <th>Correo electrónico</th>
+                  <th>correo</th>
                   <th>Teléfono</th>
-                  <th>Representante</th>
+                  <th>Persona</th>
+                  <th>Cargo</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -29,7 +30,8 @@
                       <td>{{ item.nombre_medio }}</td>
                       <td>{{ item.correo }}</td>
                       <td>{{ item.telefono }}</td>
-                      <td>{{ item.persona }} {{ item.persona.apellidos_persona }}</td>
+                      <td>{{ item.persona }}</td>
+                      <td>{{ item.cargo }}</td>
                       {% if item.estado is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

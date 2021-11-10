@@ -1,8 +1,10 @@
 from django.db import models
+from app.models import Perfil
 
 class personalEducativo(models.Model):
     nombres = models.CharField(max_length=255)
     apellidos = models.CharField(max_length=255)
+    perfile = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='profile_personalEducativo')
     telefono_personal = models.CharField(max_length=15,null=True, blank=True)
     email_personal = models.CharField(max_length=50,null=True, blank=True)
     fechaNac_personal = models.DateTimeField()

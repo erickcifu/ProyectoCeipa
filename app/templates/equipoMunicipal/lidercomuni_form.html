@@ -1,0 +1,111 @@
+{% extends 'EquipoMunicipal/municipalizacion.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-6 col-md-6 mb-6">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Lider Comunitario
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col-10">
+                                {{ form.persona }}
+                            </div>
+
+                            <div class="col-10">
+                                {{ form.cargo_grupo }}
+                            </div>
+
+                            <div class="col-10">
+                                {{ form.grupo_orga }}
+                            </div>
+
+                            <div class="col-10">
+                                {{ form.programa_c }}
+                            </div>
+
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="id_leer">Sabe leer</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="leer" class="form-control" id="id_leer" type="checkbox"  {% if obj.leer %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="id_escribir">Sabe escribir</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="escribir" class="form-control" id="id_escribir" type="checkbox"  {% if obj.escribir %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="id_vacuna_covid">Tiene la Vacuna contra el covid</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="vacuna_covid" class="form-control" id="id_vacuna_covid" type="checkbox"  {% if obj.vacuna_covid %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="text" name="periodo" maxlength="50" class="form-control" required id="id_periodo"
+                                    placeholder="Periodo" value="{% if obj %} {{ obj.periodo }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="date" name="fecha_inicio" maxlength="50" class="form-control" required id="id_fecha_inicio"
+                                    placeholder="Fecha de inicio de periodo" value="{% if obj %} {{ obj.fecha_inicio }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="input-group">
+                                    <input type="date" name="fecha_fin" maxlength="50" class="form-control" required id="id_fecha_fin"
+                                    placeholder="Fecha de fin de periodo" value="{% if obj %} {{ obj.fecha_fin }} {% endif %}">
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="id_estado">Estado</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="estado" class="form-control" id="id_estado" type="checkbox"  {% if obj.estado %} checked {% endif %}>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- {{form.as_p}} -->
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'municipalizacion:lidercomuni_list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}

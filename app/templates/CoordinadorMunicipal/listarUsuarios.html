@@ -1,0 +1,59 @@
+{% extends 'base/municipalizacion.html' %}
+
+{% block page_content %}
+
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            Listado de Coordinadores de Area
+      </div>
+      <div class="card mb-4">
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay usuarios</div>
+          {% else %}
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Cargo</th>
+                  <th>Estado</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.first_name }}</td>
+                      <td>{{ item.last_name }}</td>
+                      <td>{{ item.cargo}}</td>
+                      {% if item.is_active is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Activo</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+
+</script>
+{% endblock%}
