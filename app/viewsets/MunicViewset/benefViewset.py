@@ -4,23 +4,26 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.CoordinadorMunicipal.mixin import IsCoordinadorMunicipalMixin
+from app.viewsets.users.mixins.CooMunicipalYEquipoMunicipal import RolesCooMunicipalEquipoMunicipalMixin
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-from app.models import Beneficiado, Persona, IdiomaPersona, TutorMuni, Area
+from app.models import Beneficiado, Persona, IdiomaPersona, TutorMuni
 from app.forms import BenForm, PersonaForm, IdPerForm, TutorMuniForm
 from django.forms import formset_factory
 from django.db import IntegrityError, transaction
 from app.models.educacion_model.idioma import idioma
 
-class BenView(LoginRequiredMixin, generic.ListView):
+class BenView(IsCoordinadorMunicipalMixin, generic.ListView):
     model = Beneficiado
     template_name = 'municipalizacion/beneficiado_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
-class BenNew(LoginRequiredMixin, generic.CreateView):
+class BenNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = Beneficiado
     template_name = 'municipalizacion/beneficiado_form.html'
     context_object_name = "obj"
@@ -30,6 +33,20 @@ class BenNew(LoginRequiredMixin, generic.CreateView):
     four_form_class = TutorMuniForm
     success_url = reverse_lazy("municipalizacion:ben_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/beneficiado_form.html"]
+            else:
+                return [self.template_name]
 
     def get_context_data(self, **kwargs):
         context = super(BenNew, self).get_context_data(**kwargs)
@@ -71,7 +88,7 @@ class BenNew(LoginRequiredMixin, generic.CreateView):
         except IntegrityError:
             return HttpResponseRedirect("ERROR: No se puede registrar al participante")
 
-class BenEdit(LoginRequiredMixin, generic.UpdateView):
+class BenEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     template_name = "municipalizacion/benefEdit.html"
     success_url = reverse_lazy("municipalizacion:ben_list")
     model = Beneficiado
@@ -144,7 +161,7 @@ class BenEdit(LoginRequiredMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class BenDetail(LoginRequiredMixin, generic.DetailView):
+class BenDetail(IsCoordinadorMunicipalMixin, generic.DetailView):
     template_name = "municipalizacion/ben_detail.html"
     model = Beneficiado
 
@@ -162,33 +179,8 @@ class BenDetail(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class BenDel(LoginRequiredMixin, generic.DeleteView):
+class BenDel(IsCoordinadorMunicipalMixin, generic.DeleteView):
     model = Beneficiado
     template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"
     success_url = reverse_lazy("municipalizacion:ben_list")
-
-
-#Listado de participantes por area
-class ListarPorArea(LoginRequiredMixin, generic.ListView):
-    model = Beneficiado
-    template_name = "municipalizacion/listar_ben_por_area.html"
-    context_object_name = 'obj'
-
-    def get_queryset(self):
-        id_area = self.request.GET.get("id_area")
-        if id_area:
-            return Beneficiado.objects.filter(ba_benef__area_id = int(id_area))
-
-        return Beneficiado.objects.filter(ba_benef__area_id__in=Area.objects.filter(estado_area=True).values_list('id'))
-
-    def get_context_data(self, **kwargs):
-        context =  super().get_context_data(**kwargs)
-        context['areas'] = Area.objects.all()
-        id_area = None
-        try:
-            id_area = Area.objects.filter(id=int(self.request.GET.get("id_area"))).first()
-        except:
-            id_area = None
-        context['id_area'] = id_area
-        return context

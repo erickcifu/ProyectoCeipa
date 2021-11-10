@@ -4,6 +4,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.CoordinadorSocioProductivo.mixin import IsCoordinadorSocioProductivoMixin
+from app.viewsets.users.mixins.CooSocioproductivoYEquipoSocioproductivo import RolesCoordinadorSocioproductivoYEquipoSocioproductivo
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from app.models import PersonaBasica, GastoFamiliar, InfoEducacion, AspectosSalud, ViviendaSocio, ElectVivienda, PadresSociop, Encargado, InfoEconomica, Caract_laborales
@@ -12,13 +15,13 @@ from django.db import IntegrityError, transaction
 from django.forms import formset_factory
 from django.shortcuts import redirect
 
-class PersonaBasicaView(LoginRequiredMixin, generic.ListView):
+class PersonaBasicaView(IsCoordinadorSocioProductivoMixin, generic.ListView):
     model = PersonaBasica
     template_name = 'socioproductivo/personabasica_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
-class PersonaBasicaNew(LoginRequiredMixin, generic.CreateView):
+class PersonaBasicaNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.CreateView):
     model = PersonaBasica
     template_name = 'socioproductivo/personabasica_form.html'
     context_object_name = "obj"
@@ -34,6 +37,20 @@ class PersonaBasicaNew(LoginRequiredMixin, generic.CreateView):
     ten_form_class = ClabForm
     success_url = reverse_lazy("socioproductivo:personabasica_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/personabasica_form.html"]
+            else:
+                return [self.template_name]
 
     def get_context_data(self, **kwargs):
         context = super(PersonaBasicaNew, self).get_context_data(**kwargs)
@@ -109,7 +126,7 @@ class PersonaBasicaNew(LoginRequiredMixin, generic.CreateView):
             handle_exception()
 
 
-class PersonaBasicaEdit(LoginRequiredMixin, generic.UpdateView):
+class PersonaBasicaEdit(IsCoordinadorSocioProductivoMixin, generic.UpdateView):
     model = PersonaBasica
     template_name = "socioproductivo/personabasica_edit.html"
     form_class = PersonaBForm
@@ -239,7 +256,7 @@ class PersonaBasicaEdit(LoginRequiredMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class personabDetail(LoginRequiredMixin, generic.DetailView):
+class personabDetail(IsCoordinadorSocioProductivoMixin, generic.DetailView):
     template_name = "socioproductivo/personab_detail.html"
     model = PersonaBasica
 
@@ -268,8 +285,32 @@ class personabDetail(LoginRequiredMixin, generic.DetailView):
         context['gasto_familiar'] = self.get_GastoFamiliar(personab)
         return context
 
-class PersonaBasicaDel(LoginRequiredMixin, generic.DeleteView):
+class PersonaBasicaDel(IsCoordinadorSocioProductivoMixin, generic.DeleteView):
     model = PersonaBasica
     template_name = "socioproductivo/catalogos_del.html"
     context_object_name = "obj"
     success_url = reverse_lazy("socioproductivo:personabasica_list")
+
+#Listado de alumnos por taller
+class ListarAlumnosPorTaller(LoginRequiredMixin, generic.ListView):
+    model = PersonaBasica
+    template_name = 'socioproductivo/listar_por_taller.html'
+    context_object_name = 'obj'
+
+    def get_queryset(self):
+        id_taller = self.request.GET.get("id_taller")
+        if id_taller:
+            return PersonaBasica.objects.filter(insc_persona__taller_asignado__id=int(id_taller))
+
+        return PersonaBasica.objects.filter(insc_persona__taller_asignado__id__in=Taller.objects.filter(estado_taller=True).values_list('id'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['talleres'] = Taller.objects.all()
+        id_taller = None
+        try:
+            id_taller = Taller.objects.filter(id=int(self.request.GET.get("id_taller"))).first()
+        except:
+            id_taller = None
+        context['id_taller'] = id_taller
+        return context

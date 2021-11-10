@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
+from app.viewsets.users.CoordinadorEducacion.mixin import IsCoordinadorEducacionMixin
+from app.viewsets.users.directorCentro.mixin import IsDirectorCentroMixin
 from django.views import generic
 from django.urls import reverse_lazy
 
@@ -50,9 +52,9 @@ class ListarGradosPorCentroEducacion(LoginRequiredMixin, generic.ListView):
         id_centro_educativo = self.request.GET.get("id_centro_educativo")
         if id_centro_educativo:
             return Ciclo_grado.objects.filter(cgc_cg__maestro__p_educativo__centro_Educativo__id=int(id_centro_educativo))
-        
+
         return Ciclo_grado.objects.filter(cgc_cg__maestro__p_educativo__centro_Educativo__id__in=centro_educativo.objects.values_list('id'))
-    
+
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
         context['centros_educativos'] = centro_educativo.objects.all()
@@ -63,3 +65,14 @@ class ListarGradosPorCentroEducacion(LoginRequiredMixin, generic.ListView):
             id_centro_educativo = None
         context['id_centro_educativo'] =  id_centro_educativo
         return context
+
+#rol de director
+class ListarGradosDeCadaCentro(IsDirectorCentroMixin, generic.ListView):
+    model = Ciclo_grado
+    template_name = 'educacion/grados_por_centro_educativo.html'
+    context_object_name = 'obj'
+
+    def get_queryset(self):
+        id_centro_educativo = self.kwargs.get("id_centro_educativo")
+        if id_centro_educativo:
+            return Ciclo_grado.objects.filter(cgc_cg__maestro__p_educativo__centro_Educativo__id=int(id_centro_educativo))

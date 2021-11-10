@@ -4,6 +4,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.CoordinadorMunicipal.mixin import IsCoordinadorMunicipalMixin
+from app.viewsets.users.mixins.CooMunicipalYEquipoMunicipal import RolesCooMunicipalEquipoMunicipalMixin
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -13,13 +16,13 @@ from django.db import IntegrityError, transaction
 from django.forms import formset_factory
 from app.models.educacion_model.idioma import idioma
 
-class MaesView(LoginRequiredMixin, generic.ListView):
+class MaesView(IsCoordinadorMunicipalMixin, generic.ListView):
     model = Maestro
     template_name = 'municipalizacion/maerstro_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
-class MaesNew(LoginRequiredMixin, generic.CreateView):
+class MaesNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = Maestro
     template_name = 'municipalizacion/maerstro_form.html'
     context_object_name = "obj"
@@ -28,6 +31,20 @@ class MaesNew(LoginRequiredMixin, generic.CreateView):
     third_form_class = formset_factory(IdPerForm, extra=1)
     success_url = reverse_lazy("municipalizacion:maes_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/maerstro_form.html"]
+            else:
+                return [self.template_name]
 
     def get_context_data(self, **kwargs):
         context = super(MaesNew, self).get_context_data(**kwargs)
@@ -66,7 +83,7 @@ class MaesNew(LoginRequiredMixin, generic.CreateView):
             return HttpResponseRedirect("ERROR: No se puede registrar al participante")
 
 
-class MaesEdit(LoginRequiredMixin, generic.UpdateView):
+class MaesEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     model = Maestro
     template_name = "municipalizacion/maerstro_edit.html"
     form_class = PersonaForm
@@ -97,6 +114,7 @@ class MaesEdit(LoginRequiredMixin, generic.UpdateView):
             if form.is_valid() and form2.is_valid():
                 form.save()
                 form2.save()
+                form3.save()
                 return HttpResponseRedirect(self.success_url)
             else:
                 return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
@@ -111,8 +129,8 @@ class MaesEdit(LoginRequiredMixin, generic.UpdateView):
             idiom_maestro = IdiomaPersona.objects.filter(persona=persona_maestro)
             for id_ma in idiom_maestro:
                 listado_idmaestro.append({
-                    'idioma':id_ma.idioma.id,
-                    'estado_ip':id_ma.estado_ip
+                    'idioma':i.idioma.id,
+                    'estado_ip':i.estado_ip
                 })
             formset_idmaestro = formid_maestro(initial=listado_idmaestro, prefix='idiomas_maestro')
         except:
@@ -120,7 +138,7 @@ class MaesEdit(LoginRequiredMixin, generic.UpdateView):
             return HttpResponseRedirect(self.success_url)
         context = {}
         if 'form' not in context:
-            context['form'] = self.form_class(instance = persona_maestro)
+            context['form'] = self.form_class(instance = persona)
         if 'form2' not in context:
             context['form2'] = self.second_form_class(instance = maestro)
         if 'form3' not in context:
@@ -130,23 +148,7 @@ class MaesEdit(LoginRequiredMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class MaesDetail(LoginRequiredMixin, generic.DetailView):
-    template_name = "municipalizacion/maestro_detail.html"
-    model = Maestro
-
-    def get_idioma(self, persona_maestro):
-        return IdiomaPersona.objects.filter(persona=persona_maestro)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        maestro = self.get_object()
-        persona_maestro = maestro.persona_maestro
-        context['item'] = maestro
-        context['persona_maestro'] = persona_maestro
-        context['idioma_maestro'] = self.get_idioma(persona_maestro)
-        return context
-
-class MaesDel(LoginRequiredMixin, generic.DeleteView):
+class MaesDel(IsCoordinadorMunicipalMixin, generic.DeleteView):
     model = Maestro
     template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"

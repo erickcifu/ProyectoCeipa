@@ -3,10 +3,11 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
-from django.forms import inlineformset_factory
-
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.CoordinadorMunicipal.mixin import IsCoordinadorMunicipalMixin
+from app.viewsets.users.mixins.CooMunicipalYEquipoMunicipal import RolesCooMunicipalEquipoMunicipalMixin
 from django.db.models import F
-from app.models import BeneficiadoArea, Area, Beneficiado, ProgramaC
+from app.models import BeneficiadoArea, Area
 from app.forms import BenefArForm, AreaForm
 
 def beneficiado_areaView(request, pk):
@@ -17,7 +18,7 @@ def beneficiado_areaView(request, pk):
     }
     return render(request, 'municipalizacion/benefar_list.html', context)
 
-class BenefArView(LoginRequiredMixin, generic.ListView):
+class BenefArView(IsCoordinadorMunicipalMixin, generic.ListView):
     model = BeneficiadoArea
     template_name = 'municipalizacion/benefar_list.html'
     context_object_name = 'obj'
@@ -40,70 +41,59 @@ class BenefArView(LoginRequiredMixin, generic.ListView):
         context['id_area'] = id_area
         return context
 
-class BenefArNew(LoginRequiredMixin, generic.CreateView):
+class BenefArNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = BeneficiadoArea
     template_name = 'municipalizacion/benefar_form.html'
     context_object_name = "obj"
     form_class = BenefArForm
     success_url = reverse_lazy("municipalizacion:benefar_list")
     login_url = 'app:login'
+    id_area = ''
 
-    def get_areas(self):
-        id_area = self.kwargs.get('id_area')
-        if id_area:
-            return Area.objects.filter(id=int(id_area)).first()
-        return None
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/benefar_form.html"]
+            else:
+                return [self.template_name]
 
-        def get(self, request, *args, **kwargs):
-            id_area = self.get_areas()
-            context={}
-            context['id_area'] = id_area
-            context['beneficiado'] = Beneficiado.objects.filter(estado_beneficiado=True).exclude(ba_benef__area_id = id_area.id)
-            return render(request, self.template_name, context)
-
-        def post(self, request, *args, **kwargs):
-            id_area = self.get_areas()
-            beneficiados = self.request.POST.get('beneficiados')
-            if beneficiados:
-                fecha = datetime.now().strftime('%Y-%m-%d')
-                BeneficiadoArea.objects.create(area=id_area, beneficiado_id=int(beneficiados), fecha=fecha)
-                return redirect('municipalizacion/benefar_list.html', id_area=id_area.id)
-
-class Area_beneficiado(LoginRequiredMixin, generic.ListView):
-    model = BeneficiadoArea
-    template_name = 'municipalizacion/area_beneficiado.html'
-    context_object_name = "obj"
-    form_class = BenefArForm
-    success_url = reverse_lazy("municipalizacion:benefar_por_area")
-    login_url = 'app:login'
+    def get_queryset(self):
+        return Area.objects.all()
 
     def get_object(self):
-        id_area =  self.kwargs.get('pk')
-        if id_area:
-            return Area.objects.filter(id=int(id_area)).first()
-        return None
-
-    def post(self, request, *args, **kwargs):
-        form = BenefArForm(request.POST)
-        if form.is_valid():
-            area_ben = self.get_object()
-            if area_ben:
-                fecha = datetime.now().strftime('%Y-%m-%d')
-                observacion = ''
-                BeneficiadoArea.objects.create(**form.cleaned_data, area=area_ben, fecha=fecha)
-                return HttpResponseRedirect(self.success_url)
-        return self.render_to_response(self.get_context_data(form=form))
-
+        area_id = self.kwargs.get('pk')
+        qs = None
+        if area_id:
+            qs = self.get_queryset().filter(id=area_id).first()
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['id_area'] = self.get_object()
+        context['id_area'] = self.get_object().id if self.get_object() else ''
         context['areas'] = Area.objects.all()
-        context['beneficiados'] = Beneficiado.objects.exclude(ba_benef__area__id = self.get_object().id)
-        context['programa'] = ProgramaC.objects.all()
         return context
 
-class BenefArEdit(LoginRequiredMixin, generic.UpdateView):
+    def post(self, request, *args, **kwargs):
+        self.id_area = self.get_object()
+        super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        if form.is_valid():
+            if self.id_area:
+                area_benef = BeneficiadoArea(**form.cleaned_data, area=self.id_area)
+                area_benef.save()
+                return HttpResponseRedirect(self.success_url)
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+class BenefArEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     model = BeneficiadoArea
     template_name = "municipalizacion/benefar_form.html"
     context_object_name = "obj"
@@ -111,7 +101,7 @@ class BenefArEdit(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy("municipalizacion:benefar_list")
     login_url = 'app:login'
 
-class BenefArDel(LoginRequiredMixin, generic.DeleteView):
+class BenefArDel(IsCoordinadorMunicipalMixin, generic.DeleteView):
     model = BeneficiadoArea
     template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"

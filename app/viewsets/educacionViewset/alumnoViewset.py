@@ -2,6 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from app.models.educacion_model.ciclo_grado_curso import Ciclo_grado_curso
+from app.viewsets.users.maestro.mixin import IsMaestroMixin
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.mixins.CoordinadorGeneralYDirectorCentroMixin import RolesCoordinadorEducacionYDirectorCentroMixin
+from app.viewsets.users.mixins.CooEducacionDirectorCentroMaestro import RolesCooEducacionDirectorCentroMaestroMixin
+
 from django.views import generic
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -17,11 +23,23 @@ from django.shortcuts import redirect
 
 from app.models.educacion_model.padecimientoModel import Padecimiento
 
-class AlumnoView(LoginRequiredMixin, generic.ListView):
+class AlumnoView(RolesCoordinadorEducacionYDirectorCentroMixin, generic.ListView):
     model = Alumno
     template_name = 'educacion/alumno_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            print('hola mundo')
+            if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 5:
+                return ["directorCentro/alumno_list.html"]
 
 class AlumnoNew(LoginRequiredMixin, generic.CreateView):
     model = Alumno
@@ -38,6 +56,19 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
     nine_form_class = LaboralForm
     success_url = reverse_lazy("educacion:alumno_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 5:
+                return ["directorCentro/alumno_form.html"]
+            elif self.request.user.user_profile.rol.id == 6:
+                return ["maestro/alumno_form.html"]
 
     def get_context_data(self, **kwargs):
         context = super(AlumnoNew, self).get_context_data(**kwargs)
@@ -112,8 +143,7 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
         except IntegrityError:
             handle_exception()
 
-
-class AlumnoEdit(LoginRequiredMixin, generic.UpdateView):
+class AlumnoEdit(RolesCoordinadorEducacionYDirectorCentroMixin, generic.UpdateView):
     model = Alumno
     template_name = "educacion/alumnoedit_form.html"
     context_object_name = "obj"
@@ -121,7 +151,18 @@ class AlumnoEdit(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy("educacion:alumno_list")
     login_url = 'app:login'
 
-class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 5:
+                return ["directorCentro/alumnoedit_form.html"]
+
+class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, generic.UpdateView):
     template_name = "prueba/alumnoEdit.html"
     success_url = reverse_lazy("educacion:alumno_list")
     model = Alumno
@@ -134,6 +175,17 @@ class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
     seven_form_class = VivForm
     eight_form_class = ConvivienteForm
     nine_form_class = LaboralForm
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 5:
+                return ["directorCentro/alumnoEdit.html"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -220,12 +272,23 @@ class AlumnoDetailAndCreate(LoginRequiredMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class AlumnoEditViviendaConvivientes(LoginRequiredMixin, generic.UpdateView):
+class AlumnoEditViviendaConvivientes(RolesCoordinadorEducacionYDirectorCentroMixin, generic.UpdateView):
     template_name = "prueba/alumnoEditViviendaConvivientes.html"
     success_url = reverse_lazy("educacion:prueba_alumno_list_convivientes")
     model = Alumno
     form_viv = VivFormEdit
     form_convivientes = formset_factory(ConvivienteFormEdit, extra=1)
+
+    def get_template_names(self):
+            if self.template_name is None:
+                raise ImproperlyConfigured(
+                    "TemplateResponseMixin requires either a definition of "
+                    "'template_name' or an implementation of 'get_template_names()'")
+            else:
+                if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
+                    return [self.template_name]
+                elif self.request.user.user_profile.rol.id == 5:
+                    return ["directorCentro/alumnoEditViviendaConvivientes.html"]
 
     def get(self, request, *args, **kwargs):
         alumno = self.get_object()
@@ -257,9 +320,22 @@ class AlumnoEditViviendaConvivientes(LoginRequiredMixin, generic.UpdateView):
         else:
             return self.render_to_response(self.get_context_data(form7=form7))
 
-class AlumnoDetail(LoginRequiredMixin, generic.DetailView):
+class AlumnoDetail(RolesCooEducacionDirectorCentroMaestroMixin, generic.DetailView):
     template_name = "educacion/alumno_detail.html"
     model = Alumno
+
+    def get_template_names(self):
+            if self.template_name is None:
+                raise ImproperlyConfigured(
+                    "TemplateResponseMixin requires either a definition of "
+                    "'template_name' or an implementation of 'get_template_names()'")
+            else:
+                if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
+                    return [self.template_name]
+                elif self.request.user.user_profile.rol.id == 5:
+                    return ["directorCentro/alumno_detail.html"]
+                elif self.request.user.user_profile.rol.id == 6:
+                    return ["maestro/alumno_detail.html"]
 
     def get_apadecimientos(self, alumno):
         return Apadecimiento.objects.filter(alumno=alumno)
@@ -282,9 +358,23 @@ class AlumnoDetail(LoginRequiredMixin, generic.DetailView):
         context['laboral'] = alumno.aspect_alumn.first()
         return context
 
-
-class AlumnoDel(LoginRequiredMixin, generic.DeleteView):
+class AlumnoDel(RolesCoordinadorEducacionYDirectorCentroMixin, generic.DeleteView):
     model = Alumno
     template_name = "educacion/catalogos_del.html"
     context_object_name = "obj"
     success_url = reverse_lazy("educacion:alumno_list")
+
+#rol para el maestro
+class AlumnosDeCadaCurso(IsMaestroMixin, generic.ListView):
+    model = Alumno
+    template_name = 'maestro/listar_alumnos_por_curso.html'
+    context_object_name = 'obj'
+    login_url = 'app:login'
+
+    def get_object(self):
+        id_curso_grado = self.kwargs.get('pk')
+        if id_curso_grado:
+            return Ciclo_grado_curso.objects.filter(id=id_curso_grado).first()
+
+    def get_queryset(self):
+        return Alumno.objects.filter(estado_alumno=True, A_alumnos__ciclo_grado__cgc_cg__id = self.get_object().id)

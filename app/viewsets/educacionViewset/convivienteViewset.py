@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.core.exceptions import ImproperlyConfigured
+from app.forms.educacionForms.convivienteForm import ConvivienteFormEdit
 
 from app.models import Conviviente, Parentesco, vivienda
 from app.forms import ConvivienteForm
@@ -41,6 +43,17 @@ class ConvivienteAlumnoEdit(LoginRequiredMixin, generic.UpdateView):
     form_class = ConvivienteForm
     success_url = reverse_lazy("educacion:conviviente_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+            if self.template_name is None:
+                raise ImproperlyConfigured(
+                    "TemplateResponseMixin requires either a definition of "
+                    "'template_name' or an implementation of 'get_template_names()'")
+            else:
+                if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
+                    return [self.template_name]
+                elif self.request.user.user_profile.rol.id == 5:
+                    return ["directorCentro/conviviente_form.html"]
 
     def form_valid(self, form):
         form.save()

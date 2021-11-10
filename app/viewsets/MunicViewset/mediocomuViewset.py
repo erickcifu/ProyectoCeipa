@@ -4,31 +4,44 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
-
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.CoordinadorMunicipal.mixin import IsCoordinadorMunicipalMixin
+from app.viewsets.users.mixins.CooMunicipalYEquipoMunicipal import RolesCooMunicipalEquipoMunicipalMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from app.models import MedioComuni, Persona, IdiomaPersona
 from app.forms import MedioComuniForm, PersonaForm,IdPerForm
-from django.forms import formset_factory
 from django.db import IntegrityError, transaction
-from app.models.educacion_model.idioma import idioma
 
-class MedioComuniView(LoginRequiredMixin, generic.ListView):
+class MedioComuniView(IsCoordinadorMunicipalMixin, generic.ListView):
     model = MedioComuni
     template_name = 'municipalizacion/mediocomu_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
-class MedioComuniNew(LoginRequiredMixin, generic.CreateView):
+class MedioComuniNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = MedioComuni
     template_name = 'municipalizacion/mediocomu_form.html'
     context_object_name = "obj"
     form_class = PersonaForm
     second_form_class = MedioComuniForm
-    third_form_class = formset_factory(IdPerForm, extra=1)
+    third_form_class = IdPerForm
     success_url = reverse_lazy("municipalizacion:mediocomu_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/mediocomu_form.html"]
+            else:
+                return [self.template_name]
 
     def get_context_data(self, **kwargs):
         context = super(MedioComuniNew, self).get_context_data(**kwargs)
@@ -37,7 +50,7 @@ class MedioComuniNew(LoginRequiredMixin, generic.CreateView):
         if 'form2' not in context:
             context['form2'] = self.second_form_class(self.request.GET)
         if 'form3' not in context:
-            context['form3'] = self.third_form_class(prefix='idioma_medioc')
+            context['form3'] = self.third_form_class(self.request.GET)
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -48,27 +61,27 @@ class MedioComuniNew(LoginRequiredMixin, generic.CreateView):
         try:
             with transaction.atomic():
                 self.object = self.get_object
-                form = self.form_class(request.POST, request.FILES)
+                form = self.form_class(request.POST)
                 form2 = self.second_form_class(request.POST)
-                form3 = self.third_form_class(request.POST, prefix='idioma_medioc')
+                form3 = self.third_form_class(request.POST)
                 if form.is_valid() and form2.is_valid() and form3.is_valid():
                     persona = form.save()
                     medio= form2.save(commit=False)
                     medio.persona = persona
                     medio.save()
-                    for idi_medioc in form3:
-                        idioma = idi_medioc.save(commit=False)
-                        idioma.persona = persona
-                        idioma.save()
+                    idioma = form3.save(commit=False)
+                    idioma.persona = persona
+                    idioma.save()
                     return HttpResponseRedirect(self.get_success_url())
                 else:
                     return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
         except IntegrityError:
             handle_exception()
 
-class MedioComuniEdit(LoginRequiredMixin, generic.UpdateView):
+class MedioComuniEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     model = MedioComuni
     template_name = "municipalizacion/mediocomu_form.html"
+    context_object_name = "obj"
     form_class = PersonaForm
     second_form_class = MedioComuniForm
     third_form_class = IdPerForm
@@ -116,7 +129,7 @@ class MedioComuniEdit(LoginRequiredMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class MedioComuniDel(LoginRequiredMixin, generic.DeleteView):
+class MedioComuniDel(IsCoordinadorMunicipalMixin, generic.DeleteView):
     model = MedioComuni
     template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"

@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.db.models.query_utils import check_rel_lookup_compatibility
+from django.shortcuts import render, redirect
+from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from app.viewsets.users.CoordinadorEducacion.mixin import IsCoordinadorEducacionMixin
+from app.viewsets.users.mixins.CoordinadorGeneralYDirectorCentroMixin import RolesCoordinadorEducacionYDirectorCentroMixin
 from django.forms import inlineformset_factory
-
 from app.models import Ciclo_grado, Ciclo, Alumno
 from django.db.models import F
 from app.forms import CGForm, CGFormCreate
@@ -18,7 +21,7 @@ def ciclo_gradoView(request, pk):
     }
     return render(request, 'educacion/cg_list.html', context)
 
-class CGView(LoginRequiredMixin, generic.ListView):
+class CGView(IsCoordinadorEducacionMixin, generic.ListView):
     model = Ciclo_grado
     template_name = 'educacion/cg_list.html'
     context_object_name = 'obj'
@@ -42,7 +45,7 @@ class CGView(LoginRequiredMixin, generic.ListView):
         return context
 
 
-class CGNew(LoginRequiredMixin, generic.CreateView):
+class CGNew(IsCoordinadorEducacionMixin, generic.CreateView):
     model = Ciclo_grado
     template_name = 'educacion/cg_form.html'
     context_object_name = "obj"
@@ -83,11 +86,22 @@ class CGNew(LoginRequiredMixin, generic.CreateView):
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
-class CG_Del_Alumno(LoginRequiredMixin, generic.ListView):
+class CG_Del_Alumno(RolesCoordinadorEducacionYDirectorCentroMixin, generic.ListView):
     model = Ciclo_grado
     template_name = 'educacion/grados_del_alumno.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 5:
+                return ["directorCentro/grados_del_alumno.html"]
 
     def get_object(self):
         id_alumno = self.kwargs.get('pk')
@@ -107,7 +121,7 @@ class CG_Del_Alumno(LoginRequiredMixin, generic.ListView):
         context['alumno'] =  self.get_object()
         return context
 
-class CGEdit(LoginRequiredMixin, generic.UpdateView):
+class CGEdit(IsCoordinadorEducacionMixin, generic.UpdateView):
     pass
     model = Ciclo_grado
     template_name = "educacion/cg_form_update.html"
@@ -116,7 +130,7 @@ class CGEdit(LoginRequiredMixin, generic.UpdateView):
     success_url = reverse_lazy("educacion:cg_list")
     login_url = 'app:login'
 
-class CGDel(LoginRequiredMixin, generic.DeleteView):
+class CGDel(IsCoordinadorEducacionMixin, generic.DeleteView):
     pass
     model = Ciclo_grado
     template_name = "educacion/catalogos_del.html"
@@ -124,7 +138,7 @@ class CGDel(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("educacion:cg_list")
 
 
-class CiclosForCreateGradeandCourseView(LoginRequiredMixin, generic.ListView):
+class CiclosForCreateGradeandCourseView(IsCoordinadorEducacionMixin, generic.ListView):
     model = Ciclo
     template_name = 'prueba/ciclos.html'
     context_object_name = 'obj'
