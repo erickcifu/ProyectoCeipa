@@ -1,5 +1,5 @@
 from django import forms
-from app.models import ElectVivienda
+from app.models import ElectVivienda, Electrodomesticos
 
 class ElectvivForm(forms.ModelForm):
     class Meta:

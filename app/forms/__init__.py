@@ -14,7 +14,7 @@ from .educacionForms.cursoForm import CursoForm
 from .educacionForms.generoForm import GeneroForm
 from .educacionForms.gradosForm import GradosForm
 from .educacionForms.idiomaForm import IdiomaForm
-from .educacionForms.personalForms import PersonalForm
+from .educacionForms.personalForms import PersonalForm, MaestroCentroForm, DirectorCentroForm
 from .educacionForms.religionForm import ReligionForm
 from .educacionForms.gradoForm import GradoForm
 from .educacionForms.religionalumForm import ReligionAlumnoForm
@@ -25,7 +25,7 @@ from .educacionForms.serviaguaForm import ServiaguaForm
 from .educacionForms.convivienteForm import ConvivienteForm, ConvivienteFormEdit
 from .educacionForms.tutorForm import TutorForm
 from .educacionForms.alumnoForm import AlumnoForm
-from .educacionForms.centroPerForm import CentPerForm, CentPerPorCentroEducativoForm
+from .educacionForms.centroPerForm import CentPerForm, CentPerPorCentroEducativoForm,AsignarDirectorCentroEducativoForm
 from .educacionForms.estantForm import EstAntForm
 from .educacionForms.cgForm import CGForm, CGFormCreate, CFCicloFormCreate
 from .educacionForms.cgcForm import CGCForm, CGCFormCreate, CGCFormCreateForPersonal
@@ -39,8 +39,10 @@ from .muniForms.personaForm import PersonaForm
 from .muniForms.beneficiadoForm import BenForm
 from .muniForms.maestroForm import MaestroForm
 from .muniForms.profecionForm import ProfesionForm
+from .muniForms.cargoForm import CargoForm
 from .muniForms.tmedioForm import TmedioForm
 from .muniForms.comisionForm import ComisionForm
+from .muniForms.establecimientoForm import EstablecimientoForm
 from .muniForms.lidercomuniForm import LiderComuniMuniForm
 from .muniForms.mediocomuForm import MedioComuniForm
 from .muniForms.partidopoliticForm import PartidoPoliticForm

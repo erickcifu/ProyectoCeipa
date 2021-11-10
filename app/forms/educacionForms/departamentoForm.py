@@ -6,7 +6,7 @@ class DepartamentoForm(forms.ModelForm):
     class Meta:
         model = departamento
         fields = ['nombre_departamento', 'estado_departamento']
-        labels = {'nombre_departamento':"Departamento", 'estado_departamento':"Activo"}
+        labels = {'nombre_departamento':"Departamento", 'estado_departamento':"Estado"}
         widget = {'nombre_departamento': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

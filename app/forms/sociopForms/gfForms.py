@@ -5,7 +5,7 @@ class GastFamForm(forms.ModelForm):
     class Meta:
         model = GastoFamiliar
         fields = ['servicio', 'cantidad_servicio', 'estado_gastofamiliar']
-        labels = {'servicio':'Nombre servicio', 'cantidad_servicio':"Cantidad por servicio",'estado_gastofamiliar':'Activo/Inactivo'}
+        labels = {'servicio':'Nombre del servicio', 'cantidad_servicio':'Cantidad mensual por servicio', 'estado_gastofamiliar':'Activo/Inactivo'}
         widget = {
             'servicio': forms.TextInput,
             'estado_gastofamiliar': forms.CheckboxInput(
