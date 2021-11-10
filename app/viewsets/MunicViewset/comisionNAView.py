@@ -4,6 +4,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.CoordinadorMunicipal.mixin import IsCoordinadorMunicipalMixin
+from app.viewsets.users.mixins.CooMunicipalYEquipoMunicipal import RolesCooMunicipalEquipoMunicipalMixin
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -14,13 +17,13 @@ from app.models import ComisionNA, Persona, IdiomaPersona
 from app.forms import Comision_NAForm, PersonaForm, IdPerForm
 from app.models.educacion_model.idioma import idioma
 
-class ComisionNAView(LoginRequiredMixin, generic.ListView):
+class ComisionNAView(IsCoordinadorMunicipalMixin, generic.ListView):
     model = ComisionNA
     template_name = 'municipalizacion/comisionNA_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
-class ComisionNANew(LoginRequiredMixin, generic.CreateView):
+class ComisionNANew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = ComisionNA
     template_name = 'municipalizacion/comisionNA_form.html'
     context_object_name = "obj"
@@ -29,6 +32,20 @@ class ComisionNANew(LoginRequiredMixin, generic.CreateView):
     third_form_class = formset_factory(IdPerForm, extra=1)
     success_url = reverse_lazy("municipalizacion:comisionNA_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/comision_form.html"]
+            else:
+                return [self.template_name]
 
     def get_context_data(self, **kwargs):
         context = super(ComisionNANew, self).get_context_data(**kwargs)
@@ -66,7 +83,7 @@ class ComisionNANew(LoginRequiredMixin, generic.CreateView):
         except IntegrityError:
             return HttpResponseRedirect("ERROR: No se puede registrar al participante")
 
-class ComisionNAEdit(LoginRequiredMixin, generic.UpdateView):
+class ComisionNAEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     model = ComisionNA
     template_name = "municipalizacion/comisionNA_edit.html"
     form_class = PersonaForm
@@ -132,7 +149,7 @@ class ComisionNAEdit(LoginRequiredMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class ComisionNADetail(LoginRequiredMixin, generic.DetailView):
+class ComisionNADetail(IsCoordinadorMunicipalMixin, generic.DetailView):
     template_name = "municipalizacion/comisionNA_detail.html"
     model = ComisionNA
 
@@ -147,8 +164,8 @@ class ComisionNADetail(LoginRequiredMixin, generic.DetailView):
         context['persona_na'] = persona_na
         context['id_per_na'] = self.get_idioma_na(persona_na)
         return context
-        
-class ComisionNADel(LoginRequiredMixin, generic.DeleteView):
+
+class ComisionNADel(IsCoordinadorMunicipalMixin, generic.DeleteView):
     model = ComisionNA
     template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"
