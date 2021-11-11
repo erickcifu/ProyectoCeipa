@@ -129,6 +129,23 @@ class PadFamEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
+class PadFamDetail(IsCoordinadorMunicipalMixin, generic.DetailView):
+    template_name = "municipalizacion/padfam_detail.html"
+    model = PadresFamilia
+
+    def get_idioma(self, persona):
+        return IdiomaPersona.objects.filter(persona=persona)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        padfam = self.get_object()
+        persona = padfam.persona
+        context['item'] = padfam
+        context['persona'] = persona
+        context['idioma_persona'] = self.get_idioma(persona)
+        return context
+
+
 class PadFamDel(IsCoordinadorMunicipalMixin, generic.DeleteView):
     model = PadresFamilia
     template_name = "municipalizacion/catalogos_del.html"

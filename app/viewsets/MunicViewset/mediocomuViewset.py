@@ -11,7 +11,10 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from app.models import MedioComuni, Persona, IdiomaPersona
 from app.forms import MedioComuniForm, PersonaForm,IdPerForm
+from django.forms import formset_factory
 from django.db import IntegrityError, transaction
+from app.models.educacion_model.idioma import idioma
+
 
 class MedioComuniView(IsCoordinadorMunicipalMixin, generic.ListView):
     model = MedioComuni
@@ -25,7 +28,7 @@ class MedioComuniNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     context_object_name = "obj"
     form_class = PersonaForm
     second_form_class = MedioComuniForm
-    third_form_class = IdPerForm
+    third_form_class = formset_factory(IdPerForm, extra=1)
     success_url = reverse_lazy("municipalizacion:mediocomu_list")
     login_url = 'app:login'
 
@@ -50,7 +53,7 @@ class MedioComuniNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
         if 'form2' not in context:
             context['form2'] = self.second_form_class(self.request.GET)
         if 'form3' not in context:
-            context['form3'] = self.third_form_class(self.request.GET)
+            context['form3'] = self.third_form_class(prefix='idioma_medioc')
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -61,17 +64,18 @@ class MedioComuniNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
         try:
             with transaction.atomic():
                 self.object = self.get_object
-                form = self.form_class(request.POST)
+                form = self.form_class(request.POST, request.FILES)
                 form2 = self.second_form_class(request.POST)
-                form3 = self.third_form_class(request.POST)
+                form3 = self.third_form_class(request.POST, prefix='idioma_medioc')
                 if form.is_valid() and form2.is_valid() and form3.is_valid():
                     persona = form.save()
                     medio= form2.save(commit=False)
                     medio.persona = persona
                     medio.save()
-                    idioma = form3.save(commit=False)
-                    idioma.persona = persona
-                    idioma.save()
+                    for idi_medioc in form3:
+                        idioma = idi_medioc.save(commit=False)
+                        idioma.persona = persona
+                        idioma.save()
                     return HttpResponseRedirect(self.get_success_url())
                 else:
                     return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
@@ -128,6 +132,23 @@ class MedioComuniEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
         context['persona'] = self.get_object()
 
         return render(request, self.template_name, context)
+
+class MedioComuniDetail(IsCoordinadorMunicipalMixin, generic.DetailView):
+    template_name = "municipalizacion/mediocomu_detail.html"
+    model = MedioComuni
+
+    def get_idioma(self, persona):
+        return IdiomaPersona.objects.filter(persona=persona)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        medio = self.get_object()
+        persona = medio.persona
+        context['item'] = medio
+        context['persona'] = persona
+        context['idioma_persona'] = self.get_idioma(persona)
+        return context
+
 
 class MedioComuniDel(IsCoordinadorMunicipalMixin, generic.DeleteView):
     model = MedioComuni

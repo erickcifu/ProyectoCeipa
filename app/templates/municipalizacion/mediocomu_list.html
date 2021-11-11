@@ -27,7 +27,8 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.nombre_medio }}</td>
+                      <td><a href="{% url 'municipalizacion:mediocomu_detail' item.id %}">{{ item.nombre_medio }}</a></td>
+
                       <td>{{ item.correo }}</td>
                       <td>{{ item.telefono }}</td>
                       <td>{{ item.persona }}</td>
