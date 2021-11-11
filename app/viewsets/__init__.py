@@ -103,17 +103,17 @@ from .MunicViewset.curgradViewset import CarGView, CarGNew, CarGEdit, CarGDel
 from .MunicViewset.idperViewset import IdPerView, IdPerNew, IdPerEdit, IdPerDel
 from .MunicViewset.personaViewset import PerView, PerNew, PerEdit, PerDel
 from .MunicViewset.benefViewset import BenView, BenNew, BenEdit, BenDel, BenDetail
-from .MunicViewset.maestroViewset import MaesView, MaesNew, MaesEdit, MaesDel
+from .MunicViewset.maestroViewset import MaesView, MaesNew, MaesEdit, MaesDel, MaesDetail
 from .MunicViewset.ProfesionViewset import ProfView, ProfNew, ProfEdit, ProfDel
 from .MunicViewset.cargoViewset import CarView, CarNew, CarEdit, CarDel
 from .MunicViewset.tmedioViewset import TmedioView, TmedioNew, TmedioEdit, TmedioDel
 from .MunicViewset.comisionViewset import ComView, ComNew, ComEdit, ComDel
 from .MunicViewset.establecimientoViewset import EstablecimientoView, EstablecimientoNew, EstablecimientoEdit, EstablecimientoDel
-from .MunicViewset.lidercomuniViewset import LiderComunitarioMuniView, LiderComunitarioNew, LiderComunitarioEdit, LiderComunitarioDel
-from .MunicViewset.mediocomuViewset import MedioComuniView, MedioComuniNew, MedioComuniEdit, MedioComuniDel
+from .MunicViewset.lidercomuniViewset import LiderComunitarioMuniView, LiderComunitarioNew, LiderComunitarioEdit, LiderComunitarioDel, LiderComunitarioDetail
+from .MunicViewset.mediocomuViewset import MedioComuniView, MedioComuniNew, MedioComuniEdit, MedioComuniDel, MedioComuniDetail
 from .MunicViewset.partidopoliticViewset import PartidoPoliticView, PartidoPoliticNew, PartidoPoliticEdit, PartidoPoliticDel
 from .MunicViewset.tutormuniViewset import TutorMuniView, TutorMuniNew, TutorMuniEdit, TutorMuniDel
-from .MunicViewset.padfamViewset import PadFamView, PadFamNew, PadFamEdit, PadFamDel
+from .MunicViewset.padfamViewset import PadFamView, PadFamNew, PadFamEdit, PadFamDel,PadFamDetail
 from .MunicViewset.benefarViewset import BenefArView, BenefArNew, BenefArEdit, BenefArDel
 from .MunicViewset.idioma_MuniView import IdiomaMuniView, IdiomaMuniNew, IdiomaMuniEdit, IdiomaMuniDel
 from .MunicViewset.MuniView import MunicView, MuniNew, MuniEdit, MuniDel

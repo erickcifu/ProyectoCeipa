@@ -3,7 +3,7 @@
 {% block page_content %}
 {% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
-<form method="POST" class="form-inline">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
@@ -16,7 +16,7 @@
                   <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                         <div class="col-12 col-md-12 offset-md-12">
-                          <h2>{% if obj %} Editar {% else %} Nuevo {% endif %} Lider Comunitario
+                          <h2>Nuevo registro de lider comunitario
                           </h2>
                         </div>
                   </div>
@@ -42,14 +42,6 @@
                                         <div class="wizard-step-text-details">Informaciòn adicional del lider comunitario</div>
                                       </div>
                                     </a>
-                                    <!--Wizard item 3-->
-                                    <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
-                                      <div class="wizard-step-icon">3</div>
-                                      <div class="wizard-step-text">
-                                        <div class="wizard-step-text-name">Idiomas</div>
-                                        <div class="wizard-step-text-details">Informaciòn sobre los idiomas del maestro</div>
-                                      </div>
-                                    </a>
 
                                   <div class="card-body">
                                     <!--Wizard Body-->
@@ -66,11 +58,6 @@
                                                   </div>
                                                   <div class="mb-3 col-md-6">
                                                       {{ form.apellidos_persona | as_crispy_field }}
-                                                  </div>
-                                                </div>
-                                                <div class="row gx-3">
-                                                  <div class="mb-3 col-md-12">
-                                                  {{ form.fecha_nacimiento | as_crispy_field }}
                                                   </div>
                                                 </div>
                                                 <div class="row gx-3">
@@ -93,7 +80,7 @@
                                                 </div>
                                                 <div class="row gx-3">
                                                   <div class="mb-3 col-md-12">
-                                                      {{ form.fotografia | as_crispy_field }}
+                                                      {{ form.fotografia_persona | as_crispy_field }}
                                                   </div>
                                                 </div>
                                                 <div class="row gx-3">
@@ -126,11 +113,27 @@
                                                     </div>
                                                   </div>
 
-                                                <hr class="my-4"/>
-                                                <div class="d-flex justify-content-between">
-                                                  <button class="btn btn-ligth" type="button">Anterior</button>
-                                                  <a class="btn btn-primary next-step"  role="button">Siguiente</a>
-                                                </div>
+                                                  <!--IDIOMA FORMSET-->
+                                                  <div class="row gx-6">
+                                                      <div class="row gx-3">
+                                                        {{form3.management_form}}
+                                                        {%for f in form3 %}
+                                                          <div id="formularios_idiomas_lider" class="row">
+                                                              {{ f | crispy }}
+                                                          </div>
+                                                          <br/>
+                                                          <br/>
+                                                        {% endfor %}
+                                                        </div>
+                                                        <br/>
+                                                        <br/>
+                                                        <div class="d-flex justify-content-between">
+                                                          <button class="btn btn-light" role="button" onclick="agregar_idiomas_lider();">
+                                                              <i class="me-2" data-feather="plus-circle"></i>Agregar idioma
+                                                        </button>
+                                                        </div>
+                                                    </div>
+                                                  <!--IDOMA FORMSET FIN-->
                                               <!--Fin Formulario-->
                                           </div>
                                           </div>
@@ -141,9 +144,17 @@
                                             <div class="col-xxl-6 col-xl-8">
                                               <h3 class="text-primary">Paso 2</h3>
                                               <h5 class="card-title mb-4">Ingrese informaciòn del lider comunitario</h5>
+                                              <div class="ow gx-12">
+
+
                                                 <div class="row gx-3">
                                                     <div class="mb-3 col-md-12">
                                                       {{ form2.programa_c | as_crispy_field }}
+                                                    </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                    <div class="mb-3 col-md-12">
+                                                      {{ form2.correo_lideres | as_crispy_field }}
                                                     </div>
                                                 </div>
                                                 <div class="row gx-3">
@@ -185,29 +196,13 @@
                                                 </div>
                                                 <hr class="my-4"/>
                                                 <div class="d-flex justify-content-between">
-                                                  <button class="btn btn-ligth" type="button">Anterior</button>
-                                                  <a class="btn btn-primary next-step" role="button">Siguiente</a>
+                                                  <a href="{% url 'municipalizacion:lidercomuni_list' %}" class="btn btn-danger">Cancelar</a>
+                                                  <button type="submit" class="btn btn-success">Guardar</button>
+                                                </div>
                                                 </div>
                                             </div>
                                           </div>
                                         </div>
-                                        <!--Tab item 3-->
-                                        <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
-                                          <div class="row justify-content-center">
-                                            <div class="col-xxl-6 col-xl-8">
-                                              <h3 class="text-primary">Paso 3</h3>
-                                              <h5 class="card-title mb-4"></h5>
-                                                  <div class="row gx-3">
-                                                      {{ form3 | crispy }}
-                                                    </div>
-                                                <hr class="my-4"/>
-                                                <div class="d-flex justify-content-between">
-                                                  <a href="{% url 'municipalizacion:lidercomuni_list' %}" class="btn btn-danger">Cancelar</a>
-                                                    <button type="submit" class="btn btn-success">Guardar</button>
-                                                  </div>
-                                              </div>
-                                            </div>
-                                          </div>
                                       </div>
                                     </div>
                                   </div>
@@ -222,4 +217,28 @@
 </div>
 {% endblock %}
 {% block js_page %}
+<script>
+    function agregar_idiomas_lider(){
+      const $total_forms_lider = document.getElementById('id_idioma_lider-TOTAL_FORMS')
+
+      let $label_idioma_lider = document.createElement('label')
+      $label_idioma_lider.innerHTML = 'Idioma'
+      let $input_idioma_lider = document.querySelector('#id_idioma_lider-0-idioma').cloneNode(true)
+      $input_idioma_lider.name = 'idioma_lider-'+$total_forms_lider.value+'-idioma'
+      $input_idioma_lider.id = 'id_idioma_lider-'+$total_forms_lider.value+'-idioma'
+
+      let $label_estado_idper_lider = document.createElement('label')
+      $label_estado_idper_lider.innerHTML = 'Activo/Inactivo'
+      let $input_estado_idper_lider = document.querySelector('#id_idioma_lider-0-estado_ip').cloneNode(true)
+      $input_estado_idper_lider.name = 'idioma_lider-'+$total_forms_lider.value+'-estado_ip'
+      $input_estado_idper_lider.id = 'id_idioma_lider-'+$total_forms_lider.value+'-estado_ip'
+
+      document.getElementById('formularios_idiomas_lider').appendChild($label_idioma_lider)
+      document.getElementById('formularios_idiomas_lider').appendChild($input_idioma_lider)
+      document.getElementById('formularios_idiomas_lider').appendChild($label_estado_idper_lider)
+      document.getElementById('formularios_idiomas_lider').appendChild($input_estado_idper_lider)
+
+      $total_forms_lider.value = parseInt($total_forms_lider.value) + 1
+    }
+</script>
 {% endblock %}

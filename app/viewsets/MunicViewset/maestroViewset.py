@@ -148,6 +148,23 @@ class MaesEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
+class MaesDetail(LoginRequiredMixin, generic.DetailView):
+    template_name = "municipalizacion/maestro_detail.html"
+    model = Maestro
+
+    def get_idioma(self, persona_maestro):
+        return IdiomaPersona.objects.filter(persona=persona_maestro)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        maestro = self.get_object()
+        persona_maestro = maestro.persona_maestro
+        context['item'] = maestro
+        context['persona_maestro'] = persona_maestro
+        context['idioma_maestro'] = self.get_idioma(persona_maestro)
+        return context
+
+
 class MaesDel(IsCoordinadorMunicipalMixin, generic.DeleteView):
     model = Maestro
     template_name = "municipalizacion/catalogos_del.html"

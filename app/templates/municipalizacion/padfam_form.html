@@ -2,7 +2,7 @@
 {% block page_content %}
 {% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
-<form method="POST" class="form-inline">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
@@ -67,11 +67,6 @@
                                           </div>
                                           <div class="row gx-3">
                                             <div class="mb-3 col-md-12">
-                                            {{ form.fecha_nacimiento | as_crispy_field }}
-                                            </div>
-                                          </div>
-                                          <div class="row gx-3">
-                                            <div class="mb-3 col-md-12">
                                                 {{ form.cui | as_crispy_field }}
                                             </div>
                                           </div>
@@ -90,7 +85,7 @@
                                           </div>
                                           <div class="row gx-3">
                                             <div class="mb-3 col-md-12">
-                                                {{ form.fotografia | as_crispy_field }}
+                                                {{ form.fotografia_persona | as_crispy_field }}
                                             </div>
                                           </div>
                                           <div class="row gx-3">

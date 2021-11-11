@@ -252,6 +252,7 @@ urlpatterns = [
     path('maestro/', viewsets.MaesView.as_view(), name='maes_list'),
     path('maestro/new', viewsets.MaesNew.as_view(), name='maes_new'),
     path('maestro/edit/<int:pk>', viewsets.MaesEdit.as_view(), name='maes_edit'),
+    path('maestro/detail/<int:pk>/', viewsets.MaesDetail.as_view(), name='maes_detail'),
     path('maestro/delete/<int:pk>', viewsets.MaesDel.as_view(), name='maes_del'),
 
     path('profesion/', viewsets.ProfView.as_view(), name='prof_list'),
@@ -287,6 +288,7 @@ urlpatterns = [
     path('mediodecomunicacion/', viewsets.MedioComuniView.as_view(), name='mediocomu_list'),
     path('mediodecomunicacion/new', viewsets.MedioComuniNew.as_view(), name='mediocomu_new'),
     path('mediodecomunicacion/edit/<int:pk>', viewsets.MedioComuniEdit.as_view(), name='mediocomu_edit'),
+    path('mediodecomunicacion/detail/<int:pk>', viewsets.MedioComuniDetail.as_view(), name='mediocomu_detail'),
     path('mediodecomunicacion/delete/<int:pk>', viewsets.MedioComuniDel.as_view(), name='mediocomu_del'),
 
     path('tutormuni/', viewsets.TutorMuniView.as_view(), name='tutormuni_list'),
@@ -297,11 +299,13 @@ urlpatterns = [
     path('lidercomunitario/', viewsets.LiderComunitarioMuniView.as_view(), name='lidercomuni_list'),
     path('lidercomunitario/new', viewsets.LiderComunitarioNew.as_view(), name='lidercomuni_new'),
     path('lidercomunitario/edit/<int:pk>', viewsets.LiderComunitarioEdit.as_view(), name='lidercomuni_edit'),
+    path('lidercomunitario/detil/<int:pk>/', viewsets.LiderComunitarioDetail.as_view(), name='lidercomuni_detail'),
     path('lidercomunitario/delete/<int:pk>', viewsets.LiderComunitarioDel.as_view(), name='lidercomuni_del'),
 
     path('padresfamilia/', viewsets.PadFamView.as_view(), name='padfam_list'),
     path('padresfamilia/new', viewsets.PadFamNew.as_view(), name='padfam_new'),
     path('padresfamilia/edit/<int:pk>', viewsets.PadFamEdit.as_view(), name='padfam_edit'),
+    path('padresfamilia/detail/<int:pk>', viewsets.PadFamDetail.as_view(), name='padfam_detail'),
     path('padresfamilia/delete/<int:pk>', viewsets.PadFamDel.as_view(), name='padfam_del'),
 
     path('benefeciadoare/', viewsets.BenefArView.as_view(), name='benefar_list'),
