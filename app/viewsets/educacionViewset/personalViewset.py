@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
@@ -29,6 +29,7 @@ class PersonalMaestroNew(IsCoordinadorEducacionMixin, generic.CreateView):
     form_class = MaestroCentroForm
     success_url = reverse_lazy("educacion:listado_personal_por_centro_educativo")
     login_url = 'app:login'
+
 
 class PersonalDirectorCentroNew(IsCoordinadorEducacionMixin, generic.CreateView):
     model = personalEducativo

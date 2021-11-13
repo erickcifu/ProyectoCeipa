@@ -32,6 +32,7 @@ from .models.educacion_model.alumnopadecimiento import Apadecimiento
 from .models.educacion_model.inscipsionesModel  import Inscripcion
 from .models.educacion_model.etnia import etnia
 from .models.educacion_model.Perfil import Perfil
+from .models.educacion_model.estudiosantModel import EstudiosAnt
 #Municipalizacion
 from .models.municipalizacionModel.area import Area
 from .models.municipalizacionModel.Gorganizado import GOrganizado
@@ -111,6 +112,7 @@ admin.site.register(Apadecimiento)
 admin.site.register(Inscripcion)
 admin.site.register(etnia)
 admin.site.register(Perfil)
+admin.site.register(EstudiosAnt)
 #municipalizacion
 admin.site.register(Area)
 admin.site.register(GOrganizado)
