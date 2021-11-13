@@ -69,6 +69,7 @@ class DirectorCentroForm(forms.ModelForm):
         widget=forms.DateInput(
             attrs={
                 'class':'form-control',
+                'type':'date',
                 'placeholder':'fecha nacimiento',
                 'id':'fechaNac_personal',
                 'name':'fechaNac_personal',
@@ -158,6 +159,7 @@ class MaestroCentroForm(forms.ModelForm):
         widget=forms.DateInput(
             attrs={
                 'class':'form-control',
+                'type':'date',
                 'placeholder':'fecha nacimiento',
                 'id':'fechaNac_personal',
                 'name':'fechaNac_personal',
