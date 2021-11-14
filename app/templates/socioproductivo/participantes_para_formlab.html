@@ -1,0 +1,55 @@
+{% extends 'base/socioproductivo.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            <h2>Participantes con certificado de talleres</h2>
+        </div>
+        <div class="card-body">
+            {% if not participantes_certificados %}
+            <div class="alert alert-info">No hay datos</div>
+            {% else %}
+            <table id="datatablesSimple">
+                <thead>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>CUI</th>
+                    <th>Estado</th>
+                    <th>Inscribir</th>
+                </thead>
+                <tbody>
+                    {% for item in participantes_certificados %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.insc_persona.nombresp }} {{ item.insc_persona.apellidos }}</td>
+                        <td>{{ item.insc_persona.DPIP }}</td>
+
+                        {% if item.insc_persona.estado_persona_basica is True %}
+                        <td>
+                          <span class="badge bg-green-soft text-green">Activo</span>
+                        </td>
+                        {% else %}
+                        <td>
+                          <span class="badge bg-red-soft text-red">Inactivo</span>
+                        </td>
+                        {% endif %}
+                        <td>
+                          <a href="{% url 'socioproductivo:form_new' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="plus-circle"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}

@@ -1,47 +1,45 @@
-{% extends 'base/municipalizacion.html' %}
+{% extends 'base/base4Multiselect.html' %}
 
 {% block page_content %}
 {% load crispy_forms_tags %}
+<style>
+    .mul-select{
+        width: 100%;
+    }
+</style>
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-12 col-md-12 mb-12">
+    <div class=" col-xl-12 col-md-12 mb-12 ">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
         <div class="card border-left-success shadow h-100 py-2">
         {% endif %}
-            <div class="card-body">
+            <div class="card-body ">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Beneficiado Area
+                            Agregar participantes prueba
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
-                          <label for="area">Area de niñez, adolescencia y juventud</label>
-                          <select name="area" id="area" class="form-control" {%if id_area%}disabled{%endif%}>
-                              <option value selected>---------</option>
-                              {%if areas%}
-                                {%for area in areas%}
-                                  {%if id_area == area.id%}
-                                      <option value="{{area.id}}" selected>{{area.nombre_area}}</option>
-                                  {%else%}
-                                  <option value="{{area.id}}">{{area.nombre_area}}</option>
-
-                                  {%endif%}
-
-                                {%endfor%}
-                              {%endif%}
-                          </select>
+                          <div class="col-15">
+                              <div id="div_id_area" class="form-group">
+                                  <label for="id_area" class="requiredField">
+                                      Área
+                                  </label>
+                                  <div class>
+                                      <input type="text" name="area" class="form-control" value="{{id_area.nombre_area}}" id="id_area" disabled>
+                                  </div>
+                              </div>
                             {{ form | crispy }}
-                            </div>
+                          </div>
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'municipalizacion:benefar_list' %}" class="btn btn-danger">Cancelar</a>
+                                <button type="submit" class="btn btn-success">Agregar</button>
                             </div>
                         </div>
                     </div>
@@ -53,4 +51,13 @@
 </div>
 {% endblock %}
 {% block js_page %}
+    <script>
+        $(document).ready(function(){
+        $(".mul-select").select2({
+            placeholder: "select country", //placeholder
+            tags: true,
+            tokenSeparators: ['/',',',';'," "]
+        });
+    })
+    </script>
 {% endblock %}

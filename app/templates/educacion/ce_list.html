@@ -1,0 +1,97 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            {%if id_ciclo%}
+            <h2>Ciclo Escolar {{id_ciclo.anio}}</h2>
+              <a href="{% url 'educacion:ce_new' id_ciclo.id %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+              {%else%}
+              <h2>Ciclo Escolar</h2>
+              <a href="{% url 'educacion:ce_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+
+            {%endif%}
+
+            {%if id_ciclo%}
+                <form method="GET" class="form-inline">
+                  <select name="ciclo" id="ciclo">
+                    {%if ciclos%}
+                      {%for ciclo in ciclos%}
+                          {%if id_ciclo.id == ciclo.id%}
+                            <option value="{{ciclo.id}}" selected>{{ciclo.anio}}</option>
+                          {%else%}
+                            <option value="{{ciclo.id}}">{{ciclo.anio}}</option>
+                          {%endif%}
+                      {%endfor%}
+
+                    {%endif%}
+
+                  </select>
+                  <button type="submit" class="btn btn-success">buscar</button>
+              </form>
+            {%else%}
+              <form method="GET" class="form-inline">
+                <select name="ciclo" id="ciclo">
+                  {%if ciclos%}
+                    {%for ciclo in ciclos%}
+                      <option value="{{ciclo.id}}">{{ciclo.anio}}</option>
+                    {%endfor%}
+                  {%endif%}
+
+                </select>
+                <button type="submit" class="btn btn-success">buscar</button>
+              </form>
+            {%endif%}
+
+
+
+        </div>
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos</div>
+          {% else %}
+          <div class="row">
+          {% for item in obj %}
+          <div class="col-lg-6 col-xl-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                  <a class="text-primary stretched-link" href="#">{{ item.c_etapa }}</a>
+                  <!--<div class="text-primary"><i class="fas fa-angle-right"></i></div>-->
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <label><b>Ciclo:</b> {{item.ciclo_c}}</label>
+                  <div class="text-lg fw-bold">
+                    {% if item.estado_ce is True %}
+                      <span class="badge bg-green-soft text-green">Activo</span>
+                    {% else %}
+                      <span class="badge bg-red-soft text-red">Inactivo</span>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <a href="#Editar" class="btn btn-outline-yellow" role="button">Editar</a>
+                  <a href="#Borrar" class="btn btn-outline-red" role="button">Eliminar</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+          {% endif %}
+          <div class="dropdown-divider"></div>
+          <div class="row">
+
+          </div>
+      </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}

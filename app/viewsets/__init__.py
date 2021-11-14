@@ -63,6 +63,9 @@ from .educacionViewset.viviendaViewset import VivView, VivNew, VivEdit, VivDel
 from .educacionViewset.educacionViewset import HomeEducacion
 from .educacionViewset.Reportes import (AlumnosPorEdad, AlumnosPorOcupacion, CantidadAlumnosPorCentro,
                                         CantidadAlumnosPorGenero, ReportesAlumnos)
+from .educacionViewset.etapaView import EtapaView, EtapaNew, EtapaEdit, EtapaDel
+from .educacionViewset.ceView import CEView, CENew, Etapas_Del_Alumno
+from .educacionViewset.inscripcionesViewSet import ListarAlumnosParaCentro, ListarEtapasParaInscribirAlumnos, EtapasInscribirAlumnos, InsEtapaDel
 
 #homes de usuarios
 from .users.directorGeneral.HomeDirectorGeneral import HomeDirectorGeneral
@@ -102,7 +105,7 @@ from .MunicViewset.areaViewset import AreaView, AreaNew, AreaEdit, AreaDel
 from .MunicViewset.curgradViewset import CarGView, CarGNew, CarGEdit, CarGDel
 from .MunicViewset.idperViewset import IdPerView, IdPerNew, IdPerEdit, IdPerDel
 from .MunicViewset.personaViewset import PerView, PerNew, PerEdit, PerDel
-from .MunicViewset.benefViewset import BenView, BenNew, BenEdit, BenDel, BenDetail
+from .MunicViewset.benefViewset import BenView, BenNew, BenEdit, BenDel, BenDetail, ListarPorArea
 from .MunicViewset.maestroViewset import MaesView, MaesNew, MaesEdit, MaesDel, MaesDetail
 from .MunicViewset.ProfesionViewset import ProfView, ProfNew, ProfEdit, ProfDel
 from .MunicViewset.cargoViewset import CarView, CarNew, CarEdit, CarDel
@@ -114,7 +117,7 @@ from .MunicViewset.mediocomuViewset import MedioComuniView, MedioComuniNew, Medi
 from .MunicViewset.partidopoliticViewset import PartidoPoliticView, PartidoPoliticNew, PartidoPoliticEdit, PartidoPoliticDel
 from .MunicViewset.tutormuniViewset import TutorMuniView, TutorMuniNew, TutorMuniEdit, TutorMuniDel
 from .MunicViewset.padfamViewset import PadFamView, PadFamNew, PadFamEdit, PadFamDel,PadFamDetail
-from .MunicViewset.benefarViewset import BenefArView, BenefArNew, BenefArEdit, BenefArDel
+from .MunicViewset.benefarViewset import BenefArView, BenefArNew, BenefArEdit, BenefArDel, Area_beneficiado
 from .MunicViewset.idioma_MuniView import IdiomaMuniView, IdiomaMuniNew, IdiomaMuniEdit, IdiomaMuniDel
 from .MunicViewset.MuniView import MunicView, MuniNew, MuniEdit, MuniDel
 from .MunicViewset.DepView import DeptoView, DeptoNew, DeptoEdit, DeptoDel
@@ -142,7 +145,10 @@ from .sociopViewset.electVivView import ElectvivView, ElectvivNew, ElectvivEdit,
 from .sociopViewset.aspectos_saludView import AspectosSaludView, AspectosSaludNew, AspectosSaludEdit, AspectosSaludDel
 from .sociopViewset.talleresView import TallerView, TallerNew, TallerEdit, TallerDel
 from .sociopViewset.infoeducacionView import InfoEducacionView, InfoEducacionNew, InfoEducacionEdit, InfoEducacionDel
-from .sociopViewset.personabasicaView import PersonaBasicaView, PersonaBasicaNew, PersonaBasicaEdit, PersonaBasicaDel, personabDetail
+from .sociopViewset.personabasicaView import PersonaBasicaView, PersonaBasicaNew, PersonaBasicaEdit, PersonaBasicaDel, personabDetail, ListarParticipantesPorTaller, ListarParticipantesCertificados
 from .sociopViewset.viviSoView import ViviendSoView, ViviendSoNew, ViviendSoEdit, ViviendSoDel
 from .sociopViewset.encargadoView import EncargadoView, EncargadoNew, EncargadoEdit, EncargadoDel
 from .sociopViewset.empreView import EmprenView, EmprenNew, EmprenEdit, EmprenDel
+from .sociopViewset.inscp_view import InscpView, InscpNew, InscpEdit, InscpDel, InscribirParticipanteTaller
+from .sociopViewset.formlabView import  FormLabNew, FormLabView
+from .sociopViewset.reportes_sociop import ParticipantesSociop

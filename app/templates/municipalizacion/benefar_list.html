@@ -14,20 +14,19 @@
 
         {% if id_area %}
         <form class="form-inline" method="GET">
+          <select class="form-select form-select-sm" id="area" name="nombre_area">
+                      {% if areas %}
+                        {% for a in areas %}
+                          {% if id_area.id == a.id %}
+                            <option value="{{a.id}}" selected>{{a.nombre_area}}</option>
+                            {% else %}
+                              <option value="{{a.id}}">{{a.nombre_area}}</option>
+                          {% endif %}
 
-        <!--  <select class="form-select form-select-sm" id="nombre_area" name="nombre_area">
-            {% if areas %}
-              {% for a in areas %}
-                {% if id_area.id == a.id %}
-                  <option value="{{a.id}}" selected>{{a.nombre_area}}</option>
-                  {% else %}
-                    <option value="{{a.id}}" selected>{{a.nombre_area}}</option>
-                {% endif %}
-
-              {% endfor %}
-            {% endif %}
-          </select>
-          <button type="submit" class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="search"></i></button>-->
+                        {% endfor %}
+                      {% endif %}
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-success"><i data-feather="search"></i></button>
 
         </form>
         {% else %}
@@ -55,9 +54,9 @@
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>area</th>
-                  <th>Program</th>
-                  <th>Beneficiado</th>
+                  <th>Área</th>
+                  <th>Programa</th>
+                  <th>Particiapante</th>
                   <th>Observacion</th>
                   <th>Fecha</th>
                   <th>Estado</th>
@@ -71,7 +70,7 @@
                       <td>{{ item.programa }}</td>
                       <td>{{ item.beneficiado }}</td>
                       <td>{{ item.observacion }}</td>
-                      <td>{{ item.fecha }}</td>
+                      <td>{{ item.fecha_ba }}</td>
                       {% if item.estado_ba is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,7 +9,7 @@ from app.viewsets.users.CoordinadorSocioProductivo.mixin import IsCoordinadorSoc
 from app.viewsets.users.mixins.CooSocioproductivoYEquipoSocioproductivo import RolesCoordinadorSocioproductivoYEquipoSocioproductivo
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from app.models import PersonaBasica, GastoFamiliar, InfoEducacion, AspectosSalud, ViviendaSocio, ElectVivienda, PadresSociop, Encargado, InfoEconomica, Caract_laborales
+from app.models import PersonaBasica, GastoFamiliar, InfoEducacion, AspectosSalud, ViviendaSocio, ElectVivienda, PadresSociop, Encargado, InfoEconomica, Caract_laborales, Taller, Inscripcionp
 from app.forms import PersonaBForm, GastFamForm, InfoEducacionForm, AspectosSaludForm, ViviendaSForm, ElectvivForm, PadresForm, EncargadoForm, InfoecoForm, ClabForm
 from django.db import IntegrityError, transaction
 from django.forms import formset_factory
@@ -126,7 +126,7 @@ class PersonaBasicaNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, ge
             handle_exception()
 
 
-class PersonaBasicaEdit(IsCoordinadorSocioProductivoMixin, generic.UpdateView):
+class PersonaBasicaEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.UpdateView):
     model = PersonaBasica
     template_name = "socioproductivo/personabasica_edit.html"
     form_class = PersonaBForm
@@ -256,7 +256,7 @@ class PersonaBasicaEdit(IsCoordinadorSocioProductivoMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class personabDetail(IsCoordinadorSocioProductivoMixin, generic.DetailView):
+class personabDetail(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.DetailView):
     template_name = "socioproductivo/personab_detail.html"
     model = PersonaBasica
 
@@ -291,21 +291,19 @@ class PersonaBasicaDel(IsCoordinadorSocioProductivoMixin, generic.DeleteView):
     context_object_name = "obj"
     success_url = reverse_lazy("socioproductivo:personabasica_list")
 
-#Listado de alumnos por taller
-class ListarAlumnosPorTaller(LoginRequiredMixin, generic.ListView):
+class ListarParticipantesPorTaller(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
     model = PersonaBasica
-    template_name = 'socioproductivo/listar_por_taller.html'
-    context_object_name = 'obj'
+    template_name = "socioproductivo/participantes_por_taller.html"
+    context_object_name = "obj"
 
     def get_queryset(self):
         id_taller = self.request.GET.get("id_taller")
         if id_taller:
-            return PersonaBasica.objects.filter(insc_persona__taller_asignado__id=int(id_taller))
-
-        return PersonaBasica.objects.filter(insc_persona__taller_asignado__id__in=Taller.objects.filter(estado_taller=True).values_list('id'))
+            return PersonaBasica.objects.filter(ins_per__taller_id=int(id_taller))
+        return PersonaBasica.objects.filter(ins_per__taller_id__in=Taller.objects.filter(estado_taller=True).values_list('id'))
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context =  super().get_context_data(**kwargs)
         context['talleres'] = Taller.objects.all()
         id_taller = None
         try:
@@ -313,4 +311,14 @@ class ListarAlumnosPorTaller(LoginRequiredMixin, generic.ListView):
         except:
             id_taller = None
         context['id_taller'] = id_taller
+        return context
+
+class ListarParticipantesCertificados(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
+    model = Inscripcionp
+    template_name = "socioproductivo/participantes_para_formlab.html"
+    context_object_name = "obj"
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['participantes_certificados'] = Inscripcionp.objects.filter(certificado_taller=True)
         return context

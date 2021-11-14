@@ -1,0 +1,102 @@
+{% extends 'base/municipalizacion.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            {%if id_area %}
+                <h2>Participantes de {{id_area.nombre_area}}</h2>
+              {%else%}
+                <h2>Participantes</h2>
+            {%endif%}
+
+
+            {%if id_area %}
+                <form method="GET" class="form-inline">
+                  <select name="id_area" id="id_area">
+                    {%if areas %}
+                      {%for area in areas %}
+                          {%if id_area.id == area.id%}
+                            <option value="{{area.id}}" selected>{{area.nombre_area}}</option>
+                          {%else%}
+                            <option value="{{area.id}}">{{area.nombre_area}}</option>
+                          {%endif%}
+                      {%endfor%}
+                    {%endif%}
+                  </select>
+                  <button type="submit" class="btn btn-success"> Buscar </button>
+              </form>
+            {%else%}
+                <form method="GET" class="form-inline">
+                    <select name="id_area" id="id_area">
+                    {%if areas %}
+                        {%for area in areas %}
+                            <option value="{{area.id}}">{{area.nombre_area}}</option>
+                        {%endfor%}
+                    {%endif%}
+                    </select>
+                    <button type="submit" class="btn btn-success"> Buscar </button>
+                </form>
+            {%endif%}
+
+        </div>
+        <div class="card-header">
+          {%if id_area %}
+              <a href="{% url 'municipalizacion:area_ben_por_area' id_area.id %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar participante</a>
+            {%else%}
+          {%endif%}
+          <a href="{%url 'municipalizacion:ben_new'%}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Nuevo participante</a>
+          <a href="{%url 'municipalizacion:area_new'%}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Nueva área</a>
+
+      </div>
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos</div>
+          {% else %}
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>Participante</th>
+                  <th>Estado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.persona }} {{ item.persona.apellidos_persona }}</td>
+                      {% if item.estado_beneficiado is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Activo</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">Inactivo</span>
+                      </td>
+                      {% endif %}
+                      <td>
+                        <a href="{% url 'municipalizacion:ben_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                        <a href="{% url 'municipalizacion:ben_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+          <div class="dropdown-divider"></div>
+          <div class="row">
+              <div class="col">
+                  <a href="{% url 'municipalizacion:benefar_por_area' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+              </div>
+          </div>
+      </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}
