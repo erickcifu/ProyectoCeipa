@@ -18,7 +18,7 @@ class CorpMuniForm(forms.ModelForm):
         'correo_corporacion',
         'participacion',
         'grupo',
-        'cargo','vacuna', 'estado_corporacion']
+        'cargo','vacuna_corp', 'estado_corporacion']
         labels = {'comision':'Comision a la que pertenece',
         'partido':'Partido político con el que entró a la corporación',
         'partido_actual':'Partido político actual',
@@ -26,7 +26,7 @@ class CorpMuniForm(forms.ModelForm):
         'correo_corporacion':'Correo electrónico',
         'grupo':'Grupo en el que participa',
         'cargo':'Cargo que ocupa en el grupo',
-        'vacuna':'Vacunado contra COVID-19',
+        'vacuna_corp':'Vacunado contra COVID-19',
         'estado_corporacion':"Estado"}
         widget = {'comision': forms.TextInput}
 

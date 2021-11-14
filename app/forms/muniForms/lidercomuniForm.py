@@ -14,7 +14,7 @@ class LiderComuniMuniForm(forms.ModelForm):
         queryset = ProgramaC.objects.filter(estado_programa=True)
         .order_by('nombre_programa'), label ="Programa al que pertenece dentro de CEIPA", required="False"
     )
-    estado = forms.BooleanField(
+    estado_liders = forms.BooleanField(
         widget = forms.CheckboxInput(
             attrs={
                 'checked':True,
@@ -33,8 +33,21 @@ class LiderComuniMuniForm(forms.ModelForm):
     )
     class Meta:
         model = LiderComunitario
-        fields = ['cargo_grupo', 'grupo_orga', 'programa_c', 'leer', 'escribir', 'vacuna_covid', 'periodo', 'fecha_inicio', 'fecha_fin', 'correo_lideres','estado']
-        labels = {'cargo_grupo':'Cargo que tendrà en el grupo', 'grupo_orga':"Grupo organizado al que pertenece", 'programa_c':'Programa al que pertenece en CEIPA', 'leer':'Sabe leer', 'escribir':"Sabe escribir", 'vacuna_covid':"Tiene la vacuna contra COVID", 'periodo':"Tiempo que durarà el cargo", 'fecha_inicio':"Fecha de Inicio de periodo", 'fecha_fin':"Fecha de fin de periodo", 'correo_lideres':'Correo electrónico' ,'estado':'Activo/Inactivo'}
+        fields = ['cargo_grupo',
+        'grupo_orga', 'programa_c',
+         'leer_l', 'escribir_l',
+          'vacuna_covid_l', 'periodo',
+          'fecha_inicio_l', 'fecha_fin_l',
+          'correo_lideres','estado_liders']
+        labels = {'cargo_grupo':'Cargo que tendrà en el grupo',
+        'grupo_orga':"Grupo organizado al que pertenece",
+        'programa_c':'Programa al que pertenece en CEIPA',
+        'leer_l':'Sabe leer', 'escribir_l':"Sabe escribir",
+        'vacuna_covid_l':"Tiene la vacuna contra COVID",
+        'periodo':"Tiempo que durarà el cargo",
+        'fecha_inicio_l':"Fecha de Inicio de periodo",
+        'fecha_fin_l':"Fecha de fin de periodo",
+         'correo_lideres':'Correo electrónico' ,'estado_liders':'Activo/Inactivo'}
 
 
     def __init__(self, *args, **kwargs):

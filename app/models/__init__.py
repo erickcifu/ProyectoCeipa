@@ -33,6 +33,10 @@ from .educacion_model.padecimientoModel import Padecimiento
 from .educacion_model.alumnopadecimiento import Apadecimiento
 from .educacion_model.inscipsionesModel  import Inscripcion
 from .educacion_model.etnia import etnia
+from .educacion_model.inscripcion_etapa import Inscripcion_etapa
+from .educacion_model.etapa import Etapa
+from .educacion_model.ciclo_etapa import Ciclo_etapa
+
 #Municipalizacion
 from .municipalizacionModel.area import Area
 from .municipalizacionModel.Gorganizado import GOrganizado

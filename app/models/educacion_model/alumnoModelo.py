@@ -21,13 +21,13 @@ class Alumno(models.Model):
     cui = models.CharField(max_length=13)
     apellidos_alumno = models.CharField(max_length=100)
     codigo_mineduc = models.CharField(max_length=13)
-    estado_alumno = models.BooleanField(default=True)
     fecha_nacimiento = models.DateField()
     ingreso_familiar = models.FloatField(null=True, blank=True)
     direccion_alumno = models.CharField(max_length=80, null=True, blank=True)
-    telefono = models.CharField(max_length=8, null=True, blank=True)
+    telefono_alumno = models.CharField(max_length=8, null=True, blank=True)
     fotografia = models.ImageField(upload_to='ceipa', blank=True, null=True)
     edad = models.IntegerField(null=True, default=None, blank=True)
+    estado_alumno = models.BooleanField(default=True)
 
     @property
     def foto_url(self):

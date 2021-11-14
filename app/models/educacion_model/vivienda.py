@@ -18,11 +18,12 @@ class vivienda(models.Model):
     muro = models.ForeignKey(Tipo_muro, on_delete=models.CASCADE, related_name="T_muro")
     servicio = models.ForeignKey(Servicio_Agua, on_delete=models.CASCADE, related_name="servicio_vivienda")
     estudiante = models.ForeignKey(Alumno, on_delete=models.CASCADE, related_name="estudiante_vivieda")
+    servicio_internet = models.BooleanField(default=False)
     estado_vivienda = models.BooleanField(default=True)
 
     def __str__(self):
         return str(self.estudiante)
-        
+
     def delete(self, *args):
         self.estado_vivienda = False
         self.save()

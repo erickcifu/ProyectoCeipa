@@ -5,16 +5,16 @@ class MedioComuniForm(forms.ModelForm):
     class Meta:
         model = MedioComuni
         fields = ['nombre_medio',
-        'correo',
+        'correo_medio',
         'vacuna_medio',
-        'telefono',
+        'telefono_medio',
         'cargo',
         't_medio',
         'estado']
         labels = {'nombre_medio':'Nombres de el medio',
         'correo':'Correo',
         'vacuna_medio':'Vacunado contra COVID-19',
-        'telefono':"Telefono",  'cargo':'Cargo',
+        'telefono_medio':"Telefono",  'cargo':'Cargo',
         't_medio':'Tipo de distribución del medio de comunicación',
         'estado':'Estado'}
         widget = {'nombre_medio', forms.TextInput}

@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormMixin
 from app.models.educacion_model.ciclo_grado_curso import Ciclo_grado_curso
 from app.viewsets.users.maestro.mixin import IsMaestroMixin
 from django.core.exceptions import ImproperlyConfigured
@@ -98,19 +99,19 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
+
+        self.object = self.get_object
+        form = self.form_class(request.POST,request.FILES)
+        form2 = self.second_form_class(request.POST)
+        form3 = self.third_form_class(request.POST,request.FILES)
+        form4 = self.four_form_class(request.POST)
+        form5 = self.five_form_class(request.POST, prefix = 'apadecimientos')
+        form6 = self.six_form_class(request.POST)
+        form7 = self.seven_form_class(request.POST)
+        form8 = self.eight_form_class(request.POST, prefix='convivientes')
+        form9 = self.nine_form_class(request.POST)
         try:
             with transaction.atomic():
-                self.object = self.get_object
-                form = self.form_class(request.POST,request.FILES)
-                form2 = self.second_form_class(request.POST)
-                form3 = self.third_form_class(request.POST,request.FILES)
-                form4 = self.four_form_class(request.POST)
-                form5 = self.five_form_class(request.POST, prefix = 'apadecimientos')
-                form6 = self.six_form_class(request.POST)
-                form7 = self.seven_form_class(request.POST)
-                form8 = self.eight_form_class(request.POST, prefix='convivientes')
-                form9 = self.nine_form_class(request.POST)
-
                 if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid() and form7.is_valid() and form8.is_valid() and form9.is_valid():
                     alumno = form3.save(commit=False)
                     alumno.estudios_anteriores = form2.save()
@@ -122,11 +123,18 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
                     areligion = form4.save(commit=False)
                     areligion.alumno = alumno
                     areligion.save()
-                    for form_pad in form5:
-                        apadecimiento=form_pad.save(commit=False)
-                        print('apadecimiento-----',apadecimiento)
-                        apadecimiento.alumno = alumno
-                        apadecimiento.save()
+                    if len(form5.cleaned_data) == 1:
+                        if form5.cleaned_data[0]:
+                            for form_pad in form5:
+                                apadecimiento=form_pad.save(commit=False)
+                                apadecimiento.alumno = alumno
+                                apadecimiento.save()
+                    elif len(form5.cleaned_data) >= 1:
+                        for form_pad in form5:
+                            if form_pad.cleaned_data:
+                                apadecimiento=form_pad.save(commit=False)
+                                apadecimiento.alumno = alumno
+                                apadecimiento.save()
                     psico=form6.save(commit=False)
                     psico.alumno = alumno
                     psico.save()
@@ -135,13 +143,38 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
                     vivi.save()
                     for form_conviv in form8:
                         con= Conviviente(**form_conviv.cleaned_data, vivienda = vivi)
-                        print('convivientes-----',con)
                         con.save()
+                    print('creado')
+                    if self.request.user.user_profile.rol.id == 6:
+                        return redirect('educacion:home_maestro')
+
                     return HttpResponseRedirect(self.get_success_url())
                 else:
-                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8, form9=form9))
+                    #agregando los errores de cada form
+                    print(form3.errors)
+                    errors={
+                        'form':{'erros':form.errors, 'name':'Tutor'},
+                        'form2':{'erros':form2.errors, 'name':'Estudios Anteriores'},
+                        'form3':{'erros':form3.errors, 'name':'Alumno'},
+                        'form4':{'erros':form4.errors, 'name':'Religion'},
+                        'form5':{'erros':form5.errors, 'name':'Apadecimiento'},
+                        'form6':{'erros':form6.errors, 'name':'Psicologo'},
+                        'form7':{'erros':form7.errors, 'name':'Vivienda'},
+                        'form8':{'erros':form8.errors, 'name':'Convivientes'}
+                    }
+                    print(errors)
+                    return self.render_to_response(self.get_context_data(form=form,
+                        form2=form2,
+                        form3=form3,
+                        form4=form4,
+                        form5=form5,
+                        form6=form6,
+                        form7=form7,
+                        form8=form8,
+                        errors_forms=errors
+                        ))
         except IntegrityError:
-            handle_exception()
+           return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8))
 
 class AlumnoEdit(RolesCoordinadorEducacionYDirectorCentroMixin, generic.UpdateView):
     model = Alumno

@@ -11,10 +11,10 @@ class InstitucionForm(forms.ModelForm):
     )
     class Meta:
         model = Institucion
-        fields = ['nombre_ins', 'correo', 'estado_ins']
+        fields = ['nombre_ins', 'correo_ins', 'estado_ins']
         labels = {
         'nombre_ins':'Nombre de la institución',
-        'correo': 'Correo electrónico de la institucion',
+        'correo_ins': 'Correo electrónico de la institucion',
         'estado_ins':'Activo/Inactivo',
         }
         widget = {'nombre_ins': forms.TextInput}

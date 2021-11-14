@@ -6,7 +6,7 @@ class Taller(models.Model):
     estado_taller = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.talleres
+        return self.nombre_taller
 
     def delete(self, *args):
         self.estado_taller = False

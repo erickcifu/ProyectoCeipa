@@ -30,6 +30,9 @@ class PersonalMaestroNew(IsCoordinadorEducacionMixin, generic.CreateView):
     success_url = reverse_lazy("educacion:listado_personal_por_centro_educativo")
     login_url = 'app:login'
 
+    def form_valid(self, form):
+        form.save()
+        return redirect("educacion:listado_personal_por_centro_educativo")
 
 class PersonalDirectorCentroNew(IsCoordinadorEducacionMixin, generic.CreateView):
     model = personalEducativo

@@ -3,6 +3,14 @@ from app.models import centro_educativo
 
 
 class CentEduForm(forms.ModelForm):
+    estado_centro = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
+
     class Meta:
         model = centro_educativo
         fields = ['nombre_centro', 'direccion_centro', 'codigo_centro', 'estado_centro']
