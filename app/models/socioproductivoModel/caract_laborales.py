@@ -15,6 +15,7 @@ class Caract_laborales(models.Model):
     empleado = models.BooleanField(default=False)
     propio = models.BooleanField(default=False)
     s_americano = models.BooleanField(default=False)
+    InfEconomica = models.CharField(max_length=100, null=True, blank=True)
     estado_claborales = models.BooleanField(default=True)
 
     def __str__(self):

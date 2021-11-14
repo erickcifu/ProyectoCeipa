@@ -6,8 +6,8 @@ from .CarGrup import CargoGrupo
 
 class PadresFamilia(models.Model):
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name="per_padre")
-    leer = models.BooleanField(default=False)
-    escribir = models.BooleanField(default=False)
+    leer_P = models.BooleanField(default=False)
+    escribir_p = models.BooleanField(default=False)
     cantidad_hijos = models.PositiveIntegerField()
     vacunaCovid = models.BooleanField(default=False)
     participacionG = models.BooleanField(default=False)

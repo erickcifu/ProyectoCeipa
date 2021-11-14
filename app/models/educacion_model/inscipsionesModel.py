@@ -12,6 +12,8 @@ class Inscripcion(models.Model):
     Fecha_inscripcion = models.DateTimeField()
     alumno_promovido = models.BooleanField(default=False)
     alumno_retirado = models.BooleanField(default=False)
+    alumno_promovido = models.BooleanField(default=False)
+    alumno_retirado = models.BooleanField(default=False)
     estado_incpripsion = models.BooleanField(default=True)
 
     def __str__(self):

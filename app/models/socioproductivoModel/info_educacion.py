@@ -20,7 +20,7 @@ class InfoEducacion(models.Model):
     estado_info_educacion = models.BooleanField(default=100)
 
     def __str__(self):
-        return self.info_educacion
+        return self.nombre_establecimiento
 
     def delete(self, *args):
         self.estado_info_educacion = False

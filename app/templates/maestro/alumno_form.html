@@ -1,7 +1,6 @@
 {% extends 'maestro/base.html' %}
 
 {% block page_content %}
-{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
@@ -33,9 +32,18 @@
                                   <div class="wizard-step-text-details">Infomaciòn general del alumno</div>
                                 </div>
                               </a>
+                              <!--Wizard item 9-->
+                              <a class="nav-item nav-link" id="wizard9-tab" href="#wizard9" data-bs-toggle="tab" role="tab" aria-controls="wizard9" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Aspectos Laborales</div>
+                                  <div class="wizard-step-text-details">Aspectos laborales del alumno</div>
+                                </div>
+                              </a>
+
                               <!--Wizard item 2-->
                               <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
-                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-icon">3</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Tutor</div>
                                   <div class="wizard-step-text-details">Informaciòn personal de el tutor</div>
@@ -43,7 +51,7 @@
                               </a>
                               <!--Wizard item 3-->
                               <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
-                                <div class="wizard-step-icon">3</div>
+                                <div class="wizard-step-icon">4</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Estudios Anteriores</div>
                                   <div class="wizard-step-text-details">Informaciòn sobre sus estudios anteriores</div>
@@ -51,7 +59,7 @@
                               </a>
                               <!--Wizard item 4-->
                               <a class="nav-item nav-link" id="wizard4-tab" href="#wizard4" data-bs-toggle="tab" role="tab" aria-controls="wizard4" aria-selected="true">
-                                <div class="wizard-step-icon">4</div>
+                                <div class="wizard-step-icon">5</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Religion</div>
                                   <div class="wizard-step-text-details">Informaciòn sobre su religion</div>
@@ -59,7 +67,7 @@
                               </a>
                               <!--Wizard item 5-->
                               <a class="nav-item nav-link" id="wizard5-tab" href="#wizard5" data-bs-toggle="tab" role="tab" aria-controls="wizard5" aria-selected="true">
-                                <div class="wizard-step-icon">5</div>
+                                <div class="wizard-step-icon">6</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Padecimiento</div>
                                   <div class="wizard-step-text-details">Informaciòn sobre sus padecimiento</div>
@@ -67,7 +75,7 @@
                               </a>
                               <!--Wizard item 6-->
                               <a class="nav-item nav-link" id="wizard6-tab" href="#wizard6" data-bs-toggle="tab" role="tab" aria-controls="wizard6" aria-selected="true">
-                                <div class="wizard-step-icon">6</div>
+                                <div class="wizard-step-icon">7</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Anàlisis Psicologico</div>
                                   <div class="wizard-step-text-details">Informaciòn sobre el analicis psicologicos</div>
@@ -75,7 +83,7 @@
                               </a>
                               <!--Wizard item 7-->
                               <a class="nav-item nav-link" id="wizard7-tab" href="#wizard7" data-bs-toggle="tab" role="tab" aria-controls="wizard7" aria-selected="true">
-                                <div class="wizard-step-icon">7</div>
+                                <div class="wizard-step-icon">8</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Vivienda</div>
                                   <div class="wizard-step-text-details">Informaciòn sobre la vivienda </div>
@@ -83,13 +91,76 @@
                               </a>
                               <!--Wizard item 8-->
                               <a class="nav-item nav-link" id="wizard8-tab" href="#wizard8" data-bs-toggle="tab" role="tab" aria-controls="wizard8" aria-selected="true">
-                                <div class="wizard-step-icon">8</div>
+                                <div class="wizard-step-icon">9</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Conviviente</div>
                                   <div class="wizard-step-text-details">Informaciòn sobre el conviviente</div>
                                 </div>
                               </a>
                             <div class="card-body">
+                              {%if form.errors%}
+                                    {%for field in form%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                              {%endif%}
+                                  {%if form9.errors%}
+                                    {%for field in form9%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form2.errors%}
+                                    {%for field in form2%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form3.errors%}
+                                    {%for field in form3%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form4.errors%}
+                                    {%for field in form4%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form5.errors%}
+                                    {%for field in form5%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form6.errors%}
+                                    {%for field in form6%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form7.errors%}
+                                    {%for field in form7%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form8.errors%}
+                                    {%for field in form8%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
                               <!--Wizard Body-->
                                 <div class="tab-content" id="cardTabContent">
                                   <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
@@ -99,26 +170,96 @@
                                         <h5 class="card-title mb-4">Ingrese la informaciòn personal del alumno </h5>
                                         <!--Inicio Formulario-->
                                           <div class="row gx-3">
-                                                {{ form3 |crispy  }}
+                                                {{ form3.nombres_alumno }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.apellidos_alumno }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.cui }}
+                                          </div>
+                                          <div class="row gx-3">
+                                            <label>Codigo de MINEDUC</label>
+                                                {{ form3.codigo_mineduc }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.fecha_nacimiento }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.ingreso_familiar }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.direccion_alumno }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.telefono }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.fotografia }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.etni }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.idiome }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.muni }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.gen }}
+                                          </div>
+                                          <div class="row gx-3">
+                                                {{ form3.estado_alumno }}
                                           </div>
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
                                             <button class="btn btn-ligth" type="button">Anterior</button>
-                                            <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                            <button class="btn btn-primary" type="submit">Siguiente</button>
                                           </div>
                                         <!--Fin Formulario-->
                                       </div>
                                     </div>
                                   </div>
 
+                                  <!--Tab item 9-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard9" role="tabpanel" aria-labelledby="wizard9-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 2</h3>
+                                          <h5 class="card-title mb-4">Ingrese la información laboral del alumno </h5>
+                                          <!--Inicio Formulario-->
+                                          <div class="row gx-3">
+                                                {{ form3.ocup  }}
+                                          </div>
+                                            <div class="row gx-3">
+                                              {%for f in form9%}
+                                                {{f.label}}
+                                                {{f}}
+                                              {%endfor%}
+                                            </div>
+                                            <hr class="my-4"/>
+                                            <div class="d-flex justify-content-between">
+                                              <button class="btn btn-ligth" type="button">Anterior</button>
+                                              <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                            </div>
+                                          <!--Fin Formulario-->
+                                        </div>
+                                      </div>
+                                    </div>
+
                                   <!--Tab item 2-->
                                   <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
                                     <div class="row justify-content-center">
                                       <div class="col-xxl-6 col-xl-8">
-                                        <h3 class="text-primary">Paso 2</h3>
+                                        <h3 class="text-primary">Paso 3</h3>
                                         <h5 class="card-title mb-4">Ingrese informaciòn personal del tutor</h5>
                                           <div class="row gx-3">
-                                              {{ form | crispy  }}
+                                            {%for f in form%}
+                                              {{f.label}}
+                                              {{f}}
+                                            {%endfor%}
+
                                           </div>
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
@@ -132,11 +273,14 @@
                                   <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
                                     <div class="row justify-content-center">
                                       <div class="col-xxl-6 col-xl-8">
-                                        <h3 class="text-primary">Paso 3</h3>
+                                        <h3 class="text-primary">Paso 4</h3>
                                         <h5 class="card-title mb-4">Ingrese informaciòn spbre sus estudios anteriores</h5>
                                             <div class="row gx-3">
-                                                {{ form2 | crispy }}
-                                              </div>
+                                              {%for f in form2%}
+                                                {{f.label}}
+                                                {{f}}
+                                              {%endfor%}
+                                            </div>
                                           <hr class="my-4"/>
                                           <div class="d-flex justify-content-between">
                                             <button class="btn btn-ligth" type="button">Anterior</button>
@@ -149,10 +293,14 @@
                                     <div class="tab-pane py-5 py-xl-10 fade" id="wizard4" role="tabpanel" aria-labelledby="wizard4-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
-                                          <h3 class="text-primary">Paso 4</h3>
+                                          <h3 class="text-primary">Paso 5</h3>
                                           <h5 class="card-title mb-4">Ingrese informaciòn de la religionr</h5>
                                             <div class="row gx-3">
-                                                {{ form4 | crispy }}
+                                              {%for f in form4%}
+
+                                                  {{f.label}}
+                                                  {{f}}
+                                                {%endfor%}
                                             </div>
                                             <hr class="my-4"/>
                                             <div class="d-flex justify-content-between">
@@ -166,20 +314,20 @@
                                     <div class="tab-pane py-5 py-xl-10 fade" id="wizard5" role="tabpanel" aria-labelledby="wizard5-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
-                                          <h3 class="text-primary">Paso 5</h3>
+                                          <h3 class="text-primary">Paso 6</h3>
                                           <h5 class="card-title mb-4">Ingrese informaciòn de alumno padecimiento </h5>
                                             <div class="row gx-3" >
                                                 {{form5.management_form}}
                                                   {%for f in form5%}
                                                     <div id="formularios_padecimientos" class="row">
-                                                      {{ f | crispy}}
+                                                      {{ f }}
                                                     </div>
                                                     <br>
                                                     <br>
                                                   {%endfor%}
                                             </div>
                                             <br/>
-                                            
+
                                             <div class="d-flex justify-content-between">
                                               <button class="btn btn-primary" role="button" onclick="agregar_form_apadecimiento();">
                                                 nuevo form
@@ -197,10 +345,13 @@
                                     <div class="tab-pane py-5 py-xl-10 fade" id="wizard6" role="tabpanel" aria-labelledby="wizard6-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
-                                          <h3 class="text-primary">Paso 6</h3>
+                                          <h3 class="text-primary">Paso 7</h3>
                                           <h5 class="card-title mb-4">Ingrese informaciòn de psicologicor</h5>
                                             <div class="row gx-3">
-                                                {{ form6 | crispy  }}
+                                              {%for f in form6%}
+                                                {{f.label}}
+                                                {{f}}
+                                              {%endfor%}
                                             </div>
                                             <hr class="my-4"/>
                                             <div class="d-flex justify-content-between">
@@ -214,10 +365,13 @@
                                     <div class="tab-pane py-5 py-xl-10 fade" id="wizard7" role="tabpanel" aria-labelledby="wizard7-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
-                                          <h3 class="text-primary">Paso 7</h3>
+                                          <h3 class="text-primary">Paso 8</h3>
                                           <h5 class="card-title mb-4">Ingrese informaciòn vivienda</h5>
                                             <div class="row gx-3">
-                                                {{ form7 | crispy }}
+                                              {%for f in form7%}
+                                                {{f.label}}
+                                                {{f}}
+                                              {%endfor%}
                                             </div>
                                             <hr class="my-4"/>
                                             <div class="d-flex justify-content-between">
@@ -231,14 +385,14 @@
                                     <div class="tab-pane py-5 py-xl-10 fade" id="wizard8" role="tabpanel" aria-labelledby="wizard8-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
-                                          <h3 class="text-primary">Paso 8</h3>
+                                          <h3 class="text-primary">Paso 9</h3>
                                           <h5 class="card-title mb-4">Ingrese informaciòn de el conviviente</h5>
                                             <div class="row gx-3">
                                               {{form8.management_form}}
                                                 <div id="formularios_convivientes" class="row">
                                                   {%for f in form8%}
                                                       <div id="hijo_fomulario_conviviente" class="row">
-                                                          {{ f | crispy}}
+                                                          {{ f }}
                                                       </div>
                                                   {%endfor%}
                                                 </div>
@@ -252,7 +406,6 @@
                                       </div>
                                     </div>
                                     <!--Tab fin -->
-
                                 </div>
                               </div>
                             </div>
@@ -266,117 +419,409 @@
 {% endblock %}
 {% block js_page %}
   <script>
+    //show alert
+    function showAlert(){
+      console.log('hola ')
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+    }
 
-      //funcion para agregar mas formularios para los padecimientos
-      function agregar_form_apadecimiento(){
-        const $total_forms = document.getElementById('id_apadecimientos-TOTAL_FORMS')
-        
-        let $label_pad = document.createElement('label')
-        $label_pad.innerHTML = 'AlumPad'
-        let $input_padeci = document.querySelector('#id_apadecimientos-0-padecimiento').cloneNode(true)
-        $input_padeci.name = 'apadecimientos-'+$total_forms.value+'-padecimiento'
-        $input_padeci.id = 'id_apadecimientos-'+$total_forms.value+'-padecimiento'
+  // const initialStylePadecimiento = ()=>{
+  //   const $tratameintoApa = document.querySelector('#id_apadecimientos-0-tratamiento')
+  //   $nombreApa.setAttribute('onBlur',`isRequeried(${$tratameintoApa})`)
 
-        console.log('label_pad', $label_pad)
-        console.log('input_pad', $input_padeci)
+  // }
+
+  //cargando las funciones de comprobacion para los convivientes
+  window.addEventListener('DOMContentLoaded', ()=>{
+  console.log('hola')
+    const $convivientes_0_nombres_conviviente = document.querySelector('#id_convivientes-0-nombres_conviviente')
+    const $id_convivientes_0_apellidos_conviviente = document.querySelector('#id_convivientes-0-apellidos_conviviente')
+    const $id_convivientes_0_fecha_nacimiento =  document.querySelector('#id_convivientes-0-fecha_nacimiento')
+    const $id_convivientes_0_parentesco = document.querySelector('#id_convivientes-0-parentesco')
+    $convivientes_0_nombres_conviviente.setAttribute('onBlur', `validateConvivientesNameFirst();`)
+    $id_convivientes_0_apellidos_conviviente.setAttribute('onBlur', `validateConvivientesLastNameFirst();`)
+    $id_convivientes_0_fecha_nacimiento.setAttribute('onBlur', `validateConvivientesDateFirst();`)
+    $id_convivientes_0_parentesco.setAttribute('onBlur', `validateConvivientesParenFirst();`)
+  })
 
 
-        let $label_tratamiento = document.createElement('label')
-        $label_tratamiento.innerHTML = 'tratamiento'
-        let $input_tratamiento = document.querySelector('#id_apadecimientos-0-tratamiento').cloneNode(true)
-        $input_tratamiento.name = 'apadecimientos-'+$total_forms.value+'-tratamiento'
-        $input_tratamiento.id = 'id_apadecimientos-'+$total_forms.value+'-tratamiento'
-
-        let $label_estado_pad = document.createElement('label')
-        $label_estado_pad.innerHTML = 'Estado'
-        let $input_estado_pad = document.querySelector('#id_apadecimientos-0-estado_Alpadecimiento').cloneNode(true)
-        $input_estado_pad.name = 'apadecimientos-'+$total_forms.value+'-estado_Alpadecimiento'
-        $input_estado_pad.id = 'id_apadecimientos-'+$total_forms.value+'-estado_Alpadecimiento'
-
-        document.getElementById('formularios_padecimientos').appendChild($label_pad)
-        document.getElementById('formularios_padecimientos').appendChild($input_padeci)
-        document.getElementById('formularios_padecimientos').appendChild($label_tratamiento)
-        document.getElementById('formularios_padecimientos').appendChild($input_tratamiento)
-        document.getElementById('formularios_padecimientos').appendChild($label_estado_pad)
-        document.getElementById('formularios_padecimientos').appendChild($input_estado_pad)
-
-        $total_forms.value = parseInt($total_forms.value) + 1
-        
+  function validateConvivientesNameFirst(name) {
+    const $field = document.querySelector('#id_convivientes-0-nombres_conviviente')
+    if((!$field.value || $field.value.trim().length === 0)){
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if(!$error_is_requeried)
+          $field.insertAdjacentHTML('afterend', `<div id="isRequeried_${$field.name}">Este campo es requerido</div>`)
+      }else{
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if($error_is_requeried) $error_is_requeried.remove()
       }
-      
-      
-      //formatear los formularios si en caso se cambió el valor de los convivientes
-      function agregar_forms_viviendas() {
-        const $cantidad_de_personas = document.querySelector('#id_cantidad_personas')
+  }
+  function validateConvivientesLastNameFirst(name) {
+    const $field = document.querySelector('#id_convivientes-0-apellidos_conviviente')
+    if((!$field.value || $field.value.trim().length === 0)){
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if(!$error_is_requeried)
+          $field.insertAdjacentHTML('afterend', `<div id="isRequeried_${$field.name}">Este campo es requerido</div>`)
+      }else{
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if($error_is_requeried) $error_is_requeried.remove()
+      }
+  }
+  function validateConvivientesDateFirst(name) {
+    const $field = document.querySelector('#id_convivientes-0-fecha_nacimiento')
+    if((!$field.value || $field.value.trim().length === 0)){
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if(!$error_is_requeried)
+          $field.insertAdjacentHTML('afterend', `<div id="isRequeried_${$field.name}">Este campo es requerido</div>`)
+      }else{
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if($error_is_requeried) $error_is_requeried.remove()
+      }
+  }
 
-        if(!$cantidad_de_personas.value)return null
+  function validateConvivientesParenFirst(name) {
+    const $field = document.querySelector('#id_convivientes-0-parentesco')
+    if((!$field.value || $field.value.trim().length === 0)){
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if(!$error_is_requeried)
+          $field.insertAdjacentHTML('afterend', `<div id="isRequeried_${$field.name}">Este campo es requerido</div>`)
+      }else{
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if($error_is_requeried) $error_is_requeried.remove()
+      }
+  }
 
-        const $total_forms_convivientes = document.querySelector('#id_convivientes-TOTAL_FORMS')
-        const $formulario_convivientes = document.getElementById('formularios_convivientes')
-        if($formulario_convivientes.childElementCount > 1){
-            for (let i = 1; i <= $formulario_convivientes.childElementCount; i++) {
-              let $nombre_hijo = document.getElementById(`hijo_formulario_conviviente_${i}`)
-              $nombre_hijo.remove()
+  function validateConvivientes(name) {
+    const $field = document.querySelector(`#${name}`)
+    if((!$field.value || $field.value.trim().length === 0)){
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if(!$error_is_requeried)
+          $field.insertAdjacentHTML('afterend', `<div id="isRequeried_${$field.name}">Este campo es requerido</div>`)
+      }else{
+        const $error_is_requeried = document.querySelector(`#isRequeried_${$field.name}`)
+        if($error_is_requeried) $error_is_requeried.remove()
+      }
+  }
+
+
+  function isRequeried(field) {
+    console.log(field)
+      let value = field.value
+      if((!value || value.trim().length === 0)){
+        const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+        if(!$error_is_requeried)
+          field.insertAdjacentHTML('afterend', `<div id="isRequeried_${field.name}">Este campo es requerido</div>`)
+      }else{
+        const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+        if($error_is_requeried) $error_is_requeried.remove()
+      }
+    }
+
+  const isEmail = (field)=>{
+      let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+      const result = isRequeried(field)
+      if(!result){
+          let value = field.value
+          if(!regexEmail.test(value)){
+            const $error_is_email = document.querySelector(`#isEmail_${field.name}`)
+            if(!$error_is_email){
+              field.insertAdjacentHTML('afterend', `<div id="isEmail_${field.name}">No es un Correo Valido</div>`)
             }
-            
-            $total_forms_convivientes.value = 1
-        }
-
-        //agregando la cantidad de formularios dependiendo de la cantidad de personas de la vivienda 
-        for (let i = 1; i < $cantidad_de_personas.value; i++) {
-            // nombre
-          let $label_nombre = document.createElement('label')
-          $label_nombre.innerHTML = 'Nombre'
-          let $input_nombre = document.querySelector('#id_convivientes-0-nombres_conviviente').cloneNode(true)
-          $input_nombre.name = "convivientes-"+$total_forms_convivientes.value+"-nombres_conviviente"
-          $input_nombre.id =  "id_convivientes-"+$total_forms_convivientes.value+"-nombres_conviviente"
-
-          //apellidos
-
-          let $label_apellido = document.createElement('label')
-          $label_apellido.innerHTML = 'apellidos'
-          let $input_apellidos = document.querySelector('#id_convivientes-0-apellidos_conviviente').cloneNode(true)
-          $input_apellidos.name = "convivientes-"+$total_forms_convivientes.value+"-apellidos_conviviente"
-          $input_apellidos.id =  "id_convivientes-"+$total_forms_convivientes.value+"-apellidos_conviviente"
-          
-          //fecha
-          let $label_fecha = document.createElement('label')
-          $label_fecha.innerHTML = 'fecha de nacimiento'
-          let $input_fecha = document.querySelector('#id_convivientes-0-fecha_nacimiento').cloneNode(true)
-          $input_fecha.name = "convivientes-"+$total_forms_convivientes.value+"-fecha_nacimiento"
-          $input_fecha.id =  "id_convivientes-"+$total_forms_convivientes.value+"-fecha_nacimiento"
-
-          //parentesco
-          let $label_parentesco = document.createElement('label')
-          $label_parentesco.innerHTML = 'parentesco'
-          let $input_parenteso = document.querySelector('#id_convivientes-0-parentesco').cloneNode(true)
-          $input_parenteso.name = "convivientes-"+$total_forms_convivientes.value+"-parentesco"
-          $input_parenteso.id =  "id_convivientes-"+$total_forms_convivientes.value+"-parentesco"
-          //estado
-          let $label_estado = document.createElement('label')
-          $label_estado.innerHTML = 'estado'
-          let $input_estado = document.querySelector('#id_convivientes-0-estado_conviviente').cloneNode(true)
-          $input_estado.name = "convivientes-"+$total_forms_convivientes.value+"-estado_conviviente"
-          $input_estado.id =  "id_convivientes-"+$total_forms_convivientes.value+"-estado_conviviente"
-
-          const $formualio_hijo = document.createElement('div')
-          $formualio_hijo.id =`hijo_formulario_conviviente_${$total_forms_convivientes.value}`
-          $formualio_hijo.appendChild($label_nombre)
-          $formualio_hijo.appendChild($input_nombre)
-          $formualio_hijo.appendChild($label_apellido)
-          $formualio_hijo.appendChild($input_apellidos)
-          $formualio_hijo.appendChild($label_fecha)
-          $formualio_hijo.appendChild($input_fecha)
-          $formualio_hijo.appendChild($label_parentesco)
-          $formualio_hijo.appendChild($input_parenteso)
-          $formualio_hijo.appendChild($label_estado)
-          $formualio_hijo.appendChild($input_estado)
-
-          
-          document.getElementById('formularios_convivientes').appendChild($formualio_hijo)
-          $total_forms_convivientes.value = parseInt($total_forms_convivientes.value)+1
-        }
-
+          }else{
+            const $error_is_email = document.querySelector(`#isEmail_${field.name}`)
+            if($error_is_email) $error_is_email.remove()
+          }
       }
+  }
+  function isTelephoneNumber(field){
+    let regexNumber = /^[0-9]{8}$/
+    if(!field.value)return null
+    const $error_is_telephone = document.querySelector(`#isTelephoneNumber_${field.name}`)
+    if(!regexNumber.test(field.value)){
+      if(!$error_is_telephone){
+        field.insertAdjacentHTML('afterend', `<div id="isTelephoneNumber_${field.name}">El numero de telefono debe tener 8 digitos</div>`)
+      }
+    }else{
+      if($error_is_telephone) $error_is_telephone.remove()
+    }
+  }
+
+  function isIdentify(field) {
+    const result = isRequeried(field)
+    if(!result){
+      let regexNumber = /^[0-9]{13}$/
+      const $error_is_identify = document.querySelector(`#isIdenfify_${field.name}`)
+      if(!regexNumber.test(field.value)){
+        if(!$error_is_identify){
+          field.insertAdjacentHTML('afterend', `<div id="isIdenfify_${field.name}">
+              En # debe tener 13 digitos y solo digitos
+            </div>`)
+        }
+      }else{
+        if($error_is_identify) $error_is_identify.remove()
+      }
+    }
+  }
+
+
+  //validaciones por formulario
+
+  const validate_student_form = ()=>{
+    const $id_nombres_alumno = document.querySelector('#id_nombres_alumno')
+    isRequeried($id_nombres_alumno)
+    const $id_apellidos_alumno = document.querySelector('#id_apellidos_alumno')
+    isRequeried($id_apellidos_alumno)
+    const $id_cui = document.querySelector('#id_cui')
+    isIdentify($id_cui)
+    const $id_codigo_mineduc = document.querySelector('#id_codigo_mineduc')
+    isRequeried($id_codigo_mineduc)
+    const $id_fecha_nacimiento = document.querySelector('#id_fecha_nacimiento')
+    isRequeried($id_fecha_nacimiento)
+    // const $id_muni = document.querySelector('#id_muni')
+    // isRequeried($id_muni)
+    const $id_telefono_alumno = document.querySelector('#id_telefono_alumno')
+    if($id_telefono_alumno.value){
+      isTelephoneNumber($id_telefono_alumno)
+    }
+
+    const $id_ocup = document.querySelector('#id_ocup')
+    isRequeried($id_ocup)
+
+    const $id_gen = document.querySelector('#id_gen')
+    isRequeried($id_gen)
+    const $id_etni = document.querySelector('#id_etni')
+    isRequeried($id_etni)
+    const $id_idiome = document.querySelector('#id_idiome')
+    isRequeried($id_idiome)
+  }
+
+  const validate_tutor_form = ()=>{
+    const $id_nombres_tutor = document.querySelector('#id_nombres_tutor')
+    isRequeried($id_nombres_tutor)
+    const $id_apellidos_tutor = document.querySelector('#id_apellidos_tutor')
+    isRequeried($id_apellidos_tutor)
+    const $id_DPI = document.querySelector('#id_DPI')
+    isIdentify($id_DPI)
+    const $id_fecha_nacimiento_tutor = document.querySelector('#id_fecha_nacimiento_tutor')
+    isRequeried($id_fecha_nacimiento_tutor)
+    const $id_telefono_tutor = document.querySelector('#id_telefono_tutor')
+    if($id_telefono_tutor.value){
+      isTelephoneNumber($id_telefono_tutor)
+    }
+    const $id_correo = document.querySelector('#id_correo')
+    isEmail($id_correo)
+    const $id_muni = document.querySelector('#id_muni')
+    isRequeried($id_muni)
+    const $id_genero = document.querySelector('#id_genero')
+    isRequeried($id_genero)
+    const $id_parentesco = document.querySelector('#id_parentesco')
+    isRequeried($id_parentesco)
+  }
+  const validate_estudAnt_form = ()=>{
+    const $id_grado= document.querySelector('#id_grado')
+    isRequeried($id_grado)
+    const $id_nombre_establecimiento = document.querySelector('#id_nombre_establecimiento')
+    isRequeried($id_nombre_establecimiento)
+
+    const $id_telefono_estudios_anteriores = document.querySelector('#id_telefono_estudios_anteriores')
+    if($id_telefono_estudios_anteriores.value)isTelephoneNumber($id_telefono_estudios_anteriores)
+  }
+
+  const validate_religion_form = ()=>{
+    const $id_religion = document.querySelector('#id_religion')
+    isRequeried($id_religion)
+    const $id_nombre_iglesia = document.querySelector('#id_nombre_iglesia')
+    isRequeried($id_nombre_iglesia)
+  }
+
+  const validate_psicologico_form = ()=>{
+    const $id_Analisis_psicologico = document.querySelector('#id_Analisis_psicologico')
+    isRequeried($id_Analisis_psicologico)
+    const $id_fecha_Analisis = document.querySelector('#id_fecha_Analisis')
+    isRequeried($id_fecha_Analisis)
+  }
+
+  const validate_vivienda_form = ()=>{
+    const $id_cantidad_ambientes = document.querySelector('#id_cantidad_ambientes')
+    isRequeried($id_cantidad_ambientes)
+    const $id_techo = document.querySelector('#id_techo')
+    isRequeried($id_techo)
+
+    const $id_categoria = document.querySelector('#id_categoria')
+    isRequeried($id_categoria)
+    const $id_piso = document.querySelector('#id_piso')
+    isRequeried($id_piso)
+    const $id_muro = document.querySelector('#id_muro')
+    isRequeried($id_muro)
+    const $id_servicio = document.querySelector('#id_servicio')
+    isRequeried($id_servicio)
+  }
+
+  const $btn_form_alumno = document.querySelector('#btn_form_alumno')
+
+  $btn_form_alumno.addEventListener('click', e=>{
+    e.preventDefault()
+    validate_student_form()
+  })
+
+  const $btn_form_tutor = document.querySelector('#btn_form_tutor')
+  $btn_form_tutor.addEventListener('click', e=>{
+    e.preventDefault()
+    validate_tutor_form()
+  })
+
+  const $btn_form_estAnt = document.querySelector('#btn_form_estAnt')
+  $btn_form_estAnt.addEventListener('click', e=>{
+    e.preventDefault()
+    validate_estudAnt_form()
+  })
+
+  const $btn_form_religion = document.querySelector('#btn_form_religion')
+  $btn_form_religion.addEventListener('click', e=>{
+    e.preventDefault()
+    validate_religion_form()
+  })
+
+  const $btn_form_psicologico = document.querySelector('#btn_form_psicologico')
+  $btn_form_psicologico.addEventListener('click', e=>{
+    e.preventDefault()
+    validate_psicologico_form()
+  })
+
+  const $btn_form_vivienda = document.querySelector('#btn_form_vivienda')
+  $btn_form_vivienda.addEventListener('click', e=>{
+    e.preventDefault()
+    validate_vivienda_form()
+  })
+
+
+
+  const $add_apadecimiento = document.querySelector('#add_apadecimiento')
+  $add_apadecimiento.addEventListener('click', e=>{
+    e.preventDefault()
+    agregar_form_apadecimiento();
+  })
+
+
+
+    //funcion para agregar mas formularios para los padecimientos
+    function agregar_form_apadecimiento(){
+      const $total_forms = document.getElementById('id_apadecimientos-TOTAL_FORMS')
+
+      let $label_pad = document.createElement('label')
+      $label_pad.innerHTML = 'AlumPad'
+      let $input_padeci = document.querySelector('#id_apadecimientos-0-padecimiento').cloneNode(true)
+      $input_padeci.name = 'apadecimientos-'+$total_forms.value+'-padecimiento'
+      $input_padeci.id = 'id_apadecimientos-'+$total_forms.value+'-padecimiento'
+
+      console.log('label_pad', $label_pad)
+      console.log('input_pad', $input_padeci)
+
+
+      let $label_tratamiento = document.createElement('label')
+      $label_tratamiento.innerHTML = 'tratamiento'
+      let $input_tratamiento = document.querySelector('#id_apadecimientos-0-tratamiento').cloneNode(true)
+      $input_tratamiento.name = 'apadecimientos-'+$total_forms.value+'-tratamiento'
+      $input_tratamiento.id = 'id_apadecimientos-'+$total_forms.value+'-tratamiento'
+
+      let $label_estado_pad = document.createElement('label')
+      $label_estado_pad.innerHTML = 'Estado'
+      let $input_estado_pad = document.querySelector('#id_apadecimientos-0-estado_Alpadecimiento').cloneNode(true)
+      $input_estado_pad.name = 'apadecimientos-'+$total_forms.value+'-estado_Alpadecimiento'
+      $input_estado_pad.id = 'id_apadecimientos-'+$total_forms.value+'-estado_Alpadecimiento'
+
+      document.getElementById('formularios_padecimientos').appendChild($label_pad)
+      document.getElementById('formularios_padecimientos').appendChild($input_padeci)
+      document.getElementById('formularios_padecimientos').appendChild($label_tratamiento)
+      document.getElementById('formularios_padecimientos').appendChild($input_tratamiento)
+      document.getElementById('formularios_padecimientos').appendChild($label_estado_pad)
+      document.getElementById('formularios_padecimientos').appendChild($input_estado_pad)
+
+      $total_forms.value = parseInt($total_forms.value) + 1
+
+    }
+
+
+    //formatear los formularios si en caso se cambió el valor de los convivientes
+    function agregar_forms_viviendas() {
+      console.log('hola')
+      const $cantidad_de_personas = document.querySelector('#id_cantidad_personas')
+
+      if(!$cantidad_de_personas.value)return null
+
+      const $total_forms_convivientes = document.querySelector('#id_convivientes-TOTAL_FORMS')
+      const $formulario_convivientes = document.getElementById('formularios_convivientes')
+      if($formulario_convivientes.childElementCount > 1){
+          for (let i = 1; i <= $formulario_convivientes.childElementCount; i++) {
+            let $nombre_hijo = document.getElementById(`hijo_formulario_conviviente_${i}`)
+            $nombre_hijo.remove()
+          }
+
+          $total_forms_convivientes.value = 1
+      }
+
+      //agregando la cantidad de formularios dependiendo de la cantidad de personas de la vivienda
+      for (let i = 1; i < $cantidad_de_personas.value; i++) {
+          // nombre
+        let $label_nombre = document.createElement('label')
+        $label_nombre.innerHTML = 'Nombre'
+        let $input_nombre = document.querySelector('#id_convivientes-0-nombres_conviviente').cloneNode(true)
+        $input_nombre.name = "convivientes-"+$total_forms_convivientes.value+"-nombres_conviviente"
+        $input_nombre.id =  "id_convivientes-"+$total_forms_convivientes.value+"-nombres_conviviente"
+        $input_nombre.setAttribute('onBlur',`validateConvivientes("id_convivientes-"+${$total_forms_convivientes.value}+"-nombres_conviviente")`)
+
+        //apellidos
+
+        let $label_apellido = document.createElement('label')
+        $label_apellido.innerHTML = 'apellidos'
+        let $input_apellidos = document.querySelector('#id_convivientes-0-apellidos_conviviente').cloneNode(true)
+        $input_apellidos.name = "convivientes-"+$total_forms_convivientes.value+"-apellidos_conviviente"
+        $input_apellidos.id =  "id_convivientes-"+$total_forms_convivientes.value+"-apellidos_conviviente"
+        $input_apellidos.setAttribute('onBlur',`validateConvivientes("id_convivientes-"+${$total_forms_convivientes.value}+"-apellidos_conviviente")`)
+        //fecha
+        let $label_fecha = document.createElement('label')
+        $label_fecha.innerHTML = 'fecha de nacimiento'
+        let $input_fecha = document.querySelector('#id_convivientes-0-fecha_nacimiento').cloneNode(true)
+        $input_fecha.name = "convivientes-"+$total_forms_convivientes.value+"-fecha_nacimiento"
+        $input_fecha.id =  "id_convivientes-"+$total_forms_convivientes.value+"-fecha_nacimiento"
+        $input_fecha.setAttribute('onBlur',`validateConvivientes("id_convivientes-"+${$total_forms_convivientes.value}+"-fecha_nacimiento")`)
+        //parentesco
+        let $label_parentesco = document.createElement('label')
+        $label_parentesco.innerHTML = 'parentesco'
+        let $input_parenteso = document.querySelector('#id_convivientes-0-parentesco').cloneNode(true)
+        $input_parenteso.name = "convivientes-"+$total_forms_convivientes.value+"-parentesco"
+        $input_parenteso.id =  "id_convivientes-"+$total_forms_convivientes.value+"-parentesco"
+        $input_parenteso.setAttribute('onBlur',`validateConvivientes("id_convivientes-"+${$total_forms_convivientes.value}+"-parentesco")`)
+        //estado
+        let $label_estado = document.createElement('label')
+        $label_estado.innerHTML = 'estado'
+        let $input_estado = document.querySelector('#id_convivientes-0-estado_conviviente').cloneNode(true)
+        $input_estado.name = "convivientes-"+$total_forms_convivientes.value+"-estado_conviviente"
+        $input_estado.id =  "id_convivientes-"+$total_forms_convivientes.value+"-estado_conviviente"
+
+        const $formualio_hijo = document.createElement('div')
+        $formualio_hijo.id =`hijo_formulario_conviviente_${$total_forms_convivientes.value}`
+        $formualio_hijo.appendChild($label_nombre)
+        $formualio_hijo.appendChild($input_nombre)
+        $formualio_hijo.appendChild($label_apellido)
+        $formualio_hijo.appendChild($input_apellidos)
+        $formualio_hijo.appendChild($label_fecha)
+        $formualio_hijo.appendChild($input_fecha)
+        $formualio_hijo.appendChild($label_parentesco)
+        $formualio_hijo.appendChild($input_parenteso)
+        $formualio_hijo.appendChild($label_estado)
+        $formualio_hijo.appendChild($input_estado)
+
+
+        document.getElementById('formularios_convivientes').appendChild($formualio_hijo)
+        $total_forms_convivientes.value = parseInt($total_forms_convivientes.value)+1
+      }
+
+    }        }
   </script>
 {% endblock %}

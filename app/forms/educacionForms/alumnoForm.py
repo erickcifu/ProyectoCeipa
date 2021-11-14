@@ -25,7 +25,18 @@ class AlumnoForm(forms.ModelForm):
     )
     class Meta:
         model = Alumno
-        fields = ['ocup','nombres_alumno', 'apellidos_alumno', 'cui','edad', 'codigo_mineduc', 'fecha_nacimiento', 'muni', 'ingreso_familiar', 'direccion_alumno', 'telefono', 'fotografia', 'gen', 'etni', 'idiome',  'estado_alumno']
+        fields = ['ocup',
+        'nombres_alumno',
+         'apellidos_alumno',
+          'cui','edad',
+           'codigo_mineduc',
+            'fecha_nacimiento',
+             'muni', 'ingreso_familiar',
+             'direccion_alumno',
+              'telefono_alumno',
+               'fotografia',
+               'gen', 'etni',
+               'idiome',  'estado_alumno']
         labels = {
             'ocup':'Ocupacion',
             'nombres_alumno':'Nombres',
@@ -35,7 +46,7 @@ class AlumnoForm(forms.ModelForm):
             'fecha_nacimiento':'Fecha de nacimiento',
             'ingreso_familiar':"Ingreso Familiar",
             'direccion_alumno':"Direccion",
-            'telefono':"Telefono",
+            'telefono_alumno':"Telefono",
             'fotografia':"Fotografia",
             'etni':"Etnia",
             'idiome':"Idioma que habla",
@@ -54,6 +65,33 @@ class AlumnoForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
+            if field == 'estado_alumno':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
+            })
+            required = self.fields[field].required
+            if required:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+                })
+
+            if field == 'telefono_alumno':
+                self.fields[field].widget.attrs.update({
+                    'placeholder':'45002585',
+                    'onblur':'isTelephoneNumber({});'.format('id_'+field),
+                })
+
+            if field == 'cui':
+                self.fields[field].widget.attrs.update({
+                    'placeholder':'0000 00000 0000',
+                    'onblur':'isIdentify({});'.format(field),
+                })
+            if field == 'fecha_nacimiento':
+                self.fields[field].widget.attrs.update({
+                    'placeholder':'dd/mm/yyyy',
+                    'type':'date',
+                })
         self.fields['ocup'].empty_label = "Seleccione ocupación"
         self.fields['etni'].empty_label = "Seleccione etnia"
         self.fields['idiome'].empty_label = "Seleccione idioma"

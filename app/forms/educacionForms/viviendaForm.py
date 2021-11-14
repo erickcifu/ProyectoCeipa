@@ -12,15 +12,16 @@ class VivForm(forms.ModelForm):
         'techo':'Techo', 'piso':'piso',
         'muro':'muro',
         'servicio':'servicio', 'categoria':'categoria'}
-        widgets = {
-            'cantidad_personas': forms.TextInput(
-                attrs={
-                    'placeholder':'cantidad de personas',
-                    'onblur':'agregar_forms_viviendas();'
-                }
-            )
-
-        }
+        # widgets = {
+        #     'cantidad_personas': forms.TextInput(
+        #         attrs={
+        #             'placeholder':'cantidad de personas',
+        #             'onblur':'agregar_forms_viviendas();',
+        #             'min':1,
+        #             'max':2,
+        #         }
+        #     )
+        # }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -28,6 +29,24 @@ class VivForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
+            #agreango el nombre de la funcion para utilizarla en la plantilla
+            required = self.fields[field].required
+            if required:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+                })
+            if field == 'cantidad_personas':
+                self.fields[field].widget.attrs.update({
+                    'placeholder':'cantidad de personas',
+                    'onblur':'agregar_forms_viviendas();',
+                    'min':1,
+                    'max':2,
+                })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input'
+            })
+
             self.fields['techo'].empty_label = "Seleccione un techo"
             self.fields['piso'].empty_label = "Seleccione un Piso"
             self.fields['servicio'].empty_label = "Seleccione un servicio"
@@ -45,6 +64,7 @@ class VivFormEdit(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
+
             self.fields['techo'].empty_label = "Seleccione un techo"
             self.fields['piso'].empty_label = "Seleccione un Piso"
             self.fields['servicio'].empty_label = "Seleccione un servicio"

@@ -2,7 +2,7 @@ from django import forms
 from app.models import TutorMuni
 
 class TutorMuniForm(forms.ModelForm):
-    fecha_nacimiento = forms.DateField(
+    fecha_nacimiento_T = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
         )
@@ -16,14 +16,17 @@ class TutorMuniForm(forms.ModelForm):
     )
     class Meta:
         model = TutorMuni
-        fields = ['nombres_tutor', 'apellidos_tutor', 'parentesco','DPI', 'fecha_nacimiento', 'direccion_tutor', 'telefono', 'fotografia_tutor', 'estado_tutor']
+        fields = ['nombres_tutor', 'apellidos_tutor',
+        'parentesco','DPI_T',
+        'fecha_nacimiento_T', 'direccion_tutor',
+        'telefono_T', 'fotografia_tutor', 'estado_tutor']
         labels = {'nombres_tutor':'Nombres',
         'apellidos_tutor':'Apellidos',
         'parentesco':'Parentesco que tiene con el beneficiado',
-        'DPI':"No. DPI",
-        'fecha_nacimiento':'Fecha de nacimiento',
+        'DPI_T':"No. DPI",
+        'fecha_nacimiento_T':'Fecha de nacimiento',
         'direccion_tutor':'Direccion',
-        'telefono':"No. Telefono",
+        'telefono_T':"No. Telefono",
         'fotografia_tutor':"Fotografia",
         'estado_tutor':'Activo/Inactivo'}
         widget = {'nombres_tutor', forms.TextInput}

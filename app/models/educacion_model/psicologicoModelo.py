@@ -7,6 +7,8 @@ class psicologico(models.Model):
     tratamiento = models.CharField(max_length=255, null=True, blank=True)
     fecha_Analisis = models.DateTimeField()
     Entrevistador = models.CharField(max_length=255, null=True, blank=True)
+    tiene_sueños = models.BooleanField(default=False)
+    sueños = models.CharField(max_length=255, null=True, blank=True)
     estado_psicologico = models.BooleanField(default=True)
 
     def __str__(self):

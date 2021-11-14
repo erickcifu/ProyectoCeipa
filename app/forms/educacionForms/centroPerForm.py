@@ -3,6 +3,13 @@ from app.models import Centropersona
 from app.models.educacion_model.personalEducativo import personalEducativo
 
 class CentPerForm(forms.ModelForm):
+    estado_centropersona = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = Centropersona
         fields = ['centro_Educativo','personal', 'estado_centropersona']

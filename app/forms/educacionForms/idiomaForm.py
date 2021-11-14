@@ -2,6 +2,13 @@ from django import forms
 from app.models import idioma
 
 class IdiomaForm(forms.ModelForm):
+    estado_idioma = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo/Inactivo"
+    )
     class Meta:
         model = idioma
         fields = ['nombre_idioma', 'descripcion_idioma', 'estado_idioma']

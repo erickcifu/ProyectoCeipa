@@ -19,7 +19,9 @@ class ClabForm(forms.ModelForm):
             'empleado',
             'propio',
             's_americano',
+            'InfEconomica',
             'estado_claborales',
+
         ]
         labels = {
             'ha_trabajado':'Ha trabajado alguna vez',

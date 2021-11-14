@@ -11,9 +11,13 @@ class PadFamForm(forms.ModelForm):
     )
     class Meta:
         model = PadresFamilia
-        fields = ['leer', 'escribir', 'cantidad_hijos','programaC','vacunaCovid','correo_padres','participacionG', 'grupo', 'cargo','estado_padres']
-        labels = {'leer':'Sabe leer',
-        'escribir':'Sabe escribir',
+        fields = ['leer_P', 'escribir_p',
+        'cantidad_hijos','programaC',
+        'vacunaCovid','correo_padres',
+        'participacionG', 'grupo',
+         'cargo','estado_padres']
+        labels = {'leer_P':'Sabe leer',
+        'escribir_p':'Sabe escribir',
         'cantidad_hijos':'Cantidad de hijos que tiene',
         'programaC':'Programa al que pertenece en CEIPA',
         'vacunaCovid':'Està vacunado contra COVID-19',
