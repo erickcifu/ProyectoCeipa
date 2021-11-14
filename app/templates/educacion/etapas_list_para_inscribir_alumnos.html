@@ -1,0 +1,58 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            {%if id_centro_educativo%}
+            <h2>{{id_centro_educativo.nombre_centro}}</h2>
+            <h3>Elegir la etapa para agregar alumnos</h3>
+            {%endif%}
+        </div>
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos</div>
+          {% else %}
+              <table class="table table-striped table-hover">
+                <thead>
+                    <th>Id</th>
+                    <th>Etapa</th>
+                    <th>Ciclo</th>
+                    <th>Estado</th>
+                    <th class="all">Agregar Alumnos</th>
+                </thead>
+                <tbody>
+                    {% for item in obj %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.c_etapa }}</td>
+                        <td>{{item.ciclo_c}}</td>
+                        <td>{{ item.estado_ce|yesno:"Activo,Inactivo" }}</td>
+                        <td>
+                          {%if id_centro_educativo.id%}
+                            <a href="{% url 'educacion:insc_centro_etapa' id_centro_educativo.id item.id %}" class="btn btn-warning btn-circle" role="button"><i class="fas fa-plus"></i></a>
+
+                          {%endif%}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          {% endif %}
+          <div class="dropdown-divider"></div>
+          <div class="row">
+              <div class="col">
+                  <a href="{% url 'educacion:ciclo_list' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+              </div>
+          </div>
+      </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}

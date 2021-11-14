@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
@@ -92,6 +92,56 @@ class BenefArNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
                 return HttpResponseRedirect(self.success_url)
         else:
             return self.render_to_response(self.get_context_data(form=form))
+
+class Area_beneficiado(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
+    model = BeneficiadoArea
+    template_name = 'municipalizacion/area_beneficiado.html'
+    context_object_name = "obj"
+    form_class = BenefArForm
+    success_url = reverse_lazy("municipalizacion:benefar_por_area")
+    login_url = 'app:login'
+    id_areaben = ''
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/benefar_form.html"]
+            else:
+                return [self.template_name]
+
+    def get_queryset(self):
+        return Area.objects.all()
+
+    def get_object(self):
+        area_id = self.kwargs.get('id_area')
+        qs = None
+        if area_id:
+            qs = self.get_queryset().filter(id=area_id).first()
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['id_areaben'] = self.get_object().id if self.get_object() else ''
+        context['areas'] = Area.objects.all()
+        return context
+
+    def form_valid(self, form):
+        if form.is_valid():
+            self.id_areaben = self.get_object()
+            if self.id_areaben:
+                asignacion = BeneficiadoArea(**form.cleaned_data, area=self.id_areaben)
+                asignacion.save()
+                return redirect("municipalizacion:benefar_por_area")
+            else:
+                return self.render_to_response(self.get_context_data(form=form))
+
 
 class BenefArEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     model = BeneficiadoArea

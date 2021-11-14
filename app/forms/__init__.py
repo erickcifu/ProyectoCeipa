@@ -31,6 +31,9 @@ from .educacionForms.cgForm import CGForm, CGFormCreate, CFCicloFormCreate
 from .educacionForms.cgcForm import CGCForm, CGCFormCreate, CGCFormCreateForPersonal
 from .educacionForms.insForm import InsForm
 from .educacionForms.viviendaForm import VivForm, VivFormEdit
+from .educacionForms.etapaForm import EtapaForm
+from .educacionForms.ceForm import CEForm, CEFormCreate
+from .educacionForms.inscetapaForm import InscEtapaForm
 #Municipalizacion
 from .muniForms.areaForm import AreaForm
 from .muniForms.cargrupForm import CarGForm
@@ -75,3 +78,5 @@ from .sociopForms.personabasicaForm import PersonaBForm
 from .sociopForms.VivSoForm import ViviendaSForm
 from .sociopForms.encargadoForm import EncargadoForm
 from .sociopForms.emprenForm import EmprenForm
+from .sociopForms.inscp_form import InscpForm, InscTallerForm
+from .sociopForms.labForm import LaboralSocioForm, LaboralEditForm

@@ -108,10 +108,10 @@
                                     <a class="nav-link" href={% url 'educacion:centedu_list' %}>Centro Educativo</a>
                                     <a class="nav-link" href={% url 'educacion:ciclo_list' %}>Ciclo Escolar</a>
                                     <a class="nav-link" href={% url 'educacion:genero_list' %}>Género</a>
-                                    <a class="nav-link" href={% url 'educacion:grados_list' %}>Grados</a>
                                     <a class="nav-link" href={% url 'educacion:idioma_list' %}>Idioma</a>
                                     <a class="nav-link" href={% url 'educacion:religion_list' %}>Religión</a>
                                     <a class="nav-link" href={% url 'educacion:grado_list' %}>Grado</a>
+                                    <a class="nav-link" href={% url 'educacion:etapa_list' %}>Etapas</a>
                                     <a class="nav-link" href={% url 'educacion:techo_list' %}>Tipo de Techo</a>
                                     <a class="nav-link" href={% url 'educacion:pared_list' %}>Tipo de Pared</a>
                                     <a class="nav-link" href={% url 'educacion:etnia_list' %}>Tipo de Etnia</a>
@@ -140,13 +140,14 @@
                                 </nav>
                               </div>
                               <!--inscripsion-->
-                                <div class="sidenav-menu-heading">Inscripción y asignación</div>
-                                <a class="nav-link" href={% url 'educacion:personal_list' %}>Personal Educativo</a>
-                                <a class="nav-link" href={% url 'educacion:alumno_list' %}>Registro de Alumnos</a>
-                                <a class="nav-link" href={% url 'educacion:grados_por_centro_educacion' %}>Grados por centro educativo</a>
-                                <a class="nav-link" href={% url 'educacion:listado_personal_por_centro_educativo' %}>Asignación de maestros por centro educativo</a>
-                                <a class="nav-link" href={% url 'educacion:alumno_list_por_centro_educativo' %}>Inscripción de alumnos</a>
-                                <a class="nav-link" href={% url 'educacion:cg_list' %}>Ciclo y Grado</a>
+                              <div class="sidenav-menu-heading">Inscripción y asignación</div>
+                              <a class="nav-link" href={% url 'educacion:alumno_list' %}>Registro de Alumnos</a>
+                              <a class="nav-link" href={% url 'educacion:grados_por_centro_educacion' %}>Grados por centro educativo</a>
+                              <a class="nav-link" href={% url 'educacion:listado_personal_por_centro_educativo' %}>Asignación de maestros por centro educativo</a>
+                              <a class="nav-link" href={% url 'educacion:alumno_list_por_centro_educativo' %}>Inscripción de alumnos a grados</a>
+                              <a class="nav-link" href={% url 'educacion:alumno_list_para_etapas' %}>Inscripción de alumnos a etapas</a>
+                              <a class="nav-link" href={% url 'educacion:cg_list' %}>Ciclo y Grado</a>
+                              <a class="nav-link" href={% url 'educacion:ce_list' %}>Ciclo y Etapa</a>
 
 
                     {% endblock side_bar %}

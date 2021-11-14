@@ -1,0 +1,83 @@
+{% extends 'base/base3.html' %}
+
+{% block page_content %}
+{% load crispy_forms_tags %}
+<style>
+    .mul-select{
+        width: 100%;
+    }
+</style>
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class=" col-xl-10 col-md-6 mb-6 ">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body ">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Agrega los alumnos
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+
+                                {%if id_centro_educativo and id_etapa%}
+                                    <h2 class="text-muted">
+                                        {{id_centro_educativo.nombre_centro}}
+                                    </h2>
+                                    <h2 class="text-muted">
+                                        {{id_etapa.etapa_insc.nombre_etapa}}
+                                    </h2>
+                                {%endif%}
+
+                        </div>
+                        <div class="container-fluid h-100 bg-light text-dark">
+                            <div class="row justify-content-center align-items-center">
+                                <h1>Elija</h1>
+                            </div>
+                            <br>
+                            {%if alumnos%}
+                            <div class="row justify-content-center align-items-center h-100">
+                                <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-12">
+                                    <div class="form-group">
+                                        <select name="alumnos" class="form-select"  aria-label=" select example">
+                                            {%for alumno in alumnos%}
+                                                <option value="{{alumno.id}}">{{alumno.nombres_alumno}} {{alumno.apellidos_alumno}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                               </div>
+                            </div>
+                            {%else%}
+                                <h1>No hay alumnos</h1>
+                            {%endif%}
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+    <script>
+        $(document).ready(function(){
+        $(".mul-select").select2({
+            placeholder: "select country", //placeholder
+            tags: true,
+            tokenSeparators: ['/',',',';'," "]
+        });
+    })
+    </script>
+{% endblock %}

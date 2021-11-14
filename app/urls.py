@@ -80,6 +80,11 @@ urlpatterns = [
     path('ciclo/edit/<int:pk>', viewsets.CicloEdit.as_view(), name='ciclo_edit'),
     path('ciclo/delete/<int:pk>', viewsets.CicloDel.as_view(), name='ciclo_del'),
 
+    path('etapa/', viewsets.EtapaView.as_view(), name='etapa_list'),
+    path('etapa/new', viewsets.EtapaNew.as_view(), name='etapa_new'),
+    path('etapa/edit/<int:pk>', viewsets.EtapaEdit.as_view(), name='etapa_edit'),
+    path('etapa/delete/<int:pk>', viewsets.EtapaDel.as_view(), name='etapa_del'),
+
     path('curso/', viewsets.CursoView.as_view(), name='curso_list'),
     path('curso/new', viewsets.CursoNew.as_view(), name='curso_new'),
     path('curso/edit/<int:pk>', viewsets.CursoEdit.as_view(), name='curso_edit'),
@@ -213,8 +218,19 @@ urlpatterns = [
     path('Vivienda/delete/<int:pk>', viewsets.VivDel.as_view(), name='viv_del'),
 
     path('reportes/alumnos/', viewsets.ReportesAlumnos.as_view(), name='reportes_alumnos'),
-    #Municipalizacion
 
+    #Etapas
+    path('ciclo_etapa/', viewsets.CEView.as_view(), name='ce_list'),
+    path('ciclo_etapa/new', viewsets.CENew.as_view(), name='ce_new'),
+    path('ciclo_etapa/new/<int:pk>', viewsets.CENew.as_view(), name='ce_new'),
+    path('alumno/list/centro_educativo_etapas', viewsets.ListarAlumnosParaCentro.as_view(), name='alumno_list_para_etapas'),
+    path('ciclo_etapas/alumno/<int:pk>', viewsets.Etapas_Del_Alumno.as_view(), name='etapas_del_alumno'),
+    path('ciclo_etapa/inscribir/<int:id_centro_educativo>', viewsets.ListarEtapasParaInscribirAlumnos.as_view(), name='etapas_list_para_inscribir_alumnos'),
+    path('inscripcion/centro_educativo/etapa/<int:id_centro_educativo>/<int:id_etapa>', viewsets.EtapasInscribirAlumnos.as_view(), name='insc_centro_etapa'),
+    path('inscripcion_etapa/delete/<int:pk>', viewsets.InsEtapaDel.as_view(), name='insetapa_del'),
+    #Fin Etapas
+
+    #Municipalizacion
     path('reportes/municipalización/', viewsets.AlumnosporDepto.as_view(), name='reportes_participantes'),
     path('reportes/comisiones/',viewsets.total_comisiones.as_view(), name='reporte_comisiones'),
     path('reportes/corporaciones/',viewsets.total_corporaciones.as_view(), name='reporte_corporaciones'),
@@ -308,11 +324,12 @@ urlpatterns = [
     path('padresfamilia/detail/<int:pk>', viewsets.PadFamDetail.as_view(), name='padfam_detail'),
     path('padresfamilia/delete/<int:pk>', viewsets.PadFamDel.as_view(), name='padfam_del'),
 
-    path('benefeciadoare/', viewsets.BenefArView.as_view(), name='benefar_list'),
-    path('benefeciadoare/new', viewsets.BenefArNew.as_view(), name='benefar_new'),
-    path('benefeciadoare/new/<int:pk>', viewsets.BenefArNew.as_view(), name='benefar_new'),
-    path('benefeciadoare/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
-    path('benefeciadoare/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
+    path('participantes_area/', viewsets.BenefArView.as_view(), name='benefar_list'),
+    path('participantes_area/por_area/', viewsets.ListarPorArea.as_view(), name='benefar_por_area'),
+    path('participantes_area/new/por_area/<int:id_area>', viewsets.Area_beneficiado.as_view(), name='area_ben_por_area'),
+    path('participantes_area/new/', viewsets.BenefArNew.as_view(), name='benefar_new'),
+    path('participantes_area/edit/<int:pk>', viewsets.BenefArEdit.as_view(), name='benefar_edit'),
+    path('participantes_area/delete/<int:pk>', viewsets.BenefArDel.as_view(), name='benefar_del'),
 
     path('idioma_m/', viewsets.IdiomaMuniView.as_view(), name='idiomaMuni_list'),
     path('idioma_m/new', viewsets.IdiomaMuniNew.as_view(), name='idiomaMuni_new'),
@@ -423,6 +440,8 @@ urlpatterns = [
     path('informacion_educacion/delete/<int:pk>', viewsets.InfoEducacionDel.as_view(), name='infoeducacion_del'),
 
     path('persona_socio', viewsets.PersonaBasicaView.as_view(), name='personabasica_list'),
+    path('participantes_por_taller', viewsets.ListarParticipantesPorTaller.as_view(), name='part_taller'),
+    path('participantes_form_laboral', viewsets.ListarParticipantesCertificados.as_view(), name='part_formlab'),
     path('persona_socio/new', viewsets.PersonaBasicaNew.as_view(),name='personabasica_new'),
     path('persona_socio/edit/<int:pk>', viewsets.PersonaBasicaEdit.as_view(), name='personabasica_edit'),
     path('persona_socio/detail/<int:pk>/', viewsets.personabDetail.as_view(), name='personabasica_detail'),
@@ -442,6 +461,18 @@ urlpatterns = [
     path('emprendimiento/new', viewsets.EmprenNew.as_view(),name='emprend_new'),
     path('emprendimiento/edit/<int:pk>', viewsets.EmprenEdit.as_view(), name='emprend_edit'),
     path('emprendimiento/delete/<int:pk>', viewsets.EmprenDel.as_view(), name='emprend_del'),
+
+    path('inscripcion_taller', viewsets.InscpView.as_view(), name='inscp_list'),
+    path('inscripcion_taller/new', viewsets.InscpNew.as_view(),name='inscp_new'),
+    path('inscripcion_taller/new/<int:pk>/', viewsets.InscribirParticipanteTaller.as_view(),name='inscp_taller'),
+    path('inscripcion_taller/edit/<int:pk>', viewsets.InscpEdit.as_view(), name='inscp_edit'),
+    path('inscripcion_taller/delete/<int:pk>', viewsets.InscpDel.as_view(), name='inscp_del'),
+
+
+    path('formacionlab', viewsets.FormLabView.as_view(), name='formlab_list'),
+    path('inscripcion_formacionlab/new/<int:pk>/', viewsets.FormLabNew.as_view(),name='form_new'),
+    path('reportes/socioproductivo', viewsets.ParticipantesSociop.as_view(),name='reportes_socio'),
+
 
 #login views
     path('', viewsets.Home.as_view(), name = 'home'),

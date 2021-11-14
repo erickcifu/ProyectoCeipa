@@ -1,0 +1,95 @@
+{% extends 'base/socioproductivo.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            {%if id_taller%}
+                <h2>Participantes del taller de {{id_taller.nombre_taller}}</h2>
+              {%else%}
+                <h2>Inscripción a talleres</h2>
+            {%endif%}
+
+
+            {%if id_taller %}
+                <form method="GET" class="form-inline">
+                  <select name="id_taller" id="id_taller">
+                    {%if talleres %}
+                      {%for taller in talleres %}
+                          {%if id_taller.id == taller.id%}
+                            <option value="{{taller.id}}" selected>{{taller.nombre_taller}}</option>
+                          {%else%}
+                            <option value="{{taller.id}}">{{taller.nombre_taller}}</option>
+                          {%endif%}
+                      {%endfor%}
+                    {%endif%}
+                  </select>
+                  <button type="submit" class="btn btn-success btn-sm"><i class="me-2" data-feather="search"></i></button>
+              </form>
+            {%else%}
+                <form method="GET" class="form-inline">
+                    <select name="id_taller" id="id_taller">
+                    {%if talleres %}
+                        {%for taller in talleres %}
+                            <option value="{{taller.id}}">{{taller.nombre_taller}}</option>
+                        {%endfor%}
+                    {%endif%}
+                    </select>
+                    <button type="submit" class="btn btn-success btn-sm"><i class="me-2" data-feather="search"></i></button>
+                </form>
+            {%endif%}
+
+        </div>
+        <div class="card-header">
+          {%if id_taller %}
+              <a href="{% url 'socioproductivo:inscp_taller' id_taller.id  %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar participante</a>
+            {%else%}
+          {%endif%}
+          <a href="{%url 'socioproductivo:personabasica_new'%}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Nuevo participante</a>
+          <a href="{%url 'socioproductivo:talleres_new'%}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Nuevo taller</a>
+
+      </div>
+        <div class="card-body">
+            {% if not obj %}
+            <div class="alert alert-info">No hay datos</div>
+            {% else %}
+            <table id="datatablesSimple">
+                <thead>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>CUI</th>
+                    <th>Estado</th>
+                </thead>
+                <tbody>
+                    {% for item in obj %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.nombresp }} {{ item.apellidos }}</td>
+                        <td>{{ item.DPIP }}</td>
+
+                        {% if item.estado_persona_basica is True %}
+                        <td>
+                          <span class="badge bg-green-soft text-green">Activo</span>
+                        </td>
+                        {% else %}
+                        <td>
+                          <span class="badge bg-red-soft text-red">Inactivo</span>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            <a type="button" class="btn btn-outline-success" href="{% url 'socioproductivo:inscp_list' %}">Edición/Certificación</a>
+        </div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}
