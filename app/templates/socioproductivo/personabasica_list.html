@@ -16,21 +16,15 @@
               <thead>
                   <th>Id</th>
                   <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>Fecha de nacimiento</th>
-                  <th>DPI/CUI</th>
-                  <th>Dirección</th>
+                  <th>CUI</th>
                   <th>Estado</th>
               </thead>
               <tbody>
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td><a href="{% url 'socioproductivo:personabasica_detail' item.id %}">{{ item.nombresp }}</a></td>
-                      <td>{{ item.apellidos }}</td>
-                      <td>{{ item.fecha_nacimiento }}</td>
+                      <td><a href="{% url 'socioproductivo:personabasica_detail' item.id %}">{{ item.nombresp }} {{ item.apellidosp }}</a></td>
                       <td>{{ item.DPIP }}</td>
-                      <td>{{ item.direccion }}</td>
                       {% if item.estado_persona_basica is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>
@@ -43,7 +37,6 @@
                       <td>
                           <a href="{% url 'socioproductivo:personabasica_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
                           <a href="{% url 'socioproductivo:personabasica_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
-                          
                       </td>
                   </tr>
                   {% endfor %}

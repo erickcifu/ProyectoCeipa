@@ -2,7 +2,7 @@ from django import forms
 from app.models import PersonaBasica
 
 class PersonaBForm(forms.ModelForm):
-    fecha_nacimiento = forms.DateField(
+    fecha_nacimientop = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
         )
@@ -40,7 +40,7 @@ class PersonaBForm(forms.ModelForm):
             'tel_casap':'Teléfono de casa',
             'tel_celp':'Teléfono Celular',
             'emailp':'Correo electrònico',
-            'cantidad_convivientes':'Cantidad de personas que viven en su casa',
+            'cantidad_convivientesp':'Cantidad de personas que viven en su casa',
             'conquien_vive':'Con quièn vive actualmente',
             'fotografiaP':'Fotografía',
             'municipio':'Municipio',
