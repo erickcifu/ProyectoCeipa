@@ -322,3 +322,13 @@ class ListarParticipantesCertificados(RolesCoordinadorSocioproductivoYEquipoSoci
         context =  super().get_context_data(**kwargs)
         context['participantes_certificados'] = Inscripcionp.objects.filter(certificado_taller=True)
         return context
+
+class ListarParticipantesParaEmprenimientos(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
+    model = Inscripcionp
+    template_name = "socioproductivo/para_emprendimientos.html"
+    context_object_name = "obj"
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['part_emp'] = Inscripcionp.objects.filter(certificado_taller=True)
+        return context
