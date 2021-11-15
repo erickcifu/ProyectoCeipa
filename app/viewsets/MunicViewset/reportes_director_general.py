@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
 from django.db.models import Count, OuterRef, Subquery, IntegerField
+from app.viewsets.users.directorGeneral.mixin import IsDirectorGeneralMixin
 
 from app.models import Beneficiado, Persona, IdiomaPersona, TutorMuni, Area, ComisionNA, GOrganizado, CorporacionMunicipal, PartidoPolitic, Maestro, LiderComunitario, CargoGrupo, MedioComuni, Tipo_medio, PadresFamilia
 from app.models.educacion_model.idioma import idioma
@@ -12,9 +13,9 @@ from app.models.educacion_model.etnia import etnia
 from app.models.educacion_model.genero import genero
 from app.models import BeneficiadoArea
 
-class AlumnosporDepto(LoginRequiredMixin, generic.ListView):
+class reporte_participantes(IsDirectorGeneralMixin, generic.ListView):
     model = Beneficiado
-    template_name = 'reportes/participantes.html'
+    template_name = 'directorGeneral/reporte_participantes.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -33,9 +34,9 @@ class AlumnosporDepto(LoginRequiredMixin, generic.ListView):
         context['cant_por_area'] = Area.objects.annotate(cant_area = Count('ba_Area__beneficiado'))
         return context
 
-class total_comisiones(LoginRequiredMixin, generic.ListView):
+class reporte_comisiones(IsDirectorGeneralMixin, generic.ListView):
     model = ComisionNA
-    template_name = 'reportes/comisiones.html'
+    template_name = 'directorGeneral/reporte_comisiones.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -50,9 +51,9 @@ class total_comisiones(LoginRequiredMixin, generic.ListView):
         context['sector_privado'] = ComisionNA.objects.filter(estado_comision=True, inst_gobierno=True).count()
         return context
 
-class total_corporaciones(LoginRequiredMixin, generic.ListView):
+class reporte_corporaciones(IsDirectorGeneralMixin, generic.ListView):
     model = CorporacionMunicipal
-    template_name = 'reportes/corporaciones.html'
+    template_name = 'directorGeneral/reporte_corporaciones.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -66,9 +67,9 @@ class total_corporaciones(LoginRequiredMixin, generic.ListView):
         context['por_part_politico'] = PartidoPolitic.objects.filter(estado=True).annotate( corp_partido = Count('partido_cm'))
         return context
 
-class total_maestros(LoginRequiredMixin, generic.ListView):
+class reporte_maestros(IsDirectorGeneralMixin, generic.ListView):
     model = Maestro
-    template_name = 'reportes/maestros.html'
+    template_name = 'directorGeneral/reporte_maestros.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -85,24 +86,24 @@ class total_maestros(LoginRequiredMixin, generic.ListView):
         context['maestro_area_rural'] = Maestro.objects.filter(estado_maestro=True, area_rural=True).count()
         return context
 
-class Total_lideres(LoginRequiredMixin, generic.ListView):
+class reporte_lideres(IsDirectorGeneralMixin, generic.ListView):
     model = LiderComunitario
-    template_name = 'reportes/lideres.html'
+    template_name = 'directorGeneral/reporte_lideres.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['total_lideres'] = LiderComunitario.objects.filter(estado=True).count()
-        context['total_lideres_vacunados'] = LiderComunitario.objects.filter(estado=True, vacuna_covid_l=True).count()
+        context['total_lideres'] = LiderComunitario.objects.filter(estado_liders=True).count()
+        context['total_lideres_vacunados'] = LiderComunitario.objects.filter(estado_liders=True, vacuna_covid_l=True).count()
         context['lideres_por_genero'] = genero.objects.filter(estado_genero=True).annotate( lideres_genero = Count('P_genero__B_personaM'))
         context['lideres_por_etnia'] = etnia.objects.filter(estado_etnia=True).annotate(lideres_etnia=Count('P_etnia__B_personaM'))
         context['total_lideres_por_grupo'] = GOrganizado.objects.filter(estado_grupo=True).annotate( lideres_grupo = Count('G_organizado'))
         context['total_lideres_por_cargo'] = CargoGrupo.objects.filter(estado_cg=True).annotate(lideres_cargo = Count('C_cargoGM'))
         return context
 
-class Total_medios(LoginRequiredMixin, generic.ListView):
+class reporte_medios(IsDirectorGeneralMixin, generic.ListView):
     model = MedioComuni
-    template_name = 'reportes/medios.html'
+    template_name = 'directorGeneral/reporte_medios.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -114,9 +115,9 @@ class Total_medios(LoginRequiredMixin, generic.ListView):
         context['por_tipo_medio'] = Tipo_medio.objects.annotate(medios_tipo = Count('tipo_med'))
         return context
 
-class Total_padres(LoginRequiredMixin, generic.ListView):
+class reporte_padres(IsDirectorGeneralMixin, generic.ListView):
     model = PadresFamilia
-    template_name = 'reportes/padres.html'
+    template_name = 'directorGeneral/reporte_padres.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -127,8 +128,8 @@ class Total_padres(LoginRequiredMixin, generic.ListView):
         context['padres_por_etnia'] = etnia.objects.filter(estado_etnia=True).annotate(etnia_padres = Count('P_etnia__per_padre'))
         context['part_padres_grupo'] = PadresFamilia.objects.filter(estado_padres=True, participacionG=True).count()
         context['padres_por_grupo'] = GOrganizado.objects.filter(estado_grupo=True).annotate(padres_grupo=Count('grupoOr_padre'))
-        context['leer_y_escribir'] = PadresFamilia.objects.filter(estado_padres=True, leer=True, escribir=True).count()
-        context['solo_leer'] = PadresFamilia.objects.filter(estado_padres=True, leer=True, escribir=False).count()
-        context['solo_escribir'] = PadresFamilia.objects.filter(estado_padres=True, escribir=True, leer=True).count()
-        context['no_leer_no_escribir'] = PadresFamilia.objects.filter(estado_padres=True, escribir=False, leer=False).count()
+        context['leer_y_escribir'] = PadresFamilia.objects.filter(estado_padres=True, leer_P=True, escribir_p=True).count()
+        context['solo_leer'] = PadresFamilia.objects.filter(estado_padres=True, leer_P=True, escribir_p=False).count()
+        context['solo_escribir'] = PadresFamilia.objects.filter(estado_padres=True, escribir_p=True, leer_P=True).count()
+        context['no_leer_no_escribir'] = PadresFamilia.objects.filter(estado_padres=True, escribir_p=False, leer_P=False).count()
         return context

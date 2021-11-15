@@ -77,7 +77,7 @@ from .models.socioproductivoModel.aspectos_salud import AspectosSalud
 from .models.socioproductivoModel.talleres import Taller
 from .models.socioproductivoModel.info_educacion import InfoEducacion
 from .models.socioproductivoModel.persona_basica import PersonaBasica
-
+from .models.socioproductivoModel.inscripcionp import Inscripcionp
 
 admin.site.register(ocupacion)
 admin.site.register(religion)
@@ -155,3 +155,4 @@ admin.site.register(GrupoNA)
 admin.site.register(AspectosSalud)
 admin.site.register(InfoEducacion)
 admin.site.register(PersonaBasica)
+admin.site.register(Inscripcionp)

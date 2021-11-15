@@ -145,10 +145,13 @@ from .sociopViewset.electVivView import ElectvivView, ElectvivNew, ElectvivEdit,
 from .sociopViewset.aspectos_saludView import AspectosSaludView, AspectosSaludNew, AspectosSaludEdit, AspectosSaludDel
 from .sociopViewset.talleresView import TallerView, TallerNew, TallerEdit, TallerDel
 from .sociopViewset.infoeducacionView import InfoEducacionView, InfoEducacionNew, InfoEducacionEdit, InfoEducacionDel
-from .sociopViewset.personabasicaView import PersonaBasicaView, PersonaBasicaNew, PersonaBasicaEdit, PersonaBasicaDel, personabDetail, ListarParticipantesPorTaller, ListarParticipantesCertificados
+from .sociopViewset.personabasicaView import PersonaBasicaView, PersonaBasicaNew, PersonaBasicaEdit, PersonaBasicaDel, personabDetail, ListarParticipantesPorTaller, ListarParticipantesCertificados, ListarParticipantesParaEmprendimientos
 from .sociopViewset.viviSoView import ViviendSoView, ViviendSoNew, ViviendSoEdit, ViviendSoDel
 from .sociopViewset.encargadoView import EncargadoView, EncargadoNew, EncargadoEdit, EncargadoDel
 from .sociopViewset.empreView import EmprenView, EmprenNew, EmprenEdit, EmprenDel
 from .sociopViewset.inscp_view import InscpView, InscpNew, InscpEdit, InscpDel, InscribirParticipanteTaller
 from .sociopViewset.formlabView import  FormLabNew, FormLabView
 from .sociopViewset.reportes_sociop import ParticipantesSociop
+
+#Reportes del director director general
+from .MunicViewset.reportes_director_general import reporte_participantes, reporte_comisiones, reporte_corporaciones, reporte_maestros, reporte_lideres, reporte_medios, reporte_padres
