@@ -323,7 +323,7 @@ class ListarParticipantesCertificados(RolesCoordinadorSocioproductivoYEquipoSoci
         context['participantes_certificados'] = Inscripcionp.objects.filter(certificado_taller=True)
         return context
 
-class ListarParticipantesParaEmprenimientos(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
+class ListarParticipantesParaEmprendimientos(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
     model = Inscripcionp
     template_name = "socioproductivo/para_emprendimientos.html"
     context_object_name = "obj"

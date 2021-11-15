@@ -1,3 +1,4 @@
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
@@ -44,7 +45,6 @@ class EmprenNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.C
         return redirect("socioproductivo:emprend_list")
 
     def get_queryset(self):
-
         return PersonaBasica.objects.all()
 
     def get_object(self):
@@ -60,12 +60,9 @@ class EmprenNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.C
         context['personas'] = PersonaBasica.objects.all()
         return context
 
-    def post(self, request, *args, **kwargs):
-        self.id_persona = self.get_object()
-        super().post(request, *args, **kwargs)
-
     def form_valid(self, form):
         if form.is_valid():
+            self.id_persona = self.get_object()
             if self.id_persona:
                 emprendimiento_persona = Emprendimiento(**form.cleaned_data, persona=self.id_persona)
                 emprendimiento_persona.save()

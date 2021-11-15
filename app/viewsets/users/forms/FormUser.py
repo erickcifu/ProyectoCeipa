@@ -14,7 +14,7 @@ class UserFormCoordinadorGeneral(forms.ModelForm):
             'required':'required'
         }
     ))
-    password2 = forms.CharField(label='Contraseña de Confirmacion', widget=forms.PasswordInput(
+    password2 = forms.CharField(label='Contraseña de Confirmación', widget=forms.PasswordInput(
         attrs={'class':'form-control',
             'placeholder':'Ingrese nuevamente su contraseña',
             'id':'password2',
@@ -22,7 +22,7 @@ class UserFormCoordinadorGeneral(forms.ModelForm):
         }
     ))
 
-    phone = forms.CharField(label='Numero de telefono', widget=forms.TextInput(
+    phone = forms.CharField(label='Número de teléfono', widget=forms.TextInput(
         attrs={
             'class':'form-control',
             'placeholder':'Telefono',
@@ -31,10 +31,10 @@ class UserFormCoordinadorGeneral(forms.ModelForm):
             'required':'required'
         }
     ))
-    address = forms.CharField(label='Direccion', widget=forms.TextInput(
+    address = forms.CharField(label='Dirección domiciliar', widget=forms.TextInput(
         attrs={
             'class':'form-control',
-            'placeholder':'direccion',
+            'placeholder':'Dirección',
             'id':'address',
             'name':'address',
             'required':'required'
@@ -62,7 +62,7 @@ class UserFormCoordinadorGeneral(forms.ModelForm):
             'last_name':forms.TextInput(attrs={'class':'form-control'}),
             'email':forms.EmailInput(attrs={'class':'form-control'}),
         }
-    
+
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
@@ -70,7 +70,7 @@ class UserFormCoordinadorGeneral(forms.ModelForm):
             raise forms.ValidationError('Contraseñas no coinciden')
 
         return password2
-    
+
     def save(self, commit=True):
         user =  super().save(commit=False)
         user.set_password(self.cleaned_data.get('password1'))
@@ -78,12 +78,12 @@ class UserFormCoordinadorGeneral(forms.ModelForm):
             with transaction.atomic():
                 user.save()
                 print(user)
-                perfil = Perfil(user=user, 
-                                phone=self.cleaned_data.get('phone'), 
+                perfil = Perfil(user=user,
+                                phone=self.cleaned_data.get('phone'),
                                 address=self.cleaned_data.get('address'),
-                                rol = self.cleaned_data.get('rol') 
+                                rol = self.cleaned_data.get('rol')
                             )
-                perfil.save() 
+                perfil.save()
         return user
 
 class UserFormDirectorOAsistenteGeneral(forms.ModelForm):
@@ -132,7 +132,7 @@ class UserFormDirectorOAsistenteGeneral(forms.ModelForm):
             'last_name':forms.TextInput(attrs={'class':'form-control'}),
             'email':forms.EmailInput(attrs={'class':'form-control'}),
         }
-    
+
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
@@ -140,7 +140,7 @@ class UserFormDirectorOAsistenteGeneral(forms.ModelForm):
             raise forms.ValidationError('Contraseñas no coinciden')
 
         return password2
-    
+
     def save(self, commit=True):
         user =  super().save(commit=False)
         user.set_password(self.cleaned_data.get('password1'))
@@ -148,12 +148,12 @@ class UserFormDirectorOAsistenteGeneral(forms.ModelForm):
             with transaction.atomic():
                 user.save()
                 print(user)
-                perfil = Perfil(user=user, 
-                                phone=self.cleaned_data.get('phone'), 
+                perfil = Perfil(user=user,
+                                phone=self.cleaned_data.get('phone'),
                                 address=self.cleaned_data.get('address'),
-                                rol = self.cleaned_data.get('rol') 
+                                rol = self.cleaned_data.get('rol')
                             )
-                perfil.save() 
+                perfil.save()
         return user
 
 #form para crear nuevos usuarios con los roles: asitente educacion, director y maestro.
@@ -204,7 +204,7 @@ class UserFormAsignarRolesCoordinadorEducacion(forms.ModelForm):
             'last_name':forms.TextInput(attrs={'class':'form-control'}),
             'email':forms.EmailInput(attrs={'class':'form-control'}),
         }
-    
+
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
@@ -212,7 +212,7 @@ class UserFormAsignarRolesCoordinadorEducacion(forms.ModelForm):
             raise forms.ValidationError('Contraseñas no coinciden')
 
         return password2
-    
+
     def save(self, commit=True):
         user =  super().save(commit=False)
         user.set_password(self.cleaned_data.get('password1'))
@@ -220,12 +220,12 @@ class UserFormAsignarRolesCoordinadorEducacion(forms.ModelForm):
             with transaction.atomic():
                 user.save()
                 print(user)
-                perfil = Perfil(user=user, 
-                                phone=self.cleaned_data.get('phone'), 
+                perfil = Perfil(user=user,
+                                phone=self.cleaned_data.get('phone'),
                                 address=self.cleaned_data.get('address'),
-                                rol = self.cleaned_data.get('rol') 
+                                rol = self.cleaned_data.get('rol')
                             )
-                perfil.save() 
+                perfil.save()
         return user
 
 #form para crear equipo tecnico municipal y asistente
@@ -275,7 +275,7 @@ class UserFormEquipoMunicipalAsisenteMunicipal(forms.ModelForm):
             'last_name':forms.TextInput(attrs={'class':'form-control'}),
             'email':forms.EmailInput(attrs={'class':'form-control'}),
         }
-    
+
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
@@ -283,7 +283,7 @@ class UserFormEquipoMunicipalAsisenteMunicipal(forms.ModelForm):
             raise forms.ValidationError('Contraseñas no coinciden')
 
         return password2
-    
+
     def save(self, commit=True):
         user =  super().save(commit=False)
         user.set_password(self.cleaned_data.get('password1'))
@@ -291,12 +291,12 @@ class UserFormEquipoMunicipalAsisenteMunicipal(forms.ModelForm):
             with transaction.atomic():
                 user.save()
                 print(user)
-                perfil = Perfil(user=user, 
-                                phone=self.cleaned_data.get('phone'), 
+                perfil = Perfil(user=user,
+                                phone=self.cleaned_data.get('phone'),
                                 address=self.cleaned_data.get('address'),
-                                rol = self.cleaned_data.get('rol') 
+                                rol = self.cleaned_data.get('rol')
                             )
-                perfil.save() 
+                perfil.save()
         return user
 
 #form para crear equipo socioproductivo y asitente
@@ -346,7 +346,7 @@ class UserFormEquipoSocioproductivoAsisenteSocioproductivo(forms.ModelForm):
             'last_name':forms.TextInput(attrs={'class':'form-control'}),
             'email':forms.EmailInput(attrs={'class':'form-control'}),
         }
-    
+
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
@@ -354,7 +354,7 @@ class UserFormEquipoSocioproductivoAsisenteSocioproductivo(forms.ModelForm):
             raise forms.ValidationError('Contraseñas no coinciden')
 
         return password2
-    
+
     def save(self, commit=True):
         user =  super().save(commit=False)
         user.set_password(self.cleaned_data.get('password1'))
@@ -362,10 +362,10 @@ class UserFormEquipoSocioproductivoAsisenteSocioproductivo(forms.ModelForm):
             with transaction.atomic():
                 user.save()
                 print(user)
-                perfil = Perfil(user=user, 
-                                phone=self.cleaned_data.get('phone'), 
+                perfil = Perfil(user=user,
+                                phone=self.cleaned_data.get('phone'),
                                 address=self.cleaned_data.get('address'),
-                                rol = self.cleaned_data.get('rol') 
+                                rol = self.cleaned_data.get('rol')
                             )
-                perfil.save() 
+                perfil.save()
         return user

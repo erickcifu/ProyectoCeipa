@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.CoordinadorSocioProductivo.mixin import IsCoordinadorSocioProductivoMixin
+from app.viewsets.users.mixins.CooSocioproductivoYEquipoSocioproductivo import RolesCoordinadorSocioproductivoYEquipoSocioproductivo
 
 from app.models import Inscripcionp, PersonaBasica, Taller
 from app.forms import InscpForm, InscTallerForm
@@ -35,13 +38,33 @@ class InscpDel(LoginRequiredMixin, generic.DeleteView):
     context_object_name = "obj"
     success_url = reverse_lazy("socioproductivo:inscp_list")
 
-class InscribirParticipanteTaller(LoginRequiredMixin, generic.CreateView):
+class InscribirParticipanteTaller(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.CreateView):
     model = Inscripcionp
     template_name = "socioproductivo/inscp_participante.html"
     context_object_name = "obj"
     form_class = InscTallerForm
     success_url = reverse_lazy("socioproductivo:part_taller")
     login_url = 'app:login'
+    id_taller = ''
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/Emprendimiento_form.html"]
+            else:
+                return [self.template_name]
+    def form_valid(self, form):
+        form.save()
+        if self.request.user.user_profile.rol.id == 12:
+            return redirect('socioproductivo:home_equipo_socioproductivo')
+        return redirect("socioproductivo:part_taller")
 
     def get_queryset(self):
         return Taller.objects.all()
@@ -52,18 +75,19 @@ class InscribirParticipanteTaller(LoginRequiredMixin, generic.CreateView):
         if id_taller:
             qs = self.get_queryset().filter(id=id_taller).first()
         return qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['id_taller'] = self.get_object()
+        context['id_taller'] = self.get_object().id if self.get_object() else ''
         context['talleres'] = Taller.objects.all()
         context['participantes'] = PersonaBasica.objects.exclude(ins_per__taller__id = self.get_object().id)
         return context
 
     def form_valid(self,form):
         if form.is_valid():
-            taller_ins = self.get_object()
+            self.id_taller = self.get_object()
             if taller_ins:
-                inscp = Inscripcionp.objects.create(**form.cleaned_data, taller=taller_ins)
+                inscp = Inscripcionp(**form.cleaned_data, taller=taller_ins)
                 inscp.save()
             else:
                 return HttpResponseRedirect(self.success_url)
