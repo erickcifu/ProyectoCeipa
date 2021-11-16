@@ -1,0 +1,16 @@
+<table id="datatablesSimple">
+    <thead>
+        <th>Id</th>
+        <th>Ocupacion</th>
+        <th>Estado</th>
+    </thead>
+    <tbody>
+        {% for ocupaciones in ocupaciones %}
+        <tr>
+            <td>{{ ocupaciones.id }}</td>
+            <td>{{ ocupaciones.nombre_ocupacion }}</td>
+            <td> {{ ocupaciones.estado_ocupacion  }} </td>
+        {% endfor %}
+        </tr>
+    </tbody>
+</table>

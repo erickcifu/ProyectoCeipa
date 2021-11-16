@@ -1,0 +1,207 @@
+{% load static %}
+<div class="card card-header-actions">
+    <div class="card-header">
+          Reportes de participantes
+      </div>
+    <div class="card-body">
+        <div class="row">
+              <div class="card">
+                  <div class="card-body">
+                    <!--Totales-->
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Total de participantes registrados</h5>
+                              <p class="card-text">{{ total_participantes }}</p>
+                            </div>
+                          </div>
+                          </div>
+
+                          {% for area in cant_por_area %}
+                          <div class="col-sm-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Participantes registrados en {{ area.nombre_area }}</h5>
+                                <p class="card-text">{{ area.cant_area }}</p>
+                              </div>
+                            </div>
+                          </div>
+                          {% endfor %}
+                      </div>
+                    <!--Fin totales-->
+                    <br/>
+                    {% if not Departamento %}
+                    <div class="alert alert-info">Participantes por departamento: No hay datos</div>
+                    {% else %}
+                    <caption><b>Total de participantes por departamento</b></caption>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th><br>Departamento</th>
+                          <th><br>Cantidad de municipios</th>
+                          <th><br>Total de participantes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for item in Departamento %}
+                        <tr>
+                          <td><br>{{ item.nombre_departamento }}</td>
+                          <td><br>{{ item.cant }}</td>
+                          <td><br>{{ item.cant_personas }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endif %}
+                    <br/>
+                    <br/>
+                    {% if not participantes_por_municipio %}
+                    <div class="alert alert-info">Participantes por municipio: No hay datos</div>
+                    {% else %}
+                    <caption><b>Total de participantes por municipio</b></caption>
+                    <table class="table table-bordered" id='datatablesSimple'>
+                      <thead>
+                        <tr>
+                          <th><br>Municipio</th>
+                          <th><br>Departamento</th>
+                          <th><br>Total de participantes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for muni in participantes_por_municipio %}
+                        <tr>
+                          <td><br>{{ muni.nombre_municipio }}</td>
+                          <td><br>{{ muni.dep.nombre_departamento }}</td>
+                          <td><br>{{ muni.cantidad_municipio }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endif %}
+
+                  <br/>
+                  <br/>
+                  {% if not por_genero_municipio %}
+                  <div class="alert alert-info">Participantes por género: No hay datos</div>
+                  {% else %}
+                  <caption><b>Total de participantes por género</b></caption>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th><br>Género</th>
+                        <th><br>Total de participantes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for gen in por_genero_municipio %}
+                      <tr>
+                        <td><br>{{ gen.genero }}</td>
+                        <td><br>{{ gen.cant_per }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% endif %}
+
+                  <br/><br/>
+
+                  {% if not por_grupo_etnico %}
+                  <div class="alert alert-info">Participantes por grupo étnico: No hay datos</div>
+                  {% else %}
+                  <caption><b>Total de participantes por grupo étnico</b></caption>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th><br>Grupo étnico</th>
+                        <th><br>Total de participantes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in por_grupo_etnico %}
+                      <tr>
+                        <td><br>{{ item.nombre_etnia }}</td>
+                        <td><br>{{ item.cantidad_total }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% endif %}
+
+                  <br/>
+                  <br/>
+                  <!--Por establecimiento-->
+                  <caption><b>Total de participantes por tipo de establecimiento educativo</b></caption>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col"><br>Tipo de establecimiento</th>
+                        <th scope="col"><br>Total de participantes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><br>Privado</td>
+                        <td><br>{{ por_establecimiento_privado }}</td>
+                      </tr>
+                      <tr>
+                        <td><br>Público</td>
+                        <td><br>{{ por_establecimiento_publico }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <br/><br/>
+
+                  <!--Por nivel académico-->
+                  <caption><b>Total de participantes por nivel educativo</b></caption>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col"><br>Nivel académico</th>
+                        <th scope="col"><br>Total de participantes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><br>Primaria</td>
+                        <td><br>{{ alumnos_primaria }}</td>
+                      </tr>
+                      <tr>
+                        <td><br>Secundaria</td>
+                        <td><br>{{ alumnos_secundaria }}</td>
+                      </tr>
+                      <tr>
+                        <td><br>Universidad</td>
+                        <td><br>{{ alumnos_universidad }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <br/>
+                  <br/>
+                  <!--Por area -->
+                  {% if not cant_por_area %}
+                  <div class="alert alert-info">Participantes por área: No hay datos</div>
+                  {% else %}
+                  <caption><b>Total de participantes por área</b></caption>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th><br>Área</th>
+                        <th><br>Total de participantes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for area in cant_por_area%}
+                      <tr>
+                        <td><br>{{ area.nombre_area }}</td>
+                        <td><br>{{ area.cant_area }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% endif %}
+                  </div>
+              </div>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8/ISO-8859-1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Maestros</title>
+</head>
+<body>
+    <div class="card card-header-actions">
+        <div class="card-header">
+            <h1> Reportes de corporaciones municipales</h1>
+          </div>
+        <div class="card-body">
+            <div class="row">
+              <div class="card">
+              <div class="card-body">
+                <!--Totales-->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Maestros registrados</h5>
+                          <p class="card-text">{{ total_maestros }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Maestros vacunados contra COVID-19</h5>
+                          <p class="card-text">{{ total_vacunados_maestros }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!--Fin totales-->
+                  <br/>
+                  <!--Inicio por genero-->
+                  {% if not maestros_por_genero %}
+                    <div class="alert alert-info">Maestros por genero: No hay datos</div>
+                  {% else %}
+                  <caption><b>Total de maestros por género</b></caption>
+                  <table border="0.5">
+                    <thead>
+                      <tr>
+                        <th><br>Género</th>
+                        <th><br>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for gen_maestro in maestros_por_genero %}
+                        <tr>
+                          <td><br>-{{ gen_maestro.genero }}</td>
+                          <td><br>{{ gen_maestro.maestros_genero }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% endif %}
+                  <!--Fin por genero-->
+                  <br/>
+                  <!--Inicio por etnia-->
+                  {% if not maestros_por_etnia %}
+                    <div class="alert alert-info">Maestros por grupo étnico: No hay datos</div>
+                  {% else %}
+                  <caption><b>Total de maestros por grupo étnico</b></caption>
+                  <table border="0.5">
+                    <thead>
+                      <tr>
+                        <th><br>Étnia</th>
+                        <th><br>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for etnia_maestro in maestros_por_etnia %}
+                        <tr>
+                          <td><br>-{{ etnia_maestro.nombre_etnia }}</td>
+                          <td><br>{{ etnia_maestro.maestros_etnia }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% endif %}
+                  <!--Fin por etnia-->
+                  <br/>
+                  <!--Inicio por grupos organizados-->
+                  {% if not total_maestros_por_grupo %}
+                    <div class="alert alert-info">Maestros por grupo organizado: No hay datos</div>
+                  {% else %}
+                  <caption><b>Total de maestros por grupo organizado</b></caption>
+                  <table border="0.5">
+                    <thead>
+                      <tr>
+                        <th>Grupo Organizado</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for maestros_grupo in total_maestros_por_grupo %}
+                        <tr>
+                          <td>-{{ maestros_grupo.nombre_grupo }}</td>
+                          <td>{{ maestros_grupo.maestro_grupo }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td><b>Total</b></td>
+                        <td>{{part_maestro_grupo}}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  {% endif %}
+                  <!--Fin por grupos organizados-->
+                  <br/>
+                  <!-- Inicio por establecimiento-->
+                  <caption><b>Maestros que imparten clases por tipo de establecimiento educativo</b></caption>
+                  <table border="0.5">
+                    <thead>
+                      <tr>
+                        <th scope="col"><br>Tipo de establecimiento</th>
+                        <th scope="col"><br>Total de maestros</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><br>-Público</td>
+                        <td><br>{{maestros_est_publico}}</td>
+                      </tr>
+                      <tr>
+                        <td><br>-Privado</td>
+                        <td><br>{{maestros_est_privado}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!--Fin por establecimiento-->
+                  <br/>
+                  <!-- Inicio por área-->
+                  <caption><b>Maestros que imparten clases por área</b></caption>
+                  <table border="0.5">
+                    <thead>
+                      <tr>
+                        <th scope="col"><br>Área</th>
+                        <th scope="col"><br>Total de maestros</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><br>-Urbana</td>
+                        <td><br>{{maestros_area_urbana}}</td>
+                      </tr>
+                      <tr>
+                        <td><br>-Rural</td>
+                        <td><br>{{maestro_area_rural}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!--Fin por área-->
+            </div>
+          </div>
+            </div>
+        </div>
+        </div>
+</body>
+</html>
