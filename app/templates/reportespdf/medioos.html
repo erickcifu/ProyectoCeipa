@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8/ISO-8859-1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Medios</title>
+</head>
+<body>
+    <div class="card card-header-actions">
+        <div class="card-header">
+            <h1>Reportes de medios decomunicación</h1>
+          </div>
+        <div class="card-body">
+            <div class="row">
+              <div class="card">
+              <div class="card-body">
+                <!--Totales-->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Medios de comunicación activos</h5>
+                          <p class="card-text">{{ total_medios }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Representantes de medios de comunicación vacunados contra COVID-19</h5>
+                          <p class="card-text">{{ total_medios_vacunados }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!--Fin totales-->
+                <br/>
+              <!--Inicio por genero-->
+              {% if not medios_por_genero %}
+                <div class="alert alert-info">Representantes de medio de comunicación por género: No hay datos</div>
+              {% else %}
+              <caption><b>Total de representantes por género</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th><br>Género</th>
+                    <th><br>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for gen_medio in medios_por_genero %}
+                    <tr>
+                      <td><br>-{{ gen_medio.genero }}</td>
+                      <td><br>{{ gen_medio.medios_genero }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por genero-->
+              <br/>
+              <!--Inicio por etnia-->
+              {% if not medios_por_etnia %}
+                <div class="alert alert-info">Representantes de medios de comunicación por grupo étnico: No hay datos</div>
+              {% else %}
+              <caption><b>Total de representantes por grupo étnico</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th><br>Étnia</th>
+                    <th><br>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for etnia_medios in medios_por_etnia %}
+                    <tr>
+                      <td><br>-{{ etnia_medios.nombre_etnia }}</td>
+                      <td><br>{{ etnia_medios.medios_etnia }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por etnia-->
+              <br/>
+              <!--Inicio por tipo de medio-->
+              {% if not por_tipo_medio %}
+                <div class="alert alert-info">Medios de comunicación por tipo de distribución: No hay datos</div>
+              {% else %}
+              <caption><b>Total de medio por tipo de distribución</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th><br>Tipo de distribución</th>
+                    <th><br>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for tipo_medios in por_tipo_medio %}
+                    <tr>
+                      <td><br>-{{ tipo_medios.tipo_medio }}</td>
+                      <td><br>{{ tipo_medios.medios_tipo }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por tipo de medio-->
+            </div>
+          </div>
+        </div>
+        </div>
+</body>
+</html>

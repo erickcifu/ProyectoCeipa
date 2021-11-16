@@ -131,7 +131,7 @@ from .MunicViewset.programasView import ProgramasView, ProgramasNew, ProgramasEd
 from .MunicViewset.comisionNAView import ComisionNAView, ComisionNANew, ComisionNAEdit, ComisionNADel, ComisionNADetail
 from .MunicViewset.reportes_muni import AlumnosporDepto, total_comisiones, total_corporaciones, total_maestros, Total_lideres, Total_medios, Total_padres
 from .MunicViewset.gradoacadView import GradoacadView, GradoacadNew, GradoacadEdit, GradoacadDel
-
+from .MunicViewset.reportemuniViewset import AlumnosporDeptosView, ListAlumnosDeptoPdf, total_corporacionesPDF, total_comisionesPDF, Total_lideresPDF, total_maestrosPDF, Total_mediosPDF, Total_padresPDF
 #SocioProductivo
 from .sociopViewset.aspectos_saludView import (AspectosSaludNew, AspectosSaludEdit, AspectosSaludDel,
                                             AspectosSaludView)

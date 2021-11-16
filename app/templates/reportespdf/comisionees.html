@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8/ISO-8859-1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de comisiones</title>
+</head>
+<body>
+    <div class="card card-header-actions">
+        <div class="card-header">
+              <h1>Reportes de comisiones de niñez y adolescencia</h1>
+          </div>
+        <div class="card-body">
+            <div class="row">
+              <div class="card">
+              <div class="card-body">
+                <!--Totales-->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Total de comisiones de niñez y adolescencia registradas</h5>
+                          <p class="card-text">{{ total_comisiontes }}</p>
+                        </div>
+                      </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Representantes de comisiones de niñez y adolescencia vacunados contra COVID-19</h5>
+                            <p class="card-text">{{ total_comisiones_vacuna }}</p>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                <!--Fin totales-->
+                <br/>
+              {% if not por_genero %}
+                <div class="alert alert-info">Representantes de comisión por genero: No hay datos</div>
+              {% else %}
+              <caption><b>Total de representantes por género</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th>Género</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for gen in por_genero %}
+                    <tr>
+                      <td>{{ gen.genero }}</td>
+                      <td>{{ gen.cant_gen }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <br/>
+              <!--Por etnia-->
+              {% if not comision_por_etnia %}
+                <div class="alert alert-info">Representantes de comisión de niñez y adolescencia por grupo étnico: No hay datos</div>
+              {% else %}
+              <caption><b>Total de representantes por grupo étnico</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th>Étnia</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for etnia in comision_por_etnia %}
+                    <tr>
+                      <td>{{ etnia.nombre_etnia }}</td>
+                      <td>{{ etnia.comision_etnia }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <br/>
+  
+              <!--Por grupos organizados-->
+              {% if not comision_grupo_org %}
+                <div class="alert alert-info">Representantes de comisión de niñez y adolescencia por grupo organizado: No hay datos</div>
+              {% else %}
+              <caption><b>Total de representantes por grupo organizado</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th>Grupo Organizado</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for grupo in comision_grupo_org %}
+                    <tr>
+                      <td>{{ grupo.nombre_grupo }}</td>
+                      <td>{{ grupo.total_grupo }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td><b>Total</b></td>
+                    <td>{{total_grupo_organizado}}</td>
+                  </tr>
+                </tfoot>
+              </table>
+              {% endif %}
+                <br/>
+              <!--Publico y privado-->
+              <caption><b>Total de comisiones pubicas y privadas</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th scope="col">Tipo de institución</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>Pública</td>
+                      <td>{{ sector_publico }}</td>
+                    </tr>
+                    <tr>
+                      <td>Privada</td>
+                      <td>{{ sector_privado }}</td>
+                    </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+        </div>
+</body>
+</html>

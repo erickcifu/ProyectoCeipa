@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8/ISO-8859-1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes de padres</title>
+</head>
+<body>
+    <div class="card card-header-actions">
+        <div class="card-header">
+            <h1>Reportes de padres y madres de familia</h1>
+          </div>
+        <div class="card-body">
+            <div class="row">
+              <div class="card">
+              <div class="card-body">
+                <!--Totales-->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Padres y madres de familia registrados</h5>
+                          <p class="card-text">{{ total_padres }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Padres y madres de familia contra COVID-19</h5>
+                          <p class="card-text">{{ total_padres_vacunados }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!--Fin totales-->
+                <br/>
+              <!--Inicio por genero-->
+              {% if not padres_por_genero %}
+                <div class="alert alert-info">Padres y madres de familia por género: No hay datos</div>
+              {% else %}
+              <caption><b>Total de padres y madres de familia por género</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th><br>Género</th>
+                    <th><br>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for gen_padres in padres_por_genero %}
+                    <tr>
+                      <td><br>-{{ gen_padres.genero }}</td>
+                      <td><br>{{ gen_padres.padres_genero }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por genero-->
+              <br/>
+              <!--Inicio por etnia-->
+              {% if not padres_por_etnia %}
+                <div class="alert alert-info">Padres y madres de familia por grupo étnico: No hay datos</div>
+              {% else %}
+              <caption><b>Total de padres y madres de familia por grupo étnico</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th><br>Étnia</th>
+                    <th><br>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for etnia_padres in padres_por_etnia %}
+                    <tr>
+                      <td><br>-{{ etnia_padres.nombre_etnia }}</td>
+                      <td><br>{{ etnia_padres.etnia_padres }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por etnia-->
+              <br/>
+              <!--Inicio por grupos organizados-->
+              {% if not padres_por_grupo %}
+                <div class="alert alert-info">Padres y madres de familia por grupo organizado: No hay datos</div>
+              {% else %}
+              <caption><b>Total de padres y madres de familia por grupo organizado</b></caption>
+              <table border="0.5">
+                <thead>
+                  <tr>
+                    <th><br>Grupo Organizado</th>
+                    <th><br>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for grupo_padres in padres_por_grupo %}
+                    <tr>
+                      <td><br>-{{ grupo_padres.nombre_grupo }}</td>
+                      <td><br>{{ grupo_padres.padres_grupo }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td><b>Total</b></td>
+                    <td><br>{{part_padres_grupo }}</td>
+                  </tr>
+                </tfoot>
+              </table>
+              {% endif %}
+              <!--Fin por grupos organizados-->
+              <br/>
+              <!--Inicio leer y escribir-->
+              <caption><b>Total de padres y madres de familia que saben leer y escribir</b></caption>
+              <table border="0.5">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><br>-Sabe leer y escribir</td>
+                    <td><br>{{leer_y_escribir}}</td>
+                  </tr>
+                  <tr>
+                    <td><br>-Sabe leer, no sabe escribir</td>
+                    <td><br>{{solo_leer}}</td>
+                  </tr>
+                  <tr>
+                    <td><br>-No sabe escribir, no sabe leer</td>
+                    <td><br>{{no_leer_no_escribir}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--Fin leery escribir-->
+            </div>
+          </div>
+        </div>
+</body>
+</html>

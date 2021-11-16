@@ -31,7 +31,7 @@ class AlumnosporDepto(LoginRequiredMixin, generic.ListView):
         context['alumnos_universidad'] = Beneficiado.objects.filter(estado_beneficiado=True, nivel_universitario=True).count()
         context['por_genero_municipio'] = genero.objects.filter(estado_genero=True).annotate(cant_per = Count('P_genero__B_persona'))
         context['cant_por_area'] = Area.objects.annotate(cant_area = Count('ba_Area__beneficiado'))
-        
+
         return context
 
 class total_comisiones(LoginRequiredMixin, generic.ListView):
@@ -93,8 +93,8 @@ class Total_lideres(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['total_lideres'] = LiderComunitario.objects.filter(estado=True).count()
-        context['total_lideres_vacunados'] = LiderComunitario.objects.filter(estado=True, vacuna_covid_l=True).count()
+        context['total_lideres'] = LiderComunitario.objects.filter(estado_liders=True).count()
+        context['total_lideres_vacunados'] = LiderComunitario.objects.filter(estado_liders=True, vacuna_covid_l=True).count()
         context['lideres_por_genero'] = genero.objects.filter(estado_genero=True).annotate( lideres_genero = Count('P_genero__B_personaM'))
         context['lideres_por_etnia'] = etnia.objects.filter(estado_etnia=True).annotate(lideres_etnia=Count('P_etnia__B_personaM'))
         context['total_lideres_por_grupo'] = GOrganizado.objects.filter(estado_grupo=True).annotate( lideres_grupo = Count('G_organizado'))
@@ -128,8 +128,8 @@ class Total_padres(LoginRequiredMixin, generic.ListView):
         context['padres_por_etnia'] = etnia.objects.filter(estado_etnia=True).annotate(etnia_padres = Count('P_etnia__per_padre'))
         context['part_padres_grupo'] = PadresFamilia.objects.filter(estado_padres=True, participacionG=True).count()
         context['padres_por_grupo'] = GOrganizado.objects.filter(estado_grupo=True).annotate(padres_grupo=Count('grupoOr_padre'))
-        context['leer_y_escribir'] = PadresFamilia.objects.filter(estado_padres=True, leer=True, escribir=True).count()
-        context['solo_leer'] = PadresFamilia.objects.filter(estado_padres=True, leer=True, escribir=False).count()
-        context['solo_escribir'] = PadresFamilia.objects.filter(estado_padres=True, escribir=True, leer=True).count()
-        context['no_leer_no_escribir'] = PadresFamilia.objects.filter(estado_padres=True, escribir=False, leer=False).count()
+        context['leer_y_escribir'] = PadresFamilia.objects.filter(estado_padres=True, leer_P=True, escribir_p=True).count()
+        context['solo_leer'] = PadresFamilia.objects.filter(estado_padres=True, leer_P=True, escribir_p=False).count()
+        context['solo_escribir'] = PadresFamilia.objects.filter(estado_padres=True, escribir_p=True, leer_P=True).count()
+        context['no_leer_no_escribir'] = PadresFamilia.objects.filter(estado_padres=True, escribir_p=False, leer_P=False).count()
         return context

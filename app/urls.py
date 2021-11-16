@@ -489,6 +489,16 @@ urlpatterns = [
     path('municipalizacion/reporte_medios/',viewsets.reporte_medios.as_view(), name='repo_med'),
     path('municipalizacion/reporte_padres_madres/',viewsets.reporte_padres.as_view(), name='repo_pad'),
 
+#Reportes PDF
+    path('municipalizacion/pdf_participantes/', viewsets.ListAlumnosDeptoPdf.as_view(), name='repo_part'),
+    path('municipalizacion/pdf_comisiones/',viewsets.total_comisionesPDF.as_view(), name='repo_comi'),
+    path('municipalizacion/pdf_corporaciones/',viewsets.total_corporacionesPDF.as_view(), name='repo_corp'),
+    path('municipalizacion/pdf_maestros/',viewsets.total_maestrosPDF.as_view(), name='repo_maest'),
+    path('municipalizacion/pdf_lideres/',viewsets.Total_lideresPDF.as_view(), name='repo_lid'),
+    path('municipalizacion/pdf_medios/',viewsets.Total_mediosPDF.as_view(), name='repo_med'),
+    path('municipalizacion/pdf_padres_madres/',viewsets.Total_padresPDF.as_view(), name='repo_pad'),
+
+
 #login views
     path('', viewsets.Home.as_view(), name = 'home'),
     path('educacion/', viewsets.HomeEducacion.as_view(), name='educacion'),
