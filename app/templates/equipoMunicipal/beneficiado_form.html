@@ -1,10 +1,11 @@
 {% extends 'EquipoMunicipal/municipalizacion.html' %}
 
 {% block page_content %}
+{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
-<form method="POST" class="form-inline">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="col-xl-12 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -14,50 +15,273 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} beneficiado
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <form>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione un Tutor</label>
-                                {{ form.tutor }}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione una persona</label>
-                                {{ form.persona }}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione el genero</label>
-                                {{ form.gen }}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione la ocupacion</label>
-                                {{ form.ocup }}
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1">Seleccione estudio anterior</label>
-                                {{ form.estudios_anteriores }}
-                            </div>
-                        </form>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="id_estado_beneficiado">Estado</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="estado_beneficiado" class="form-control" id="id_estado_beneficiado" type="checkbox"  {% if obj.estado_beneficiado is true %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- {{form.as_p}} -->
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'municipalizacion:ben_list' %}" class="btn btn-danger">Cancelar</a>
-                            </div>
-                        </div>
+                          <div class="col-12 col-md-6 offset-md-3">
+                            <h4>{% if obj %} Editar {% else %} Nuevo {% endif %} Participante
+                            </h4>
+                          </div>
                     </div>
                 </div>
+                <!--Wizzard-->
+                        <div class="card">
+                          <div class="card-header border-bottom">
+                            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                              <!--Wizard item 1-->
+                              <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                <div class="wizard-step-icon">1</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Participante</div>
+                                  <div class="wizard-step-text-details">Infomación personal</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 2-->
+                              <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Académico</div>
+                                  <div class="wizard-step-text-details">Información académica</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 4-->
+                              <a class="nav-item nav-link" id="wizard4-tab" href="#wizard4" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
+                                <div class="wizard-step-icon">4</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Encargado</div>
+                                  <div class="wizard-step-text-details">Informaciòn del encargado</div>
+                                </div>
+                              </a>
+                              <div class="card-body">
+                                <!--Errores form1-->
+                                {% if form.errors %}
+                                  {% for field in form %}
+                                    {% for error in field.errors %}
+                                      {{error}}
+                                    {% endfor %}
+                                  {% endfor %}
+                                {% endif %}
+                                <!--Errores form2-->
+                                {% if form2.errors %}
+                                  {% for field in form2 %}
+                                    {% for error in field.errors %}
+                                      {{error}}
+                                    {% endfor %}
+                                  {% endfor %}
+                                {% endif %}
+                                <!--Errores form3-->
+                                {% if form3.errors %}
+                                  {% for field in form3 %}
+                                    {% for error in field.errors %}
+                                      {{error}}
+                                    {% endfor %}
+                                  {% endfor %}
+                                {% endif %}
+                                <!--Errores form4-->
+                                {% if form4.errors %}
+                                  {% for field in form4 %}
+                                    {% for error in field.errors %}
+                                      {{error}}
+                                    {% endfor %}
+                                  {% endfor %}
+                                {% endif %}
+                            <!--Wizard Body-->
+                                <div class="tab-content" id="cardTabContent">
+                                  <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 1</h3>
+                                        <h5 class="card-title mb-4">Ingrese la informaciòn personal del participante </h5>
+                                        <!--Inicio Formulario-->
+                                        <div class="row gx-12">
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                <label>Nombre</label>
+                                                {{ form.persona }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label>Apellidos</label>
+                                                {{ form.apellidos_persona }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>Fecha de nacimiento</label>
+                                              {{ form2.fecha_nacimiento_benef }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>No. CUI</label>
+                                                {{ form.cui_persona }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>Dirección domiciliar</label>
+                                                {{ form.direccion_persona }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                              <label>No. Teléfono</label>
+                                                {{ form.telefono_Persona }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                              <label>No. Teléfono de casa</label>
+                                                {{ form.telefonoc_per }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>Fotografía</label>
+                                                {{ form.fotografia_persona }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                              <label>Municipio</label>
+                                                {{ form.muni }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                              <label>Grupo étnico</label>
+                                                {{ form.etni }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>Último grado cursado</label>
+                                                {{ form.estudios_anteriores }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>Género</label>
+                                                {{ form.gen }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                              <label>Tiene alguna discapacidad</label>
+                                                {{ form.disc }}
+                                            </div>
+                                            <div class="mb-3 col-md-6" hidden>
+                                              <label>Activo</label>
+                                                {{ form.estado_persona }}
+                                            </div>
+                                          </div>
+                                          <br/>
+                                          <br/>
+                                          <!--IDIOMA FORMSET-->
+                                          <div class="row gx-6">
+                                              <div class="row gx-3">
+                                                {{form3.management_form}}
+                                                {%for f in form3 %}
+                                                  <div id="formularios_idiomas" class="row">
+                                                      {{ f }}
+                                                  </div>
+                                                  <br/>
+                                                  <br/>
+                                                {% endfor %}
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <div class="d-flex justify-content-between">
+                                                  <button class="btn btn-light" id="add_idioma" type="button" role="button">
+                                                      <i class="me-2" data-feather="plus-circle"></i>Agregar idioma
+                                                </button>
+                                                </div>
+                                            </div>
+                                          <!--IDOMA FORMSET FIN-->
+                                          <hr class="my-4"/>
+
+                                        <!--Fin Formulario-->
+                                      </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!--Tab item 2-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 2</h3>
+                                        <h5 class="card-title mb-4">Ingrese información de estudios del participante</h5>
+                                          <div class="row gx-12">
+                                            <div class="row gx-3">
+                                              <label>Ocupación del participante</label>
+                                                <div class="mb-3 col-md-12">
+                                                  {{ form2.ocup  }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <label>Nombre del establecimiento donde estudia</label>
+                                              <div class="mb-3 col-md-12">
+                                              {{ form2.establecimiento }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <h4>Estudia en un establecimiento: </h4>
+                                              <div class="mb-3 col-md-6">
+                                              <label>Privado</label>
+                                              {{ form2.establecimiento_privado }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                              <label>Público</label>
+                                              {{ form2.establecimiento_publico  }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <h4>Nivel educativo: </h4>
+                                              <div class="mb-3 col-md-12">
+                                                <label>Primario</label>
+                                                {{ form2.nivel_primario  }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                <label>Secundario</label>
+                                              {{ form2.nivel_secundario }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                <label>Universitario</label>
+                                              {{ form2.nivel_universitario  }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3" hidden>
+                                              {{ form2.estado_beneficiado }}
+                                          </div>
+                                          <hr class="my-4"/>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+                                    <!--Tab item 4-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard4" role="tabpanel" aria-labelledby="wizard4-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 3</h3>
+                                          <h5 class="card-title mb-4">Ingrese informaciòn del encargado</h5>
+                                              <div class="row gx-3">
+                                                {% for f in form4 %}
+                                                  {{ f.label }}
+                                                  {{ f }}
+                                                {% endfor %}
+                                                </div>
+                                            <hr class="my-4"/>
+                                            <div class="d-flex justify-content-between">
+                                              <a class="btn btn-ligth" href="{% url 'municipalizacion:ben_list' %}">Cancelar</a>
+                                              <button type="submit" class="btn btn-success"">Guardar</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <!--Tab fin -->
+                                </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
             </div>
         </div>
     </div>
@@ -65,4 +289,92 @@
 </div>
 {% endblock %}
 {% block js_page %}
+<script>
+
+  //Funcion campo requerido
+  function isRequeried(field) {
+      console.log(field)
+        let value = field.value
+        if(value.trim === 0)
+          alert('El campo: '+`${field.name}`+' No puede ir vacío')
+        if((!value || value.trim().length === 0)){
+          const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+          alert('El campo: '+`${field.name}`+' No puede ir vacío')
+          if(!$error_is_requeried)
+            field.insertAdjacentHTML('afterend', `<div id="isRequeried_${field.name}">Este campo es requerido</div>`)
+        }else{
+          const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+          if($error_is_requeried)
+            $error_is_requeried.remove()
+        }
+
+      }
+
+  function isTelephoneNumber(field){
+      let regexNumber = /^[0-9]{8}$/
+      if(!field.value)return null
+      const $error_is_telephone = document.querySelector(`#isTelephoneNumber_${field.name}`)
+      if(!regexNumber.test(field.value)){
+        if(!$error_is_telephone){
+          field.insertAdjacentHTML('afterend', `<div id="isTelephoneNumber_${field.name}">El numero de telefono debe tener 8 digitos</div>`)
+        }
+      }else{
+        if($error_is_telephone) $error_is_telephone.remove()
+      }
+    }
+
+
+  function isIdentify(field) {
+      const result = isRequeried(field)
+      if(!result){
+        let regexNumber = /^[0-9]{13}$/
+        const $error_is_identify = document.querySelector(`#isIdenfify_${field.name}`)
+        if(!regexNumber.test(field.value)){
+          if(!$error_is_identify){
+            field.insertAdjacentHTML('afterend', `<div id="isIdenfify_${field.name}">
+                Debe tener 13 dígitos, no se aceptan letras
+              </div>`)
+          }
+        }else{
+          if($error_is_identify) $error_is_identify.remove()
+        }
+      }
+    }
+
+    const validate_participante_form = () => {
+        const $fecha_nacimiento_benef = document.querySelector('#id_fecha_nacimiento_benef')
+        isRequired($fecha_nacimiento_benef)
+        const $ocup = document.querySelector('#id_ocup')
+        isRequired($ocup)
+    }
+
+    const $add_idioma = document.querySelector('#add_idioma')
+    $add_idioma.addEventListener('click', e=>{
+      e.preventDefault()
+      agregar_form_idiomas();
+    })
+
+      function agregar_form_idiomas(){
+        const $total_forms = document.getElementById('id_idiomas-TOTAL_FORMS')
+
+        let $label_idioma = document.createElement('label')
+        $label_idioma.innerHTML = 'Idioma'
+        let $input_idioma = document.querySelector('#id_idiomas-0-idioma').cloneNode(true)
+        $input_idioma.name = 'idiomas-'+$total_forms.value+'-idioma'
+        $input_idioma.id = 'id_idiomas-'+$total_forms.value+'-idioma'
+
+        let $label_estado_idper = document.createElement('label')
+        $label_estado_idper.innerHTML = 'Activo/Inactivo'
+        let $input_estado_idper = document.querySelector('#id_idiomas-0-estado_ip').cloneNode(true)
+        $input_estado_idper.name = 'idiomas-'+$total_forms.value+'-estado_ip'
+        $input_estado_idper.id = 'id_idiomas-'+$total_forms.value+'-estado_ip'
+
+        document.getElementById('formularios_idiomas').appendChild($label_idioma)
+        document.getElementById('formularios_idiomas').appendChild($input_idioma)
+        document.getElementById('formularios_idiomas').appendChild($label_estado_idper)
+        document.getElementById('formularios_idiomas').appendChild($input_estado_idper)
+
+        $total_forms.value = parseInt($total_forms.value) + 1
+      }
+</script>
 {% endblock %}

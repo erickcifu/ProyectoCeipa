@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-            Establecimiento Anterior
+            Grados académicos
           <div class="dropdown no-caret">
               <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i data-feather="more-vertical"></i>
@@ -38,8 +38,8 @@
                       <td>{{ item.repitente|yesno:"si,no" }}</td>
                       <td>{{ item.estado_estudiosant|yesno:"Activo,Inactivo" }}</td>
                       <td>
-                          <a href="{% url 'municipalizacion:estmuni_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                          <a href="{% url 'municipalizacion:estmuni_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
+                          <a href="{% url 'municipalizacion:estmuni_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                          <a href="{% url 'municipalizacion:estmuni_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
                       </td>
                   </tr>
                   {% endfor %}

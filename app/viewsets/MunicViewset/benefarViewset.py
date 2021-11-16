@@ -11,18 +11,30 @@ from app.models import BeneficiadoArea, Area
 from app.forms import BenefArForm, AreaForm
 
 def beneficiado_areaView(request, pk):
-    queryset = BeneficiadoArea.objects.all().filter(area__id=pk)
-    print("CONSULTA AREA", queriset)
-    context = {
-        'beneficiados_area':queryset,
-    }
-    return render(request, 'municipalizacion/benefar_list.html', context)
+    pass
+    #queryset = BeneficiadoArea.objects.all().filter(area__id=pk)
+    #print("CONSULTA AREA", queriset)
+    #context = {
+    #    'beneficiados_area':queryset,
+    #}
+    #return render(request, 'municipalizacion/benefar_list.html', context)
 
-class BenefArView(IsCoordinadorMunicipalMixin, generic.ListView):
+class BenefArView(RolesCooMunicipalEquipoMunicipalMixin, generic.ListView):
     model = BeneficiadoArea
     template_name = 'municipalizacion/benefar_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/benefar_list.html"]
 
     def get_queryset(self):
         qs = BeneficiadoArea.objects.all()
@@ -112,7 +124,7 @@ class Area_beneficiado(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView
             if user == 7 or user == 8:
                 return [self.template_name]
             elif user == 9:
-                return ["equipoMunicipal/benefar_form.html"]
+                return ["equipoMunicipal/area_beneficiado.html"]
             else:
                 return [self.template_name]
 

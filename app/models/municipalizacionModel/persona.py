@@ -29,7 +29,7 @@ class Persona(models.Model):
 
     def delete(self, *args):
         self.estado_persona = False
-        if self.fotografia is not  None:
-            self.fotografia.delete()
+        if self.fotografia_persona is not  None:
+            self.fotografia_persona.delete()
         self.save()
         return True

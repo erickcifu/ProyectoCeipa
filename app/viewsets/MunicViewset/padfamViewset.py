@@ -9,7 +9,7 @@ from app.viewsets.users.CoordinadorMunicipal.mixin import IsCoordinadorMunicipal
 from app.viewsets.users.mixins.CooMunicipalYEquipoMunicipal import RolesCooMunicipalEquipoMunicipalMixin
 from django.shortcuts import redirect
 from django.db import IntegrityError, transaction
-
+from django.forms import formset_factory
 from app.models import PadresFamilia, IdiomaPersona, Persona
 from app.forms import PadFamForm, IdPerForm, PersonaForm
 
@@ -25,7 +25,7 @@ class PadFamNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     context_object_name = "obj"
     form_class = PersonaForm
     second_form_class = PadFamForm
-    third_form_class = IdPerForm
+    third_form_class = formset_factory(IdPerForm, extra=1)
     success_url = reverse_lazy("municipalizacion:padfam_list")
     login_url = 'app:login'
 
@@ -50,7 +50,7 @@ class PadFamNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
         if 'form2' not in context:
             context['form2'] = self.second_form_class(self.request.GET)
         if 'form3' not in context:
-            context['form3'] = self.third_form_class(self.request.GET)
+            context['form3'] = self.third_form_class(prefix = 'idiomas_padres')
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -61,18 +61,19 @@ class PadFamNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
 
         with transaction.atomic():
             self.object = self.get_object
-            form = self.form_class(request.POST)
+            form = self.form_class(request.POST, request.FILES)
             form2 = self.second_form_class(request.POST)
-            form3 = self.third_form_class(request.POST)
+            form3 = self.third_form_class(request.POST, prefix = 'idiomas_padres')
 
             if form.is_valid() and form2.is_valid() and form3.is_valid():
                 persona = form.save()
                 padfam = form2.save(commit=False)
                 padfam.persona = persona
                 padfam.save()
-                idioma = form3.save(commit=False)
-                idioma.persona = persona
-                idioma.save()
+                for idi_padres in form3:
+                    idioma = idi_padres.save(commit=False)
+                    idioma.persona = persona
+                    idioma.save()
                 return HttpResponseRedirect(self.get_success_url())
             else:
                 return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))

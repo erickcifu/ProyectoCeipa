@@ -16,10 +16,6 @@
               <thead>
                   <th>Id</th>
                   <th>Nombre</th>
-                  <th>Lee</th>
-                  <th>Escribe</th>
-                  <th>Vacunado</th>
-                  <th>Participacion en grupo</th>
                   <th>Programa en CEIPA</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
@@ -29,42 +25,6 @@
                   <tr>
                       <td>{{ item.id }}</td>
                       <td><a href="{% url 'municipalizacion:padfam_detail' item.id %}">{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</a></td>
-                        {% if item.leer is True %}
-                        <td>
-                          <span class="badge rounded-pill bg-light text-dark">Sabe leer</span>
-                        </td>
-                        {% else %}
-                        <td>
-                          <span class="badge rounded-pill bg-light text-dark">No sabe leer</span>
-                        </td>
-                        {% endif %}
-                        {% if item.escribir is True %}
-                        <td>
-                          <span class="badge rounded-pill bg-light text-dark">Sabe escribir</span>
-                        </td>
-                        {% else %}
-                        <td>
-                          <span class="badge rounded-pill bg-light text-dark">No sabe escribir</span>
-                        </td>
-                        {% endif %}
-                        {% if item.vacunaCovid is True %}
-                        <td>
-                          <span class="badge rounded-pill bg-light text-dark">Vacunado</span>
-                        </td>
-                        {% else %}
-                        <td>
-                          <span class="badge rounded-pill bg-light text-dark">No vacunado</span>
-                        </td>
-                        {% endif %}
-                        {% if item.participacionG is True %}
-                        <td>
-                          <span class="badge rounded-pill bg-light text-dark">Participa en grupo</span>
-                        </td>
-                        {% else %}
-                        <td>
-                          <span class="badge rounded-pill bg-light text-dark">No participa en grupo</span>
-                        </td>
-                        {% endif %}
                       <td>{{ item.programaC }}</td>
                       {% if item.estado_padres is True %}
                       <td>

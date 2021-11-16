@@ -4,13 +4,13 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Area
+          Grupos organizados
           <a href="{% url 'municipalizacion:Gorg_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay datos de grupos organizados</div>
+          <div class="alert alert-info">No hay datos</div>
           {% else %}
           <table id="datatablesSimple">
               <thead>

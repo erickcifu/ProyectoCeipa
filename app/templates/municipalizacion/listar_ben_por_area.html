@@ -57,6 +57,8 @@
               <thead>
                   <th>Id</th>
                   <th>Participante</th>
+                  <th>Municipio</th>
+                  <th>Departamento</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -65,6 +67,8 @@
                   <tr>
                       <td>{{ item.id }}</td>
                       <td>{{ item.persona }} {{ item.persona.apellidos_persona }}</td>
+                      <td>{{ item.persona.muni }}</td>
+                      <td>{{ item.persona.muni.dep }}</td>
                       {% if item.estado_beneficiado is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>
@@ -75,8 +79,8 @@
                       </td>
                       {% endif %}
                       <td>
-                        <a href="{% url 'municipalizacion:ben_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
-                        <a href="{% url 'municipalizacion:ben_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                        <a href="{% url 'municipalizacion:benefar_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                        <a href="{% url 'municipalizacion:benefar_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
                       </td>
                   </tr>
                   {% endfor %}

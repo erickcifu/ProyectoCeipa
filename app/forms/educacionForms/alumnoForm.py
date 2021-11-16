@@ -25,18 +25,20 @@ class AlumnoForm(forms.ModelForm):
     )
     class Meta:
         model = Alumno
-        fields = ['ocup',
-        'nombres_alumno',
-         'apellidos_alumno',
-          'cui','edad',
-           'codigo_mineduc',
+        fields = [
+            'ocup',
+            'nombres_alumno',
+            'apellidos_alumno',
+            'cui','edad',
+            'codigo_mineduc',
             'fecha_nacimiento',
-             'muni', 'ingreso_familiar',
-             'direccion_alumno',
-              'telefono_alumno',
-               'fotografia',
-               'gen', 'etni',
-               'idiome',  'estado_alumno']
+            'muni', 'ingreso_familiar',
+            'direccion_alumno',
+            'telefono_alumno',
+            'fotografia',
+            'gen', 'etni',
+            'idiome',  'estado_alumno'
+        ]
         labels = {
             'ocup':'Ocupacion',
             'nombres_alumno':'Nombres',
@@ -63,7 +65,8 @@ class AlumnoForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required': False
             })
             if field == 'estado_alumno':
                 self.fields[field].widget.attrs.update({

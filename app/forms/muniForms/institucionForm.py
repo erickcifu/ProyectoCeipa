@@ -15,7 +15,7 @@ class InstitucionForm(forms.ModelForm):
         labels = {
         'nombre_ins':'Nombre de la institución',
         'correo_ins': 'Correo electrónico de la institucion',
-        'estado_ins':'Activo/Inactivo',
+        'estado_ins':'Activo',
         }
         widget = {'nombre_ins': forms.TextInput}
     def __init__(self, *args, **kwargs):

@@ -24,7 +24,7 @@
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="{% url 'app:home' %}">Sistema CEIPA</a>
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="{% url 'app:municipalizacion' %}">Sistema CEIPA</a>
             <!-- Navbar Search Input-->
             <!-- * * Note: * * Visible only on and above the lg breakpoint-->
 
@@ -89,26 +89,25 @@
                             </a>
                             <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
                               <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="{% url 'municipalizacion:area_list' %}">Area</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:area_list' %}">Áreas de niñez adolescencia y juventud</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:depto_list' %}">Departamento</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:muni_list' %}">Municipio</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:estmuni_list' %}">Etnia</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:generomuni_list' %}">Genero</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:etniamuni_list' %}">Etnia</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:generomuni_list' %}">Género</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:idiomaMuni_list' %}">Idioma</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:ocupmuni_list' %}">Ocupación</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:Gorg_list' %}">Grupo organizado</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:carg_list' %}">Cargo Grupo</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:prof_list' %}">Profesion</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:carg_list' %}">Cargo en grupo organizado</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:prof_list' %}">Profesión</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:gacad_list' %}">Grado académico</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:tmedio_list' %}">Tipos de medio de comunicación</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:programas_list' %}">Programas dentro de CEIPA</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:establecimiento_list' %}">Establecimientos</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:partidopolitic_list' %}">Partidos Politicos</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:per_list' %}">Persona</a>
                                     </nav>
                                 </div>
 
                                 <!-- Usuarios -->
-                                <div class="sidenav-menu-heading">Gestion de Usuarios</div>
+                                <div class="sidenav-menu-heading">Gestión de Usuarios</div>
                                 <!-- Sidenav Accordion (Dashboard)-->
                                 <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseCatalogos">
                                   Usuarios
@@ -117,7 +116,7 @@
                                 <div class="collapse" id="collapseUsuarios" data-bs-parent="#accordionSidenav">
                                   <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                                     <a class="nav-link" href="{% url 'municipalizacion:crear_asistente_equipo_municipal' %}">Crear nuevo usuario</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:listar_asistente_equipo_municipal' %}">listar usuarios</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:listar_asistente_equipo_municipal' %}">Listado de usuarios</a>
                                   </nav>
                                 </div>
 
@@ -161,7 +160,7 @@
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
                                             INICIO
                                         </h1>
-                                        <div class="page-header-subtitle">Estadisticas de niños y jovenes en toda la organizacion</div>
+                                        <div class="page-header-subtitle">Coordinación PROMUNI</div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">
                                         <div class="input-group input-group-joined border-0" style="width: 16.5rem">
@@ -317,7 +316,7 @@
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
                         <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
+                            <div class="col-md-6 small">Copyright &copy; Mesoamericana 2021</div>
                             <div class="col-md-6 text-md-end small">
                                 <a href="#!">Privacy Policy</a>
                                 &middot;
@@ -331,9 +330,6 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{% static 'base/dist/js/scripts.js' %}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="{% static 'base/dist/assets/demo/chart-area-demo.js' %}"></script>
-        <script src="{% static 'base/dist/assets/demo/chart-bar-demo.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="{% static 'base/dist/js/datatables/datatables-simple-demo.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>

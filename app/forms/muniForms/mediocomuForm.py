@@ -16,7 +16,7 @@ class MedioComuniForm(forms.ModelForm):
         'vacuna_medio':'Vacunado contra COVID-19',
         'telefono_medio':"Telefono",  'cargo':'Cargo',
         't_medio':'Tipo de distribución del medio de comunicación',
-        'estado':'Estado'}
+        'estado':'Activo'}
         widget = {'nombre_medio', forms.TextInput}
 
     def __init__(self, *args, **kwargs):

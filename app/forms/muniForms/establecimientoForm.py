@@ -9,7 +9,7 @@ class EstablecimientoForm(forms.ModelForm):
         'direccion_estable', 'estado_estable']
         labels = {'nombre_establecimiento':"Establecimiento",
          'direccion_estable':"Direccion",
-         'estado_estable':"Estado"}
+         'estado_estable':"Activo"}
         widget = {'nombre_establecimiento': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

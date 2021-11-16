@@ -14,7 +14,7 @@ class GOrgForm(forms.ModelForm):
         fields = ['nombre_grupo', 'estado_grupo']
         labels = {
         'nombre_grupo':'Nombre del grupo',
-        'estado_grupo':'Activo/Inactivo',
+        'estado_grupo':'Activo',
         }
         widget = {'nombre_grupo': forms.TextInput}
     def __init__(self, *args, **kwargs):

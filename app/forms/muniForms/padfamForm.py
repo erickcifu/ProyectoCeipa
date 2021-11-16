@@ -25,7 +25,7 @@ class PadFamForm(forms.ModelForm):
         'participacionG':'Ha participado en algùn grupo organizado',
         'grupo':'Grupo en el que ha participado',
         'cargo':'Cargo que ha ocupado',
-        'estado_padres':"Activo/Inactivo"}
+        'estado_padres':"Activo"}
         widget = {
         'grupo': forms.TextInput,
         }

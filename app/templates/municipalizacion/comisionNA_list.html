@@ -17,7 +17,6 @@
                   <th>Id</th>
                   <th>Representante</th>
                   <th>Institucion</th>
-                  <th>Participacion en grupo</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -27,15 +26,6 @@
                       <td>{{ item.id }}</td>
                       <td><a href="{% url 'municipalizacion:comisionNA_detail' item.id %}">{{ item.persona_cna.persona }} {{ item.persona_cna.apellidos_persona }}</a></td>
                       <td>{{ item.nombre_instit }}</td>
-                      {% if item.vacuna_comision is True %}
-                      <td>
-                        <span class="badge bg-green-soft text-green">Vacunado</span>
-                      </td>
-                      {% else %}
-                      <td>
-                        <span class="badge bg-red-soft text-red">No vacunado</span>
-                      </td>
-                      {% endif %}
                       {% if item.estado_comision is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

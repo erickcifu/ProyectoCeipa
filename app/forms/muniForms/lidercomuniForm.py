@@ -19,7 +19,7 @@ class LiderComuniMuniForm(forms.ModelForm):
             attrs={
                 'checked':True,
             }
-        ), required=False, label="Activo/Inactivo"
+        ), required=False, label="Activo"
     )
     fecha_inicio = forms.DateField(
         widget = forms.TextInput(
@@ -47,7 +47,7 @@ class LiderComuniMuniForm(forms.ModelForm):
         'periodo':"Tiempo que durarà el cargo",
         'fecha_inicio_l':"Fecha de Inicio de periodo",
         'fecha_fin_l':"Fecha de fin de periodo",
-         'correo_lideres':'Correo electrónico' ,'estado_liders':'Activo/Inactivo'}
+         'correo_lideres':'Correo electrónico' ,'estado_liders':'Activo'}
 
 
     def __init__(self, *args, **kwargs):

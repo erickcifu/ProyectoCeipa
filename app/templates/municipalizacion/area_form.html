@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-12 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -14,7 +14,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Area
+                            {% if obj %} Editar {% else %} Nueva {% endif %} área de niñez, adolescencia y juventud
                         </div>
                         <div class="dropdown-divider"></div>
                         <form>
@@ -26,7 +26,7 @@
                         </form>
                             <div class="col-2">
                                 <div class="form-group">
-                                    <label for="id_estado_area">Estado</label>
+                                    <label for="id_estado_area">Activo/Inactivo</label>
                                     <div class="form-check">
                                       <input class="form-check-input" name="estado_area" class="form-control" id="id_estado_area" type="checkbox"  {% if obj.estado_area is true %} checked {% endif %}>
                                     </div>

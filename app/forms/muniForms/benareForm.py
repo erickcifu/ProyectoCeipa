@@ -22,7 +22,7 @@ class BenefArForm(forms.ModelForm):
         'beneficiado':'Participante',
         'fecha_ba':'Fecha de inscripción',
         'observacion':'Observaciones',
-        'estado_ba':"Activo/Inactivo"}
+        'estado_ba':"Activo"}
         widget = {'beneficiado': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

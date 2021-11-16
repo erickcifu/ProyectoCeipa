@@ -10,7 +10,7 @@
       <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay datos de Maestro </div>
+          <div class="alert alert-info">No hay datos</div>
           {% else %}
           <table id="datatablesSimple">
               <thead>
@@ -18,7 +18,6 @@
                   <th>Maestro</th>
                   <th>Establecimiento</th>
                   <th>Correo electrónico</th>
-                  <th>Teléfono</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
               </thead>
@@ -26,10 +25,9 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.persona_maestro.persona }} {{ item.persona_maestro.apellidos_persona }}</td>  
+                      <td>{{ item.persona_maestro.persona }} {{ item.persona_maestro.apellidos_persona }}</td>
                       <td>{{ item.establecimiento }}</td>
                       <td>{{ item.correo_maestro }}</td>
-                      <td>{{ item.persona_maestro.telefono }}</td>
                       {% if item.estado_maestro is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>

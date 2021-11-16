@@ -74,24 +74,26 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super(AlumnoNew, self).get_context_data(**kwargs)
         if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
+            context['form'] = self.form_class()
         if 'form2' not in context:
-            context['form2'] = self.second_form_class(self.request.GET)
+            context['form2'] = self.second_form_class()
         if 'form3' not in context:
-            context['form3'] = self.third_form_class(self.request.GET)
+            context['form3'] = self.third_form_class()
         if 'form4' not in context:
-            context['form4'] = self.four_form_class(self.request.GET)
+            context['form4'] = self.four_form_class()
         if 'form5' not in context:
 
             context['form5'] = self.five_form_class(prefix = 'apadecimientos')
         if 'form6' not in context:
-            context['form6'] = self.six_form_class(self.request.GET)
+            context['form6'] = self.six_form_class()
         if 'form7' not in context:
-            context['form7'] = self.seven_form_class(self.request.GET)
+            context['form7'] = self.seven_form_class()
         if 'form8' not in context:
             context['form8'] = self.eight_form_class(prefix = 'convivientes')
         if 'form9' not in context:
-            context['form9'] = self.nine_form_class(self.request.GET)
+            context['form9'] = self.nine_form_class()
+        context['errors_forms'] = {}
+        
         return context
 
     def get_object(self, request, pk, *args, **kwargs):

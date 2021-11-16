@@ -14,7 +14,7 @@ class ProgramaCForm(forms.ModelForm):
         fields = ['nombre_programa', 'estado_programa']
         labels = {
         'nombre_programa':'Nombre del programa',
-        'estado_programa':'Activo/Inactivo',
+        'estado_programa':'Activo',
         }
         widget = {'nombre_programa': forms.TextInput}
     def __init__(self, *args, **kwargs):
