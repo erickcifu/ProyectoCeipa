@@ -23,7 +23,5 @@ class Beneficiado(models.Model):
 
     def delete(self, *args):
         self.estado_beneficiado = False
-        if self.fotografia is not  None:
-            self.fotografia.delete()
         self.save()
         return True

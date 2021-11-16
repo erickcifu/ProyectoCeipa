@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormMixin
 from django.views import generic
 from django.urls import reverse_lazy
 from django.core.exceptions import ImproperlyConfigured
@@ -11,17 +12,29 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-from app.models import Beneficiado, Persona, IdiomaPersona, TutorMuni, Area
+from app.models import Beneficiado, Persona, IdiomaPersona, TutorMuni, Area, BeneficiadoArea
 from app.forms import BenForm, PersonaForm, IdPerForm, TutorMuniForm
 from django.forms import formset_factory
 from django.db import IntegrityError, transaction
 from app.models.educacion_model.idioma import idioma
 
-class BenView(IsCoordinadorMunicipalMixin, generic.ListView):
+class BenView(RolesCooMunicipalEquipoMunicipalMixin, generic.ListView):
     model = Beneficiado
     template_name = 'municipalizacion/beneficiado_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/beneficiado_list.html"]
+
 
 class BenNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = Beneficiado
@@ -51,13 +64,14 @@ class BenNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super(BenNew, self).get_context_data(**kwargs)
         if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
+            context['form'] = self.form_class()
         if 'form2' not in context:
-            context['form2'] = self.second_form_class(self.request.GET)
+            context['form2'] = self.second_form_class()
         if 'form3' not in context:
             context['form3'] = self.third_form_class(prefix = 'idiomas')
         if 'form4' not in context:
-            context['form4'] = self.four_form_class(self.request.GET)
+            context['form4'] = self.four_form_class()
+        context['errors_forms'] = {}
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -65,30 +79,54 @@ class BenNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST, request.FILES)
+        form2 = self.second_form_class(request.POST)
+        form3 = self.third_form_class(request.POST, prefix = 'idiomas')
+        form4 = self.four_form_class(request.POST, request.FILES)
+
         try:
             with transaction.atomic():
-                self.object = self.get_object
-                form = self.form_class(request.POST, request.FILES)
-                form2 = self.second_form_class(request.POST)
-                form3 = self.third_form_class(request.POST, prefix = 'idiomas')
-                form4 = self.four_form_class(request.POST)
                 if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
                     persona = form.save()
                     beneficiado = form2.save(commit=False)
                     beneficiado.persona = persona
                     beneficiado.tutor = form4.save()
                     beneficiado.save()
-                    for form_idiomas in form3:
-                        idioma = form_idiomas.save(commit=False)
-                        idioma.persona = persona
-                        idioma.save()
+                    if len(form3.cleaned_data) == 1:
+                        if form3.cleaned_data[0]:
+                            for form_idiomas in form3:
+                                idioma = form_idiomas.save(commit=False)
+                                idioma.persona = persona
+                                idioma.save()
+                    elif len(form3.cleaned_data) >=1:
+                        for form_idiomas in form3:
+                            if form_idiomas.cleaned_data:
+                                idioma = form_idiomas.save(commit=False)
+                                idioma.persona = persona
+                                idioma.save()
+                    if self.request.user.user_profile.rol.id == 9:
+                        return redirect('educacion:home_equipo_municipal')
+
                     return HttpResponseRedirect(self.get_success_url())
                 else:
-                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4))
+                    print(form2.errors)
+                    errors = {
+                        'form':{'erros':form.errors, 'name':'Persona'},
+                        'form2':{'erros':form2.errors, 'name':'Beneficiado'},
+                        'form3':{'erros':form3.errors, 'name':'IdiomaPersona'},
+                        'form4':{'erros':form4.errors, 'name':'TutorMuni'},
+                    }
+                    print(errors)
+                    return self.render_to_response(self.get_context_data(form=form,
+                        form2=form2,
+                        form3=form3,
+                        form4=form4,
+                    ))
         except IntegrityError:
-            return HttpResponseRedirect("ERROR: No se puede registrar al participante")
+            return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4))
 
-class BenEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
+class BenEdit(RolesCooMunicipalEquipoMunicipalMixin, generic.UpdateView):
     template_name = "municipalizacion/benefEdit.html"
     success_url = reverse_lazy("municipalizacion:ben_list")
     model = Beneficiado
@@ -96,7 +134,18 @@ class BenEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     second_form_class = BenForm
     third_form_class = IdPerForm
     four_form_class = TutorMuniForm
-    login_url = 'app:login'
+
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/benefEdit.html"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -161,9 +210,21 @@ class BenEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class BenDetail(IsCoordinadorMunicipalMixin, generic.DetailView):
+class BenDetail(RolesCooMunicipalEquipoMunicipalMixin, generic.DetailView):
     template_name = "municipalizacion/ben_detail.html"
     model = Beneficiado
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/ben_detail.html"]
+
 
     def get_idioma(self, persona):
         return IdiomaPersona.objects.filter(persona=persona)
@@ -187,9 +248,20 @@ class BenDel(IsCoordinadorMunicipalMixin, generic.DeleteView):
 
 #Listado de participantes por area
 class ListarPorArea(RolesCooMunicipalEquipoMunicipalMixin, generic.ListView):
-    model = Beneficiado
+    model = BeneficiadoArea
     template_name = "municipalizacion/listar_ben_por_area.html"
     context_object_name = 'obj'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/listar_ben_por_area.html"]
 
     def get_queryset(self):
         id_area = self.request.GET.get("id_area")

@@ -6,7 +6,7 @@ class AreaForm(forms.ModelForm):
     class Meta:
         model = Area
         fields = ['nombre_area', 'estado_area']
-        labels = {'nombre_area':"Area", 'estado_area':"Estado"}
+        labels = {'nombre_area':"Area", 'estado_area':"Activo"}
         widget = {'nombre_area': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

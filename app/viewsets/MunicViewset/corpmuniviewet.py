@@ -6,6 +6,9 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.CoordinadorMunicipal.mixin import IsCoordinadorMunicipalMixin
+from app.viewsets.users.mixins.CooMunicipalYEquipoMunicipal import RolesCooMunicipalEquipoMunicipalMixin
 from django.views.decorators.csrf import csrf_exempt
 from app.models import CorporacionMunicipal, Persona, IdiomaPersona
 from app.forms import CorpMuniForm, PersonaForm, IdPerForm
@@ -13,13 +16,24 @@ from app.models.educacion_model.idioma import idioma
 from django.forms import formset_factory
 from django.db import IntegrityError, transaction
 
-class CorpMuniView(LoginRequiredMixin, generic.ListView):
+class CorpMuniView(RolesCooMunicipalEquipoMunicipalMixin, generic.ListView):
     model = CorporacionMunicipal
     template_name = 'municipalizacion/corpmuni_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
-class CorpMuniNew(LoginRequiredMixin, generic.CreateView):
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/corpmuni_list.html"]
+
+class CorpMuniNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = CorporacionMunicipal
     template_name = 'municipalizacion/corpmuni_form.html'
     context_object_name = "obj"
@@ -29,14 +43,29 @@ class CorpMuniNew(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("municipalizacion:corpmuni_list")
     login_url = 'app:login'
 
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/corpmuni_form.html"]
+            else:
+                return [self.template_name]
+
     def get_context_data(self, **kwargs):
         context = super(CorpMuniNew, self).get_context_data(**kwargs)
         if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
+            context['form'] = self.form_class()
         if 'form2' not in context:
-            context['form2'] = self.second_form_class(self.request.GET)
+            context['form2'] = self.second_form_class()
         if 'form3' not in context:
             context['form3'] = self.third_form_class(prefix='idiomas_corp')
+        context['errors_forms'] = {}
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -44,29 +73,50 @@ class CorpMuniNew(LoginRequiredMixin, generic.CreateView):
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST, request.FILES)
+        form2 = self.second_form_class(request.POST)
+        form3 = self.third_form_class(request.POST, prefix='idiomas_corp')
         try:
             with transaction.atomic():
-                self.object = self.get_object
-                form = self.form_class(request.POST, request.FILES)
-                form2 = self.second_form_class(request.POST)
-                form3 = self.third_form_class(request.POST, prefix='idiomas_corp')
                 if form.is_valid() and form2.is_valid() and form3.is_valid():
                     persona = form.save()
                     CorpMuniForm= form2.save(commit=False)
                     CorpMuniForm.persona = persona
                     CorpMuniForm.save()
-                    for form_idi in form3:
-                        idioma = form_idi.save(commit=False)
-                        idioma.persona = persona
-                        idioma.save()
+                    if len(form3.cleaned_data) == 1:
+                        if form3.cleaned_data[0]:
+                            for corp_idiomas in form3:
+                                idioma = corp_idiomas.save(commit=False)
+                                idioma.persona = persona
+                                idioma.save()
+                    elif len(form3.cleaned_data) >=1:
+                        for corp_idiomas in form3:
+                            if corp_idiomas.cleaned_data:
+                                idioma = corp_idiomas.save(commit=False)
+                                idioma.persona = persona
+                                idioma.save()
+                    if self.request.user.user_profile.rol.id == 9:
+                        return redirect('educacion:home_equipo_municipal')
+
                     return HttpResponseRedirect(self.get_success_url())
                 else:
-                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
+                    print(form2.errors)
+                    errors = {
+                        'form':{'erros':form.errors, 'name':'Persona'},
+                        'form2':{'erros':form2.errors, 'name':'CorporacionMunicipal'},
+                        'form3':{'erros':form3.errors, 'name':'IdiomaPersona'},
+                    }
+                    print(errors)
+                    return self.render_to_response(self.get_context_data(form=form,
+                        form2=form2,
+                        form3=form3,
+                    ))
         except IntegrityError:
-            return HttpResponseRedirect("ERROR: No se puede registrar al participante")
+            return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
 
 
-class CorpMuniEdit(LoginRequiredMixin, generic.UpdateView):
+class CorpMuniEdit(RolesCooMunicipalEquipoMunicipalMixin, generic.UpdateView):
     model = CorporacionMunicipal
     template_name = "municipalizacion/corpmuni_edit.html"
     form_class = PersonaForm
@@ -74,6 +124,20 @@ class CorpMuniEdit(LoginRequiredMixin, generic.UpdateView):
     third_form_class = IdPerForm
     success_url = reverse_lazy("municipalizacion:corpmuni_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/corpmuni_edit.html"]
+            else:
+                return [self.template_name]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -129,9 +193,24 @@ class CorpMuniEdit(LoginRequiredMixin, generic.UpdateView):
         context['persona'] = self.get_object()
 
         return render(request, self.template_name, context)
-class CorpMuniDetail(LoginRequiredMixin, generic.DetailView):
+class CorpMuniDetail(RolesCooMunicipalEquipoMunicipalMixin, generic.DetailView):
     template_name = "municipalizacion/corpmuni_detail.html"
     model = CorporacionMunicipal
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/corpmuni_detail.html"]
+            else:
+                return [self.template_name]
+
     def get_idioma_corp(self, persona_corpmuni):
         return IdiomaPersona.objects.filter(persona=persona_corpmuni)
 
@@ -143,7 +222,7 @@ class CorpMuniDetail(LoginRequiredMixin, generic.DetailView):
         context['persona_corpmuni'] = persona_corpmuni
         context['idioma_corp'] = self.get_idioma_corp(persona_corpmuni)
         return context
-        
+
 class CorpMuniDel(LoginRequiredMixin, generic.DeleteView):
     model = CorporacionMunicipal
     template_name = "municipalizacion/catalogos_del.html"

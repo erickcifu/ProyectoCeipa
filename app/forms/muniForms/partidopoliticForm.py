@@ -6,7 +6,7 @@ class PartidoPoliticForm(forms.ModelForm):
     class Meta:
         model = PartidoPolitic
         fields = ['nombre_partido', 'estado']
-        labels = {'nombre_partido':"Nombre Partido Politico", 'estado':"Estado"}
+        labels = {'nombre_partido':"Nombre Partido Politico", 'estado':"Activo"}
         widget = {'nombre_partido': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

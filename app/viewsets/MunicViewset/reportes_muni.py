@@ -31,6 +31,7 @@ class AlumnosporDepto(LoginRequiredMixin, generic.ListView):
         context['alumnos_universidad'] = Beneficiado.objects.filter(estado_beneficiado=True, nivel_universitario=True).count()
         context['por_genero_municipio'] = genero.objects.filter(estado_genero=True).annotate(cant_per = Count('P_genero__B_persona'))
         context['cant_por_area'] = Area.objects.annotate(cant_area = Count('ba_Area__beneficiado'))
+        
         return context
 
 class total_comisiones(LoginRequiredMixin, generic.ListView):

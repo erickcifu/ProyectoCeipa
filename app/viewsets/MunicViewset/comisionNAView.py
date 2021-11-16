@@ -17,11 +17,23 @@ from app.models import ComisionNA, Persona, IdiomaPersona
 from app.forms import Comision_NAForm, PersonaForm, IdPerForm
 from app.models.educacion_model.idioma import idioma
 
-class ComisionNAView(IsCoordinadorMunicipalMixin, generic.ListView):
+class ComisionNAView(RolesCooMunicipalEquipoMunicipalMixin, generic.ListView):
     model = ComisionNA
     template_name = 'municipalizacion/comisionNA_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/comisionNA_list.html"]
+
 
 class ComisionNANew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = ComisionNA
@@ -43,18 +55,19 @@ class ComisionNANew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
             if user == 7 or user == 8:
                 return [self.template_name]
             elif user == 9:
-                return ["equipoMunicipal/comision_form.html"]
+                return ["equipoMunicipal/comisionNA_form.html"]
             else:
                 return [self.template_name]
 
     def get_context_data(self, **kwargs):
         context = super(ComisionNANew, self).get_context_data(**kwargs)
         if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
+            context['form'] = self.form_class()
         if 'form2' not in context:
-            context['form2'] = self.second_form_class(self.request.GET)
+            context['form2'] = self.second_form_class()
         if 'form3' not in context:
             context['form3'] = self.third_form_class(prefix = 'idiomas_na')
+        context['errors_forms'] = {}
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -62,28 +75,49 @@ class ComisionNANew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST, request.FILES)
+        form2 = self.second_form_class(request.POST)
+        form3 = self.third_form_class(request.POST, prefix = 'idiomas_na')
+
         try:
             with transaction.atomic():
-                self.object = self.get_object
-                form = self.form_class(request.POST, request.FILES)
-                form2 = self.second_form_class(request.POST)
-                form3 = self.third_form_class(request.POST, prefix = 'idiomas_na')
                 if form.is_valid() and form2.is_valid() and form3.is_valid():
                     persona = form.save()
                     comision_na = form2.save(commit=False)
                     comision_na.persona_cna = persona
                     comision_na.save()
-                    for form_idiomas in form3:
-                        idioma = form_idiomas.save(commit=False)
-                        idioma.persona = persona
-                        idioma.save()
+                    if len(form3.cleaned_data) == 1:
+                        if form3.cleaned_data[0]:
+                            for comision_idiomas in form3:
+                                idioma = comision_idiomas.save(commit=False)
+                                idioma.persona = persona
+                                idioma.save()
+                    elif len(form3.cleaned_data) >=1:
+                        for comision_idiomas in form3:
+                            if comision_idiomas.cleaned_data:
+                                idioma = comision_idiomas.save(commit=False)
+                                idioma.persona = persona
+                                idioma.save()
+                    if self.request.user.user_profile.rol.id == 9:
+                        return redirect('educacion:home_equipo_municipal')
                     return HttpResponseRedirect(self.get_success_url())
                 else:
-                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
+                    print(form2.errors)
+                    errors = {
+                        'form':{'erros':form.errors, 'name':'Persona'},
+                        'form2':{'erros':form2.errors, 'name':'ComisionNA'},
+                        'form3':{'erros':form3.errors, 'name':'IdiomaPersona'},
+                    }
+                    print(errors)
+                    return self.render_to_response(self.get_context_data(form=form,
+                        form2=form2,
+                        form3=form3,
+                    ))
         except IntegrityError:
-            return HttpResponseRedirect("ERROR: No se puede registrar al participante")
+            return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
 
-class ComisionNAEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
+class ComisionNAEdit(RolesCooMunicipalEquipoMunicipalMixin, generic.UpdateView):
     model = ComisionNA
     template_name = "municipalizacion/comisionNA_edit.html"
     form_class = PersonaForm
@@ -91,6 +125,17 @@ class ComisionNAEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     third_form_class = IdPerForm
     success_url = reverse_lazy("municipalizacion:comisionNA_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/comisionNA_edit.html"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -149,9 +194,20 @@ class ComisionNAEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class ComisionNADetail(IsCoordinadorMunicipalMixin, generic.DetailView):
+class ComisionNADetail(RolesCooMunicipalEquipoMunicipalMixin, generic.DetailView):
     template_name = "municipalizacion/comisionNA_detail.html"
     model = ComisionNA
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/comisionNA_detail.html"]
 
     def get_idioma_na(self, persona_na):
         return IdiomaPersona.objects.filter(persona=persona_na)

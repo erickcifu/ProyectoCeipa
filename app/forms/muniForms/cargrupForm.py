@@ -6,7 +6,7 @@ class CarGForm(forms.ModelForm):
     class Meta:
         model = CargoGrupo
         fields = ['nombre_cg', 'estado_cg']
-        labels = {'nombre_cg':"CargoGrupo", 'estado_cg':"Estado"}
+        labels = {'nombre_cg':"CargoGrupo", 'estado_cg':"Activo"}
         widget = {'nombre_cg': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

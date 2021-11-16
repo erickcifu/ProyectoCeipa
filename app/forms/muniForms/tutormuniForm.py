@@ -5,15 +5,9 @@ class TutorMuniForm(forms.ModelForm):
     fecha_nacimiento_T = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
-        )
+        ), label = 'Fecha de nacimiento'
     )
-    estado_tutor = forms.BooleanField(
-        widget = forms.CheckboxInput(
-            attrs={
-                'checked':True,
-            }
-        ), required=False, label="Activo/Inactivo"
-    )
+    estado_tutor = forms.BooleanField()
     class Meta:
         model = TutorMuni
         fields = ['nombres_tutor', 'apellidos_tutor',
@@ -28,13 +22,39 @@ class TutorMuniForm(forms.ModelForm):
         'direccion_tutor':'Direccion',
         'telefono_T':"No. Telefono",
         'fotografia_tutor':"Fotografia",
-        'estado_tutor':'Activo/Inactivo'}
+        'estado_tutor':'Activo'}
         widget = {'nombres_tutor', forms.TextInput}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required': False
             })
-            self.fields['parentesco'].empty_label = "Seleccione su parentesco"
+            if field == 'estado_tutor':
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input',
+                    'checked':True
+            })
+            requiered = self.fields[field].required
+            if requiered:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+            })
+            if field == 'telefono_T':
+                self.fields[field].widget.attrs.update({
+                    'placeholder':'00000000',
+                    'onblur':'isTelephoneNumber({});'.format('id_'+field),
+            })
+            if field == 'DPI_T':
+                self.fields[field].widget.attrs.update({
+                    'placeholder':'0000 00000 0000',
+                    'onblur':'isIdentify({});'.format('id_'+field),
+            })
+            if field == 'fecha_nacimiento_T':
+                self.fields[field].widget.attrs.update({
+                    'placeholder':'dd/mm/yyyy',
+                    'type':'date'
+                })
+        self.fields['parentesco'].empty_label = "Seleccione parentesco con el participante"

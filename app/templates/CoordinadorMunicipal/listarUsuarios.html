@@ -5,7 +5,7 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-            Listado de Coordinadores de Area
+            Listado de usuarios PROMUNI
       </div>
       <div class="card mb-4">
       <div class="card-body">
@@ -15,8 +15,8 @@
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
+                  <th>Usuario</th>
                   <th>Nombre</th>
-                  <th>Apellidos</th>
                   <th>Cargo</th>
                   <th>Estado</th>
               </thead>
@@ -24,8 +24,8 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.first_name }}</td>
-                      <td>{{ item.last_name }}</td>
+                      <td>{{ item.username }}</td>
+                      <td>{{ item.first_name }} {{ item.last_name }}</td>
                       <td>{{ item.cargo}}</td>
                       {% if item.is_active is True %}
                       <td>

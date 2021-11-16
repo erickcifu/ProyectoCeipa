@@ -2,13 +2,7 @@ from django import forms
 from app.models import Maestro
 
 class MaestroForm(forms.ModelForm):
-    estado_maestro = forms.BooleanField(
-        widget = forms.CheckboxInput(
-            attrs={
-                'checked':True,
-            }
-        ), required=False, label="Activo/Inactivo"
-    )
+    estado_maestro = forms.BooleanField()
     class Meta:
         model = Maestro
         fields = ['establecimiento',
@@ -23,7 +17,7 @@ class MaestroForm(forms.ModelForm):
         'estado_maestro'
         ]
 
-        labels = {'establecimiento':'Establecimiento',
+        labels = {'establecimiento':'Nombre del establecimiento',
         'area_rural':'Rural',
         'area_urbana':'Urbana',
         'est_publico':'Público',
@@ -32,15 +26,34 @@ class MaestroForm(forms.ModelForm):
         'correo_maestro':'Correo electrónico',
         'gruporg':'Cargo en el grupo organizado',
         'cargogrup':'Grupo organizado al que pertenece',
-        'estado_maestro':"Activo/Inactivo"}
+        'estado_maestro':"Activo"}
         widget = {'establecimiento': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'requiered':False
             })
-            self.fields['establecimiento'].empty_label = "Seleccione un Establecimiento"
-            self.fields['gruporg'].empty_label = "Seleccione su cargo"
-            self.fields['cargogrup'].empty_label = "Seleccione grupo"
+            if field == 'estado_maestro':
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input',
+                    'checked':True
+            })
+            if type(self.fields[field])==forms.EmailField:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isEmail({});'.format('id_'+field)
+            })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })
+            requiered = self.fields[field].required
+            if requiered:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+            })
+        self.fields['establecimiento'].empty_label = "Seleccione un Establecimiento"
+        self.fields['gruporg'].empty_label = "Seleccione su cargo"
+        self.fields['cargogrup'].empty_label = "Seleccione grupo"

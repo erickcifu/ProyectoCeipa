@@ -5,7 +5,7 @@ class IdiomaMuniForm(forms.ModelForm):
     class Meta:
         model = idioma
         fields = ['nombre_idioma', 'descripcion_idioma', 'estado_idioma']
-        labels = {'nombre_idioma':'Idioma', 'descripcion_idioma':'Descripcion_idioma', 'estado_idioma':'Estado'}
+        labels = {'nombre_idioma':'Idioma', 'descripcion_idioma':'Descripcion_idioma', 'estado_idioma':'Activo'}
         widget = {'nombre_idioma', forms.TextInput}
 
         def __init__(self, *args, **kwargs):

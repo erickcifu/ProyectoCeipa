@@ -14,7 +14,7 @@ class BeneficiadoArea(models.Model):
     def __str__(self):
         return str(self.area)
 
-    def delete(self, *args):
-        self.estado_ba = False
-        self.save()
-        return True
+    #def delete(self, *args):
+    #    self.estado_ba = False
+    #    self.save()
+    #    return True

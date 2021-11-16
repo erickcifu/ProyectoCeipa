@@ -5,7 +5,7 @@ class ComisionForm(forms.ModelForm):
     class Meta:
         model = Comision
         fields = ['nombre_comision', 'estado_comision']
-        labels = {'nombre_comision':'Comision', 'estado_comision':"Estado"}
+        labels = {'nombre_comision':'Comision', 'estado_comision':"Activo"}
         widget = {'nombre_comision': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

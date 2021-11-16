@@ -388,6 +388,11 @@ urlpatterns = [
     path('Comisiona_NA/detail/<int:pk>/', viewsets.ComisionNADetail.as_view(), name='comisionNA_detail'),
     path('Comisiona_NA/delete/<int:pk>', viewsets.ComisionNADel.as_view(), name='comisionNA_del'),
 
+    path('grado_academico/', viewsets.GradoacadView.as_view(), name='gacad_list'),
+    path('grado_academico/new', viewsets.GradoacadNew.as_view(), name='gacad_new'),
+    path('grado_academico/edit/<int:pk>', viewsets.GradoacadEdit.as_view(), name='gacad_edit'),
+    path('grado_academico/delete/<int:pk>', viewsets.GradoacadDel.as_view(), name='gacad_del'),
+
     #SocioProductivo
     path('tipo_emprendimiento/', viewsets.TipoEmpView.as_view(), name='TipoEmp_list'),
     path('tipo_emprendimiento/new', viewsets.TipoEmpNew.as_view(),name='TipoEmp_new'),

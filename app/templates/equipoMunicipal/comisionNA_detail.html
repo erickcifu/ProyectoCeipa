@@ -1,0 +1,152 @@
+{% extends 'EquipoMunicipal/municipalizacion.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions d-flex bd-highlight">
+      <div class="card-header">
+          <h2 class="text-dark">Datos de {{ item.persona_cna }} {{ item.persona_cna.apellidos_persona }}</h2>
+          <div class="p-2 bd-highlight">
+            <a href="#" class="btn btn-sm btn-light text-primary" role="button"><i class="me-2" data-feather="printer"></i>PDF</a>
+          </div>
+      </div>
+      <div class="card-body">
+            <div class="row">
+                  <div class="col-lg-12 col-xl-12 mb-12">
+                    <div class="card">
+                        <div class="card-header">
+                          <h2 class="text-muted">Información personal del representante</h2>
+                        </div>
+                        <div class="card-body d-flex">
+                          <div class=flex-shrink-0">
+                            <img class="rounded float-left" src="{{item.persona_cna.foto_url|default_if_none:'ceipa/default.png'}}" height="200" weight="250">
+                          </div>
+                          <div class="flex-grow-1 ms-3">
+                            <label><b>Nombre completo: </b>{{ item.persona_cna }} {{ item.persona_cna.apellidos_persona }}</label>
+                            <br/>
+                            <label><b>Género: </b>{{ item.persona_cna.gen }}</label>
+                            <br/>
+                            <label><b>No. CUI: </b>{{ item.persona_cna.cui }}</label>
+                            <br/>
+                            <label><b>Dirección domiciliar: </b>{{ item.persona_cna.direccion_persona }}</label>
+                            <br/>
+                            <label><b>No. Telefono: </b>{{ item.persona_cna.telefono }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label><b>No. Telefono de casa: </b> {{ item.persona_cna.telefonoc }}</label>
+                            <br/>
+                            <label><b>Correo electrónico: </b>{{ item.correo_personacna }}</label>
+                            <br/>
+                            <label><b>Municipio y departamento de origen: </b>{{ item.persona_cna.muni }}, {{ item.persona_cna.muni.dep }}</label>
+                            <br/>
+                            <label><b>Grupo étnico: </b>{{ item.persona_cna.etni }}</label>
+                            <br/>
+                            <label><b>Idioma/s que habla: </b>
+                              {% if not id_per_na %}
+                              <label>Ninguno</label>
+                              {% else %}
+                                {% for idioma in id_per_na %}
+                                  <label>{{ idioma.idioma.nombre_idioma }}, </label>
+                                {% endfor %}
+                              {% endif %}
+                            </label>
+                            <br/>
+                            <label><b>Último grado cursado: </b>{{ item.persona_cna.estudios_anteriores }}</label>
+                            <br/>
+                            <label><b>Particiáción en grupo organizado: </b>
+                              {% if item.participacion_comina is True %}
+                                <label>Sí participa</label>
+                                <br/>
+                                <label><b>Grupo organizado: </b>{{ item.gorg_comision }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label><b>Cargo que ocupa dentro del grupo organizado: </b>{{ item.cg_comision }}</label>
+                              {% else %}
+                                <label>No participa en ningún grupo organizado</label>
+                              {% endif %}
+                            </label>
+                            <br/>
+                            <label>
+                            {% if item.vacuna_comision is True %}
+                              <span class="badge bg-yellow-soft text-yellow">Vacunado contra COVID-19</span>
+                            {% else %}
+                              <span class="badge bg-yellow-soft text-yellow">No vacunado contra COVID-19</span>
+                            {% endif %}
+                            </label>
+                            <br/>
+                            <label>
+                              {% if item.persona_cna.disc is True %}
+                                <span class="badge bg-purple-soft text-purple">Tiene discapacidades físicas</span>
+                              {% else %}
+                                <span class="badge bg-purple-soft text-purple">No tiene discapacidades físicas</span>
+                              {% endif %}
+                            </label>
+                            <br/>
+                            <label>
+                              {% if item.persona_cna.estado_persona is True %}
+                                <span class="badge bg-green-soft text-green">Representante activo</span>
+                              {% else %}
+                                <span class="badge bg-red-soft text-red">Representante inactivo</span>
+                              {% endif %}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <br/>
+                      <!--INFORMACIÓN ACADEMICA Y LABORAL-->
+                      <div class="card">
+                          <div class="card-header">
+                            <h2 class="text-muted">Información de la comisión</h2>
+                          </div>
+                          <div class="card-body d-flex">
+                            <div class="flex-grow-1 ms-3">
+                              <label><b>Nombre de la institución: </b>{{ item.nombre_instit }}</label>
+                              <br/>
+                              <label><b>Correo electrónico de la institución: </b>{{ item.correo_instit }}</label>
+                              <br/>
+                              <label><b>No. Teléfono de la institución: </b>{{ item.tel_instit }}</label>
+                              <br/>
+                            <label><b>Tipo de institución: </b></label>
+                              <label>
+                                {% if item.inst_publica is True %}
+                                  <label>Pública</label>
+                                {% elif item.inst_gobierno is True %}
+                                  <label>De gobierno</label>
+                                {% else %}
+                                  <label>No definido</label>
+                                {% endif %}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      <!--FIN INFORMACIÓN ACADEMICA Y LABORAL-->
+                      <br/>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{% url 'municipalizacion:comisionNA_list' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+                        </div>
+                    </div>
+
+
+      </div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+
+</script>
+<script >
+  function eliminar(id){
+  swal.fire({
+    "titulo":"Esta seguro",
+    "text":"esta accion no se puede deshacer",
+    "icon":"question",
+    "showCancelButton":true
+  })
+  }
+</script>
+{% endblock%}

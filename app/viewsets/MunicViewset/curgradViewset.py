@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
@@ -10,13 +10,13 @@ from app.forms import CarGForm
 
 class CarGView(IsCoordinadorMunicipalMixin, generic.ListView):
     model = CargoGrupo
-    template_name = 'municipalizacion/carg_list.html'
+    template_name = 'municipalizacion/cargogrupo_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
 class CarGNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = CargoGrupo
-    template_name = 'municipalizacion/carg_form.html'
+    template_name = 'municipalizacion/cargogrupo_form.html'
     context_object_name = "obj"
     form_class = CarGForm
     success_url = reverse_lazy("municipalizacion:carg_list")
@@ -44,7 +44,7 @@ class CarGNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
 
 class CarGEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     model = CargoGrupo
-    template_name = "municipalizacion/carg_form.html"
+    template_name = "municipalizacion/cargogrupo_form.html"
     context_object_name = "obj"
     form_class = CarGForm
     success_url = reverse_lazy("municipalizacion:carg_list")

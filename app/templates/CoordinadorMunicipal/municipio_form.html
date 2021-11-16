@@ -44,7 +44,7 @@
                         </div> -->
                             <div class="col-5">
                                 <div class="form-group">
-                                    <label for="id_estado_departamento">Estado</label>
+                                    <label for="id_estado_departamento">Activo/Inactivo</label>
                                     <div class="form-check">
                                       <input class="form-check-input" name="estado_municipio" class="form-control" id="id_estado_municipio" type="checkbox"  {% if obj.estado_municipio is true %} checked {% endif %}>
                                     </div>
@@ -54,8 +54,8 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-danger">Guardar</button>
-                                <a href="{% url 'educacion:municipio_list' %}" class="btn btn-success">Cancelar</a>
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'educacion:municipio_list' %}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </div>
