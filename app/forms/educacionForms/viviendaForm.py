@@ -4,14 +4,17 @@ from app.models import vivienda
 class VivForm(forms.ModelForm):
     class Meta:
         model = vivienda
-        fields = ['cantidad_personas','cantidad_ambientes', 'energia_electrica', 'servicio_sanitario', 'letrina', 'techo','categoria', 'piso', 'muro', 'servicio']
+        fields = ['cantidad_personas','cantidad_ambientes', 'energia_electrica', 'servicio_sanitario', 'letrina', 'techo','categoria', 'piso', 'muro','servicio_internet', 'servicio', 'estado_vivienda']
         labels = {'cantidad_personas':"CantidadPersonas",
+        'cantidad_ambientes':'Cantidad de ambientes',
         'energia_electrica':'Energia electrica',
         'servicio_sanitario':'Sevicios sanitario',
         'letrina':'letrina',
         'techo':'Techo', 'piso':'piso',
+        'servicio_internet':'Servicio de internet',
         'muro':'muro',
-        'servicio':'servicio', 'categoria':'categoria'}
+        'servicio':'servicio', 'categoria':'categoria',
+        'estado_vivienda':'Activo'}
         # widgets = {
         #     'cantidad_personas': forms.TextInput(
         #         attrs={
@@ -28,6 +31,11 @@ class VivForm(forms.ModelForm):
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
+            })
+            if field == 'estado_vivienda':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
             })
             #agreango el nombre de la funcion para utilizarla en la plantilla
             required = self.fields[field].required

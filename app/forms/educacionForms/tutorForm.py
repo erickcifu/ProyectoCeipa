@@ -41,15 +41,15 @@ class TutorForm(forms.ModelForm):
         'apellidos_tutor':'Apellidos',
         'DPI_tutor':"DPI",
         'fecha_nacimiento_tutor':'Fecha de nacimiento',
-        'direccion_tutor':'Direcció domiciliarn',
+        'direccion_tutor':'Dirección domiciliar',
         'telefono_tutor':"Teléfono",
-        'correo_tutor':"Correo",
-        'fotografia_t':"Fotografia",
+        'correo_tutor':"Correo electrónico",
+        'fotografia_t':"Fotografía",
         'muni':"Municipio",
-        'genero':"Genero",
+        'genero':"Género",
         'parentesco':'Parentesco con el alumno',
         'ocupacion_tutor':'Ocupación',
-         'estado_tutor':'Estado'}
+         'estado_tutor':'Activo'}
         widget = {'nombres_tutor', forms.TextInput}
 
     def __init__(self, *args, **kwargs):

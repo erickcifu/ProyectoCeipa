@@ -1,15 +1,18 @@
 from django import forms
 from django.forms import widgets
+#from django.forms.widgets import TimePickerInput
 from app.models import AspectosLab
 
 class LaboralForm(forms.ModelForm):
     estado_laborales = forms.BooleanField()
-    hora_entrada = forms.TimeField()
-    hora_salida = forms.TimeField(
-        widget=forms.TimeInput(
-            attrs={
-                'class':'time-pick'
-            }
+    hora_entrada = forms.DateField(
+        widget = forms.TextInput(
+            attrs = { 'type': 'time' }
+        )
+    )
+    hora_salida = forms.DateField(
+        widget = forms.TextInput(
+            attrs = { 'type': 'time' }
         )
     )
     class Meta:
@@ -43,14 +46,17 @@ class LaboralForm(forms.ModelForm):
             'i_semanal':'Ingreso semanal',
             'i_quincenal':'Ingreso quincenal',
             'i_mensual':'Ingreso mensual',
-            'total_ingreso':'Total de ingresos',
+            'total_ingreso':'Total de ingresos al mes',
             'destino_ingreso':'Destino de los ingresos',
-            'edad_inicio_trabajo':'Edad a la que empezó a trabajar',
+            'edad_inicio_trabajo':'¿A qué edad empezó a trabajar?',
             'familia_migrante':'¿Tiene familia migrante?',
             'cantidad_familiares':'Si es así, ¿cuántos familiares tiene en el extranjero?',
             'estado_laborales':'Activo/Inactivo'
         }
-        widget = {'empleador', forms.TextInput,
+        widget = {
+            'empleador': forms.TextInput,
+            #'hora_entrada': TimePickerInput(),
+            #'hora_salida': TimePickerInput()
         }
 
         def __init__(self, *args, **kwargs):
@@ -73,14 +79,6 @@ class LaboralForm(forms.ModelForm):
                 if requiered:
                     self.fields[field].widget.attrs.update({
                         'onblur':'isRequeried({});'.format('id_'+field)
-                })
-                if field == 'hora_entrada':
-                    self.fields[field].widget.attrs.update({
-                        'placeholder':'00:00'
-                })
-                if field == 'hora_salida':
-                    self.fields[field].widget.attrs.update({
-                        'placeholder':'00:00'
                 })
                 if type(self.fields[field])==forms.EmailField:
                     self.fields[field].widget.attrs.update({

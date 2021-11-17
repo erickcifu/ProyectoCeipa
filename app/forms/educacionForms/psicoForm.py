@@ -8,17 +8,23 @@ class PsicoForm(forms.ModelForm):
             attrs={'type':'date'}
         )
     )
-    estado_psicologico = forms.BooleanField(
-        widget = forms.CheckboxInput(
-            attrs={
-                'checked':True,
-            }
-        ), required=False, label="Activo/Inactivo"
-    )
+    estado_psicologico = forms.BooleanField()
     class Meta:
         model = psicologico
-        fields = ['Analisis_psicologico', 'fecha_Analisis','tratamiento', 'Entrevistador','estado_psicologico']
-        labels = {'Analisis_psicologico':"Psicologico",'fecha_Analisis':'Fecha Analisis', 'tratamiento':'tratamiento','Entrevistador':'Entrevistador','estado_psicologico':"Estado"}
+        fields = ['Analisis_psicologico',
+        'fecha_Analisis',
+        'tratamiento',
+        'tiene_sueños',
+        'sueños',
+        'Entrevistador',
+        'estado_psicologico']
+        labels = {'Analisis_psicologico':"Análisis psicológico",
+        'fecha_Analisis':'Fecha en la que se realizó el análisis',
+        'tratamiento':'Descripción del tratamiento que recibe',
+        'tiene_sueños':'Tiene sueños',
+        'sueños':'¿Cuáles son sus sueños?',
+        'Entrevistador':'Entrevistador',
+        'estado_psicologico':"Activo"}
         widget = {'Analisis_psicologico': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
@@ -27,6 +33,12 @@ class PsicoForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
+            if field == 'estado_psicologico':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
+            })
+            
             #agreango el nombre de la funcion para utilizarla en la plantilla
             required = self.fields[field].required
             if required:
