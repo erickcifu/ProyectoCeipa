@@ -71,12 +71,13 @@ class CGNew(IsCoordinadorEducacionMixin, generic.CreateView):
         context['id_ciclo'] = self.get_object().id if self.get_object() else ''
         context['ciclos'] = Ciclo.objects.all()
         return context
-
+        '''
     def post(self, request, *args, **kwargs):
         self.id_ciclo = self.get_object()
         super().post(request, *args, **kwargs)
-
+        '''
     def form_valid(self, form):
+        self.id_ciclo = self.get_object()
         if form.is_valid():
             if self.id_ciclo:
                 grado_ciclo = Ciclo_grado(**form.cleaned_data, ciclo=self.id_ciclo)
