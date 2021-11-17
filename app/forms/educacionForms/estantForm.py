@@ -12,21 +12,31 @@ class EstAntForm(forms.ModelForm):
     class Meta:
         model = EstudiosAnt
         fields = ['grado','nombre_establecimiento', 'telefono_estudios_anteriores','repitente','apoyo_ong','nombre_ong','estado_estudiosant']
-        labels = {'nombre_establecimiento':"Establecimiento anterior", 'repitente':"Repitente",'apoyo_ong':'Recibe apoyo de alguna ONG', 'nombre_ong':'Nombre de la ONG','telefono_estudios_anteriores':'Telefono de la organización','estado_estudiosant':"Estado"}
+        labels = {'nombre_establecimiento':"Establecimiento anterior",
+        'repitente':"Es repitente",
+        'apoyo_ong':'Recibe apoyo de alguna ONG',
+        'nombre_ong':'Nombre de la ONG',
+        'telefono_estudios_anteriores':'Telefono de la organización',
+        'estado_estudiosant':"Estado"}
         widget = {'nombre_establecimiento': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required':False
             })
 
-            if field == 'estado_estudiosant' or field == 'repitente':
+            if field == 'estado_estudiosant':
                 self.fields[field].widget.attrs.update({
-                'class':'form-check-input'
+                'class':'form-check-input',
+                'checked':True
             })
-            
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })
             #Asignando nombres de funciones dependiendo el tipo de campo y si es requerido.
             required = self.fields[field].required
             if required:

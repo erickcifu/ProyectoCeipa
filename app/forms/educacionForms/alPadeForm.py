@@ -8,7 +8,7 @@ class APadeForm(forms.ModelForm):
     class Meta:
         model = Apadecimiento
         fields = ['padecimiento','tratamiento', 'estado_Alpadecimiento']
-        labels = {'padecimiento':"AlumPad", 'tratamiento':'Tratamiento','estado_Alpadecimiento':"Estado"}
+        labels = {'padecimiento':"Padecimiento", 'tratamiento':'Tratamiento','estado_Alpadecimiento':"Activo"}
         widget = {'estado_Alpadecimiento': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

@@ -35,7 +35,7 @@ class AlumnoForm(forms.ModelForm):
             'idiome',  'estado_alumno'
         ]
         labels = {
-            'ocup':'Ocupacion',
+            'ocup':'Ocupación',
             'nombres_alumno':'Nombres',
             'apellidos_alumno':'Apellidos',
             'cui':"CUI",
@@ -45,9 +45,9 @@ class AlumnoForm(forms.ModelForm):
             'direccion_alumno':"Direccion",
             'telefono_alumno':"Telefono",
             'fotografia':"Fotografia",
-            'etni':"Etnia",
+            'etni':"Grupo étnico",
             'idiome':"Idioma que habla",
-            'gen':'Genero',
+            'gen':'Género',
             'muni':'Municipio',
             'estado_alumno':'Estado',
             'edad':'Edad'

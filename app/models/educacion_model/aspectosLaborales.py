@@ -17,7 +17,7 @@ class AspectosLab(models.Model):
     total_ingreso = models.FloatField(null=True, blank=True)
     destino_ingreso = models.CharField(max_length=255, null=True, blank=True)
     edad_inicio_trabajo = models.PositiveIntegerField(null=True, blank=True)
-    familia_migrante = models.BooleanField(default=True)
+    familia_migrante = models.BooleanField(default=False)
     cantidad_familiares = models.CharField(max_length=10, null=True, blank=True)
     estado_laborales = models.BooleanField(default=True)
 
