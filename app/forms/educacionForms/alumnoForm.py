@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import widgets
 from app.models import Alumno, municipio, genero
 
 
@@ -9,13 +10,7 @@ class AlumnoForm(forms.ModelForm):
             attrs={'type':'date'}
         )
     )
-    estado_alumno = forms.BooleanField(
-        widget = forms.CheckboxInput(
-            attrs={
-                'checked':True,
-            }
-        ), required=False, label="Activo/Inactivo"
-    )
+    estado_alumno = forms.BooleanField()
     edad = forms.BooleanField(
         widget = forms.CheckboxInput(
             attrs={

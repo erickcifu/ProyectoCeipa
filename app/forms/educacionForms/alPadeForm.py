@@ -4,13 +4,7 @@ from app.models import Apadecimiento,Padecimiento
 
 class APadeForm(forms.ModelForm):
     #padecimiento = forms.ModelMultipleChoiceField(queryset=Padecimiento.objects.all())
-    estado_Alpadecimiento = forms.BooleanField(
-        widget = forms.CheckboxInput(
-            attrs={
-                'checked':True,
-            }
-        ), required=False, label="Activo/Inactivo"
-    )
+    estado_Alpadecimiento = forms.BooleanField()
     class Meta:
         model = Apadecimiento
         fields = ['padecimiento','tratamiento', 'estado_Alpadecimiento']
@@ -21,6 +15,16 @@ class APadeForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required': False
             })
-            self.fields['padecimiento'].empty_label = "Seleccione un padecimiento"
+            if field == 'estado_Alpadecimiento':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
+            })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })
+        self.fields['padecimiento'].empty_label = "Seleccione un padecimiento"
