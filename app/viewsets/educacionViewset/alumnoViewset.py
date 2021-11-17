@@ -82,7 +82,6 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
         if 'form4' not in context:
             context['form4'] = self.four_form_class()
         if 'form5' not in context:
-
             context['form5'] = self.five_form_class(prefix = 'apadecimientos')
         if 'form6' not in context:
             context['form6'] = self.six_form_class()
@@ -93,7 +92,7 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
         if 'form9' not in context:
             context['form9'] = self.nine_form_class()
         context['errors_forms'] = {}
-        
+
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -101,7 +100,6 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
-
         self.object = self.get_object
         form = self.form_class(request.POST,request.FILES)
         form2 = self.second_form_class(request.POST)
@@ -162,7 +160,9 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
                         'form5':{'erros':form5.errors, 'name':'Apadecimiento'},
                         'form6':{'erros':form6.errors, 'name':'Psicologo'},
                         'form7':{'erros':form7.errors, 'name':'Vivienda'},
-                        'form8':{'erros':form8.errors, 'name':'Convivientes'}
+                        'form8':{'erros':form8.errors, 'name':'Convivientes'},
+                        'form9':{'erros':form9.errors, 'name':'AspectosLab'},
+
                     }
                     print(errors)
                     return self.render_to_response(self.get_context_data(form=form,
@@ -173,10 +173,11 @@ class AlumnoNew(LoginRequiredMixin, generic.CreateView):
                         form6=form6,
                         form7=form7,
                         form8=form8,
+                        form9=form9,
                         errors_forms=errors
                         ))
         except IntegrityError:
-           return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8))
+           return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8, form9=form9))
 
 class AlumnoEdit(RolesCoordinadorEducacionYDirectorCentroMixin, generic.UpdateView):
     model = Alumno

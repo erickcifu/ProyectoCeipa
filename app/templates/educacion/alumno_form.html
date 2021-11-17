@@ -1,6 +1,7 @@
 {% extends 'base/base3.html' %}
 
 {% block page_content %}
+{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
@@ -161,6 +162,13 @@
                                       {%endfor%}
                                     {%endfor%}
                                   {%endif%}
+                                  {%if form9.errors%}
+                                    {%for field in form9%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
                               <!--Wizard Body-->
                                 <div class="tab-content" id="cardTabContent">
                                   <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
@@ -169,55 +177,89 @@
                                         <h3 class="text-primary">Paso 1</h3>
                                         <h5 class="card-title mb-4">Ingrese la informaciòn personal del alumno </h5>
                                         <!--Inicio Formulario-->
+                                        <div class="row gx-12">
                                           <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                <label>Nombres</label>
                                                 {{ form3.nombres_alumno }}
-                                          </div>
-                                          <div class="row gx-3">
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                              <label>Apellidos</label>
                                                 {{ form3.apellidos_alumno }}
+                                            </div>
                                           </div>
                                           <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>No. CUI</label>
                                                 {{ form3.cui }}
+                                            </div>
                                           </div>
                                           <div class="row gx-3">
-                                            <label>Codigo de MINEDUC</label>
+                                            <div class="mb-3 col-md-12">
+                                            <label>Código de MINEDUC</label>
                                                 {{ form3.codigo_mineduc }}
+                                            </div>
                                           </div>
                                           <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                            <label>Fecha de nacimiento</label>
                                                 {{ form3.fecha_nacimiento }}
+                                            </div>
                                           </div>
                                           <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>Ingreso familiar</label>
                                                 {{ form3.ingreso_familiar }}
+                                            </div>
                                           </div>
                                           <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>Dirección domiciliar</label>
                                                 {{ form3.direccion_alumno }}
+                                            </div>
                                           </div>
                                           <div class="row gx-3">
-                                                {{ form3.telefono }}
+                                            <div class="mb-3 col-md-12">
+                                              <label>No. Teléfono</label>
+                                                {{ form3.telefono_alumno }}
+                                            </div>
                                           </div>
                                           <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                              <label>Fotografía</label>
                                                 {{ form3.fotografia }}
+                                            </div>
                                           </div>
                                           <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                              <label>Etnia</label>
                                                 {{ form3.etni }}
-                                          </div>
-                                          <div class="row gx-3">
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                              <label>Idioma</label>
                                                 {{ form3.idiome }}
+                                            </div>
                                           </div>
                                           <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                              <label>Municipio</label>
                                                 {{ form3.muni }}
-                                          </div>
-                                          <div class="row gx-3">
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                              <label>Género</label>
                                                 {{ form3.gen }}
+                                            </div>
                                           </div>
-                                          <div class="row gx-3">
+
+                                          <div class="row gx-3" hidden>
+                                            <div class="mb-3 col-md-12">
+                                              <label>Activo</label>
                                                 {{ form3.estado_alumno }}
+                                              </div>
                                           </div>
                                           <hr class="my-4"/>
-                                          <div class="d-flex justify-content-between">
-                                            <button class="btn btn-ligth" type="button">Anterior</button>
-                                            <button class="btn btn-primary" type="submit">Siguiente</button>
-                                          </div>
-                                        <!--Fin Formulario-->
+                                          <!--Fin Formulario-->
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -228,22 +270,97 @@
                                         <div class="col-xxl-6 col-xl-8">
                                           <h3 class="text-primary">Paso 2</h3>
                                           <h5 class="card-title mb-4">Ingrese la información laboral del alumno </h5>
+                                          <div class="row gx-12">
                                           <!--Inicio Formulario-->
-                                          <div class="row gx-3">
-                                                {{ form3.ocup  }}
-                                          </div>
                                             <div class="row gx-3">
-                                              {%for f in form9%}
-                                                {{f.label}}
-                                                {{f}}
-                                              {%endfor%}
+                                              <div class="mb-3 col-md-12">
+                                                  <label>Ocupación</label>
+                                                  {{ form3.ocup  }}
+                                              </div>
                                             </div>
-                                            <hr class="my-4"/>
-                                            <div class="d-flex justify-content-between">
-                                              <button class="btn btn-ligth" type="button">Anterior</button>
-                                              <a class="btn btn-primary next-step"  role="button">Siguiente</a>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.empleador | as_crispy_field }}
+                                              </div>
                                             </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.tel_empleador | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.area_trabaja | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form9.jornada | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form9.dias_trabajo | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form9.hora_entrada | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form9.hora_salida | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <label>Tipo de ingresos</label>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.i_diario | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.i_semanal | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.i_quincenal | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.i_mensual | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form9.total_ingreso | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form9.destino_ingreso | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.edad_inicio_trabajo | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.familia_migrante | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.cantidad_familiares | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3" hidden>
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form9.estado_laborales | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                              <hr class="my-4"/>
                                           <!--Fin Formulario-->
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
@@ -253,7 +370,7 @@
                                     <div class="row justify-content-center">
                                       <div class="col-xxl-6 col-xl-8">
                                         <h3 class="text-primary">Paso 3</h3>
-                                        <h5 class="card-title mb-4">Ingrese informaciòn personal del tutor</h5>
+                                        <h5 class="card-title mb-4">Ingrese información personal del tutor</h5>
                                           <div class="row gx-3">
                                             {%for f in form%}
                                               {{f.label}}
@@ -262,10 +379,6 @@
 
                                           </div>
                                           <hr class="my-4"/>
-                                          <div class="d-flex justify-content-between">
-                                            <button class="btn btn-ligth" type="button">Anterior</button>
-                                            <a class="btn btn-primary next-step" role="button">Siguiente</a>
-                                          </div>
                                       </div>
                                     </div>
                                   </div>
@@ -282,10 +395,6 @@
                                               {%endfor%}
                                             </div>
                                           <hr class="my-4"/>
-                                          <div class="d-flex justify-content-between">
-                                            <button class="btn btn-ligth" type="button">Anterior</button>
-                                            <a class="btn btn-primary next-step" role="button">Siguiente</a>
-                                            </div>
                                         </div>
                                       </div>
                                     </div>
@@ -303,10 +412,6 @@
                                                 {%endfor%}
                                             </div>
                                             <hr class="my-4"/>
-                                            <div class="d-flex justify-content-between">
-                                              <button class="btn btn-ligth" type="button">Anterior</button>
-                                              <a class="btn btn-primary next-step" role="button">Siguiente</a>
-                                            </div>
                                         </div>
                                       </div>
                                     </div>
@@ -329,15 +434,11 @@
                                             <br/>
 
                                             <div class="d-flex justify-content-between">
-                                              <button class="btn btn-primary" role="button" onclick="agregar_form_apadecimiento();">
-                                                nuevo form
+                                              <button class="btn btn-light"  id="add_apadecimiento" type="button" role="button">
+                                                <i class="me-2" data-feather="plus-circle"></i>Agregar padecimiento
                                             </button>
                                             </div>
                                             <hr class="my-4"/>
-                                            <div class="d-flex justify-content-between">
-                                              <button class="btn btn-ligth" type="button">Anterior</button>
-                                              <a class="btn btn-primary next-step" role="button">Siguiente</a>
-                                            </div>
                                         </div>
                                       </div>
                                     </div>
@@ -354,10 +455,6 @@
                                               {%endfor%}
                                             </div>
                                             <hr class="my-4"/>
-                                            <div class="d-flex justify-content-between">
-                                              <button class="btn btn-ligth" type="button">Anterior</button>
-                                              <a class="btn btn-primary next-step" role="button">Siguiente</a>
-                                            </div>
                                         </div>
                                       </div>
                                     </div>
@@ -374,10 +471,6 @@
                                               {%endfor%}
                                             </div>
                                             <hr class="my-4"/>
-                                            <div class="d-flex justify-content-between">
-                                              <button class="btn btn-ligth" type="button">Anterior</button>
-                                              <a class="btn btn-primary next-step" role="button">Siguiente</a>
-                                            </div>
                                         </div>
                                       </div>
                                     </div>
@@ -398,10 +491,8 @@
                                                 </div>
                                             </div>
                                             <hr class="my-4"/>
-                                            <div class="d-flex justify-content-between">
-                                              <a class="btn btn-ligth" href="{% url 'educacion:alumno_list' %}">Cancelar</a>
-                                              <button type="submit" class="btn btn-success">Guardar</button>
-                                            </div>
+                                            <a class="btn btn-ligth" href="{% url 'educacion:alumno_list' %}">Cancelar</a>
+                                            <button type="submit" class="btn btn-success"">Guardar</button>
                                         </div>
                                       </div>
                                     </div>
@@ -516,11 +607,11 @@
         const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
         if(!$error_is_requeried)
           field.insertAdjacentHTML('afterend', `<div id="isRequeried_${field.name}">Este campo es requerido</div>`)
-      }else{
+    }else{
         const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
         if($error_is_requeried) $error_is_requeried.remove()
-      }
     }
+  }
 
   const isEmail = (field)=>{
       let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
@@ -559,7 +650,7 @@
       if(!regexNumber.test(field.value)){
         if(!$error_is_identify){
           field.insertAdjacentHTML('afterend', `<div id="isIdenfify_${field.name}">
-              En # debe tener 13 digitos y solo digitos
+              En debe tener 13 dígitos, no se aceptan letras
             </div>`)
         }
       }else{
@@ -661,44 +752,6 @@
     const $id_servicio = document.querySelector('#id_servicio')
     isRequeried($id_servicio)
   }
-
-  const $btn_form_alumno = document.querySelector('#btn_form_alumno')
-
-  $btn_form_alumno.addEventListener('click', e=>{
-    e.preventDefault()
-    validate_student_form()
-  })
-
-  const $btn_form_tutor = document.querySelector('#btn_form_tutor')
-  $btn_form_tutor.addEventListener('click', e=>{
-    e.preventDefault()
-    validate_tutor_form()
-  })
-
-  const $btn_form_estAnt = document.querySelector('#btn_form_estAnt')
-  $btn_form_estAnt.addEventListener('click', e=>{
-    e.preventDefault()
-    validate_estudAnt_form()
-  })
-
-  const $btn_form_religion = document.querySelector('#btn_form_religion')
-  $btn_form_religion.addEventListener('click', e=>{
-    e.preventDefault()
-    validate_religion_form()
-  })
-
-  const $btn_form_psicologico = document.querySelector('#btn_form_psicologico')
-  $btn_form_psicologico.addEventListener('click', e=>{
-    e.preventDefault()
-    validate_psicologico_form()
-  })
-
-  const $btn_form_vivienda = document.querySelector('#btn_form_vivienda')
-  $btn_form_vivienda.addEventListener('click', e=>{
-    e.preventDefault()
-    validate_vivienda_form()
-  })
-
 
 
   const $add_apadecimiento = document.querySelector('#add_apadecimiento')
@@ -822,6 +875,6 @@
         $total_forms_convivientes.value = parseInt($total_forms_convivientes.value)+1
       }
 
-    }        }
+    }
   </script>
 {% endblock %}

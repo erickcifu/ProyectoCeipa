@@ -24,8 +24,32 @@ class TutorForm(forms.ModelForm):
     )
     class Meta:
         model = Tutor
-        fields = ['nombres_tutor', 'apellidos_tutor', 'DPI_tutor', 'fecha_nacimiento_tutor', 'direccion_tutor', 'telefono_tutor', 'correo_tutor', 'fotografia_t', 'muni', 'genero', 'parentesco', 'estado_tutor']
-        labels = {'nombres_tutor':'Nombres', 'apellidos_tutor':'Apellidos', 'DPI_tutor':"DPI", 'fecha_nacimiento_tutor':'Fecha de nacimiento', 'direccion_tutor':'Direccion', 'telefono_tutor':"Telefono", 'correo_tutor':"Correo", 'fotografia_t':"Fotografia", 'muni':"Municipio", 'genero':"Genero", 'parentesco':'Parentesco', 'estado_tutor':'Estado'}
+        fields = ['nombres_tutor',
+        'apellidos_tutor',
+        'DPI_tutor',
+        'fecha_nacimiento_tutor',
+        'direccion_tutor',
+        'telefono_tutor',
+        'correo_tutor',
+        'fotografia_t',
+        'muni',
+        'genero',
+        'parentesco',
+        'ocupacion_tutor',
+        'estado_tutor']
+        labels = {'nombres_tutor':'Nombres',
+        'apellidos_tutor':'Apellidos',
+        'DPI_tutor':"DPI",
+        'fecha_nacimiento_tutor':'Fecha de nacimiento',
+        'direccion_tutor':'Direcció domiciliarn',
+        'telefono_tutor':"Teléfono",
+        'correo_tutor':"Correo",
+        'fotografia_t':"Fotografia",
+        'muni':"Municipio",
+        'genero':"Genero",
+        'parentesco':'Parentesco con el alumno',
+        'ocupacion_tutor':'Ocupación',
+         'estado_tutor':'Estado'}
         widget = {'nombres_tutor', forms.TextInput}
 
     def __init__(self, *args, **kwargs):

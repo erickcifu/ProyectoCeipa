@@ -91,7 +91,7 @@
                               <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                                     <a class="nav-link" href="{% url 'educacion:educacion' %}">PRONNAT</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:municipalizacion' %}">PROMUNI</a>
-                                    
+
                                   </nav>
                                 </div>
 
@@ -124,7 +124,7 @@
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
                                             INICIO
                                         </h1>
-                                        <div class="page-header-subtitle">Estadisticas de niños y jovenes en toda la organizacion</div>
+                                        <div class="page-header-subtitle">Estadísticas de niños y jóvenes en toda la organización</div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">
                                         <div class="input-group input-group-joined border-0" style="width: 16.5rem">
@@ -145,7 +145,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-xl-8 col-xxl-12">
                                                 <div class="text-center text-xl-start text-xxl-center mb-4 mb-xl-0 mb-xxl-4">
-                                                    <h1 class="text-primary">Bienvenido/a al espacio de trabajo</h1>
+                                                    <h1 class="text-primary">Bienvenido/a {{ user.firstname }}, {{ user.lastname }} al espacio de trabajo</h1>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="{% static 'base/dist/assets/img/Ceipa_Logo.jpeg' %}" style="max-width: 15rem" /></div>
