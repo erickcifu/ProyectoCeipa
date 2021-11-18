@@ -89,17 +89,26 @@
                             </a>
                             <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
                               <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                    <a class="nav-link" href="{% url 'socioproductivo:depsocio_list' %}">Departamento</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:municp_list' %}">Municipio</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:etniasocio_list' %}">Grupo étnico</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:generosocio_list' %}">Género</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:tpisosocio_list' %}">Tipo de piso</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:techosocio_list' %}">Tipo de techo</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:paredsocio_list' %}">Tipo de pared</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:catsocio_list' %}">Categoría de vivienda</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:parensocio_list' %}">Parentesco</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:ocupTutor_list' %}">Ocupación del encargado</a>
                                     <a class="nav-link" href="{% url 'socioproductivo:TipoEmp_list' %}">Tipo de emprendimiento</a>
                                     <a class="nav-link" href="{% url 'socioproductivo:talleres_list' %}">Talleres</a>
+                                    <a class="nav-link" href="{% url 'socioproductivo:gradoact_list' %}">Grados</a>
                                     <a class="nav-link" href="{% url 'socioproductivo:elect_list' %}">Electrodomesticos</a>
                                     <a class="nav-link" href="{% url 'socioproductivo:jornadaes_list' %}">Jornada de estudios</a>
                                     <a class="nav-link" href="{% url 'socioproductivo:grupona_list' %}">Grupos de niñez y adolescencia</a>
-                                    <a class="nav-link" href="{% url 'socioproductivo:ocupTutor_list' %}">Ocupación Encargado</a>
-                                    <a class="nav-link" href="{% url 'socioproductivo:viviendSo_list' %}">Vivienda</a>
                               </nav>
                             </div>
                             <!--inscripsion -->
-                            <div class="sidenav-menu-heading">Gestion de Usuarios</div>
+                            <div class="sidenav-menu-heading">Gestión de Usuarios</div>
                             <!-- Sidenav Accordion (Dashboard)-->
                             <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseCatalogos">
                               Usuarios
@@ -108,7 +117,7 @@
                             <div class="collapse" id="collapseUsuarios" data-bs-parent="#accordionSidenav">
                               <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                                   <a class="nav-link" href="{% url 'socioproductivo:crear_asistente_equipo_socio' %}">Crear usuarios</a>
-                                  <a class="nav-link" href="{% url 'socioproductivo:listar_usuarios_socioproductivos' %}">listar usuarios</a>
+                                  <a class="nav-link" href="{% url 'socioproductivo:listar_usuarios_socioproductivos' %}">Listar usuarios</a>
 
                              </nav>
                            </div>
@@ -116,14 +125,24 @@
                            <!--inscripsion -->
                            <div class="sidenav-menu-heading">Inscripción y asignación</div>
                                <a class="nav-link" href="{% url 'socioproductivo:personabasica_list' %}">Registro de participante</a>
-                               <a class="nav-link" href="{% url 'socioproductivo:formlab_list' %}">Participantes de formación laboral</a>
                                <a class="nav-link" href="{% url 'socioproductivo:part_taller' %}">Inscripción de participante a taller</a>
                                <a class="nav-link" href="{% url 'socioproductivo:part_formlab' %}">Inscripción de participante a formación laboral</a>
                                <a class="nav-link" href="{% url 'socioproductivo:list_para_emprendimientos' %}">Crear emprendimiento</a>
-                               <a class="nav-link" href="{% url 'socioproductivo:emprend_list' %}">Emprendimientos</a>
-                               <a class="nav-link" href="{% url 'socioproductivo:reportes_socio' %}">Reportes</a>
+                               <!--<a class="nav-link" href="{% url 'socioproductivo:reportes_socio' %}">Reportes</a>-->
 
+                               <div class="sidenav-menu-heading">Listas</div>
+                               <!-- Sidenav Accordion (Dashboard)-->
+                               <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapselistado" aria-expanded="false" aria-controls="collapselistado">
+                                 Listados de participantes
+                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                               </a>
+                               <div class="collapse" id="collapselistado" data-bs-parent="#accordionSidenav">
+                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                                 <a class="nav-link" href="{% url 'socioproductivo:formlab_list' %}">Participantes de formación laboral</a>
+                                 <a class="nav-link" href="{% url 'socioproductivo:emprend_list' %}">Emprendimientos</a>
 
+                                </nav>
+                              </div>
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
                     {% block footer %}
@@ -181,8 +200,23 @@
                                 </div>
                             </div>
 
-                        <!-- Example Colored Cards for Dashboard Demo-->
-
+                        <!-- Example Colored Cards for Dashboard Demo
+                        <div class="col-lg-6 col-xl-3 mb-4">
+                            <div class="card bg-warning text-white h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="me-3">
+                                            <div class="text-white-75 small">Reportes</div>
+                                        </div>
+                                        <i class="feather-xl text-white-50" data-feather="users"></i>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex align-items-center justify-content-between small">
+                                    <a class="text-white stretched-link" href="{% url 'socioproductivo:reportes_socio' %}">Ver reporte</a>
+                                    <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>-->
                         <!-- Example Charts for Dashboard Demo-->
 
                     </div>
@@ -190,7 +224,7 @@
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
                         <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
+                            <div class="col-md-6 small">Copyright &copy; Mesoamericana 2021</div>
                             <div class="col-md-6 text-md-end small">
                                 <a href="#!">Privacy Policy</a>
                                 &middot;

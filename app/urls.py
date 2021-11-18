@@ -447,6 +447,8 @@ urlpatterns = [
     path('persona_socio', viewsets.PersonaBasicaView.as_view(), name='personabasica_list'),
     path('participantes_por_taller', viewsets.ListarParticipantesPorTaller.as_view(), name='part_taller'),
     path('participantes_form_laboral', viewsets.ListarParticipantesCertificados.as_view(), name='part_formlab'),
+    path('participantes_form_laboral/edit/<int:pk>', viewsets.formlabEdit.as_view(), name='part_formlab_edit'),
+    path('participantes_form_laboral/delete/<int:pk>', viewsets.formlabDelete.as_view(), name='part_formlab_delete'),
     path('persona_socio/new', viewsets.PersonaBasicaNew.as_view(),name='personabasica_new'),
     path('persona_socio/edit/<int:pk>', viewsets.PersonaBasicaEdit.as_view(), name='personabasica_edit'),
     path('persona_socio/detail/<int:pk>/', viewsets.personabDetail.as_view(), name='personabasica_detail'),
@@ -474,6 +476,50 @@ urlpatterns = [
     path('inscripcion_taller/edit/<int:pk>', viewsets.InscpEdit.as_view(), name='inscp_edit'),
     path('inscripcion_taller/delete/<int:pk>', viewsets.InscpDel.as_view(), name='inscp_del'),
 
+    path('municipio_socioproductivo', viewsets.DepsocioView.as_view(), name='depsocio_list'),
+    path('municipio_socioproductivo/new', viewsets.DepsocioNew.as_view(),name='depsocio_new'),
+    path('municipio_socioproductivo/edit/<int:pk>/', viewsets.DepsocioEdit.as_view(),name='depsocio_edit'),
+    path('municipio_socioproductivo/delete/<int:pk>', viewsets.DepsocioDel.as_view(), name='depsocio_del'),
+
+    path('departamento_socioproductivo', viewsets.MunicSocioView.as_view(), name='municp_list'),
+    path('departamento_socioproductivo/new', viewsets.MunicSocioNew.as_view(),name='municp_new'),
+    path('departamento_socioproductivo/edit/<int:pk>/', viewsets.MunicSocioEdit.as_view(),name='municp_edit'),
+    path('departamento_socioproductivo/delete/<int:pk>', viewsets.MunicSocioDel.as_view(), name='municp_del'),
+
+    path('etnia_socioproductivo', viewsets.EtnsocioView.as_view(), name='etniasocio_list'),
+    path('etnia_socioproductivo/new', viewsets.EtnsocioNew.as_view(),name='etniasocio_new'),
+    path('etnia_socioproductivo/edit/<int:pk>/', viewsets.EtnsocioEdit.as_view(),name='etniasocio_edit'),
+    path('etnia_socioproductivo/delete/<int:pk>', viewsets.EtnsocioDel.as_view(), name='etniasocio_del'),
+
+    path('genero_socioproductivo', viewsets.GenerosocioView.as_view(), name='generosocio_list'),
+    path('genero_socioproductivo/new', viewsets.GenerosocioNew.as_view(),name='generosocio_new'),
+    path('genero_socioproductivo/edit/<int:pk>/', viewsets.GenerosocioEdit.as_view(),name='generosocio_edit'),
+    path('genero_socioproductivo/delete/<int:pk>', viewsets.GenerosocioDel.as_view(), name='generosocio_del'),
+
+    path('tpiso_socioproductivo', viewsets.TpisosocioView.as_view(), name='tpisosocio_list'),
+    path('tpiso_socioproductivo/new', viewsets.TpisosocioNew.as_view(),name='tpisosocio_new'),
+    path('tpiso_socioproductivo/edit/<int:pk>/', viewsets.TpisosocioEdit.as_view(),name='tpisosocio_edit'),
+    path('tpiso_socioproductivo/delete/<int:pk>', viewsets.TpisosocioDel.as_view(), name='tpisosocio_del'),
+
+    path('techo_socioproductivo', viewsets.TechosocioView.as_view(), name='techosocio_list'),
+    path('techo_socioproductivo/new', viewsets.TechosocioNew.as_view(),name='techosocio_new'),
+    path('techo_socioproductivo/edit/<int:pk>/', viewsets.TechosocioEdit.as_view(),name='techosocio_edit'),
+    path('techo_socioproductivo/delete/<int:pk>', viewsets.TechosocioDel.as_view(), name='techosocio_del'),
+
+    path('pared_socioproductivo', viewsets.ParedsocioView.as_view(), name='paredsocio_list'),
+    path('pared_socioproductivo/new', viewsets.ParedsocioNew.as_view(),name='paredsocio_new'),
+    path('pared_socioproductivo/edit/<int:pk>/', viewsets.ParedsocioEdit.as_view(),name='paredsocio_edit'),
+    path('pared_socioproductivo/delete/<int:pk>', viewsets.ParedsocioDel.as_view(), name='paredsocio_del'),
+
+    path('categoria_socioproductivo', viewsets.CatsocioView.as_view(), name='catsocio_list'),
+    path('categoria_socioproductivo/new', viewsets.CatsocioNew.as_view(),name='catsocio_new'),
+    path('categoria_socioproductivo/edit/<int:pk>/', viewsets.CatsocioEdit.as_view(),name='catsocio_edit'),
+    path('categoria_socioproductivo/delete/<int:pk>', viewsets.CatsocioDel.as_view(), name='catsocio_del'),
+
+    path('parentesco_socioproductivo', viewsets.ParentescosocioView.as_view(), name='parensocio_list'),
+    path('parentesco_socioproductivo/new', viewsets.ParentescosocioNew.as_view(),name='parensocio_new'),
+    path('parentesco_socioproductivo/edit/<int:pk>/', viewsets.ParentescosocioEdit.as_view(),name='parensocio_edit'),
+    path('parentesco_socioproductivo/delete/<int:pk>', viewsets.ParentescosocioDel.as_view(), name='parensocio_del'),
 
     path('formacionlab', viewsets.FormLabView.as_view(), name='formlab_list'),
     path('inscripcion_formacionlab/new/<int:pk>/', viewsets.FormLabNew.as_view(),name='form_new'),
@@ -529,6 +575,8 @@ urlpatterns = [
     path('usuarios/coordinadorSocio/new', viewsets.CrearAsistenteSocioproductivoEquipoSocio.as_view(), name = 'crear_asistente_equipo_socio'),
     path('usuarios/coordinadorSocio/list', viewsets.ListarAsistenteSocioproductivoEquipoSocio.as_view(), name = 'listar_usuarios_socioproductivos'),
 
+    #Delete de los usuarios
+    path('usuarios/coordinadorSocio/delete/<int:pk>', viewsets.DeleteUserSocio.as_view(), name='delete_sociop'),
     #prueba roles
 
 ]

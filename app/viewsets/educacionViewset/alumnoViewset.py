@@ -42,7 +42,7 @@ class AlumnoView(RolesCoordinadorEducacionYDirectorCentroMixin, generic.ListView
             elif self.request.user.user_profile.rol.id == 5:
                 return ["directorCentro/alumno_list.html"]
 
-class AlumnoNew(LoginRequiredMixin, generic.CreateView):
+class AlumnoNew(RolesCoordinadorEducacionYDirectorCentroMixin, generic.CreateView):
     model = Alumno
     template_name = 'educacion/alumno_form.html'
     context_object_name = "obj"

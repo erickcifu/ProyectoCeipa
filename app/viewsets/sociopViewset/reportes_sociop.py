@@ -12,7 +12,7 @@ from app.models.educacion_model.genero import genero
 
 class ParticipantesSociop(LoginRequiredMixin, generic.ListView):
     model = PersonaBasica
-    template_name = 'reportes/socioproductivo.html'
+    template_name = 'reportes/sociop.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):

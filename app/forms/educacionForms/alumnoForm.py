@@ -49,7 +49,7 @@ class AlumnoForm(forms.ModelForm):
             'idiome':"Idioma que habla",
             'gen':'Género',
             'muni':'Municipio',
-            'estado_alumno':'Estado',
+            'estado_alumno':'Activo',
             'edad':'Edad'
         }
 
@@ -76,7 +76,7 @@ class AlumnoForm(forms.ModelForm):
 
             if field == 'telefono_alumno':
                 self.fields[field].widget.attrs.update({
-                    'placeholder':'45002585',
+                    'placeholder':'00000000',
                     'onblur':'isTelephoneNumber({});'.format('id_'+field),
                 })
 

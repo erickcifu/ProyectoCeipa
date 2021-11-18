@@ -14,7 +14,7 @@ class InfoecoForm(forms.ModelForm):
             'cantidad_mensual':'Cantidad de ingresos mensuales',
             'procedencia_ingreso':'Procedencia del ingreso',
             'observacion':'Observaciones',
-            'estado_infoeco':'Activo/Inactivo'
+            'estado_infoeco':'Activo'
         }
         widget = {
             'pariente': forms.TextInput,
@@ -29,8 +29,20 @@ class InfoecoForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required':False
             })
-            self.fields['cantidad_mensual'].required = False
-            self.fields['procedencia_ingreso'].required = False
-            self.fields['observacion'].required = False
+            if field == 'estado_infoeco':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
+            })
+            required = self.fields[field].required
+            if required:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+            })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })

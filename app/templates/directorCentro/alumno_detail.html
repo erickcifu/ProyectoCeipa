@@ -15,7 +15,7 @@
                         </div>
                       </div>
                       <div class="card">
-                        <img class="card-img-top" src="{{item.foto_url|default_if_none:'ceipa/default.png'}}">
+                        <img class="card-img-top" src="{{item.foto_url|default_if_none:'ceipa/default.png'}}" height="200" weight="250">
                         <div class="card-body">
                             <div class="card-header">
                                 {{ item.nombres_alumno }} {{ item.apellidos_alumno }}
@@ -45,9 +45,9 @@
                         </div>
                       </div>
                     </div>
-                  
+
                   {%if tutor%}
-                  
+
                     <div class="col-lg-6 col-xl-4 mb-4">
                       <div class="card">
                           <div class="card-header">
@@ -55,17 +55,17 @@
                           </div>
                         </div>
                         <div class="card">
-                          <img class="card-img-top" src="{{tutor.foto_url|default_if_none:'ceipa/default.png'}}">
+                          <img class="card-img-top" src="{{tutor.foto_url|default_if_none:'ceipa/default.png'}}" height="300" weight="100">
                           <div class="card-body">
                               <div class="card-header">
                                   {{ tutor.nombres_tutor }} {{ tutor.apellidos_tutor }}
                               </div>
                             <label><b>ID: </b>{{ tutor.id }}</label>
                             <br/>
-                            <label><b>Parentesco: </b>{{ tutor.parentesco }}</label>
+                            <label><b>Parentesco con el alumno: </b>{{ tutor.parentesco }}</label>
                             <label><b>CUI: </b>{{ tutor.DPI }}</label>
                             <label><b>Fecha de nacimiento: </b>{{ tutor.fecha_nacimiento|date:"d M, Y" }}</label>
-                            <label><b>direcciòn: </b>{{ tutor.direccion_tutor }}</label>
+                            <label><b>Direcciòn: </b>{{ tutor.direccion_tutor }}</label>
                             <label><b>Municipio: </b>{{ tutor.muni }}</label>
                             <label><b>Gènero: </b>{{ tutor.genero }}</label>
 
@@ -79,12 +79,12 @@
                           </div>
                         </div>
                       </div>
-                    
-                    
+
+
                     {%endif%}
-                    
+
                     {%if estudiosAnt%}
-                  
+
                     <div class="col-lg-6 col-xl-4 mb-4">
                       <div class="card">
                           <div class="card-header">
@@ -111,12 +111,63 @@
                           </div>
                         </div>
                       </div>
-                    
-                    
+
+
+                    {%endif%}
+
+                    {%if laboral %}
+
+                    <div class="col-lg-6 col-xl-4 mb-4">
+                      <div class="card">
+                          <div class="card-header">
+                            <h2 class="text-primary">Aspectos Laborales</h2>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div class="card-body">
+                              <div class="card-header">
+                                  {{ laboral.area_trabaja }}
+                              </div>
+                            <label><b>Empleador: </b>{{ laboral.empleador }}</label>
+                            <label><b>No. Telefono: </b>{{ laboral.tel_empleador }}</label>
+                            <label><b>Jornada laboral </b>{{ laboral.jornada }}</label>
+                            <label><b>Dias de trabajo: </b>{{ laboral.dias_trabajo }}</label>
+                            <label><b>Hora de entrada: </b>{{ laboral.hora_entrada }}</label>
+                            <label><b>Hora de salida: </b>{{ laboral.hora_salida }}</label>
+                            <br/>
+                            <label>
+                              {% if laboral.i_diario is True %}
+                              <span class="badge bg-green-soft text-green">Ingreso diario</span>
+                              {% elif laboral.i_semanal is True %}
+                              <span class="badge bg-green-soft text-green">Ingreso semanal</span>
+                              {% elif laboral.i_quincenal is True %}
+                              <span class="badge bg-green-soft text-green">Ingreso quincenal</span>
+                              {% elif laboral.i_mensual %}
+                              <span class="badge bg-green-soft text-green">Ingreso mensual</span>
+                              {% else %}
+                              <span class="badge bg-red-soft text-red">Sin ingresos</span>
+                              {% endif %}
+                            </label>
+                            <label><b>Ingresos Totales: </b>Q.{{ laboral.total_ingreso }}</label>
+                            <label><b>Destino de los ingresos: </b>{{ laboral.destino_ingreso }}</label>
+                            <label><b>Edad de inicio laboral: </b>{{ laboral.edad_inicio_trabajo }}</label>
+                            <div class="text-lg fw-bold">
+                            {% if relig.estado_laborales  is True %}
+                                <span class="badge bg-green-soft text-green">Activo </span>
+                            {% else %}
+                                <span class="badge bg-red-soft text-red">Inactivo</span>
+                            {% endif %}
+                            </div>
+                            <br/>
+                          </div>
+                        </div>
+                      </div>
+
+
                     {%endif%}
 
                     {%if relig%}
-                    
+
                         <div class="col-lg-6 col-xl-4 mb-4">
                         <div class="card">
                             <div class="card-header">
@@ -130,7 +181,7 @@
                                 </div>
                                 <label><b>ID: </b>{{ relig.id }}</label>
                                 <br/>
-                                <label><b>nombre: </b>{{ relig.nombre_iglesia  }}</label>
+                                <label><b>Nombre de la iglesia: </b>{{ relig.nombre_iglesia  }}</label>
 
                                 <div class="text-lg fw-bold">
                                 {% if relig.estado_religionalumno  is True %}
@@ -142,12 +193,12 @@
                             </div>
                             </div>
                         </div>
-                        
-                        
+
+
                     {%endif%}
 
                     {%if psic%}
-                    
+
                         <div class="col-lg-6 col-xl-4 mb-4">
                         <div class="card">
                             <div class="card-header">
@@ -174,12 +225,12 @@
                             </div>
                             </div>
                         </div>
-                        
-                      
+
+
                     {%endif%}
 
                     {%if viv%}
-                    
+
                         <div class="col-lg-6 col-xl-4 mb-4">
                         <div class="card">
                             <div class="card-header">
@@ -193,12 +244,12 @@
                                 </div>
                                 <label><b>ID: </b>{{ viv.id }}</label>
                                 <br/>
-                                <label><b>habitaciones: </b>{{ viv.cantidad_ambientes  }}</label>
-                                <label><b>techo: </b>{{ viv.techo  }}</label>
-                                <label><b>categoria: </b>{{ viv.categoria  }}</label>
-                                <label><b>piso: </b>{{ viv.piso  }}</label>
-                                <label><b>muro: </b>{{ viv.muro  }}</label>
-                                <label><b>servicio: </b>{{ viv.servicio  }}</label>
+                                <label><b>Habitaciones: </b>{{ viv.cantidad_ambientes  }}</label>
+                                <label><b>Techo: </b>{{ viv.techo  }}</label>
+                                <label><b>Categoria: </b>{{ viv.categoria  }}</label>
+                                <label><b>Piso: </b>{{ viv.piso  }}</label>
+                                <label><b>Pared: </b>{{ viv.muro  }}</label>
+                                <label><b>Servicio: </b>{{ viv.servicio  }}</label>
                                 <label><b>Entrevistador: </b>{{ psic.Entrevistador  }}</label>
                                 <div class="text-lg fw-bold">
                                     {% if viv.energia_electrica%}
@@ -224,11 +275,11 @@
                             </div>
                             </div>
                         </div>
-                        
+
                   </div>
                     {%endif%}
       </div>
-
+<div>
       <div class="card card-header-actions">
         <div class="card-header">
             Convivientes
@@ -241,10 +292,9 @@
             <table id="datatablesSimple">
                 <thead>
                     <th>Id</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
+                    <th>Nombre del conviviente</th>
                     <th>fecha de nacimiento</th>
-                    <th>Vivienda</th>
+                    <th>Alumno</th>
                     <th>Parentesco</th>
                     <th>Estado</th>
                 </thead>
@@ -252,17 +302,23 @@
                     {% for item in conviv %}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.nombres_conviviente }}</td>
-                        <td>{{ item.apellidos_conviviente }}</td>
-                        <td>{{ item.fecha_nacimiento }}</td>
+                        <td>{{ item.nombres_conviviente }} {{ item.apellidos_conviviente }}</td>
+                        <td>{{ item.fecha_nacimiento|date:"d, M, Y"}}</td>
                         <td>{{ item.vivienda }}</td>
                         <td>{{ item.parentesco }}</td>
-                        <td>{{ item.estado_conviviente|yesno:"Activo,Inactivo" }}</td>
+                        <td>
+                          {% if item.estado_conviviente is True %}
+                            <span class="badge bg-green-soft text-green">Activo</span>
+                          {% else %}
+                            <span class="badge bg-red-soft text-red">Inactivo</span>
+                          {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
             {% endif %}
+
         </div>
       </div>
       </div>
@@ -271,12 +327,13 @@
         <div class="card-header">
             Padecimientos
         </div>
+
         <div class="card mb-4">
         <div class="card-body">
             {% if not padec %}
-            <div class="alert alert-info">No hay padecimientos</div>
+            <div class="alert alert-info">No tiene padecimientos</div>
             {% else %}
-            <table id="datatablesSimple1">
+            <table class="table table-bordered">
                 <thead>
                     <th>Id</th>
                     <th>Alumno</th>
@@ -291,13 +348,11 @@
                         <td>{{ item.alumno }} {{ item.alumno.apellidos_alumno }}</td>
                         <td>{{ item.padecimiento }}</td>
                         <td>{{ item.tratamiento }}</td>
-                        <td>
-                          {% if item.estado_Alpadecimiento is True %}
-                            <span class="badge bg-green-soft text-green">Activo </span>
-                          {% else %}
-                            <span class="badge bg-red-soft text-red">Inactivo</span>
-                          {% endif %}
-                        </td>
+                        {% if item.estado_Alpadecimiento is True %}
+                          <td><span class="badge bg-green-soft text-green">Activo</span></td>
+                        {% else %}
+                          <td><span class="badge bg-red-soft text-red">Inactivo</span></td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -306,7 +361,7 @@
         </div>
       </div>
       </div>
-
+</div>
 {% endblock %}
 
 {% block js_page %}

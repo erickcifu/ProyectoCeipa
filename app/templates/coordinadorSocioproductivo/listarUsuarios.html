@@ -5,7 +5,7 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-            Listado de Coordinadores de Area
+            Listado de usuarios programa socioproductivo
       </div>
       <div class="card mb-4">
       <div class="card-body">
@@ -19,6 +19,7 @@
                   <th>Apellidos</th>
                   <th>Cargo</th>
                   <th>Estado</th>
+                  <th>Acciones</th>
               </thead>
               <tbody>
                   {% for item in obj %}
@@ -36,6 +37,9 @@
                         <span class="badge bg-red-soft text-red">Inactivo</span>
                       </td>
                       {% endif %}
+                      <td>
+                        <a href="{% url 'socioproductivo:delete_sociop' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i class="far fa-trash-alt"></i></a>
+                      </td>
                   </tr>
                   {% endfor %}
               </tbody>

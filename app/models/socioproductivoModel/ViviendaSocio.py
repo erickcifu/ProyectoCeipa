@@ -29,7 +29,7 @@ class ViviendaSocio(models.Model):
 
 
     def __str__(self):
-        return str(self.numero_habitantes)
+        return self.desc_Otra_Viv
 
     def delete(self, *args):
         self.estado_vivsocio = False

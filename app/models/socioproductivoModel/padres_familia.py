@@ -10,12 +10,7 @@ class PadresSociop(models.Model):
     estado_padres = models.BooleanField(default=True)
 
     def __str__(self):
-        if self.nombre_madre:
-            return self.nombre_madre
-        elif self.nombre_padre:
-            return self.nombre_padre
-        else:
-            return 'Sin datos'
+        return self.nombre_madre
 
     def delete(self, *args):
         self.estado_padres = False

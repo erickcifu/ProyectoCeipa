@@ -47,13 +47,23 @@ class LaboralEditForm(forms.ModelForm):
             'fecha_inicio':'Fecha en la que inicia la formación laboral',
             'fecha_fin_formacion': 'Fecha de finalización de formación',
             'horas_formacion':'Horas que durará la formación',
-            'estado_formacion':'Activo/Inactivo',
-            'formacion_completada':'Formación laboral completada',
+            'estado_formacion':'Activo',
+            'formacion_completada':'Inserción laboral',
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required':False
+            })
+            if field == 'estado_formacion':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
+            })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
             })

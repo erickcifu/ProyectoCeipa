@@ -4,7 +4,7 @@
 <div id="layoutSidenav_content">
 <form method="POST" class="form-inline">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -14,7 +14,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Tipo_piso
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Tipo de piso
                         </div>
                         <div class="dropdown-divider"></div>
                         <form>
@@ -26,7 +26,7 @@
                         </form>
                             <div class="col-2">
                                 <div class="form-group">
-                                    <label for="estado_tipopiso">Estado</label>
+                                    <label for="estado_tipopiso">Activo</label>
                                     <div class="form-check">
                                       <input class="form-check-input" name="estado_tipopiso" class="form-control" id="id_estado_tipopiso" type="checkbox"  {% if obj.estado_tipopiso is true %} checked {% endif %}>
                                     </div>

@@ -29,7 +29,7 @@ class PersonaBasica(models.Model):
     info_educacion = models.ForeignKey(InfoEducacion, on_delete=models.CASCADE, related_name="PB_info_educacion", null=True, blank=True)
     caract_laborales = models.ForeignKey(Caract_laborales, on_delete=models.CASCADE, related_name="PB_Carac_laborales", null=True, blank=True)
     aspectos_salud = models.ForeignKey(AspectosSalud, on_delete=models.CASCADE, related_name="PB_aspectos_salud", null=True, blank=True)
-    razon = models.CharField(max_length=200)
+    razon = models.CharField(max_length=200, null=True, blank=True)
     ingreso_total = models.FloatField()
     total_gastos = models.FloatField(null=True, blank=True)
     edad = models.IntegerField(null=True, default=None, blank=True)

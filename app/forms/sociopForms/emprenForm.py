@@ -13,7 +13,7 @@ class EmprenForm(forms.ModelForm):
             attrs={
                 'checked':True,
             }
-        ), required=False, label="Activo/Inactivo"
+        ), required=False, label="Activo"
     )
     class Meta:
         model = Emprendimiento
@@ -32,7 +32,7 @@ class EmprenForm(forms.ModelForm):
                 'fecha_inicio':"Fecha de inicio del emprendimiento",
                 'Tipoemp':"Tipo de emprendimiento",
                 'muni':"Municipio",
-                'estado_Emprendimiento':'Activo/Inactivo'}
+                'estado_Emprendimiento':'Activo'}
         widget = {
             'nombres_emp': forms.TextInput,
             'estado_Emprendimiento': forms.CheckboxInput(
@@ -48,5 +48,14 @@ class EmprenForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-            self.fields['muni'].empty_label = "Seleccione un municipio"
-            self.fields['Tipoemp'].empty_label = "Seleccione tipo de emprendimiento"
+            if field == 'estado_Emprendimiento':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
+            })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })
+        self.fields['muni'].empty_label = "Seleccione un municipio"
+        self.fields['Tipoemp'].empty_label = "Seleccione tipo de emprendimiento"

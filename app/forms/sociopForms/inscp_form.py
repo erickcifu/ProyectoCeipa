@@ -56,10 +56,7 @@ class InscTallerForm(forms.ModelForm):
         queryset = municipio.objects.filter(estado_municipio=True)
         .order_by('nombre_municipio')
     )
-    taller = forms.ModelChoiceField(
-        queryset = Taller.objects.filter(estado_taller=True)
-        .order_by('nombre_taller')
-    )
+
     inicio_taller = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
@@ -78,7 +75,6 @@ class InscTallerForm(forms.ModelForm):
             'final_taller',]
         labels = {
             'insc_persona':'Participante',
-            'taller':'Nombre del taller',
             'lugar_inscripcion':'Lugar de inscripción',
             'inicio_taller':'Fecha de inicio de taller',
             'final_taller':'Fecha de finalización de taller',
