@@ -92,7 +92,7 @@ from .users.mixins.CooMunicipalYEquipoMunicipal import RolesCooMunicipalEquipoMu
 from .users.CoordinadorMunicipal.mixin import IsCoordinadorMunicipalMixin
 from .users.CoordinadorMunicipal.User import CrearEquipoMunicipalYAsistenteMunicipal,ListarPersonalEquipoMunicipalAsistenteMunicipal
 
-from .users.CoordinadorSocioProductivo.User import CrearAsistenteSocioproductivoEquipoSocio, ListarAsistenteSocioproductivoEquipoSocio
+from .users.CoordinadorSocioProductivo.User import CrearAsistenteSocioproductivoEquipoSocio, ListarAsistenteSocioproductivoEquipoSocio, DeleteUserSocio
 from .users.CoordinadorSocioProductivo.mixin import IsCoordinadorSocioProductivoMixin
 from .users.mixins.CooSocioproductivoYEquipoSocioproductivo import RolesCoordinadorSocioproductivoYEquipoSocioproductivo
 
@@ -150,8 +150,16 @@ from .sociopViewset.viviSoView import ViviendSoView, ViviendSoNew, ViviendSoEdit
 from .sociopViewset.encargadoView import EncargadoView, EncargadoNew, EncargadoEdit, EncargadoDel
 from .sociopViewset.empreView import EmprenView, EmprenNew, EmprenEdit, EmprenDel
 from .sociopViewset.inscp_view import InscpView, InscpNew, InscpEdit, InscpDel, InscribirParticipanteTaller
-from .sociopViewset.formlabView import  FormLabNew, FormLabView
+from .sociopViewset.formlabView import  FormLabNew, FormLabView, formlabEdit, formlabDelete
 from .sociopViewset.reportes_sociop import ParticipantesSociop
-
+from .sociopViewset.munisocioView import MunicSocioView, MunicSocioNew, MunicSocioEdit, MunicSocioDel
+from .sociopViewset.depsocioView import DepsocioView, DepsocioNew, DepsocioEdit, DepsocioDel
+from .sociopViewset.etniasocioView import EtnsocioView, EtnsocioNew, EtnsocioEdit, EtnsocioDel
+from .sociopViewset.generosocioView import GenerosocioView, GenerosocioNew, GenerosocioEdit, GenerosocioDel
+from .sociopViewset.pisosocioView import TpisosocioView, TpisosocioNew, TpisosocioEdit, TpisosocioDel
+from .sociopViewset.techosocioView import TechosocioView, TechosocioNew, TechosocioEdit, TechosocioDel
+from .sociopViewset.paredsocioView import ParedsocioView, ParedsocioNew, ParedsocioEdit, ParedsocioDel
+from .sociopViewset.catsocioView import CatsocioView, CatsocioNew, CatsocioEdit, CatsocioDel
+from .sociopViewset.parentescosocioView import ParentescosocioView, ParentescosocioNew, ParentescosocioEdit, ParentescosocioDel
 #Reportes del director director general
 from .MunicViewset.reportes_director_general import reporte_participantes, reporte_comisiones, reporte_corporaciones, reporte_maestros, reporte_lideres, reporte_medios, reporte_padres

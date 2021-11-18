@@ -19,3 +19,9 @@ class ListarAsistenteSocioproductivoEquipoSocio(IsCoordinadorSocioProductivoMixi
 
     def get_queryset(self):
         return User.objects.filter(is_active=True, user_profile__rol_id__in=[10,11,12]).annotate(cargo=F('user_profile__rol__nombre_rol'))
+
+class DeleteUserSocio(IsCoordinadorSocioProductivoMixin, generic.DeleteView):
+    model = User
+    template_name = 'coordinadorSocioproductivo/deletesocio.html'
+    context_object_name = "obj"
+    success_url = reverse_lazy("socioproductivo:listar_usuarios_socioproductivos")

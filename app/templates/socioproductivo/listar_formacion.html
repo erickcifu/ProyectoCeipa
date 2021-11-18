@@ -15,12 +15,23 @@
               <thead>
                   <th>Id</th>
                   <th>Participante</th>
+                  <th>Inserción laboral</th>
                   <th>Estado</th>
               </thead>
               <tbody>
                     {% for item in obj %}
                   <tr>
-                      <td>{{ item.persona_formacion }}</td>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.persona_formacion }} {{ item.persona_formacion.apellidosp }}</td>
+                      {% if item.formacion_completada is True %}
+                      <td>
+                        <span class="badge bg-green-soft text-green">Insertado</span>
+                      </td>
+                      {% else %}
+                      <td>
+                        <span class="badge bg-red-soft text-red">No insertado</span>
+                      </td>
+                      {% endif %}
                       {% if item.estado_formacion is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>
@@ -31,8 +42,8 @@
                       </td>
                       {% endif %}
                       <td>
-                          <a href="#" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
-                          <a href="#" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                          <a href="{% url 'socioproductivo:part_formlab_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
+                          <a href="{% url 'socioproductivo:part_formlab_delete' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
                       </td>
                   </tr>
                   {% endfor %}

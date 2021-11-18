@@ -3,18 +3,22 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from django.core.exceptions import ImproperlyConfigured
+from app.viewsets.users.CoordinadorSocioProductivo.mixin import IsCoordinadorSocioProductivoMixin
+from app.viewsets.users.mixins.CooSocioproductivoYEquipoSocioproductivo import RolesCoordinadorSocioproductivoYEquipoSocioproductivo
+
 from app.models import FormacionLab, PersonaBasica
 from app.forms import LaboralSocioForm, LaboralEditForm
 
 
-class FormLabView(LoginRequiredMixin, generic.ListView):
+class FormLabView(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
     model = FormacionLab
     template_name = 'socioproductivo/listar_formacion.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
 
-class FormLabNew(LoginRequiredMixin, generic.CreateView):
+class FormLabNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.CreateView):
     model = FormacionLab
     template_name = "socioproductivo/formlab_form.html"
     context_object_name = "obj"
@@ -54,3 +58,19 @@ class FormLabNew(LoginRequiredMixin, generic.CreateView):
                 return redirect("socioproductivo:part_formlab")
             else:
                 return self.render_to_response(self.get_context_data(form=form))
+
+class formlabEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.UpdateView):
+    model = FormacionLab
+    template_name = "socioproductivo/labedit_form.html"
+    context_object_name = "obj"
+    form_class = LaboralEditForm
+    success_url = reverse_lazy("socioproductivo:formlab_list")
+    login_url = 'app:login'
+
+
+class formlabDelete(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.DeleteView):
+    model = FormacionLab
+    template_name = "socioproductivo/catalogos_del.html"
+    context_object_name = "obj"
+    success_url = reverse_lazy("socioproductivo:part_formlab")
+    login_url = 'app:login'

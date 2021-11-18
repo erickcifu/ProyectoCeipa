@@ -35,7 +35,7 @@ class ViviendaSForm(forms.ModelForm):
         labels = {
             'numero_habitantes':'Cantidad de habitaciones en la vivienda',
             'otra_Viv':'Sus padres tienen otra vivienda',
-            'desc_Otra_Viv':'Descripciòn de la otra Vivienda',
+            'desc_Otra_Viv':'Descripción de la otra Vivienda',
             'Telefono':'Telèfono',
             'tipopiso':'Tipo de piso',
             'tipotecho':'tipo de techo',
@@ -57,10 +57,24 @@ class ViviendaSForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required':False
             })
-            self.fields['tipotecho'].empty_label = "Seleccione un techo"
-            self.fields['tipopiso'].empty_label = "Seleccione un Piso"
-            self.fields['tipomuro'].empty_label = "Seleccione un muro"
-            self.fields['tipovivienda'].empty_label = "Seleccione una tipo de vivienda"
-            self.fields['numero_habitantes'].required = False
+            if field == 'estado_vivsocio':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
+            })
+            required = self.fields[field].required
+            if required:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+            })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })
+        self.fields['tipotecho'].empty_label = "Seleccione tipo de techo"
+        self.fields['tipopiso'].empty_label = "Seleccione tipo de piso"
+        self.fields['tipomuro'].empty_label = "Seleccione tipo de pared"
+        self.fields['tipovivienda'].empty_label = "Seleccione categoría de la vivienda"

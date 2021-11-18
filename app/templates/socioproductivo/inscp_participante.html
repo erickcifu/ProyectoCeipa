@@ -20,12 +20,12 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div id="div_id_taller" class="form-group">
-                                <label for="id_taller" id=" requiredField">Taller</label>
-                                <select name="taller" id="id_taller" class="form-control select form-control" disabled>
+                                <label for="taller" >Taller</label>
+                                <select name="taller" id="taller" class="form-control" {% if id_taller %}disabled{% endif %}>
                                     <option value selected>---------</option>
                                     {%if talleres %}
                                       {%for taller in talleres %}
-                                        {%if id_taller.id == taller.id%}
+                                        {%if id_taller == taller.id%}
                                           <option value="{{taller.id}}" selected>{{taller.nombre_taller}}</option>
                                         {%else%}
                                           <option value="{{taller.id}}">{{taller.nombre_taller}}</option>
@@ -33,8 +33,9 @@
                                       {%endfor%}
                                     {%endif%}
                                 </select>
+                                {{ form | crispy }}
                             </div>
-                            <div id="div_id_insc_persona" class="form-group">
+                          <!---  <div id="div_id_insc_persona" class="form-group">
                                 <label for="id_insc_persona" id="requiredField">Participante</label>
                                 <select name="insc_persona" id="id_insc_persona" class="form-control select form-control">
                                     <option value selected>---------</option>
@@ -45,7 +46,7 @@
                                     {%endif%}
                                 </select>
                             </div>
-                            <!--El resto del form-->
+
                             <div id="div_id_lugar_inscripcion" class="form-group">
                                 <label for="id_lugar_inscripcion" id="requiredField">Lugar de inscripción</label>
                                   {{form.lugar_inscripcion }}
@@ -62,9 +63,8 @@
                                 <label for="id_final_taller" id="requiredField">Fecha de finalización del taller</label>
                                 <input type="date" name="final_taller"  class="form-control" required id="id_final_taller"
                                 placeholder="Fecha de fin de taller" value="{% if obj %} {{ obj.final_taller }} {% endif %}">
-
                             </div>
-                        </div>
+                        </div>-->
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col">

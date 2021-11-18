@@ -15,11 +15,24 @@ from django.db import IntegrityError, transaction
 from django.forms import formset_factory
 from django.shortcuts import redirect
 
-class PersonaBasicaView(IsCoordinadorSocioProductivoMixin, generic.ListView):
+class PersonaBasicaView(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
     model = PersonaBasica
     template_name = 'socioproductivo/personabasica_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/personabasica_form.html"]
+
 
 class PersonaBasicaNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.CreateView):
     model = PersonaBasica
@@ -55,25 +68,26 @@ class PersonaBasicaNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, ge
     def get_context_data(self, **kwargs):
         context = super(PersonaBasicaNew, self).get_context_data(**kwargs)
         if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
+            context['form'] = self.form_class()
         if 'form2' not in context:
             context['form2'] = self.second_form_class(prefix = 'GastoFamiliars')
         if 'form3' not in context:
             context['form3'] = self.third_form_class(prefix = 'InfoEconomicas')
         if 'form4' not in context:
-            context['form4'] = self.four_form_class(self.request.GET)
+            context['form4'] = self.four_form_class()
         if 'form5' not in context:
-            context['form5'] = self.five_form_class(self.request.GET)
+            context['form5'] = self.five_form_class()
         if 'form6' not in context:
             context['form6'] = self.six_form_class(prefix = 'ElectViviendas')
         if 'form7' not in context:
-            context['form7'] = self.seven_form_class(self.request.GET)
+            context['form7'] = self.seven_form_class()
         if 'form8' not in context:
-            context['form8'] = self.eight_form_class(self.request.GET)
+            context['form8'] = self.eight_form_class()
         if 'form9' not in context:
-            context['form9'] = self.nine_form_class(self.request.GET)
+            context['form9'] = self.nine_form_class()
         if 'form10' not in context:
-            context['form10'] = self.ten_form_class(self.request.GET)
+            context['form10'] = self.ten_form_class()
+        context['errores_forms'] = {}
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -81,57 +95,105 @@ class PersonaBasicaNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, ge
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST,request.FILES)
+        form2 = self.second_form_class(request.POST, prefix = 'GastoFamiliars')
+        form3 = self.third_form_class(request.POST, prefix = 'InfoEconomicas')
+        form4 = self.four_form_class(request.POST)
+        form5 = self.five_form_class(request.POST)
+        form6 = self.six_form_class(request.POST, prefix = 'ElectViviendas')
+        form7 = self.seven_form_class(request.POST)
+        form8 = self.eight_form_class(request.POST)
+        form9 = self.nine_form_class(request.POST)
+        form10 = self.ten_form_class(request.POST)
+
         try:
             with transaction.atomic():
-                self.object = self.get_object
-                form = self.form_class(request.POST,request.FILES)
-                form2 = self.second_form_class(request.POST, prefix = 'GastoFamiliars')
-                form3 = self.third_form_class(request.POST, prefix = 'InfoEconomicas')
-                form4 = self.four_form_class(request.POST)
-                form5 = self.five_form_class(request.POST)
-                form6 = self.six_form_class(request.POST, prefix = 'ElectViviendas')
-                form7 = self.seven_form_class(request.POST)
-                form8 = self.eight_form_class(request.POST)
-                form9 = self.nine_form_class(request.POST)
-                form10 = self.ten_form_class(request.POST)
                 if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid() and form7.is_valid() and form8.is_valid() and form9.is_valid() and form10.is_valid():
                     personab = form.save(commit=False)
                     personab.vivienda_socio = form5.save()
-                    for form6_pad in form6:
-                        ElectVivienda=form6_pad.save(commit=False)
-                        print('ElectVivienda-----',ElectVivienda)
-                        ElectVivienda.vivienda = personab.vivienda_socio
-                        ElectVivienda.save()
+                    if len(form6.cleaned_data) == 1:
+                        if form6.cleaned_data[0]:
+                            for form6_pad in form6:
+                                ElectVivienda=form6_pad.save(commit=False)
+                                ElectVivienda.vivienda = personab.vivienda_socio
+                                ElectVivienda.save()
+                    elif len(form6.cleaned_data) >= 1:
+                        for form6_pad in form6:
+                            if form3_pad.cleaned_data:
+                                ElectVivienda=form6_pad.save(commit=False)
+                                ElectVivienda.vivienda = personab.vivienda_socio
+                                ElectVivienda.save()
                     personab.aspectos_salud =form4.save()
                     personab.padres = form7.save()
                     personab.tutor_socio = form8.save()
                     personab.info_educacion= form9.save()
                     personab.caract_laborales = form10.save()
                     personab.save()
-                    for form2_pad in form2:
-                        gasto=form2_pad.save(commit=False)
-                        print('GastoFamiliar-----',GastoFamiliar)
-                        gasto = GastoFamiliar(**form2_pad.cleaned_data, gasto_persona = personab)
-                        gasto.save()
-                    for form3_pad in form3:
-                        InfoEconomica=form3_pad.save(commit=False)
-                        print('InfoEconomica-----',InfoEconomica)
-                        InfoEconomica.eco_persona = personab
-                        InfoEconomica.save()
+                    if len(form2.cleaned_data) == 1:
+                        if form2.cleaned_data[0]:
+                            for form2_pad in form2:
+                                gasto=form2_pad.save(commit=False)
+                                gasto.gasto_persona = personab
+                                gasto.save()
+                    elif len(form2.cleaned_data) >=1:
+                        for form2_pad in form2:
+                            if form2_pad.cleaned_data:
+                                gasto=form2_pad.save(commit=False)
+                                gasto.gasto_persona = personab
+                                gasto.save()
 
+                    if len(form3.cleaned_data) == 1:
+                        if form3.cleaned_data[0]:
+                            for form3_pad in form3:
+                                InfoEconomica=form3_pad.save(commit=False)
+                                InfoEconomica.eco_persona = personab
+                                InfoEconomica.save()
+                    elif len(form3.cleaned_data) >=1:
+                        for form3_pad in form3:
+                            if form3_pad in form3:
+                                InfoEconomica=form3_pad.save(commit=False)
+                                InfoEconomica.eco_persona = personab
+                                InfoEconomica.save()
+                    if self.request.user.user_profile.rol.id == 12:
+                        return redirect('socioproductivo:home_equipo_socioproductivo')
                     return HttpResponseRedirect(self.get_success_url())
                 else:
-                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8, form9=form9 , form10=form10))
+                    errors = {
+                        'form':{'erros':form.errors, 'name':'PersonaBasica'},
+                        'form2':{'erros':form2.errors, 'name':'GastoFamiliar'},
+                        'form3':{'erros':form3.errors, 'name':'InfoEconomica'},
+                        'form4':{'erros':form4.errors, 'name':'AspectosSalud'},
+                        'form5':{'erros':form5.errors, 'name':'ViviendaSocio'},
+                        'form6':{'erros':form6.errors, 'name':'ElectVivienda'},
+                        'form7':{'erros':form7.errors, 'name':'PadresSociop'},
+                        'form8':{'erros':form8.errors, 'name':'Encargado'},
+                        'form9':{'erros':form9.errors, 'name':'InfoEducacion'},
+                        'form10':{'erros':form10.errors, 'name':'Caract_laborales'},
+                    }
+                    print(errors)
+                    return self.render_to_response(self.get_context_data(form=form,
+                    form2=form2,
+                    form3=form3,
+                    form4=form4,
+                    form5=form5,
+                    form6=form6,
+                    form7=form7,
+                    form8=form8,
+                    form9=form9,
+                    form10=form10,
+                    errors_forms=errors
+                    ))
         except IntegrityError:
-            handle_exception()
+            return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form8=form8, form9=form9 , form10=form10))
 
 
 class PersonaBasicaEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.UpdateView):
     model = PersonaBasica
     template_name = "socioproductivo/personabasica_edit.html"
     form_class = PersonaBForm
-    second_form_class = GastFamForm #formset_factory(GastFamForm, extra=1)
-    third_form_class = InfoecoForm #formset_factory(InfoecoForm, extra=1)
+    #second_form_class = GastFamForm #formset_factory(GastFamForm, extra=1)
+    #third_form_class = InfoecoForm #formset_factory(InfoecoForm, extra=1)
     four_form_class = AspectosSaludForm
     five_form_class = ViviendaSForm
     six_form_class = ElectvivForm #formset_factory(ElectvivForm, extra=1)
@@ -150,24 +212,30 @@ class PersonaBasicaEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, g
 
     def post(self, request, *args, **kwargs):
         personab = self.get_object()
-        gastos_fam = GastoFamiliar.objects.filter(gasto_persona = personab)
-        info_eco = InfoEconomica.objects.filter(eco_persona = personab)
+        #gastos_fam = GastoFamiliar.objects.filter(gasto_persona = personab)
+        #info_eco = InfoEconomica.objects.filter(eco_persona = personab)
         padres = personab.padres
         info_salud = personab.aspectos_salud
         info_educacion = personab.info_educacion
         info_laboral = personab.aspectos_salud
         tutor_socio = personab.tutor_socio
         vivienda = personab.vivienda_socio
+        elecvivienda = vivienda.electrodomest_viv.first()
 
         form = self.form_class(request.POST, request.FILES, instance = personab)
         form4 = self.four_form_class(request.POST, instance = info_salud)
         form5 = self.five_form_class(request.POST, instance = vivienda)
         form7 = self.seven_form_class(request.POST, instance = padres)
+        #form6 = self.six_form_class(request.POST, instance = elecvivienda)
         form8 = self.eight_form_class(request.POST, instance = tutor_socio)
         form9 = self.nine_form_class(request.POST, instance = info_educacion)
         form10 = self.nine_form_class(request.POST, instance = info_laboral)
 
         with transaction.atomic():
+            '''for elecvivienda in elecvivienda:
+                form6 = self.six_form_class(request.POST, instance=elecvivienda, prefix='ElectViviendas')
+                if form6.is_valid():
+                    form6.save()
             for eco_info in info_eco:
                 form3 = self.third_form_class(request.POST, instance=eco_info, prefix='InfoEconomicas')
                 if form3.is_valid():
@@ -175,7 +243,7 @@ class PersonaBasicaEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, g
             for gastos in gastos_fam:
                 form2 = self.second_form_class(request.POST, instance = gastos_fam, prefix = 'GastoFamiliars')
                 if form2.is_valid():
-                    form2.save()
+                    form2.save()'''
             if form.is_valid() and form4.is_valid() and form7.is_valid() and form8.is_valid() and form9.is_valid() and form10.is_valid():
                 form.save()
                 form4.save()
@@ -196,12 +264,12 @@ class PersonaBasicaEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, g
         info_laboral = personab.aspectos_salud
         tutor_socio = personab.tutor_socio
         vivienda = personab.vivienda_socio
+        elecvivienda = vivienda.electrodomest_viv.first()
 
-        try:
+        '''try:
             form_eco = formset_factory(InfoecoForm, extra=0)
             listadoEco = []
             eco_info = InfoEconomica.objects.filter(eco_persona = personab)
-
             for a in eco_info:
                 listadoEco.append({
                     'pariente': a.pariente,
@@ -229,19 +297,19 @@ class PersonaBasicaEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, g
             formsetGastos = form_gastos(initial=listadoGastos, prefix='GastoFamiliars')
         except:
             print('ocurró un error')
-            return HttpResponseRedirect(self.success_url)
+            return HttpResponseRedirect(self.success_url)'''
 
         context = {}
         if 'form' not in context:
             context['form'] = self.form_class(instance = personab)
-        if 'form2' not in context:
-            context['form2'] = formsetGastos
-        if 'form3' not in context:
-            context['form3'] = formsetEco
+        #if 'form2' not in context:
+        #    context['form2'] = formsetGastos
+        #if 'form3' not in context:
+        #    context['form3'] = formsetEco
         if 'form4' not in context:
             context['form4'] = self.four_form_class(instance = info_salud)
         if 'form5' not in context:
-            context['form5'] = self.five_form_class(vivienda)
+            context['form5'] = self.five_form_class(instance = vivienda)
         if 'form7' not in context:
             context['form7'] = self.seven_form_class(instance = padres)
         if 'form8' not in context:

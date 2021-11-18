@@ -14,7 +14,7 @@ class InfoEducacion(models.Model):
     grupo_nin_adole = models.ForeignKey(GrupoNA, on_delete=models.CASCADE, related_name="I_Grupo", null=True, blank=True)
     recibido_formacion = models.BooleanField(default=False)
     conocimiento_derechoshumanos = models.CharField(max_length=100)
-    conocimiento_leyes = models.BooleanField(default=True)
+    conocimiento_leyes = models.BooleanField(default=False)
     importancia_organizacion = models.BooleanField(default=False)
     te_motiva_participar = models.BooleanField(default=False)
     estado_info_educacion = models.BooleanField(default=100)

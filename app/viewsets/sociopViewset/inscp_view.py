@@ -60,11 +60,6 @@ class InscribirParticipanteTaller(RolesCoordinadorSocioproductivoYEquipoSociopro
                 return ["equipoSocioproductivo/Emprendimiento_form.html"]
             else:
                 return [self.template_name]
-    def form_valid(self, form):
-        form.save()
-        if self.request.user.user_profile.rol.id == 12:
-            return redirect('socioproductivo:home_equipo_socioproductivo')
-        return redirect("socioproductivo:part_taller")
 
     def get_queryset(self):
         return Taller.objects.all()
@@ -80,16 +75,15 @@ class InscribirParticipanteTaller(RolesCoordinadorSocioproductivoYEquipoSociopro
         context = super().get_context_data(**kwargs)
         context['id_taller'] = self.get_object().id if self.get_object() else ''
         context['talleres'] = Taller.objects.all()
-        context['participantes'] = PersonaBasica.objects.exclude(ins_per__taller__id = self.get_object().id)
+        #context['participantes'] = PersonaBasica.objects.exclude(ins_per__taller__id = self.get_object().id)
         return context
 
     def form_valid(self,form):
         if form.is_valid():
             self.id_taller = self.get_object()
-            if taller_ins:
-                inscp = Inscripcionp(**form.cleaned_data, taller=taller_ins)
+            if self.id_taller:
+                inscp = Inscripcionp(**form.cleaned_data, taller=self.id_taller)
                 inscp.save()
-            else:
                 return HttpResponseRedirect(self.success_url)
         else:
             return self.render_to_response(self.get_context_data(form=form))

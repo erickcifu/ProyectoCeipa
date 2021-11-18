@@ -5,11 +5,11 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-            Convivientes
+            Familia
       </div>
       <div class="card-body">
           {% if not convivientes %}
-          <div class="alert alert-info">No hay datos de Curso urso</div>
+          <div class="alert alert-info">No hay datos</div>
           {% else %}
           <table class="table table-striped table-hover">
               <thead>
@@ -44,7 +44,7 @@
                 <div class="row mr-2">
                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                       <div class="col-12 col-md-12 offset-md-12">
-                          <h2>Agrega mas vovivientes</h2>
+                          <h2>Agrega mas personas</h2>
                       </div>
                 </div>
                 <div class="row justify-content-center">
@@ -62,7 +62,7 @@
                         <br/>
                         <div class="d-flex justify-content-between">
                             <button class="btn btn-primary" type="button" role="button" onclick="agregar_convivientes();">
-                              nuevo form
+                              Agregar
                             </button>
                         </div>
                         <hr class="my-4"/>
@@ -122,7 +122,7 @@
           let $input_apellidos = document.querySelector('#id_convivientes-0-apellidos_conviviente').cloneNode(true)
           $input_apellidos.name = "convivientes-"+$total_forms.value+"-apellidos_conviviente"
           $input_apellidos.id =  "id_convivientes-"+$total_forms.value+"-apellidos_conviviente"
-          
+
           //fecha
           let $label_fecha = document.createElement('label')
           $label_fecha.innerHTML = 'fecha de nacimiento'
@@ -146,7 +146,7 @@
           console.log('convivientes')
           const $formualio_hijo = document.createElement('div')
           $formualio_hijo.id =`hijo_formulario_conviviente_${$total_forms_convivientes}`
-          
+
           $formualio_hijo.appendChild($label_nombre)
           $formualio_hijo.appendChild($input_nombre)
           $formualio_hijo.appendChild($label_apellido)
@@ -157,15 +157,15 @@
           $formualio_hijo.appendChild($input_parenteso)
           $formualio_hijo.appendChild($label_estado)
           $formualio_hijo.appendChild($input_estado)
-        
+
           console.log($formualio_hijo)
           document.getElementById('formularios_convivientes').appendChild($formualio_hijo)
         $total_forms.value = parseInt($total_forms.value) + 1
-        
+
       }
 
       function eliminar_convivientes() {
-          
+
       }
 </script>
 {% endblock%}

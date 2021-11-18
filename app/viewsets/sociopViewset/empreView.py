@@ -73,7 +73,7 @@ class EmprenNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.C
 
 class EmprenEdit(IsCoordinadorSocioProductivoMixin, generic.UpdateView):
     model = Emprendimiento
-    template_name = "socioproductivo/Emprendimiento_form.html"
+    template_name = "socioproductivo/Empren_form.html"
     context_object_name = "obj"
     form_class = EmprenForm
     success_url = reverse_lazy("socioproductivo:emprend_list")

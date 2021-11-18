@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import widgets
 from app.models import PersonaBasica
 
 class PersonaBForm(forms.ModelForm):
@@ -39,30 +40,53 @@ class PersonaBForm(forms.ModelForm):
             'direccionp':'Dirección domiciliar',
             'tel_casap':'Teléfono de casa',
             'tel_celp':'Teléfono Celular',
-            'emailp':'Correo electrònico',
+            'emailp':'Correo electrónico',
             'cantidad_convivientesp':'Cantidad de personas que viven en su casa',
-            'conquien_vive':'Con quièn vive actualmente',
+            'conquien_vive':'Con quién vive actualmente',
             'fotografiaP':'Fotografía',
             'municipio':'Municipio',
             'etnia':'Etnia',
             'genero':'Género',
-            'razon':'Razón',
+            'razon':'Razón por la que vive con esa/esas personas',
             'ingreso_total':'Ingreso Total',
             'total_gastos':'Total de Gastos',
             'edad':'Edad',
             'estado_persona_basica':'Activo/Inactivo'}
         widget = {
             'nombres': forms.TextInput,
-            'estado_persona_basica': forms.CheckboxInput(
-                attrs = {
-                    'checked':True,
-                }
-            )
-        }
+            }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required': False
             })
+            if field == 'estado_persona_basica':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
+            })
+            required = self.fields[field].required
+            if required:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+            })
+            if field == 'tel_casap':
+                self.fields[field].widget.attrs.update({
+                    'placeholder':'00000000',
+                    'onblur':'isTelephoneNumber({});'.format('id_'+field),
+            })
+            if field == 'tel_celp':
+                self.fields[field].widget.attrs.update({
+                    'placeholder':'00000000',
+                    'onblur':'isTelephoneNumber({});'.format('id_'+field),
+            })
+            if type(self.fields[field])==forms.EmailField:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isEmail({});'.format('id_'+field)
+            })
+        self.fields['municipio'].empty_label = "Seleccione municipio"
+        self.fields['etnia'].empty_label = "Seleccione grupo étnico"
+        self.fields['genero'].empty_label = "Seleccione género"

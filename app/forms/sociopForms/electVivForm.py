@@ -16,4 +16,9 @@ class ElectvivForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control'
             })
-            self.fields['elect'].empty_label = 'Seleccione electrodomestico'
+            
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })
+        self.fields['elect'].empty_label = 'Seleccione electrodomestico'

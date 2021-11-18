@@ -4,204 +4,198 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Detalle del alumno
+          <h2 class="text-dark">Datos de {{ item.nombresp }} {{ item.apellidosp }}</h2>
       </div>
       <div class="card-body">
             <div class="row">
-                  <div class="col-lg-6 col-xl-4 mb-4">
-                    <div class="card">
-                        <div class="card-header">
-                          <h2 class="text-primary">Datos del alumno</h2>
-                        </div>
+              <div class="col-lg-12 col-xl-12 mb-12">
+                <div class="card">
+                    <div class="card-header">
+                      <h2 class="text-muted">Información personal</h2>
+                    </div>
+                    <div class="card-body d-flex">
+                      <div class=flex-shrink-0">
+                        <img class="rounded float-left" src="{{item.foto_url|default_if_none:'ceipa/default.png'}}" height="200" weight="250">
                       </div>
-                      <div class="card">
-                        <img class="card-img-top" src="{{item.foto_url|default_if_none:'ceipa/default.png'}}" height="200" weight="250">
-                        <div class="card-body">
-                            <div class="card-header">
-                                {{ item.nombresp }} {{ item.apellidos }}
-                            </div>
-                          <label><b>ID: </b>{{ item.id }}</label>
-                          <br/>
-                          <label><b>Fecha de nacimiento: </b>{{ item.fecha_nacimiento|date:"d M, Y" }}</label>
-                          <label><b>No. CUI: </b>{{ item.DPIP }}</label>
-                          <label><b>direcciòn: </b>{{ item.direccion }}</label>
-                          <label><b>No. Telefono: </b>{{ item.tel_cel }}</label>
-                          <label><b>No. Telefono de casa: </b>{{ item.tel_casa }}</label>
-                          <label><b>Correo Electrónico: </b>{{ item.tel_casa }}</label>
-                          <label><b>Cantidad de convivientes: </b>{{ item.cantidad_convivientes }}</label>
-                          <label><b>Con quien vive: </b>{{ item.conquien_vive }}</label>
-                          <label><b>Ingreso total: Q.</b>{{ item.ingreso_total }}</label>
-                          <label><b>Total de gastos: Q.</b>{{ item.total_gastos }}</label>
-                          <label><b>Edad</b>{{ item.edad }}</label>
-                          <label><b>Etnia: </b>{{ item.etnia }}</label>
-                          <label><b>Municipio: </b>{{ item.municipio }}</label>
-                          <label><b>Gènero: </b>{{ item.genero }}</label>
-                          <label><b>Encargado: </b>{{ item.tutor_socio }}</label>
-                          <div class="text-lg fw-bold">
-                            {% if item.estado_persona_basica is True %}
-                              <span class="badge bg-green-soft text-green">Activo </span>
-                            {% else %}
-                              <span class="badge bg-red-soft text-red">Inactivo</span>
-                            {% endif %}
-                          </div>
-                        </div>
+                      <div class="flex-grow-1 ms-3">
+                        <label><b>Nombre completo: </b>{{ item.nombresp }} {{ item.apellidosp }}</label>
+                        <br/>
+                        <label><b>Fecha de nacimiento: </b>{{ item.fecha_nacimientop |date:"d M, Y"  }}</label>
+                        <br/>
+                        <label><b>Edad: </b>{{ item.edad }}</label>
+                        <br/>
+                        <label><b>Género: </b>{{ item.genero }}</label>
+                        <br/>
+                        <label><b>No. CUI: </b>{{ item.DPIP }}</label>
+                        <br/>
+                        <label><b>Dirección domiciliar: </b>{{ item.direccionp }}</label>
+                        <br/>
+                        <label><b>No. Telefono: </b>{{ item.tel_celp }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label><b>No. Telefono de casa: </b> {{ item.tel_casap }}</label>
+                        <br/>
+                        <label><b>Municipio y departamento de origen: </b>{{ item.municipio }}, {{ item.municipio.dep }}</label>
+                        <br/>
+                        <label><b>Grupo étnico: </b>{{ item.etnia }}</label>
+                        <br/>
+                        <label><b>Correo Electrónico: </b>{{ item.emailp }}</label>
+                        <br/>
+                        <label><b>Cantidad de convivientes: </b>{{ item.cantidad_convivientes }}</label>
+                        <br/>
+                        <label><b>Con quien vive: </b>{{ item.conquien_vive }}</label>
+                        <br/>
+                        <label><b>Razón de porqué vive con esa/esas personas: </b>{{ item.razon }}</label>
+                        <br/>
+                        <label><b>Ingreso total: Q.</b>{{ item.ingreso_total }}</label>
+                        <br/>
+                        <label><b>Total de gastos: Q.</b>{{ item.total_gastos }}</label>
+                        <br/>
+                        <label><b>Etnia: </b>{{ item.etnia }}</label>
+                        <br/>
+                        <label><b>Municipio: </b>{{ item.municipio }}</label>
+                        <br/>
+                        <label><b>Gènero: </b>{{ item.genero }}</label>
+                        <br/>
+                        <label class="text-lg fw-bold">
+                          {% if item.estado_persona_basica is True %}
+                            <span class="badge bg-green-soft text-green">Activo </span>
+                          {% else %}
+                            <span class="badge bg-red-soft text-red">Inactivo</span>
+                          {% endif %}
+                        </label>
                       </div>
                     </div>
-
+                  </div>
+                  <br/>
                   {%if tutor_socio %}
-
-                    <div class="col-lg-6 col-xl-4 mb-4">
                       <div class="card">
                           <div class="card-header">
-                            <h2 class="text-primary">Encargado</h2>
+                            <h2 class="text-muted">Información del encargado</h2>
                           </div>
                         </div>
                         <div class="card">
-                          <div class="card-body">
-                              <div class="card-header">
-                                  {{ tutor_socio.nombres_encar }} {{ tutor_socio.apellidos_encar }}
-                              </div>
-                            <label><b>ID: </b>{{ tutor_socio.id }}</label>
+                          <div class="card-body d-flex">
+                            <div class="flex-grow-1 ms-3">
+                            <label><b>Nombre Completo: </b>{{ tutor_socio.nombres_encar }} {{ tutor_socio.apellidos_encar }}</label>
                             <br/>
-                            <label><b>Parentesco con el alumno: </b>{{ tutor_socio.parentesco }}</label>
+                            <label><b>Parentesco con el participante: </b>{{ tutor_socio.parentesco }}</label>
+                            <br/>
                             <label><b>Fecha de nacimiento: </b>{{ tutor_socio.fecha_nacimientoE |date:"d M, Y" }}</label>
-                            <label><b>Ocupación: </b>{{ tutor_socio.octutor }}</label>
-                            <label><b>No. Telefono: </b>{{ tutor_socio.TelefonoE }}</label>
-
-                            <div class="text-lg fw-bold">
-                              {% if tutor.estado_Encargado is True %}
-                                <span class="badge bg-green-soft text-green">Activo </span>
-                              {% else %}
-                                <span class="badge bg-red-soft text-red">Inactivo</span>
-                              {% endif %}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-                    {%endif%}
-
-                    {%if info_educacion %}
-
-                    <div class="col-lg-6 col-xl-4 mb-4">
-                      <div class="card">
-                          <div class="card-header">
-                            <h2 class="text-primary">Información de educación</h2>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                              <div class="card-header">
-                                  {{ info_educacion.nombre_establecimiento }}
-                              </div>
-                            <label><b>ID: </b>{{ nombre_establecimiento.id }}</label>
                             <br/>
-                            <label><b>Establecimiento: </b>{{ info_educacion.direccion_establecimiento }}</label>
-                            <label><b>Jornada de estudios: </b>{{ info_educacion.jornada_estudio }}</label>
-                            <label><b>Maestro: </b>{{ info_educacion.nombre_maestro }}</label>
-                            <label><b>Telefono maestro: </b>{{ info_educacion.tel_maestro }}</label>
+                            <label><b>Ocupación: </b>{{ tutor_socio.octutor }}</label>
+                            <br/>
+                            <label><b>No. Telefono: </b>{{ tutor_socio.TelefonoE }}</label>
+                          </div>
+                          </div>
+                        </div>
+                    {%endif%}
 
-                            <div class="text-lg fw-bold">
-                              {% if estado_info_educacion is True %}
-                                <span class="badge bg-green-soft text-green">Activo</span>
-                              {% else %}
-                                <span class="badge bg-red-soft text-red">Inactivo</span>
-                              {% endif %}
+
+                <br/>
+                    {%if info_educacion %}
+                      <div class="card">
+                          <div class="card-header">
+                            <h2 class="text-muted">Información de educación</h2>
+                          </div>
+                          <div class="card-body d-flex">
+                            <div class="flex-grow-1 ms-3">
+                            <label><b>Nombre del establecimiento</b>{{ info_educacion.nombre_establecimiento }}</label>
+                            <br/>
+                            <label><b>Dirección del establecimiento: </b>{{ info_educacion.direccion_establecimiento }}</label>
+                            <br/>
+                            <label><b>Jornada de estudios: </b>{{ info_educacion.jornada_estudio }}</label>
+                            <br/>
+                            <label><b>Maestro: </b>{{ info_educacion.nombre_maestro }}</label>
+                            <br/>
+                            <label><b>Teléfono del maestro: </b>{{ info_educacion.tel_maestro }}</label>
                             </div>
                           </div>
                         </div>
-                      </div>
-
-
                     {%endif%}
-
+                    <br/>
                     {%if caract_laborales %}
-
-                    <div class="col-lg-6 col-xl-4 mb-4">
                       <div class="card">
                           <div class="card-header">
-                            <h2 class="text-primary">Aspectos Laborales</h2>
+                            <h2 class="text-muted">Aspectos Laborales</h2>
                           </div>
                         </div>
                         <div class="card">
-                          <div class="card-body">
-                            <label>
+                          <div class="card-body d-flex">
+                            <div class="flex-grow-1 ms-3">
+                            <label><b>Ha trabajado: </b>
                               {% if caract_laborales.ha_trabajado is True %}
-                              <span class="badge bg-green-soft text-green">Si ha trabajado</span>
+                              <label>Si ha trabajado</label>
                               {% else %}
-                              <span class="badge bg-red-soft text-red">No ha trabajado</span>
+                              <label>No ha trabajado</label>
                               {% endif %}
                             </label>
+                            <br/>
                             <label><b>Razón: </b>{{ caract_laborales.razon_t }}</label>
-                            <div class="text-lg fw-bold">
-                            {% if relig.estado_claborales  is True %}
-                                <span class="badge bg-green-soft text-green">Activo </span>
-                            {% else %}
-                                <span class="badge bg-red-soft text-red">Inactivo</span>
-                            {% endif %}
-                            </div>
                             <br/>
                           </div>
+                          </div>
                         </div>
-                      </div>
-
-
                     {%endif%}
-
+                    <br/>
                     {%if padres %}
 
-                        <div class="col-lg-6 col-xl-4 mb-4">
+
                         <div class="card">
                             <div class="card-header">
-                                <h2 class="text-primary">Padres del alumno</h2>
+                                <h2 class="text-muted">Padres del alumno</h2>
                             </div>
                             </div>
-                            <div class="card">
-                            <div class="card-body">
-                                <label><b>ID: </b>{{ padres.id }}</label>
+                            <div class="card d-flex">
+                            <div class="flex-grow-1 ms-3">
                                 <br/>
-                                <label><b>Datos de la madre</b></label>
+                                <label><b>---- Datos de la madre ----</b></label>
+                                <br/>
                                 <label><b>Nombre de la madre: </b>{{ padres.nombre_madre  }}</label>
+                                <br/>
                                 <label><b>No. Telefono: </b>{{ padres.telefono_madre  }}</label>
+                                <br/>
                                 <label><b>Ocupación: </b>{{ padres.ocupacion_madre  }}</label>
-                                <label><b>Datos del padre</b></label>
+                                <br/>
+                                <label><b>---- Datos del padre ----</b></label>
+                                <br/>
                                 <label><b>Nombre del padre: </b>{{ padres.nombre_madre  }}</label>
+                                <br/>
                                 <label><b>No. Telefono: </b>{{ padres.telefono_padre  }}</label>
-                                <label><b>Ocupación: </b>{{ padres.ocupacion_padre  }}</label>
-                                <div class="text-lg fw-bold">
-                                {% if padres.estado_padres  is True %}
-                                    <span class="badge bg-green-soft text-green">Activo </span>
-                                {% else %}
-                                    <span class="badge bg-red-soft text-red">Inactivo</span>
-                                {% endif %}
-                                </div>
+                                <br/>
+                                <label><b>Ocupación: </b>{{ padres.ocupacion_padre  }}</label>                            </div>
                             </div>
-                            </div>
-                        </div>
-                    {%endif%}
 
+                    {%endif%}
+                    <br/>
                     {%if viv%}
 
-                        <div class="col-lg-6 col-xl-4 mb-4">
+
                         <div class="card">
                             <div class="card-header">
-                                <h2 class="text-primary">Vivienda</h2>
+                                <h2 class="text-muted">Vivienda</h2>
                             </div>
                             </div>
                             <div class="card">
-                            <div class="card-body">
+                            <div class="card-body d-flex">
+                                <div class="flex-grow-1 ms-3">
                                 <label>
                                     <b>Número de habitantes:</b>{{ viv.numero_habitantes }}
                                 </label>
                                 <br/>
-                                <label><b>ID: </b>{{ viv.id }}</label>
-                                <br/>
-                                <label><b>Telefono: </b>{{ viv.Telefono  }}</label>
                                 <label><b>Vivienda: </b>{{ viv.tipovivienda  }}</label>
+                                <br/>
                                 <label><b>Techo: </b>{{ viv.tipotecho  }}</label>
+                                <br/>
                                 <label><b>Piso: </b>{{ viv.tipopiso  }}</label>
+                                <br/>
                                 <label><b>Pared: </b>{{ viv.tipomuro  }}</label>
+                                <br/>
+                                <div class="text-lg fw-bold">
+                                    {% if viv.Telefono%}
+                                        <span class="badge bg-green-soft text-green">Con agua potable</span>
+                                    {% else %}
+                                        <span class="badge bg-red-soft text-red">Sin agua potable</span>
+                                    {% endif %}
+                                </div>
                                 <div class="text-lg fw-bold">
                                     {% if viv.agua_potable%}
                                         <span class="badge bg-green-soft text-green">Con agua potable</span>
@@ -250,10 +244,11 @@
                                 </div>
                             </div>
                             </div>
-                        </div>
+                            </div>
 
                   </div>
                     {%endif%}
+                  </div>
       </div>
 <div>
       <div class="card card-header-actions">

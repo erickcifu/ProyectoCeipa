@@ -12,7 +12,7 @@ class PadresForm(forms.ModelForm):
             'nombre_padre':'Nombre del padre',
             'telefono_padre':'No.Telefono del padre',
             'ocupacion_padre':'Ocupación del padre',
-            'estado_joranadaes':'Activo/Inactivo'}
+            'estado_padres':'Activo'}
         widget = {
             'nombre_madre': forms.TextInput,
             'estado_padres': forms.CheckboxInput(
@@ -26,11 +26,20 @@ class PadresForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required':False
             })
-            self.fields['nombre_madre'].required = False
-            self.fields['telefono_madre'].required = False
-            self.fields['ocupacion_madre'].required = False
-            self.fields['nombre_padre'].required = False
-            self.fields['telefono_padre'].required = False
-            self.fields['ocupacion_padre'].required = False
+            if field == 'estado_padres':
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input',
+                    'checked':True
+            })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })
+            requiered = self.fields[field].required
+            if requiered:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+            })
