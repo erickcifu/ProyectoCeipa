@@ -5,12 +5,12 @@ from app.models import AspectosLab
 
 class LaboralForm(forms.ModelForm):
     estado_laborales = forms.BooleanField()
-    hora_entrada = forms.DateField(
+    hora_entrada = forms.TimeField(
         widget = forms.TextInput(
             attrs = { 'type': 'time' }
         )
     )
-    hora_salida = forms.DateField(
+    hora_salida = forms.TimeField(
         widget = forms.TextInput(
             attrs = { 'type': 'time' }
         )
