@@ -6,7 +6,7 @@ class Apadecimiento(models.Model):
     padecimiento = models.ForeignKey(Padecimiento, on_delete=models.CASCADE, related_name="A_padecimiento", null=True)
     alumno =models.ForeignKey(Alumno, on_delete=models.CASCADE, related_name="P_alumno", null=True)
     tratamiento = models.CharField(max_length=205,null=False)
-    lugar = models.CharField(max_length=205,null=False)
+    lugar = models.CharField(max_length=205,null=True, blank=True)
     estado_Alpadecimiento = models.BooleanField(default=True)
 
     def __str__(self):

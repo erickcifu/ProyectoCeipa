@@ -181,7 +181,7 @@
                                     </div>
 
                                   <!--Tab item 9-->
-                                    <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard9" role="tabpanel" aria-labelledby="wizard9-tab">
+                                    <div class="tab-pane py-5 py-xl-10 fade " id="wizard9" role="tabpanel" aria-labelledby="wizard9-tab">
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
                                           <h3 class="text-primary">Paso 2</h3>
@@ -445,24 +445,24 @@
                                         <div class="col-xxl-6 col-xl-8">
                                           <h3 class="text-primary">Paso 5</h3>
                                           <h5 class="card-title mb-4">Ingrese informaciòn de salud del alumno</h5>
-                                            <div class="row gx-3" >
-                                                {{form5.management_form}}
-                                                  {%for f in form5%}
-                                                    <div id="formularios_padecimientos" class="row">
-                                                      {{ f | crispy}}
-                                                    </div>
-                                                    <br>
-                                                    <br>
-                                                  {%endfor%}
-                                            </div>
-                                            <br/>
+                                          <div class="row gx-3" >
+                                              {{form5.management_form}}
+                                                {%for f in form5%}
+                                                  <div id="formularios_padecimientos" class="row">
+                                                    {{ f | crispy}}
+                                                  </div>
+                                                  <br>
+                                                  <br>
+                                                {%endfor%}
+                                          </div>
+                                          <br/>
 
-                                            <div class="d-flex justify-content-between">
-                                              <button class="btn btn-light"role="button" onclick="agregar_form();">
-                                              <i class="me-2" data-feather="plus-circle"></i>Agregar padecimiento
-                                            </button>
-                                            </div>
-                                            <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-primary" role="button" onclick="agregar_form();">
+                                              nuevo form
+                                          </button>
+                                          </div>
+                                          <hr class="my-4"/>
                                         </div>
                                       </div>
                                     </div>
@@ -528,41 +528,42 @@
 {% endblock %}
 {% block js_page %}
   <script>
-      function agregar_form(){
-        const $total_forms = document.getElementById('id_form-TOTAL_FORMS')
+    function agregar_form(){
+      const $total_forms = document.getElementById('id_form-TOTAL_FORMS')
 
-        let $label_pad = document.createElement('label')
-        $label_pad.innerHTML = 'Padecimiento'
-        let $input_padeci = document.querySelector('#id_form-0-padecimiento').cloneNode(true)
-        $input_padeci.name = 'form-'+$total_forms.value+'-padecimiento'
-        $input_padeci.id = 'id_form-'+$total_forms.value+'-padecimiento'
+      let $label_pad = document.createElement('label')
+      $label_pad.innerHTML = 'Padecimiento'
+      let $input_padeci = document.querySelector('#id_form-0-padecimiento').cloneNode(true)
+      $input_padeci.name = 'form-'+$total_forms.value+'-padecimiento'
+      $input_padeci.id = 'id_form-'+$total_forms.value+'-padecimiento'
 
-        console.log('label_pad', $label_pad)
-        console.log('input_pad', $input_padeci)
+      console.log('label_pad', $label_pad)
+      console.log('input_pad', $input_padeci)
 
 
-        let $label_tratamiento = document.createElement('label')
-        $label_tratamiento.innerHTML = 'tratamiento'
-        let $input_tratamiento = document.querySelector('#id_form-0-tratamiento').cloneNode(true)
-        $input_tratamiento.name = 'form-'+$total_forms.value+'-tratamiento'
-        $input_tratamiento.id = 'id_form-'+$total_forms.value+'-tratamiento'
+      let $label_tratamiento = document.createElement('label')
+      $label_tratamiento.innerHTML = 'Tratamiento'
+      let $input_tratamiento = document.querySelector('#id_form-0-tratamiento').cloneNode(true)
+      $input_tratamiento.name = 'form-'+$total_forms.value+'-tratamiento'
+      $input_tratamiento.id = 'id_form-'+$total_forms.value+'-tratamiento'
 
-        let $label_estado_pad = document.createElement('label')
-        $label_estado_pad.innerHTML = 'Activo'
-        let $input_estado_pad = document.querySelector('#id_form-0-estado_Alpadecimiento').cloneNode(true)
-        $input_estado_pad.name = 'form-'+$total_forms.value+'-estado_Alpadecimiento'
-        $input_estado_pad.id = 'id_form-'+$total_forms.value+'-estado_Alpadecimiento'
+      let $label_estado_pad = document.createElement('label')
+      $label_estado_pad.innerHTML = 'Activo'
+      let $input_estado_pad = document.querySelector('#id_form-0-estado_Alpadecimiento').cloneNode(true)
+      $input_estado_pad.name = 'form-'+$total_forms.value+'-estado_Alpadecimiento'
+      $input_estado_pad.id = 'id_form-'+$total_forms.value+'-estado_Alpadecimiento'
 
-        document.getElementById('formularios_padecimientos').appendChild($label_pad)
-        document.getElementById('formularios_padecimientos').appendChild($input_padeci)
-        document.getElementById('formularios_padecimientos').appendChild($label_tratamiento)
-        document.getElementById('formularios_padecimientos').appendChild($input_tratamiento)
-        document.getElementById('formularios_padecimientos').appendChild($label_estado_pad)
-        document.getElementById('formularios_padecimientos').appendChild($input_estado_pad)
+      document.getElementById('formularios_padecimientos').appendChild($label_pad)
+      document.getElementById('formularios_padecimientos').appendChild($input_padeci)
+      document.getElementById('formularios_padecimientos').appendChild($label_tratamiento)
+      document.getElementById('formularios_padecimientos').appendChild($input_tratamiento)
+      document.getElementById('formularios_padecimientos').appendChild($label_estado_pad)
+      document.getElementById('formularios_padecimientos').appendChild($input_estado_pad)
 
-        $total_forms.value = parseInt($total_forms.value) + 1
-        console.log($total_forms)
+      $total_forms.value = parseInt($total_forms.value) + 1
+      console.log($total_forms)
 
-      }
+    }
+
   </script>
 {% endblock %}

@@ -7,7 +7,7 @@ class APadeForm(forms.ModelForm):
     estado_Alpadecimiento = forms.BooleanField()
     class Meta:
         model = Apadecimiento
-        fields = ['padecimiento','tratamiento', 'estado_Alpadecimiento']
+        fields = ['padecimiento','tratamiento','estado_Alpadecimiento']
         labels = {'padecimiento':"Padecimiento", 'tratamiento':'Tratamiento','estado_Alpadecimiento':"Activo"}
         widget = {'estado_Alpadecimiento': forms.TextInput}
 
