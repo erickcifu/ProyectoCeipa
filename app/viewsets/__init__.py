@@ -30,7 +30,7 @@ from .educacionViewset.serviaguaViewset import ServiaguaView, ServiaguaNew, Serv
 from .educacionViewset.convivienteViewset import ConvivienteView, ConvivienteNew, ConvivienteEdit, ConvivienteDel, ConvivienteAlumnoEdit
 from .educacionViewset.tutorViewset import TutorView, TutorNew, TutorEdit, TutorDel
 from .educacionViewset.alumnoViewset import (AlumnoView, AlumnoNew, AlumnoEdit, AlumnoDel,
-                                    AlumnoDetail, AlumnoDetailAndCreate,
+                                    AlumnoDetail, AlumnoDetailAndCreate, AlumnoDetailAndupdate, AlumnoupdateViviendaConvivientes,
                                     AlumnoEditViviendaConvivientes,
                                     AlumnosDeCadaCurso
                                     )
