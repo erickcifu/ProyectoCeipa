@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
 from app.models.educacion_model.ciclo_grado_curso import Ciclo_grado_curso
 from app.viewsets.users.maestro.mixin import IsMaestroMixin
+from app.viewsets.users.directorCentro.mixin import IsDirectorCentroMixin
 from django.core.exceptions import ImproperlyConfigured
 from app.viewsets.users.mixins.CoordinadorGeneralYDirectorCentroMixin import RolesCoordinadorEducacionYDirectorCentroMixin
 from app.viewsets.users.mixins.CooEducacionDirectorCentroMaestro import RolesCooEducacionDirectorCentroMaestroMixin
@@ -24,7 +25,7 @@ from django.shortcuts import redirect
 
 from app.models.educacion_model.padecimientoModel import Padecimiento
 
-class AlumnoView(RolesCoordinadorEducacionYDirectorCentroMixin, generic.ListView):
+class AlumnoView(RolesCooEducacionDirectorCentroMaestroMixin, generic.ListView):
     model = Alumno
     template_name = 'educacion/alumno_list.html'
     context_object_name = 'obj'
@@ -42,7 +43,7 @@ class AlumnoView(RolesCoordinadorEducacionYDirectorCentroMixin, generic.ListView
             elif self.request.user.user_profile.rol.id == 5:
                 return ["directorCentro/alumno_list.html"]
 
-class AlumnoNew(RolesCoordinadorEducacionYDirectorCentroMixin, generic.CreateView):
+class AlumnoNew(RolesCooEducacionDirectorCentroMaestroMixin, generic.CreateView):
     model = Alumno
     template_name = 'educacion/alumno_form.html'
     context_object_name = "obj"
@@ -214,8 +215,6 @@ class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, gener
         else:
             if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
                 return [self.template_name]
-            elif self.request.user.user_profile.rol.id == 5:
-                return ["directorCentro/alumnoedit_form.html"]
 
 class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, generic.UpdateView):
     template_name = "prueba/alumnoEdit.html"
@@ -237,15 +236,14 @@ class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, gener
                 "TemplateResponseMixin requires either a definition of "
                 "'template_name' or an implementation of 'get_template_names()'")
         else:
+            print('hola mundo')
             if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
                 return [self.template_name]
-            elif self.request.user.user_profile.rol.id == 5:
-                return ["directorCentro/alumnoEdit.html"]
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = self.third_form_class
+        context['obj'] = ''
 
         return context
 
@@ -257,6 +255,7 @@ class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, gener
         religion_alumno = alumno.R_alumno.first()
         analisis_psicologico = alumno.A_alumno.first()
         vivienda = alumno.estudiante_vivieda.first()
+        laboral = alumno.aspect_alumn.first()
 
         form = self.form_class(request.POST, instance = tutor)
         form2 = self.second_form_class(request.POST, instance= estudios_anteriores)
@@ -271,7 +270,7 @@ class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, gener
                 form5 = self.five_form_class(request.POST, instance = apadecimiento, prefix='apadecimientos')
                 if form5.is_valid():
                     form5.save()
-            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form6.is_valid() and form7.is_valid():
+            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form6.is_valid() and form7.is_valid() and form9.is_valid():
                 form3.save()
                 form2.save()
                 form.save()
@@ -281,7 +280,7 @@ class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, gener
                 form9.save()
                 return HttpResponseRedirect(self.success_url)
             else:
-                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7))
+                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form9=form9))
 
     def get(self, request, *args, **kwargs):
         alumno = self.get_object()
@@ -344,8 +343,6 @@ class AlumnoEditViviendaConvivientes(RolesCoordinadorEducacionYDirectorCentroMix
             else:
                 if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
                     return [self.template_name]
-                elif self.request.user.user_profile.rol.id == 5:
-                    return ["directorCentro/alumnoEditViviendaConvivientes.html"]
 
     def get(self, request, *args, **kwargs):
         alumno = self.get_object()
@@ -376,6 +373,146 @@ class AlumnoEditViviendaConvivientes(RolesCoordinadorEducacionYDirectorCentroMix
             return redirect('educacion:prueba_alumno', pk=self.get_object().id)
         else:
             return self.render_to_response(self.get_context_data(form7=form7))
+
+class AlumnoDetailAndupdate(IsDirectorCentroMixin, generic.UpdateView):
+    template_name = "directorCentro/alumnoEdit.html"
+    success_url = reverse_lazy("educacion:direc_prueba_alumno")
+    model = Alumno
+    form_class = TutorForm
+    second_form_class = EstAntForm
+    third_form_class = AlumnoForm
+    four_form_class = ReligionAlumnoForm
+    five_form_class = APadeForm#formset_factory(APadeForm, extra=1)
+    six_form_class = PsicoForm
+    seven_form_class = VivForm
+    eight_form_class = ConvivienteForm
+    nine_form_class = LaboralForm
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.third_form_class
+        context['obj']=''
+        return context
+
+    def post(self, request, *args, **kwargs):
+        alumno = self.get_object()
+        apadecimientos = Apadecimiento.objects.filter(alumno=alumno)
+        tutor = alumno.tutor
+        estudios_anteriores = alumno.estudios_anteriores
+        religion_alumno = alumno.R_alumno.first()
+        analisis_psicologico = alumno.A_alumno.first()
+        vivienda = alumno.estudiante_vivieda.first()
+        laboral = alumno.aspect_alumn.first()
+
+        form = self.form_class(request.POST, instance = tutor)
+        form2 = self.second_form_class(request.POST, instance= estudios_anteriores)
+        form3 = self.third_form_class(request.POST, instance = alumno)
+        form4 = self.four_form_class(request.POST, instance = religion_alumno)
+        form6 = self.six_form_class(request.POST, instance = analisis_psicologico)
+        form7 = self.seven_form_class(request.POST, instance = vivienda)
+        form9 = self.nine_form_class(request.POST, instance = laboral)
+
+        with transaction.atomic():
+            for apadecimiento in apadecimientos:
+                form5 = self.five_form_class(request.POST, instance = apadecimiento, prefix='apadecimientos')
+                if form5.is_valid():
+                    form5.save()
+            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form6.is_valid() and form7.is_valid() and form9.is_valid():
+                form3.save()
+                form2.save()
+                form.save()
+                form4.save()
+                form6.save()
+                form7.save()
+                form9.save()
+                return HttpResponseRedirect(self.success_url)
+            else:
+                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form9=form9))
+
+    def get(self, request, *args, **kwargs):
+        alumno = self.get_object()
+        tutor = alumno.tutor
+        estudios_anteriores = alumno.estudios_anteriores
+        religion_alumno = alumno.R_alumno.first()
+        analisis_psicologico = alumno.A_alumno.first()
+        vivienda = alumno.estudiante_vivieda.first()
+        laboral = alumno.aspect_alumn.first()
+
+        try:
+            formApa = formset_factory(APadeForm, extra=0)
+            listadoApa = []
+            apadecimientos = Apadecimiento.objects.filter(alumno=alumno)
+
+            for a in apadecimientos:
+                listadoApa.append({
+                    'padecimiento':a.padecimiento.id,
+                    'tratamiento':a.tratamiento,
+                    'estado_Alpadecimiento':a.estado_Alpadecimiento
+                })
+            formSetApa = formApa(initial=listadoApa, prefix = 'apadecimientos')
+        except:
+            print('ocurró un error')
+            return HttpResponseRedirect(self.success_url)
+        context = {}
+        if 'form' not in context:
+            context['form'] = self.form_class(instance = tutor)
+        if 'form2' not in context:
+            context['form2'] = self.second_form_class(instance = estudios_anteriores)
+        if 'form3' not in context:
+            context['form3'] = self.third_form_class(instance = alumno)
+        if 'form4' not in context:
+            context['form4'] = self.four_form_class(instance = religion_alumno)
+        if 'form5' not in context:
+            context['form5'] = formSetApa
+        if 'form6' not in context:
+            context['form6'] = self.six_form_class(instance = analisis_psicologico)
+        if 'form7' not in context:
+            context['form7'] = self.seven_form_class(instance = vivienda)
+        if 'form9' not in context:
+            context['form9'] = self.nine_form_class(instance = laboral)
+        context['obj'] = ''
+        context['alumno'] = self.get_object()
+
+        return render(request, self.template_name, context)
+
+class AlumnoupdateViviendaConvivientes(IsDirectorCentroMixin, generic.UpdateView):
+    template_name = "directorCentro/alumnoEditViviendaConvivientes.html"
+    success_url = reverse_lazy("educacion:direc_alumno_list_convivientes")
+    model = Alumno
+    form_viv = VivFormEdit
+    form_convivientes = formset_factory(ConvivienteFormEdit, extra=1)
+
+    def get(self, request, *args, **kwargs):
+        alumno = self.get_object()
+        vivienda = alumno.estudiante_vivieda.first()
+        convivientes = Conviviente.objects.filter(vivienda=vivienda)
+        context = {}
+        context['form_viv'] = self.form_viv(instance = vivienda)
+        context['convivientes'] = convivientes
+        context['alumno'] = self.get_object()
+        context['convivientes_form'] = self.form_convivientes(prefix = 'convivientes')
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        alumno = self.get_object()
+        vivienda = alumno.estudiante_vivieda.first()
+        form7 = VivFormEdit(request.POST, instance = vivienda)
+        if form7.is_valid():
+            form7.save()
+            formNuevosConvivientes = self.form_convivientes(request.POST, prefix='convivientes')
+            for form in formNuevosConvivientes:
+                if form.is_valid():
+                    data =  form.cleaned_data
+                    if data:
+                        Conviviente.objects.create(**data, vivienda = vivienda)
+                        vivienda.cantidad_personas += 1
+                        vivienda.save()
+            return redirect('educacion:prueba_alumno', pk=self.get_object().id)
+        else:
+            return self.render_to_response(self.get_context_data(form7=form7))
+
 
 class AlumnoDetail(RolesCooEducacionDirectorCentroMaestroMixin, generic.DetailView):
     template_name = "educacion/alumno_detail.html"

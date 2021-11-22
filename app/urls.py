@@ -59,7 +59,8 @@ urlpatterns = [
     #pruba alumno
     path('prueba/alumno/edit/<int:pk>', viewsets.AlumnoDetailAndCreate.as_view(), name='prueba_alumno'),
     path('prueba/alumno/convivientes/vivienda/<int:pk>/', viewsets.AlumnoEditViviendaConvivientes.as_view(), name='alumno_list_convivientes'),
-
+    path('directorCentro/alumno/edit/<int:pk>', viewsets.AlumnoDetailAndupdate.as_view(), name='direc_prueba_alumno'),
+    path('directorCentro/alumno/convivientes/vivienda/<int:pk>/', viewsets.AlumnoupdateViviendaConvivientes.as_view(), name='direc_alumno_list_convivientes'),
     #prueba ciclos
     path('prueba/ciclos/', viewsets.CiclosForCreateGradeandCourseView.as_view(), name='prueba_ciclos'),
 
