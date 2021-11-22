@@ -1,0 +1,59 @@
+{% extends 'equipoSocioproductivo/base.html' %}
+
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+        <div class="card-header">
+            Participantes en talleres
+            </div>
+        <div class="card mb-4">
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay datos</div>
+          {% else %}
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>Taller</th>
+                  <th>Participante</th>
+                  <th>Inicio de taller</th>
+                  <th>Final de taller</th>
+                  <th>Tiene certificado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.taller }}</td>
+                      <td>{{ item.insc_persona }} {{ item.insc_persona.apellidos }}</td>
+                      <td>{{ item.inicio_taller | date:"d M, Y" }}</td>
+                      <td>{{ item.final_taller | date:"d M, Y"  }}</td>
+                      <td>
+                        {% if item.certificado_taller is True %}
+                          <span class="badge bg-green-soft text-green">Con certificado</span>
+                        {% else %}
+                          <span class="badge bg-red-soft text-red">Sin certificado</span>
+                        {% endif %}
+                      </td>
+                      <td>
+                          <a href="{% url 'socioproductivo:inscp_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i class="far fa-edit"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% endif %}
+      </div>
+
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock%}

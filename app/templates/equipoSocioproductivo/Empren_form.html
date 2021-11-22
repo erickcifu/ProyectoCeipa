@@ -1,0 +1,68 @@
+{% extends 'equipoSocioproductivo/base.html' %}
+
+
+{% block page_content %}
+{% load crispy_forms_tags %}
+<div id="layoutSidenav_content">
+<form method="POST" class="form-inline">
+    {% csrf_token %}
+    <div class="col-xl-12 col-md-12 mb-12">
+        {% if obj %}
+        <div class="card border-left-warning shadow h-100 py-2">
+        {% else %}
+        <div class="card border-left-success shadow h-100 py-2">
+        {% endif %}
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          Editar Emprendimiento
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row gx-12">
+                          <div class="row gx-3">
+                            <div class="mb-3 col-md-12">
+                            {{ form.nombres_emp | as_crispy_field }}
+                            </div>
+                          </div>
+                          <div class="row gx-3">
+                            <div class="mb-3 col-md-12">
+                            {{ form.Monto_Capital | as_crispy_field }}
+                            </div>
+                          </div>
+                          <div class="row gx-3">
+                            <div class="mb-3 col-md-12">
+                            {{ form.fecha_inicio | as_crispy_field }}
+                            </div>
+                          </div>
+                          <div class="row gx-3">
+                            <div class="mb-3 col-md-6">
+                            {{ form.Tipoemp | as_crispy_field }}
+                            </div>
+                            <div class="mb-3 col-md-6">
+                            {{ form.muni | as_crispy_field }}
+                            </div>
+                          </div>
+                          <div class="row gx-3" hidden>
+                            <div class="mb-3 col-md-12">
+                            {{ form.estado_Emprendimiento | as_crispy_field }}
+                            </div>
+                          </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a href="{% url 'socioproductivo:emprend_list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block js_page %}
+{% endblock %}

@@ -3,9 +3,13 @@ from app.models import Taller, PersonaBasica, Inscripcionp
 from app.models.educacion_model.municipioModel import municipio
 
 class InscpForm(forms.ModelForm):
+    insc_persona = forms.ModelChoiceField(
+        queryset = PersonaBasica.objects.filter(estado_persona_basica=True)
+        .order_by('nombresp'), label="Participante"
+    )
     lugar_inscripcion = forms.ModelChoiceField(
         queryset = municipio.objects.filter(estado_municipio=True)
-        .order_by('nombre_municipio')
+        .order_by('nombre_municipio'), label="Lugar de inscrićión"
     )
     taller = forms.ModelChoiceField(
         queryset = Taller.objects.filter(estado_taller=True)
@@ -52,20 +56,24 @@ class InscpForm(forms.ModelForm):
             self.fields['lugar_inscripcion'].empty_label = "Seleccione municipio"
 
 class InscTallerForm(forms.ModelForm):
+    insc_persona = forms.ModelChoiceField(
+        queryset = PersonaBasica.objects.filter(estado_persona_basica=True)
+        .order_by('nombresp'), label="Participante"
+    )
     lugar_inscripcion = forms.ModelChoiceField(
         queryset = municipio.objects.filter(estado_municipio=True)
-        .order_by('nombre_municipio')
+        .order_by('nombre_municipio'), label="Lugar de inscripción"
     )
 
     inicio_taller = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
-        )
+        ), label = "Fecha de inicio del taller"
     )
     final_taller = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
-        )
+        ), label = "Fecha de finalización del taller"
     )
     class Meta:
         model = Inscripcionp
@@ -85,7 +93,8 @@ class InscTallerForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required':False
             })
-            self.fields['insc_persona'].empty_label = "Seleccione al participante"
-            self.fields['lugar_inscripcion'].empty_label = "Seleccione municipio"
+        self.fields['insc_persona'].empty_label = "Seleccione al participante"
+        self.fields['lugar_inscripcion'].empty_label = "Seleccione municipio"

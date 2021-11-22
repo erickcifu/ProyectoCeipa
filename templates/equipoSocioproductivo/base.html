@@ -24,7 +24,7 @@
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="{% url 'app:home' %}">Sistema CEIPA</a>
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="{% url 'app:home_equipo_socioproductivo' %}">Sistema CEIPA</a>
             <!-- Navbar Search Input-->
             <!-- * * Note: * * Visible only on and above the lg breakpoint-->
 
@@ -81,22 +81,17 @@
                             <!-- Sidenav Link (Alerts)-->
                             <!-- * * Note: * * Visible only on and above the sm breakpoint-->
                             <!-- Sidenav Menu Heading (Core)-->
-                            <div class="sidenav-menu-heading">Menú SocioProductivo</div>
-                            <!-- Sidenav Accordion (Dashboard)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCatalogos" aria-expanded="false" aria-controls="collapseCatalogos">
-                              Catálogos
-                              <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
-                              <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                <a class="nav-link" href="{% url 'socioproductivo:personabasica_list' %}">Registro de participante</a>
-                                <a class="nav-link" href="{% url 'socioproductivo:formlab_list' %}">Participantes de formación laboral</a>
-                                <a class="nav-link" href="{% url 'socioproductivo:part_taller' %}">Inscripción de participante a taller</a>
-                                <a class="nav-link" href="{% url 'socioproductivo:part_formlab' %}">Inscripción de participante a formación laboral</a>
-                                <a class="nav-link" href="{% url 'socioproductivo:list_para_emprendimientos' %}">Crear emprendimiento</a>
-                                <a class="nav-link" href="{% url 'socioproductivo:emprend_list' %}">Emprendimientos</a>
-                              </nav>
-                            </div>
+                            <div class="sidenav-menu-heading">Menú socioproductivo</div>
+                            <a class="nav-link" href="{% url 'socioproductivo:personabasica_list' %}">Registro de participantes</a>
+                            <div class="sidenav-menu-heading">Talleres</div>
+                            <a class="nav-link" href="{% url 'socioproductivo:part_taller' %}">Inscripción de participante a taller</a>
+                            <a class="nav-link" href="{% url 'socioproductivo:inscp_list' %}">Listado de participantes en talleres</a>
+                            <div class="sidenav-menu-heading">Emprendimientos</div>
+                            <a class="nav-link" href="{% url 'socioproductivo:list_para_emprendimientos' %}">Crear emprendimiento</a>
+                            <a class="nav-link" href="{% url 'socioproductivo:emprend_list' %}">Listado de emprendimientos</a>
+                            <div class="sidenav-menu-heading">Formación laboral</div>
+                            <a class="nav-link" href="{% url 'socioproductivo:part_formlab' %}">Inscripción de participante a formación laboral</a>
+                            <a class="nav-link" href="{% url 'socioproductivo:formlab_list' %}">Listado de participantes de formación laboral</a>
 
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
@@ -125,7 +120,7 @@
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
                                             INICIO
                                         </h1>
-                                        <div class="page-header-subtitle">Estadisticas de niños y jovenes en toda la organizacion</div>
+                                        <div class="page-header-subtitle">Equipo técnico programa socioproductivo</div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">
                                         <div class="input-group input-group-joined border-0" style="width: 16.5rem">
@@ -146,7 +141,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-xl-8 col-xxl-12">
                                                 <div class="text-center text-xl-start text-xxl-center mb-4 mb-xl-0 mb-xxl-4">
-                                                    <h1 class="text-primary">Bienvenido/a al espacio de trabajo Equipo Tecnico socioproductivo</h1>
+                                                    <h1 class="text-primary">Bienvenido/a {{ user.first_name }}, {{ user.last_name}} al espacio de trabajo</h1>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="{% static 'base/dist/assets/img/Ceipa_Logo.jpeg' %}" style="max-width: 15rem" /></div>
@@ -159,17 +154,17 @@
                         <!-- Example Colored Cards for Dashboard Demo-->
 
                         <!-- Example Charts for Dashboard Demo-->
-                      
+
                     </div>
                 </main>
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
                         <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
+                            <div class="col-md-6 small">Copyright &copy; Mesoamericana 2021</div>
                             <div class="col-md-6 text-md-end small">
-                                <a href="#!">Privacy Policy</a>
+                                <a>Privacy Policy</a>
                                 &middot;
-                                <a href="#!">Terms &amp; Conditions</a>
+                                <a>Terms &amp; Conditions</a>
                             </div>
                         </div>
                     </div>
@@ -179,9 +174,6 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{% static 'base/dist/js/scripts.js' %}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="{% static 'base/dist/assets/demo/chart-area-demo.js' %}"></script>
-        <script src="{% static 'base/dist/assets/demo/chart-bar-demo.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="{% static 'base/dist/js/datatables/datatables-simple-demo.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>

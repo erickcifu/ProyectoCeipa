@@ -9,11 +9,23 @@ from app.viewsets.users.mixins.CooSocioproductivoYEquipoSocioproductivo import R
 from app.models import Emprendimiento, PersonaBasica
 from app.forms import EmprenForm
 
-class EmprenView(IsCoordinadorSocioProductivoMixin, generic.ListView):
+class EmprenView(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
     model = Emprendimiento
     template_name = 'socioproductivo/Emprendimiento_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 10 or self.request.user.user_profile.rol.id == 11:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 12:
+                return ["equipoSocioproductivo/Emprendimiento_list.html"]
+
 
 class EmprenNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.CreateView):
     model = Emprendimiento
@@ -71,13 +83,27 @@ class EmprenNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.C
             else:
                 return self.render_to_response(self.get_context_data(form=form))
 
-class EmprenEdit(IsCoordinadorSocioProductivoMixin, generic.UpdateView):
+class EmprenEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.UpdateView):
     model = Emprendimiento
     template_name = "socioproductivo/Empren_form.html"
     context_object_name = "obj"
     form_class = EmprenForm
     success_url = reverse_lazy("socioproductivo:emprend_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/Empren_form.html"]
+            else:
+                return [self.template_name]
 
 class EmprenDel(IsCoordinadorSocioProductivoMixin, generic.DeleteView):
     model = Emprendimiento

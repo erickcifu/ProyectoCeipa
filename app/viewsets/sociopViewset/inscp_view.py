@@ -10,13 +10,26 @@ from app.viewsets.users.mixins.CooSocioproductivoYEquipoSocioproductivo import R
 from app.models import Inscripcionp, PersonaBasica, Taller
 from app.forms import InscpForm, InscTallerForm
 
-class InscpView(LoginRequiredMixin, generic.ListView):
+class InscpView(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
     model = Inscripcionp
     template_name = 'socioproductivo/inscp_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
-class InscpNew(LoginRequiredMixin, generic.CreateView):
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/inscp_list.html"]
+
+
+class InscpNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.CreateView):
     model = Inscripcionp
     template_name = "socioproductivo/inscp_form.html"
     context_object_name = "obj"
@@ -24,13 +37,25 @@ class InscpNew(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("socioproductivo:inscp_list")
     login_url = 'app:login'
 
-class InscpEdit(LoginRequiredMixin, generic.UpdateView):
+class InscpEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.UpdateView):
     model = Inscripcionp
     template_name = "socioproductivo/inscp_form.html"
     context_object_name = "obj"
     form_class = InscpForm
     success_url = reverse_lazy("socioproductivo:inscp_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/inscp_form.html"]
 
 class InscpDel(LoginRequiredMixin, generic.DeleteView):
     model = Inscripcionp
@@ -57,7 +82,7 @@ class InscribirParticipanteTaller(RolesCoordinadorSocioproductivoYEquipoSociopro
             if user == 10 or user == 11:
                 return [self.template_name]
             elif user == 12:
-                return ["equipoSocioproductivo/Emprendimiento_form.html"]
+                return ["equipoSocioproductivo/inscp_participante.html"]
             else:
                 return [self.template_name]
 

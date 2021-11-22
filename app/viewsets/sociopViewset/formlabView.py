@@ -17,6 +17,18 @@ class FormLabView(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic
     context_object_name = 'obj'
     login_url = 'app:login'
 
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/listar_formacion.html"]
+
 
 class FormLabNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.CreateView):
     model = FormacionLab
@@ -26,6 +38,18 @@ class FormLabNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.
     success_url = reverse_lazy("socioproductivo:part_formlab")
     login_url = 'app:login'
     id_participante = ''
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/formlab_form.html"]
 
     def get_queryset(self):
         return PersonaBasica.objects.all()
@@ -66,6 +90,18 @@ class formlabEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic
     form_class = LaboralEditForm
     success_url = reverse_lazy("socioproductivo:formlab_list")
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/labedit_form.html"]
 
 
 class formlabDelete(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.DeleteView):

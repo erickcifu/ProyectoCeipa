@@ -44,7 +44,7 @@ class PersonaBasica(models.Model):
 
 
     def __str__(self):
-        return self.nombresp
+        return self.nombresp + " " + self.apellidosp
 
     def delete(self, *args):
         self.estado_persona_basica = False

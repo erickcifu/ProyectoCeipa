@@ -31,7 +31,7 @@ class PersonaBasicaView(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, g
             if user == 10 or user == 11:
                 return [self.template_name]
             elif user == 12:
-                return ["equipoSocioproductivo/personabasica_form.html"]
+                return ["equipoSocioproductivo/personabasica_list.html"]
 
 
 class PersonaBasicaNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.CreateView):
@@ -202,7 +202,19 @@ class PersonaBasicaEdit(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, g
     nine_form_class = InfoEducacionForm
     ten_form_class = ClabForm
     success_url = reverse_lazy("socioproductivo:personabasica_list")
-    login_url = 'app:login'
+
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 10 or self.request.user.user_profile.rol.id == 11:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 12:
+                return ["equipoSocioproductivo/personabasica_edit.html"]
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -328,6 +340,21 @@ class personabDetail(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, gene
     template_name = "socioproductivo/personab_detail.html"
     model = PersonaBasica
 
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/personab_detail.html"]
+            else:
+                return [self.template_name]
+
     def get_ElectVivienda(self, vivienda):
         return ElectVivienda.objects.filter(vivienda=vivienda)
 
@@ -364,6 +391,17 @@ class ListarParticipantesPorTaller(RolesCoordinadorSocioproductivoYEquipoSociopr
     template_name = "socioproductivo/participantes_por_taller.html"
     context_object_name = "obj"
 
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 10 or self.request.user.user_profile.rol.id == 11:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 12:
+                return ["equipoSocioproductivo/participantes_por_taller.html"]
+
     def get_queryset(self):
         id_taller = self.request.GET.get("id_taller")
         if id_taller:
@@ -386,15 +424,38 @@ class ListarParticipantesCertificados(RolesCoordinadorSocioproductivoYEquipoSoci
     template_name = "socioproductivo/participantes_para_formlab.html"
     context_object_name = "obj"
 
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 10 or self.request.user.user_profile.rol.id == 11:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 12:
+                return ["equipoSocioproductivo/participantes_para_formlab.html"]
+
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
         context['participantes_certificados'] = Inscripcionp.objects.filter(certificado_taller=True)
         return context
 
+
 class ListarParticipantesParaEmprendimientos(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
     model = Inscripcionp
     template_name = "socioproductivo/para_emprendimientos.html"
     context_object_name = "obj"
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 10 or self.request.user.user_profile.rol.id == 11:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 12:
+                return ["equipoSocioproductivo/para_emprendimientos.html"]
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)

@@ -6,14 +6,7 @@ class EmprenForm(forms.ModelForm):
     fecha_inicio = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
-        )
-    )
-    estado_Emprendimiento = forms.BooleanField(
-        widget = forms.CheckboxInput(
-            attrs={
-                'checked':True,
-            }
-        ), required=False, label="Activo"
+        ), label="Fecha en la que inicia el emprendimiento"
     )
     class Meta:
         model = Emprendimiento
@@ -31,7 +24,7 @@ class EmprenForm(forms.ModelForm):
                 'Monto_Capital':"Monto del capital en Q",
                 'fecha_inicio':"Fecha de inicio del emprendimiento",
                 'Tipoemp':"Tipo de emprendimiento",
-                'muni':"Municipio",
+                'muni':"Municipio en donde se ubica el emprendimiento",
                 'estado_Emprendimiento':'Activo'}
         widget = {
             'nombres_emp': forms.TextInput,
@@ -46,12 +39,8 @@ class EmprenForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
-            })
-            if field == 'estado_Emprendimiento':
-                self.fields[field].widget.attrs.update({
-                'class':'form-check-input',
-                'checked':True
+                'class':'form-control',
+                'required':False
             })
             if type(self.fields[field])==forms.BooleanField:
                 self.fields[field].widget.attrs.update({

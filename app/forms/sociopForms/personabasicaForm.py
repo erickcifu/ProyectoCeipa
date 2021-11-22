@@ -48,8 +48,8 @@ class PersonaBForm(forms.ModelForm):
             'etnia':'Etnia',
             'genero':'Género',
             'razon':'Razón por la que vive con esa/esas personas',
-            'ingreso_total':'Ingreso Total',
-            'total_gastos':'Total de Gastos',
+            'ingreso_total':'Total de ingresos',
+            'total_gastos':'Total de gastos',
             'edad':'Edad',
             'estado_persona_basica':'Activo/Inactivo'}
         widget = {

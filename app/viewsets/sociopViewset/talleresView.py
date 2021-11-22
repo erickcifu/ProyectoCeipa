@@ -8,12 +8,24 @@ from app.viewsets.users.mixins.CooSocioproductivoYEquipoSocioproductivo import R
 from app.models import Taller
 from app.forms import TallerForm
 
-class TallerView(IsCoordinadorSocioProductivoMixin, generic.ListView):
+class TallerView(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.ListView):
     model = Taller
     template_name = 'socioproductivo/talleres_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
 
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 10 or user == 11:
+                return [self.template_name]
+            elif user == 12:
+                return ["equipoSocioproductivo/talleres_list.html"]
+            
 class TallerNew(RolesCoordinadorSocioproductivoYEquipoSocioproductivo, generic.CreateView):
     model = Taller
     template_name = "socioproductivo/talleres_form.html"
