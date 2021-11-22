@@ -7,7 +7,7 @@ class ViviendaSForm(forms.ModelForm):
             attrs={
                 'checked':True,
             }
-        ), required=False, label="Activo/Inactivo"
+        ), required=False, label="Activo"
     )
     class Meta:
         model = ViviendaSocio
@@ -35,22 +35,22 @@ class ViviendaSForm(forms.ModelForm):
         labels = {
             'numero_habitantes':'Cantidad de habitaciones en la vivienda',
             'otra_Viv':'Sus padres tienen otra vivienda',
-            'desc_Otra_Viv':'Descripción de la otra Vivienda',
-            'Telefono':'Telèfono',
+            'desc_Otra_Viv':'Si los padres tienen otra vivienda, agregar una descripción',
+            'Telefono':'Teléfono',
             'tipopiso':'Tipo de piso',
-            'tipotecho':'tipo de techo',
+            'tipotecho':'Tipo de techo',
             'tipomuro':'Tipo de pared',
             'tipovivienda':'La vivienda en la que habita es',
             'agua_potable':'Agua potable',
-            'energia_elect':'Energìa elèctrica',
-            'dreaje':'Dreaje',
+            'energia_elect':'Energía eléctrica',
+            'dreaje':'Drenaje',
             'nivel_Eco_Alto':'Alto',
             'nivel_Eco_medio':'Medio',
             'nivel_Eco_bajo':'Bajo',
             'pobre':'Pobre',
             'no_pobre':'No pobre',
             'Extemadamente_pobre':'Extremadamente pobre',
-            'estado_vivsocio':'Activo/Inactivo'}
+            'estado_vivsocio':'Activo'}
         widget = { 'numero_habitantes': forms.TextInput}
 
     def __init__(self, *args, **kwargs):

@@ -5,12 +5,12 @@ class LaboralSocioForm(forms.ModelForm):
     fecha_inicio = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
-        )
+        ), label="Fecha que inicia la formación"
     )
     fecha_fin_formacion = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
-        )
+        ), label="Fecha que finaliza la formación"
     )
     class Meta:
         model = FormacionLab
@@ -30,10 +30,30 @@ class LaboralSocioForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required':False
+            })
+            if field == 'estado_formacion':
+                self.fields[field].widget.attrs.update({
+                'class':'form-check-input',
+                'checked':True
+            })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
             })
 
 class LaboralEditForm(forms.ModelForm):
+    fecha_inicio = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        ), label="Fecha que inicia la formación"
+    )
+    fecha_fin_formacion = forms.DateField(
+        widget = forms.TextInput(
+            attrs={'type':'date'}
+        ), label="Fecha que finaliza la formación"
+    )
     class Meta:
         model = FormacionLab
         fields = [
@@ -57,11 +77,6 @@ class LaboralEditForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class':'form-control',
                 'required':False
-            })
-            if field == 'estado_formacion':
-                self.fields[field].widget.attrs.update({
-                'class':'form-check-input',
-                'checked':True
             })
             if type(self.fields[field])==forms.BooleanField:
                 self.fields[field].widget.attrs.update({

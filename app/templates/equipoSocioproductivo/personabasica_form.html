@@ -3,9 +3,9 @@
 {% block page_content %}
 {% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
-<form method="POST" class="form-inline">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -15,21 +15,501 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Persona
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            {{ form | crispy }}
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'socioproductivo:personabasica_list' %}" class="btn btn-danger">Cancelar</a>
-                            </div>
-                        </div>
+                          <div class="col-12 col-md-12 offset-md-12">
+                            <h2>Nuevo Participante</h2>
+                          </div>
                     </div>
                 </div>
+                <!--Wizzard-->
+                        <div class="card">
+                          <div class="card-header border-bottom">
+                            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                              <!--Wizard item 1-->
+                              <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                <div class="wizard-step-icon">1</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Participante</div>
+                                  <div class="wizard-step-text-details">Infomación general de la persona</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 5-->
+                              <a class="nav-item nav-link" id="wizard5-tab" href="#wizard5" data-bs-toggle="tab" role="tab" aria-controls="wizard5" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Vivienda</div>
+                                  <div class="wizard-step-text-details">vivienda de la persona</div>
+                                </div>
+                              </a>
+
+                              <!--Wizard item 6-->
+                              <a class="nav-item nav-link" id="wizard6-tab" href="#wizard6" data-bs-toggle="tab" role="tab" aria-controls="wizard6" aria-selected="true">
+                                <div class="wizard-step-icon">3</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Electrodomesticos</div>
+                                  <div class="wizard-step-text-details">Información de los electrodomesticos de la vivienda</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 4-->
+                              <a class="nav-item nav-link" id="wizard4-tab" href="#wizard4" data-bs-toggle="tab" role="tab" aria-controls="wizard4" aria-selected="true">
+                                <div class="wizard-step-icon">4</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Aspectos de salud</div>
+                                  <div class="wizard-step-text-details">Información sobre aspectos de salud de la persona</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 7-->
+                              <a class="nav-item nav-link" id="wizard7-tab" href="#wizard7" data-bs-toggle="tab" role="tab" aria-controls="wizard7" aria-selected="true">
+                                <div class="wizard-step-icon">5</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Padres</div>
+                                  <div class="wizard-step-text-details">Información de los padres del participante</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 8-->
+                              <a class="nav-item nav-link" id="wizard8-tab" href="#wizard8" data-bs-toggle="tab" role="tab" aria-controls="wizard8" aria-selected="true">
+                                <div class="wizard-step-icon">6</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Encargado</div>
+                                  <div class="wizard-step-text-details">Información sobre el encargado</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 9-->
+                              <a class="nav-item nav-link" id="wizard9-tab" href="#wizard9" data-bs-toggle="tab" role="tab" aria-controls="wizard9" aria-selected="true">
+                                <div class="wizard-step-icon">7</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Información de educación</div>
+                                  <div class="wizard-step-text-details">Información académica del participante</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 10-->
+                              <a class="nav-item nav-link" id="wizard10-tab" href="#wizard10" data-bs-toggle="tab" role="tab" aria-controls="wizard10" aria-selected="true">
+                                <div class="wizard-step-icon">8</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Características laborales</div>
+                                  <div class="wizard-step-text-details">Información laboral del participante</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 3-->
+                              <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="true">
+                                <div class="wizard-step-icon">9</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Gastos Familiares</div>
+                                  <div class="wizard-step-text-details">Información sobre los gastos del participante</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 2-->
+                              <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
+                                <div class="wizard-step-icon">10</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Información económica</div>
+                                  <div class="wizard-step-text-details">Información económica del participante</div>
+                                </div>
+                              </a>
+                            <div class="card-body">
+                              {%if form.errors%}
+                                    {%for field in form%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                              {%endif%}
+                                  {%if form9.errors%}
+                                    {%for field in form9%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form2.errors%}
+                                    {%for field in form2%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form3.errors%}
+                                    {%for field in form3%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form4.errors%}
+                                    {%for field in form4%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form5.errors%}
+                                    {%for field in form5%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form6.errors%}
+                                    {%for field in form6%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form7.errors%}
+                                    {%for field in form7%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form8.errors%}
+                                    {%for field in form8%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form9.errors%}
+                                    {%for field in form9%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                                  {%if form10.errors%}
+                                    {%for field in form10%}
+                                      {%for error in field.errors%}
+                                        {{error}}
+                                      {%endfor%}
+                                    {%endfor%}
+                                  {%endif%}
+                              <!--Wizard Body-->
+                                <div class="tab-content" id="cardTabContent">
+                                  <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 1</h3>
+                                        <h5 class="card-title mb-4">Ingrese la información personal del participante </h5>
+                                        <div class="row gx-12">
+                                        <!--Inicio Formulario-->
+                                          <div class="row gx-3">
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form.nombresp | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form.apellidosp | as_crispy_field  }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form.genero | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form.municipio | as_crispy_field  }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form.etnia | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                <label>Fecha de nacimiento*</label>
+                                                  {{ form.fecha_nacimientop }}
+                                              </div>
+                                                <div class="mb-3 col-md-6">
+                                                    {{ form.edad | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form.DPIP | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form.direccionp | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form.tel_casap | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form.tel_celp | as_crispy_field  }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                <label>Correo electrónico*</label>
+                                                  {{ form.emailp }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form.cantidad_convivientesp | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form.conquien_vive | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form.razon | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form.ingreso_total | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                                  {{ form.total_gastos | as_crispy_field  }}
+                                              </div>
+                                            </div>
+                                            <div class="row gx-3" hidden>
+                                              <div class="mb-3 col-md-12">
+                                                  {{ form.estado_persona_basica | as_crispy_field }}
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <hr class="my-4"/>
+                                        <!--Fin Formulario-->
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--Tab item 5-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard5" role="tabpanel" aria-labelledby="wizard5-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 2</h3>
+                                        <h5 class="card-title mb-4">Ingrese la información de la vivienda del participante</h5>
+                                        <!--Inicio Formulario-->
+
+                                        <div class="row gx-3">
+                                          {{ form5.numero_habitantes | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.otra_Viv | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.desc_Otra_Viv | as_crispy_field }}
+                                        </div>
+
+                                        <div class="row gx-3">
+                                          {{ form5.tipopiso | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.tipotecho | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.tipomuro | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.tipovivienda | as_crispy_field }}
+                                        </div>
+                                        <label>Servicios con los que cuenta:</label>
+                                        <div class="row gx-3">
+                                          {{ form5.Telefono | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.agua_potable | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.energia_elect | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          {{ form5.dreaje | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          <label>La vivienda pertenece al nivel económico:</label>
+                                          {{ form5.nivel_Eco_Alto | as_crispy_field }}
+                                          {{ form5.nivel_Eco_medio | as_crispy_field }}
+                                          {{ form5.nivel_Eco_bajo | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3">
+                                          <label>El particiánte se considera económicamente:</label>
+                                          {{ form5.pobre | as_crispy_field }}
+                                          {{ form5.no_pobre | as_crispy_field }}
+                                          {{ form5.Extemadamente_pobre | as_crispy_field }}
+                                        </div>
+                                        <div class="row gx-3" hidden>
+                                          {{ form5.estado_vivsocio | as_crispy_field }}
+                                        </div>
+                                          <hr class="my-4"/>
+                                        <!--Fin Formulario-->
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!--Tab item 6-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard6" role="tabpanel" aria-labelledby="wizard6-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 3</h3>
+                                          <h5 class="card-title mb-4">Ingrese los electrodomesticos que el participante posee</h5>
+                                          <div class="row gx-12">
+                                          <!--Inicio Formulario-->
+                                          <div class="row gx-3" >
+                                              {{form6.management_form}}
+                                                {%for f in form6 %}
+                                                  <div id="formularios_ElectViviendas" class="row">
+                                                    {{ f | crispy}}
+                                                  </div>
+                                                  <br/>
+                                                  <br/>
+                                                {%endfor%}
+                                          </div>
+                                          <br/>
+                                          <div class="d-flex justify-content-between">
+                                            <button class="btn btn-light btn-sm" id="add_electro" type="button" role="button">
+                                              <i class="me-2" data-feather="plus-circle"></i>Agregar electrodomestico
+                                            </button>
+                                          </div>
+                                            <hr class="my-4"/>
+                                          <!--Fin Formulario-->
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                  <!--Tab item 4-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard4" role="tabpanel" aria-labelledby="wizard4-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 4</h3>
+                                        <h5 class="card-title mb-4">Ingrese información de salud del participante</h5>
+                                          <div class="row gx-3">
+                                              {{ form4 | crispy  }}
+                                          </div>
+                                          <hr class="my-4"/>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--Tab item 7-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard7" role="tabpanel" aria-labelledby="wizard7-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 5</h3>
+                                        <h5 class="card-title mb-4">Ingrese información de los padres del participante</h5>
+                                            <div class="row gx-3">
+                                                {{ form7 | crispy }}
+                                              </div>
+                                          <hr class="my-4"/>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Tab item 8-->
+                                    <div class="tab-pane py-5 py-xl-10 fade"  id="wizard8" role="tabpanel" aria-labelledby="wizard8-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 6</h3>
+                                          <h5 class="card-title mb-4">Ingrese información del encargado del participante</h5>
+                                            <div class="row gx-3">
+                                                {{ form8 | crispy }}
+                                            </div>
+                                            <hr class="my-4"/>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Tab item 9-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard9" role="tabpanel" aria-labelledby="wizard9-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 7</h3>
+                                          <h5 class="card-title mb-4">Ingrese información académica del participante</h5>
+                                            <div class="row gx-3" >
+                                                {{ form9 | crispy }}
+                                            </div>
+                                            <hr class="my-4"/>
+                                            <!--Fin Formulario-->
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Tab item 10-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard10" role="tabpanel" aria-labelledby="wizard10-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 8</h3>
+                                          <h5 class="card-title mb-4">Ingrese información laboral del participante</h5>
+
+                                            <div class="row gx-3">
+                                                {{ form10 | crispy  }}
+                                            </div>
+                                            <hr class="my-4"/>
+                                            <!--Fin Formulario-->
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Tab item 3-->
+                                      <div class="tab-pane py-5 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
+                                        <div class="row justify-content-center">
+                                          <div class="col-xxl-6 col-xl-8">
+                                            <h3 class="text-primary">Paso 9</h3>
+                                            <h5 class="card-title mb-4">Ingrese información de los gastos del participante</h5>
+                                            <!--Inicio Formulario-->
+                                            <div class="row gx-3" >
+                                                {{form2.management_form}}
+                                                  {%for f in form2 %}
+                                                    <div id="formularios_GastoFamiliars" class="row">
+                                                      {{ f | crispy}}
+                                                    </div>
+                                                    <br/>
+
+                                                  {%endfor%}
+                                            </div>
+                                            <br/>
+
+                                            <div class="d-flex justify-content-between">
+                                              <button class="btn btn-light" id="add_gasto" type="button" role="button">
+                                                <i class="me-2" data-feather="plus-circle"></i>Agregar gasto
+                                            </button>
+                                            </div>
+                                              <hr class="my-4"/>
+                                            <!--Fin Formulario-->
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <!--Tab item 8-->
+                                    <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                                      <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                          <h3 class="text-primary">Paso 10</h3>
+                                          <h5 class="card-title mb-4">Ingrese la información de ingresos económicos</h5>
+                                            <div class="row gx-3">
+                                              {{form3.management_form}}
+                                                {%for f in form3 %}
+                                                  <div id="formularios_InfoEconomicas" class="row">
+                                                    {{ f | crispy}}
+                                                  </div>
+                                                  <br/>
+
+                                                {%endfor%}
+                                                <br/>
+                                                <div class="d-flex justify-content-between">
+                                                  <button class="btn btn-light" id="add_economica" type="button" role="button">
+                                                    <i class="me-2" data-feather="plus-circle"></i>Agregar ingreso
+                                                </button>
+                                                </div>
+                                            </div>
+                                            <hr class="my-4"/>
+                                            <div class="d-flex justify-content-between">
+                                              <a class="btn btn-ligth" href="{% url 'educacion:personabasica_list' %}">Cancelar</a>
+                                              <button type="submit" class="btn btn-success">Guardar</button>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!--Tab fin -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
             </div>
         </div>
     </div>
@@ -37,4 +517,188 @@
 </div>
 {% endblock %}
 {% block js_page %}
+  <script>
+    function isRequeried(field) {
+      console.log(field)
+        let value = field.value
+        if((!value || value.trim().length === 0)){
+          const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+          if(!$error_is_requeried)
+            field.insertAdjacentHTML('afterend', `<div id="isRequeried_${field.name}">Este campo es requerido</div>`)
+      }else{
+          const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+          if($error_is_requeried) $error_is_requeried.remove()
+      }
+    }
+
+    const isEmail = (field)=>{
+        let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+        const result = isRequeried(field)
+        if(!result){
+            let value = field.value
+            if(!regexEmail.test(value)){
+              const $error_is_email = document.querySelector(`#isEmail_${field.name}`)
+              if(!$error_is_email){
+                field.insertAdjacentHTML('afterend', `<div id="isEmail_${field.name}">No es un correo electrónico válido</div>`)
+              }
+            }else{
+              const $error_is_email = document.querySelector(`#isEmail_${field.name}`)
+              if($error_is_email) $error_is_email.remove()
+            }
+        }
+    }
+    function isTelephoneNumber(field){
+      let regexNumber = /^[0-9]{8}$/
+      if(!field.value)return null
+      const $error_is_telephone = document.querySelector(`#isTelephoneNumber_${field.name}`)
+      if(!regexNumber.test(field.value)){
+        if(!$error_is_telephone){
+          field.insertAdjacentHTML('afterend', `<div id="isTelephoneNumber_${field.name}">El número de teléfono debe tener 8 digitos</div>`)
+        }
+      }else{
+        if($error_is_telephone) $error_is_telephone.remove()
+      }
+    }
+
+    function isIdentify(field) {
+      const result = isRequeried(field)
+      if(!result){
+        let regexNumber = /^[0-9]{13}$/
+        const $error_is_identify = document.querySelector(`#isIdenfify_${field.name}`)
+        if(!regexNumber.test(field.value)){
+          if(!$error_is_identify){
+            field.insertAdjacentHTML('afterend', `<div id="isIdenfify_${field.name}">
+                El dato debe tener 13 dígitos, no se aceptan letras
+              </div>`)
+          }
+        }else{
+          if($error_is_identify) $error_is_identify.remove()
+        }
+      }
+    }
+
+    const $add_electro = document.querySelector('#add_electro')
+    $add_electro.addEventListener('click', e=>{
+      e.preventDefault()
+      agregar_form_ElectVivienda();
+    })
+
+      //funcion para agregar mas formularios para los electro
+      function agregar_form_ElectVivienda(){
+        const $total_forms = document.getElementById('id_ElectViviendas-TOTAL_FORMS')
+
+        let $label_pad = document.createElement('label')
+        $label_pad.innerHTML = 'Electrodomestico'
+        let $input_padeci = document.querySelector('#id_ElectViviendas-0-elect').cloneNode(true)
+        $input_padeci.name = 'ElectViviendas-'+$total_forms.value+'-elect'
+        $input_padeci.id = 'id_ElectViviendas-'+$total_forms.value+'-elect'
+
+        console.log('label_pad', $label_pad)
+        console.log('input_pad', $input_padeci)
+
+        document.getElementById('formularios_ElectViviendas').appendChild($label_pad)
+        document.getElementById('formularios_ElectViviendas').appendChild($input_padeci)
+
+
+        $total_forms.value = parseInt($total_forms.value) + 1
+      }
+
+      const $add_gasto = document.querySelector('#add_gasto')
+      $add_gasto.addEventListener('click', e=>{
+        e.preventDefault()
+        agregar_form_GastoFamiliar();
+      })
+      //funcion para agregar mas formulartios para gasto familiar
+
+      function agregar_form_GastoFamiliar(){
+        const $total_forms = document.getElementById('id_GastoFamiliars-TOTAL_FORMS')
+
+        let $label_servicio = document.createElement('label')
+        $label_servicio.innerHTML = 'Nombre servicio'
+        let $input_servicio = document.querySelector('#id_GastoFamiliars-0-servicio').cloneNode(true)
+        $input_servicio.name = 'GastoFamiliars-'+$total_forms.value+'-servicio'
+        $input_servicio.id = 'id_GastoFamiliars-'+$total_forms.value+'-servicio'
+
+        let $label_cantidad = document.createElement('label')
+        $label_cantidad.innerHTML = 'Cantidad por servicio'
+        let $input_cantidad = document.querySelector('#id_GastoFamiliars-0-cantidad_servicio').cloneNode(true)
+        $input_cantidad.name = 'GastoFamiliars-'+$total_forms.value+'-cantidad_servicio'
+        $input_cantidad.id = 'id_GastoFamiliars-'+$total_forms.value+'-cantidad_servicio'
+
+        let $label_gasto = document.createElement('label')
+        $label_gasto.innerHTML = 'Activo/Inactivo'
+        let $input_gasto = document.querySelector('#id_GastoFamiliars-0-estado_gastofamiliar').cloneNode(true)
+        $input_gasto.name = 'GastoFamiliars-'+$total_forms.value+'-estado_gastofamiliar'
+        $input_gasto.id = 'id_GastoFamiliars-'+$total_forms.value+'-estado_gastofamiliar'
+
+        console.log('label_pad', $label_servicio)
+        console.log('input_pad', $input_servicio)
+
+        document.getElementById('formularios_GastoFamiliars').appendChild($label_servicio)
+        document.getElementById('formularios_GastoFamiliars').appendChild($input_servicio)
+        document.getElementById('formularios_GastoFamiliars').appendChild($label_cantidad)
+        document.getElementById('formularios_GastoFamiliars').appendChild($input_cantidad)
+        document.getElementById('formularios_GastoFamiliars').appendChild($label_gasto)
+        document.getElementById('formularios_GastoFamiliars').appendChild($input_gasto)
+
+
+
+        $total_forms.value = parseInt($total_forms.value) + 1
+      }
+      //funcion para agregar mas formulartios para gasto familiar
+
+      const $add_economica = document.querySelector('#add_economica')
+      $add_economica.addEventListener('click', e=>{
+        e.preventDefault()
+        agregar_form_InfoEconomica();
+      })
+
+      function agregar_form_InfoEconomica(){
+        const $total_forms = document.getElementById('id_InfoEconomicas-TOTAL_FORMS')
+
+        let $label_pariente = document.createElement('label')
+        $label_pariente.innerHTML = 'Nombre del pariente'
+        let $input_pariente = document.querySelector('#id_InfoEconomicas-0-pariente').cloneNode(true)
+        $input_pariente.name = 'InfoEconomicas-'+$total_forms.value+'-pariente'
+        $input_pariente.id = 'id_InfoEconomicas-'+$total_forms.value+'-pariente'
+
+        let $label_cant = document.createElement('label')
+        $label_cant.innerHTML = 'Cantidad de ingresos mensuales'
+        let $input_cant = document.querySelector('#id_InfoEconomicas-0-cantidad_mensual').cloneNode(true)
+        $input_cant.name = 'InfoEconomicas-'+$total_forms.value+'-cantidad_mensual'
+        $input_cant.id = 'id_InfoEconomicas-'+$total_forms.value+'-cantidad_mensual'
+
+        let $label_proc = document.createElement('label')
+        $label_proc.innerHTML = 'Procedencia del ingreso'
+        let $input_proc = document.querySelector('#id_InfoEconomicas-0-procedencia_ingreso').cloneNode(true)
+        $input_proc.name = 'InfoEconomicas-'+$total_forms.value+'-procedencia_ingreso'
+        $input_proc.id = 'id_InfoEconomicas-'+$total_forms.value+'-procedencia_ingreso'
+
+        let $label_obs = document.createElement('label')
+        $label_obs.innerHTML = 'Observaciones'
+        let $input_obs = document.querySelector('#id_InfoEconomicas-0-observacion').cloneNode(true)
+        $input_obs.name = 'InfoEconomicas-'+$total_forms.value+'-observacion'
+        $input_obs.id = 'id_InfoEconomicas-'+$total_forms.value+'-observacion'
+
+        let $label_est = document.createElement('label')
+        $label_est.innerHTML = 'Activo/Inactivo'
+        let $input_est = document.querySelector('#id_InfoEconomicas-0-estado_infoeco').cloneNode(true)
+        $input_est.name = 'InfoEconomicas-'+$total_forms.value+'-estado_infoeco'
+        $input_est.id = 'id_InfoEconomicas-'+$total_forms.value+'-estado_infoeco'
+
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_pariente)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_pariente)
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_cant)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_cant)
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_proc)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_proc)
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_obs)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_obs)
+        document.getElementById('formularios_InfoEconomicas').appendChild($label_est)
+        document.getElementById('formularios_InfoEconomicas').appendChild($input_est)
+
+        $total_forms.value = parseInt($total_forms.value) + 1
+
+      }
+  </script>
 {% endblock %}
