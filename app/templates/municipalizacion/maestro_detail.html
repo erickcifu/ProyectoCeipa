@@ -4,8 +4,8 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions d-flex bd-highlight">
       <div class="card-header">
-          <h2 class="text-dark">Datos de {{ item.persona_maestro }} {{ item.persona_maestro.apellidos_persona }}</h2>
-          
+          <h2 class="text-dark">Datos de {{ item.persona_maestro }}</h2>
+
       </div>
       <div class="card-body">
             <div class="row">
@@ -19,7 +19,7 @@
                             <img class="rounded float-left" src="{{item.persona_maestro.foto_url|default_if_none:'ceipa/default.png'}}" height="200" weight="250">
                           </div>
                           <div class="flex-grow-1 ms-3">
-                            <label><b>Nombre completo: </b>{{ item.persona_maestro }} {{ item.persona_maestro.apellidos_persona }}</label>
+                            <label><b>Nombre completo: </b>{{ item.persona_maestro }}</label>
                             <br/>
                             <label><b>Género: </b>{{ item.persona_maestro.gen }}</label>
                             <br/>

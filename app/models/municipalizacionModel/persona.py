@@ -25,7 +25,7 @@ class Persona(models.Model):
             return self.fotografia_persona.url
 
     def __str__(self):
-        return self.persona
+        return self.persona + " " + self.apellidos_persona
 
     def delete(self, *args):
         self.estado_persona = False

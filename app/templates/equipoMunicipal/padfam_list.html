@@ -1,43 +1,32 @@
 {% extends 'EquipoMunicipal/municipalizacion.html' %}
 
+
 {% block page_content %}
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Corporación Municipal
-          <a href="{% url 'municipalizacion:corpmuni_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+          Padres de familia
+          <a href="{% url 'municipalizacion:padfam_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay informacion de corporacion municipal</div>
+          <div class="alert alert-info">No hay datos de Padres de familia </div>
           {% else %}
           <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>Representante</th>
-                  <th>Comisión</th>
-                  <th>Correo electrónico</th>
-                  <th>Vacuna contra COVID-19</th>
+                  <th>Nombre</th>
+                  <th>Programa en CEIPA</th>
                   <th>Estado</th>
               </thead>
               <tbody>
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td><a href="{% url 'municipalizacion:corpmuni_detail' item.id %}">{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</a></td>
-                      <td>{{ item.comision }}</td>
-                      <td>{{ item.correo_corporacion }}</td>
-                      {% if item.vacuna is True %}
-                        <td>
-                          <span class="badge bg-purple-soft text-purple">Sí tiene</span>
-                        </td>
-                      {% else %}
-                        <td>
-                          <span class="badge bg-purple-soft text-purple">No tiene</span>
-                        </td>
-                      {% endif %}
-                      {% if item.estado_corporacion is True %}
+                      <td><a href="{% url 'municipalizacion:padfam_detail' item.id %}">{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</a></td>
+                      <td>{{ item.programaC }}</td>
+                      {% if item.estado_padres is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>
                       </td>
@@ -46,7 +35,7 @@
                         <span class="badge bg-red-soft text-red">Inactivo</span>
                       </td>
                       {% endif %}
-                      
+
                   </tr>
                   {% endfor %}
               </tbody>
@@ -54,6 +43,9 @@
           {% endif %}
       </div>
     </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block js_page %}

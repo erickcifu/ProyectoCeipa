@@ -4,10 +4,8 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions d-flex bd-highlight">
       <div class="card-header">
-          <h2 class="text-dark">Datos de {{ item.persona_maestro }} {{ item.persona_maestro.apellidos_persona }}</h2>
-          <div class="p-2 bd-highlight">
-            <a href="#" class="btn btn-sm btn-light text-primary" role="button"><i class="me-2" data-feather="printer"></i>PDF</a>
-          </div>
+          <h2 class="text-dark">Datos de {{ item.persona_maestro }}</h2>
+
       </div>
       <div class="card-body">
             <div class="row">
@@ -21,29 +19,28 @@
                             <img class="rounded float-left" src="{{item.persona_maestro.foto_url|default_if_none:'ceipa/default.png'}}" height="200" weight="250">
                           </div>
                           <div class="flex-grow-1 ms-3">
-                            <label><b>Nombre completo: </b>{{ item.persona_maestro }} {{ item.persona_maestro.apellidos_persona }}</label>
+                            <label><b>Nombre completo: </b>{{ item.persona_maestro }}</label>
                             <br/>
                             <label><b>Género: </b>{{ item.persona_maestro.gen }}</label>
                             <br/>
-                            <label><b>No. CUI: </b>{{ item.persona_maestro.cui }}</label>
+                            <label><b>No. CUI: </b>{{ item.persona_maestro.cui_persona }}</label>
                             <br/>
                             <label><b>Dirección domiciliar: </b>{{ item.persona_maestro.direccion_persona }}</label>
                             <br/>
                             <label><b>Correo electrónico: </b>{{ item.correo_maestro }}</label>
-                            <label><b>Participación en grupo organizado: </b>
+                            <br/>
                               {% if item.Pargrupo is True %}
-                                <label>Sí participa</label>
+                                <label><b>Participación en grupo organizado: </b>Sí participa</label>
                                 <br/>
                                 <label><b>Grupo organizado en el que participa: </b>{{ item.gruporg }}</label>
                                 <br/>
                                 <label><b>Cargo que ocupa en el grupo: </b>{{ item.cargogrup }}</label>
                               {% else %}
-                                <label>No participa en ningun grupo</label>
+                                <label><b>Participación en grupo organizado: </b>No participa en ningun grupo</label>
                               {% endif %}
-                            </label>
                             <br/>
-                            <label><b>No. Telefono: </b>{{ item.persona_maestro.telefono }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label><b>No. Telefono de casa: </b> {{ item.persona_maestro.telefonoc }}</label>
+                            <label><b>No. Telefono: </b>{{ item.persona_maestro.telefono_Persona }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label><b>No. Telefono de casa: </b> {{ item.persona_maestro.telefonoc_per }}</label>
                             <br/>
                             <label><b>Municipio y departamento de origen: </b>{{ item.persona_maestro.muni }}, {{ item.persona_maestro.muni.dep }}</label>
                             <br/>

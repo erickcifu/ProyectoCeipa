@@ -1,4 +1,4 @@
-{% extends 'base/municipalizacion.html' %}
+{% extends 'EquipoMunicipal/municipalizacion.html' %}
 
 {% block page_content %}
 <div id="layoutSidenav_content">
@@ -35,24 +35,66 @@
                             <label><b>Grupo étnico: </b>{{ item.persona.etni }}</label>
                             <br/>
                             <label><b>Idioma/s que habla: </b>
-                              {% if not idioma_lider %}
+                              {% if not idioma_persona %}
                               <label>Ninguno</label>
                               {% else %}
-                                {% for idioma in idioma_lider %}
+                                {% for idioma in idioma_persona %}
                                   <label>{{ idioma.idioma.nombre_idioma }}, </label>
                                 {% endfor %}
                               {% endif %}
                             </label>
                             <br/>
-                              {% if item.leer_l is True and item.escribir_l is True %}
-                              <label>Sabe leer y escribir</label>
-                              {% elif item.leer_l is True and item.escribir_l is False %}
-                              <label>Sabe leer, no sabe escribir</label>
-                              {% elif item.escribir_l is True and item.leer_l is False %}
-                              <label>Sabe escribir, no sabe leer</label>
-                              {% else %}
-                              <label>No sabe leer, no sabe escribir</label>
-                              {% endif %}
+                            <label><b>Último grado cursado: </b>{{ item.persona.estudios_anteriores }}</label>
+                            <br/>
+                            <label>
+                            {% if item.leer is True %}
+                              <label>Sabe leer</label>
+                            {% else %}
+                              <label>No sabe leer</label>
+                            {% endif %}
+                            </label>
+                            <br/>
+                            <label>
+                            {% if item.escribir is True %}
+                              <label>Sabe escribir</label>
+                            {% else %}
+                              <label>No sabe escribir</label>
+                            {% endif %}
+                            </label>
+                            <br/>
+                            <label>
+                              <b>Cantidad de hijos: </b> {{item.cantidad_hijos}}
+                            </label>
+                            <br/>
+                            <label>
+                            {% if item.participacionG is True %}
+                              <label><b>Participa en algún grupo organizado: </b>Sí participa</label>
+                              <br/>
+                              <label>
+                                <b>Grupo organizado: </b> {{item.grupo}}
+                              </label>
+                              <br/>
+                              <label>
+                                <b>Cargo Grupo: </b> {{item.cargo}}
+                              </label>
+                            {% else %}
+                              <label><b>Participa en algún grupo organizado: </b>No participa</label>
+                            {% endif %}
+                            </label>
+                            <br/>
+                            <label>
+                              <b>Correo electronico: </b> {{item.correo_padres}}
+                            </label>
+                            <br/>
+                            <label>
+                              <b>Programa ceipa: </b> {{item.programaC}}
+                            </label>
+                            <br/>
+                            {% if item.vacunaCovid is True %}
+                              <span class="badge bg-yellow-soft text-yellow">Vacunado contra COVID-19</span>
+                            {% else %}
+                              <span class="badge bg-yellow-soft text-yellow">No vacunado contra COVID-19</span>
+                            {% endif %}
                             <br/>
                             <label>
                               {% if item.persona.disc is True %}
@@ -63,54 +105,24 @@
                             </label>
                             <br/>
                             <label>
-                              {% if item.vacuna_covid_l is True %}
-                                <span class="badge bg-yellow-soft text-yellow">Tiene vacuna contra COVID-19</span>
+                              {% if item.persona.estado_persona is True %}
+                                <span class="badge bg-green-soft text-green">Representante activo</span>
                               {% else %}
-                                <span class="badge bg-yellos-soft text-yellow">No tiene vacuna contra COVID-19</span>
-                              {% endif %}
-                            </label>
-                            <br/>
-                            <label>
-                              {% if item.estado_liders is True %}
-                                <span class="badge bg-green-soft text-green">Lider activo</span>
-                              {% else %}
-                                <span class="badge bg-red-soft text-red">Lider inactivo</span>
+                                <span class="badge bg-red-soft text-red">Representante inactivo</span>
                               {% endif %}
                             </label>
                           </div>
                         </div>
                       </div>
                       <br/>
-                      <!--INFORMACIÓN ACADEMICA Y LABORAL-->
-                      <div class="card">
-                          <div class="card-header">
-                            <h2 class="text-muted">Información de cargo</h2>
-                          </div>
-                          <div class="card-body d-flex">
-                            <div class="flex-grow-1 ms-3">
-                              <label><b>Programa al que pertenece dentro de CEIPA: </b>{{ item.programa_c }}</label>
-                              <br/>
-                              <label><b>Grupo organizado al que pertenece: </b>{{ item.grupo_orga }}</label>
-                              <br/>
-                              <label><b>Cargo que ocupa dentro del grupo organizado: </b>{{ item.cargo_grupo }}</label>
-                              <br/>
-                              <label><b>Periodo del cargo: </b>{{ item.periodo }}</label>
-                              <br/>
-                              <label><b>Fecha de inicio: </b>{{ item.fecha_inicio_l }}</label>
-                              <br/>
-                              <label><b>Fecha de finalización: </b>{{ item.fecha_fin_l }}</label>
-                              <br/>
-                              <label><b>Correo electrónico: </b>{{ item.correo_lideres }}</label>
-                            </div>
-                          </div>
-                        </div>
-                      <!--FIN INFORMACIÓN ACADEMICA Y LABORAL-->
 
+                      <!--FIN INFORMACIÓN ACADEMICA Y LABORAL-->
+                      <br/>
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="row">
                         <div class="col">
-                            <a href="{% url 'municipalizacion:lidercomuni_list' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+                            <a href="{% url 'municipalizacion:padfam_list' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
                         </div>
                     </div>
 

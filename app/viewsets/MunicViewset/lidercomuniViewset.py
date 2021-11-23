@@ -13,11 +13,22 @@ from app.forms import LiderComuniMuniForm, IdPerForm, PersonaForm
 from django.forms import formset_factory
 from app.models.educacion_model.idioma import idioma
 
-class LiderComunitarioMuniView(IsCoordinadorMunicipalMixin, generic.ListView):
+class LiderComunitarioMuniView(RolesCooMunicipalEquipoMunicipalMixin, generic.ListView):
     model = LiderComunitario
     template_name = 'municipalizacion/lidercomuni_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/lidercomuni_list.html"]
 
 class LiderComunitarioNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = LiderComunitario
@@ -166,9 +177,20 @@ class LiderComunitarioEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class LiderComunitarioDetail(LoginRequiredMixin, generic.DetailView):
+class LiderComunitarioDetail(RolesCooMunicipalEquipoMunicipalMixin, generic.DetailView):
     template_name = "municipalizacion/lidercomuni_detail.html"
     model = LiderComunitario
+
+    def get_template_names(self):
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 7 or self.request.user.user_profile.rol.id == 8:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 9:
+                return ["equipoMunicipal/lidercomuni_detail.html"]
 
     def get_idioma_lider(self, persona_lider):
         return IdiomaPersona.objects.filter(persona=persona_lider)

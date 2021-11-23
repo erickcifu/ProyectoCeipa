@@ -4,10 +4,8 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions d-flex bd-highlight">
       <div class="card-header">
-          <h2 class="text-dark">Datos de {{ item.persona }} {{ item.persona.apellidos_persona }}</h2>
-          <div class="p-2 bd-highlight">
-            <a href="#" class="btn btn-sm btn-light text-primary" role="button"><i class="me-2" data-feather="printer"></i>PDF</a>
-          </div>
+          <h2 class="text-dark">Datos de {{ item.persona }}</h2>
+
       </div>
       <div class="card-body">
             <div class="row">
@@ -21,18 +19,18 @@
                             <img class="rounded float-left" src="{{item.persona.foto_url|default_if_none:'ceipa/default.png'}}" height="200" weight="250">
                           </div>
                           <div class="flex-grow-1 ms-3">
-                            <label><b>Nombre completo: </b>{{ item.persona }} {{ item.persona.apellidos_persona }}</label>
+                            <label><b>Nombre completo: </b>{{ item.persona }}</label>
                             <br/>
                             <label><b>Fecha de nacimiento: </b>{{ item.fecha_nacimiento_benef }}</label>
                             <br/>
                             <label><b>Género: </b>{{ item.persona.gen }}</label>
                             <br/>
-                            <label><b>No. CUI: </b>{{ item.persona.cui }}</label>
+                            <label><b>No. CUI: </b>{{ item.persona.cui_persona }}</label>
                             <br/>
                             <label><b>Dirección domiciliar: </b>{{ item.persona.direccion_persona }}</label>
                             <br/>
-                            <label><b>No. Telefono: </b>{{ item.persona.telefono }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label><b>No. Telefono de casa: </b> {{ item.persona.telefonoc }}</label>
+                            <label><b>No. Telefono: </b>{{ item.persona.telefono_Persona }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label><b>No. Telefono de casa: </b> {{ item.persona.telefonoc_per }}</label>
                             <br/>
                             <label><b>Municipio y departamento de origen: </b>{{ item.persona.muni }}, {{ item.persona.muni.dep }}</label>
                             <br/>
@@ -119,13 +117,13 @@
                               <br/>
                               <label><b>Parentesco con el participante: </b>{{ item.tutor.parentesco}}</label>
                               <br/>
-                              <label><b>No. CUI: </b>{{ item.tutor.DPI }}</label>
+                              <label><b>No. CUI: </b>{{ item.tutor.DPI_T }}</label>
                               <br/>
-                              <label><b>Fecha de nacimiento: </b>{{ item.tutor.fecha_nacimiento }}</label>
+                              <label><b>Fecha de nacimiento: </b>{{ item.tutor.fecha_nacimiento_T }}</label>
                               <br/>
                               <label><b>Dirección domiciliar: </b>{{ item.tutor.direccion_tutor }}</label>
                               <br/>
-                              <label><b>No. Teléfono: </b>{{ item.tutor.telefono }}</label>
+                              <label><b>No. Teléfono: </b>{{ item.tutor.telefono_T }}</label>
                             </div>
                           </div>
                         </div>
