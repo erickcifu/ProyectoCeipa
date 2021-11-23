@@ -117,7 +117,7 @@ from .MunicViewset.mediocomuViewset import MedioComuniView, MedioComuniNew, Medi
 from .MunicViewset.partidopoliticViewset import PartidoPoliticView, PartidoPoliticNew, PartidoPoliticEdit, PartidoPoliticDel
 from .MunicViewset.tutormuniViewset import TutorMuniView, TutorMuniNew, TutorMuniEdit, TutorMuniDel
 from .MunicViewset.padfamViewset import PadFamView, PadFamNew, PadFamEdit, PadFamDel,PadFamDetail
-from .MunicViewset.benefarViewset import BenefArView, BenefArNew, BenefArEdit, BenefArDel, Area_beneficiado
+from .MunicViewset.benefarViewset import BenefArView, BenefArNew, BenefArEdit, BenefArDel, Area_beneficiado, BenefArListGeneral
 from .MunicViewset.idioma_MuniView import IdiomaMuniView, IdiomaMuniNew, IdiomaMuniEdit, IdiomaMuniDel
 from .MunicViewset.MuniView import MunicView, MuniNew, MuniEdit, MuniDel
 from .MunicViewset.DepView import DeptoView, DeptoNew, DeptoEdit, DeptoDel
@@ -132,6 +132,10 @@ from .MunicViewset.comisionNAView import ComisionNAView, ComisionNANew, Comision
 from .MunicViewset.reportes_muni import AlumnosporDepto, total_comisiones, total_corporaciones, total_maestros, Total_lideres, Total_medios, Total_padres
 from .MunicViewset.gradoacadView import GradoacadView, GradoacadNew, GradoacadEdit, GradoacadDel
 from .MunicViewset.reportemuniViewset import AlumnosporDeptosView, ListAlumnosDeptoPdf, total_corporacionesPDF, total_comisionesPDF, Total_lideresPDF, total_maestrosPDF, Total_mediosPDF, Total_padresPDF
+from .MunicViewset.tpisomuniView import Tpiso_muniView, Tpiso_muniNew, Tpiso_muniEdit, Tpiso_muniDel
+from .MunicViewset.techomuniView import TechomuniView, TechomuniNew, TechomuniEdit, TechomuniDel
+from .MunicViewset.tparedmuniView import ParedmuniView, ParedmuniNew, ParedmuniEdit, ParedmuniDel
+from .MunicViewset.categoriamuniview import CatmuniView, CatmuniNew, CatmuniEdit, CatmuniDel
 #SocioProductivo
 from .sociopViewset.aspectos_saludView import (AspectosSaludNew, AspectosSaludEdit, AspectosSaludDel,
                                             AspectosSaludView)

@@ -14,21 +14,26 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Comision
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} tipo de techo
                         </div>
                         <div class="dropdown-divider"></div>
                         <form>
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1">Nombre de Comisión</label>
-                                <input type="text" name="nombre_comision" maxlength="255" class="form-control" required id="id_nombre_comision"
-                                  placeholder="Escriba la comision" value="{% if obj %} {{ obj.nombre_comision }} {% endif %}">
+                                <label for="exampleFormControlInput1">Tipo de techo</label>
+                                <input class="form-control" type="text" name="tipo_techo" maxlength="50" class="form-control" required id="id_tipo_techo"
+                                placeholder="Agrege un nuevo tipo de techo" value="{% if obj %} {{ obj.tipo_techo }} {% endif %}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1">Descripción de techo</label>
+                                <input class="form-control" type="text" name="descripcion_techo" maxlength="50" class="form-control" required id="id_descripcion_techo"
+                                placeholder="Agrege una descripcion para este techo" value="{% if obj %} {{ obj.descripcion_techo }} {% endif %}">
                             </div>
                         </form>
                             <div class="col-2">
                                 <div class="form-group">
-                                    <label for="id_estado_comision">Activo</label>
+                                    <label for="id_estado_techo">Activo</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_comision" class="form-control" id="id_estado_comision" type="checkbox"  {% if obj.estado_comision is true %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_techo" class="form-control" id="id_estado_techo" type="checkbox"  {% if obj.estado_techo is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>
@@ -37,8 +42,8 @@
                         <div class="dropdown-divider"></div>
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'municipalizacion:com_list' %}" class="btn btn-danger">Cancelar</a>
+                                <button type="submit" class="btn btn-danger">Guardar</button>
+                                <a href="{% url 'municipalizacion:techomuni_list' %}" class="btn btn-success">Cancelar</a>
                             </div>
                         </div>
                     </div>

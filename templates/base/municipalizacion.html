@@ -95,7 +95,12 @@
                                     <a class="nav-link" href="{% url 'municipalizacion:etniamuni_list' %}">Etnia</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:generomuni_list' %}">Género</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:idiomaMuni_list' %}">Idioma</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:pisomuni_list' %}">Tipo de piso</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:techomuni_list' %}">Tipo de techo</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:paredmuni_list' %}">Tipo de pared</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:catmuni_list' %}">Categoría de vivienda</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:ocupmuni_list' %}">Ocupación</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:com_list' %}">Comisión</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:Gorg_list' %}">Grupo organizado</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:carg_list' %}">Cargo en grupo organizado</a>
                                     <a class="nav-link" href="{% url 'municipalizacion:prof_list' %}">Profesión</a>
@@ -130,6 +135,9 @@
                                 <a class="nav-link" href="{% url 'municipalizacion:lidercomuni_list' %}">Registro de lideres comunitarios</a>
                                 <a class="nav-link" href="{% url 'municipalizacion:mediocomu_list' %}">Registro de medios de comunicación</a>
                                 <a class="nav-link" href="{% url 'municipalizacion:padfam_list' %}">Registro de padres de familia</a>
+
+                                <div class="sidenav-menu-heading">Listado general</div>
+                                <a class="nav-link" href="{% url 'municipalizacion:benefar_list_general' %}">Listado de participantes y areas</a>
 
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
