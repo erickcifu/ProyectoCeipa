@@ -236,15 +236,15 @@ class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, gener
                 "TemplateResponseMixin requires either a definition of "
                 "'template_name' or an implementation of 'get_template_names()'")
         else:
-            print('hola mundo')
             if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
                 return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 5:
+                return ["directorCentro/alumnoEdit.html"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = self.third_form_class
         context['obj'] = ''
-
         return context
 
     def post(self, request, *args, **kwargs):
@@ -254,15 +254,13 @@ class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, gener
         estudios_anteriores = alumno.estudios_anteriores
         religion_alumno = alumno.R_alumno.first()
         analisis_psicologico = alumno.A_alumno.first()
-        vivienda = alumno.estudiante_vivieda.first()
         laboral = alumno.aspect_alumn.first()
 
-        form = self.form_class(request.POST, instance = tutor)
+        form = self.form_class(request.POST, request.FILES, instance = tutor)
         form2 = self.second_form_class(request.POST, instance= estudios_anteriores)
-        form3 = self.third_form_class(request.POST, instance = alumno)
+        form3 = self.third_form_class(request.POST, request.FILES, instance = alumno)
         form4 = self.four_form_class(request.POST, instance = religion_alumno)
         form6 = self.six_form_class(request.POST, instance = analisis_psicologico)
-        form7 = self.seven_form_class(request.POST, instance = vivienda)
         form9 = self.nine_form_class(request.POST, instance = laboral)
 
         with transaction.atomic():
@@ -270,17 +268,16 @@ class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, gener
                 form5 = self.five_form_class(request.POST, instance = apadecimiento, prefix='apadecimientos')
                 if form5.is_valid():
                     form5.save()
-            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form6.is_valid() and form7.is_valid() and form9.is_valid():
+            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form6.is_valid() and form9.is_valid():
                 form3.save()
                 form2.save()
                 form.save()
                 form4.save()
                 form6.save()
-                form7.save()
                 form9.save()
                 return HttpResponseRedirect(self.success_url)
             else:
-                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form9=form9))
+                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form9 = form9))
 
     def get(self, request, *args, **kwargs):
         alumno = self.get_object()
@@ -323,6 +320,7 @@ class AlumnoDetailAndCreate(RolesCoordinadorEducacionYDirectorCentroMixin, gener
             context['form7'] = self.seven_form_class(instance = vivienda)
         if 'form9' not in context:
             context['form9'] = self.nine_form_class(instance = laboral)
+
         context['obj'] = ''
         context['alumno'] = self.get_object()
 
@@ -392,7 +390,7 @@ class AlumnoDetailAndupdate(IsDirectorCentroMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = self.third_form_class
-        context['obj']=''
+        context['obj'] = ''
         return context
 
     def post(self, request, *args, **kwargs):
@@ -402,15 +400,13 @@ class AlumnoDetailAndupdate(IsDirectorCentroMixin, generic.UpdateView):
         estudios_anteriores = alumno.estudios_anteriores
         religion_alumno = alumno.R_alumno.first()
         analisis_psicologico = alumno.A_alumno.first()
-        vivienda = alumno.estudiante_vivieda.first()
         laboral = alumno.aspect_alumn.first()
 
-        form = self.form_class(request.POST, instance = tutor)
+        form = self.form_class(request.POST, request.FILES, instance = tutor)
         form2 = self.second_form_class(request.POST, instance= estudios_anteriores)
-        form3 = self.third_form_class(request.POST, instance = alumno)
+        form3 = self.third_form_class(request.POST, request.FILES, instance = alumno)
         form4 = self.four_form_class(request.POST, instance = religion_alumno)
         form6 = self.six_form_class(request.POST, instance = analisis_psicologico)
-        form7 = self.seven_form_class(request.POST, instance = vivienda)
         form9 = self.nine_form_class(request.POST, instance = laboral)
 
         with transaction.atomic():
@@ -418,17 +414,16 @@ class AlumnoDetailAndupdate(IsDirectorCentroMixin, generic.UpdateView):
                 form5 = self.five_form_class(request.POST, instance = apadecimiento, prefix='apadecimientos')
                 if form5.is_valid():
                     form5.save()
-            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form6.is_valid() and form7.is_valid() and form9.is_valid():
+            if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form6.is_valid() and form9.is_valid():
                 form3.save()
                 form2.save()
                 form.save()
                 form4.save()
                 form6.save()
-                form7.save()
                 form9.save()
                 return HttpResponseRedirect(self.success_url)
             else:
-                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form7=form7, form9=form9))
+                return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3, form4=form4, form5=form5, form6=form6, form9 = form9))
 
     def get(self, request, *args, **kwargs):
         alumno = self.get_object()
@@ -471,6 +466,7 @@ class AlumnoDetailAndupdate(IsDirectorCentroMixin, generic.UpdateView):
             context['form7'] = self.seven_form_class(instance = vivienda)
         if 'form9' not in context:
             context['form9'] = self.nine_form_class(instance = laboral)
+
         context['obj'] = ''
         context['alumno'] = self.get_object()
 
