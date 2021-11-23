@@ -34,7 +34,7 @@
                             <br/>
                             <label><b>Dirección domiciliar: </b>{{ item.direccion_alumno }}</label>
                             <br/>
-                            <label><b>No. Telefono: </b>{{ item.telefono }}</label>
+                            <label><b>No. Telefono: </b>{{ item.telefono_alumno }}</label>
                             <br/>
                             <label><b>Municipio y departamento de origen: </b>{{ item.muni }}, {{ item.muni.dep }}</label>
                             <br/>
@@ -82,7 +82,7 @@
                             <br/>
                             <label><b>Parentesco con el alumno: </b>{{ tutor.parentesco }}</label>
                             <br/>
-                            <label><b>No. CUI: </b>{{ tutor.DPI }}</label>
+                            <label><b>No. CUI: </b>{{ tutor.DPI_tutor }}</label>
                             <br/>
                             <label><b>Fecha de nacimiento: </b>{{ tutor.fecha_nacimiento|date:"d M, Y" }}</label>
                             <br/>
@@ -110,7 +110,7 @@
                           <div class="flex-grow-1 ms-3">
                             <label><b>Grado: </b>{{ estudiosAnt.grado }}</label>
                             <br/>
-                            <label><b>Telefono: </b>{{ estudiosAnt.telefono }}</label>
+                            <label><b>Telefono: </b>{{ estudiosAnt.telefono_estudios_anteriores }}</label>
                             <br/>
                             <div class="text-lg fw-bold">
                               {% if estudiosAnt.repitente is True %}
@@ -166,13 +166,7 @@
                             <br/>
                             <label><b>Edad de inicio laboral: </b>{{ laboral.edad_inicio_trabajo }}</label>
                             <br/>
-                            <div class="text-lg fw-bold">
-                            {% if relig.estado_laborales  is True %}
-                                <span class="badge bg-green-soft text-green">Activo </span>
-                            {% else %}
-                                <span class="badge bg-red-soft text-red">Inactivo</span>
-                            {% endif %}
-                            </div>
+
                             <br/>
                             </div>
                           </div>
