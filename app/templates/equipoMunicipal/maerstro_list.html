@@ -19,7 +19,6 @@
                   <th>Establecimiento</th>
                   <th>Correo electrónico</th>
                   <th>Estado</th>
-                  <th class="all">Acciones</th>
               </thead>
               <tbody>
                   {% for item in obj %}
@@ -37,13 +36,7 @@
                         <span class="badge bg-red-soft text-red">Inactivo</span>
                       </td>
                       {% endif %}
-                      <td>
-                        <a href="{% url 'municipalizacion:maes_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
-                        <!--<a href="{% url 'municipalizacion:maes_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>-->
-                          <!--<a href="{% url 'municipalizacion:area_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
-                          <a href="{% url 'municipalizacion:area_del' item.id %}" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
-                        -->
-                      </td>
+                      
                   </tr>
                   {% endfor %}
               </tbody>

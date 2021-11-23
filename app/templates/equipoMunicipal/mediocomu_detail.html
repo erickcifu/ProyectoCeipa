@@ -1,18 +1,18 @@
-{% extends 'base/municipalizacion.html' %}
+{% extends 'EquipoMunicipal/municipalizacion.html' %}
+
 
 {% block page_content %}
 <div id="layoutSidenav_content">
     <div class="card card-header-actions d-flex bd-highlight">
       <div class="card-header">
-          <h2 class="text-dark">Datos de {{ item.persona }}</h2>
-
+          <h2 class="text-dark">Datos de {{ item.nombre_medio }}</h2>
       </div>
       <div class="card-body">
             <div class="row">
                   <div class="col-lg-12 col-xl-12 mb-12">
                     <div class="card">
                         <div class="card-header">
-                          <h2 class="text-muted">Información personal</h2>
+                          <h2 class="text-muted">Información personal del representante</h2>
                         </div>
                         <div class="card-body d-flex">
                           <div class=flex-shrink-0">
@@ -20,8 +20,6 @@
                           </div>
                           <div class="flex-grow-1 ms-3">
                             <label><b>Nombre completo: </b>{{ item.persona }}</label>
-                            <br/>
-                            <label><b>Fecha de nacimiento: </b>{{ item.fecha_nacimiento_benef }}</label>
                             <br/>
                             <label><b>Género: </b>{{ item.persona.gen }}</label>
                             <br/>
@@ -46,6 +44,14 @@
                               {% endif %}
                             </label>
                             <br/>
+                            <label><b>Último grado cursado: </b>{{ item.persona.estudios_anteriores }}</label>
+                            <br/>
+                            {% if item.vacuna_medio is True %}
+                              <span class="badge bg-yellow-soft text-yellow">Vacunado contra COVID-19</span>
+                            {% else %}
+                              <span class="badge bg-yellow-soft text-yellow">No vacunado contra COVID-19</span>
+                            {% endif %}
+                            <br/>
                             <label>
                               {% if item.persona.disc is True %}
                                 <span class="badge bg-purple-soft text-purple">Tiene discapacidades físicas</span>
@@ -56,83 +62,51 @@
                             <br/>
                             <label>
                               {% if item.persona.estado_persona is True %}
-                                <span class="badge bg-green-soft text-green">Participante activo</span>
+                                <span class="badge bg-green-soft text-green">Representante activo</span>
                               {% else %}
-                                <span class="badge bg-red-soft text-red">Participante inactivo</span>
+                                <span class="badge bg-red-soft text-red">Representante inactivo</span>
                               {% endif %}
                             </label>
                           </div>
                         </div>
                       </div>
                       <br/>
-                      <!--INFORMACIÓN ACADEMICA Y LABORAL-->
-                      <div class="card">
-                          <div class="card-header">
-                            <h2 class="text-muted">Información académica y laboral</h2>
-                          </div>
-                          <div class="card-body d-flex">
-                            <div class="flex-grow-1 ms-3">
-                              <label><b>Ocupación: </b>{{ item.ocup }}</label>
-                              <br/>
-                              <label><b>Establecimiento en el que estudia: </b>{{ item.establecimiento }}</label>
-                              <br/>
-                              <label><b>Tipo de establecimiento: </b>
-                                {% if item.establecimiento_privado is True %}
-                                  <label> Privado</label>
-                                {% else %}
-                                  <label> Público</label>
-                                {% endif %}
-                              </label>
-                              <br/>
-                              <label><b>Último grado cursado: </b>{{ item.persona.estudios_anteriores }}</label>
-                              <br/>
-                            <label><b>Nivel educativo: </b></label>
-                              <label>
-                                {% if item.nivel_primario is True %}
-                                  <label>Primario</label>
-                                {% elif item.nivel_secundario %}
-                                  <label>Secundario</label>
-                                {% elif item.nivel_universitario %}
-                                  <label>Universitario</label>
-                                {% else %}
-                                  <label>No tiene</label>
-                                {% endif %}
-                              </label>
-                            </div>
-                          </div>
-                        </div>
+
                       <!--FIN INFORMACIÓN ACADEMICA Y LABORAL-->
-                      <br/>
-                      <!--INFORMACIÓN DEL TUTOR-->
                       <div class="card">
                           <div class="card-header">
-                            <h2 class="text-muted">Información del encargado</h2>
+                            <h2 class="text-muted">Información del medio de comunicación</h2>
                           </div>
                           <div class="card-body d-flex">
-                            <div class=flex-shrink-0">
-                              <img class="rounded float-left" src="{{item.tutor.foto_url|default_if_none:'ceipa/default.png'}}" height="200" weight="250">
-                            </div>
                             <div class="flex-grow-1 ms-3">
-                              <label><b>Nombre completo: </b>{{ item.tutor.nombres_tutor }} {{ item.tutor.apellidos_tutor }}</label>
+                              <label>
+                                <b>Nombre del medio: </b> {{item.nombre_medio}}
+                              </label>
                               <br/>
-                              <label><b>Parentesco con el participante: </b>{{ item.tutor.parentesco}}</label>
+                              <label>
+                                <b>Cargo del representante: </b> {{item.cargo}}
+                              </label>
                               <br/>
-                              <label><b>No. CUI: </b>{{ item.tutor.DPI }}</label>
+                              <label>
+                                <b>Tipo de distribución del medio: </b> {{item.t_medio}}
+                              </label>
                               <br/>
-                              <label><b>Fecha de nacimiento: </b>{{ item.tutor.fecha_nacimiento }}</label>
+                              <label>
+                                <b>Correo electrónico: </b> {{item.correo_medio}}
+                              </label>
                               <br/>
-                              <label><b>Dirección domiciliar: </b>{{ item.tutor.direccion_tutor }}</label>
-                              <br/>
-                              <label><b>No. Teléfono: </b>{{ item.tutor.telefono }}</label>
+                              <label>
+                                <b>Numero de teléfono: </b> {{item.telefono_medio}}
+                              </label>
                             </div>
                           </div>
                         </div>
-                      <!--FIN INFORMACIÓN DEL TUTOR-->
+                      <br/>
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="row">
                         <div class="col">
-                            <a href="{% url 'municipalizacion:ben_list' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+                            <a href="{% url 'municipalizacion:mediocomu_list' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
                         </div>
                     </div>
 

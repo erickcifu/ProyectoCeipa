@@ -4,7 +4,13 @@ from app.models import Persona
 
 
 class PersonaForm(forms.ModelForm):
-    estado_persona = forms.BooleanField()
+    estado_persona = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo"
+    )
     class Meta:
         model = Persona
         fields = ['persona',

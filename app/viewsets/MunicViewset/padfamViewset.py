@@ -13,11 +13,23 @@ from django.forms import formset_factory
 from app.models import PadresFamilia, IdiomaPersona, Persona
 from app.forms import PadFamForm, IdPerForm, PersonaForm
 
-class PadFamView(IsCoordinadorMunicipalMixin, generic.ListView):
+class PadFamView(RolesCooMunicipalEquipoMunicipalMixin, generic.ListView):
     model = PadresFamilia
     template_name = 'municipalizacion/padfam_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/padfam_list.html"]
 
 class PadFamNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = PadresFamilia
@@ -166,9 +178,21 @@ class PadFamEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class PadFamDetail(IsCoordinadorMunicipalMixin, generic.DetailView):
+class PadFamDetail(RolesCooMunicipalEquipoMunicipalMixin, generic.DetailView):
     template_name = "municipalizacion/padfam_detail.html"
     model = PadresFamilia
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/padfam_detail.html"]
 
     def get_idioma(self, persona):
         return IdiomaPersona.objects.filter(persona=persona)

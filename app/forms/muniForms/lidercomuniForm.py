@@ -24,7 +24,13 @@ class LiderComuniMuniForm(forms.ModelForm):
             attrs={'type':'date'}
         ), label="Fecha de finalización del periodo"
     )
-    estado_liders = forms.BooleanField()
+    estado_liders = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo"
+    )
     class Meta:
         model = LiderComunitario
         fields = ['cargo_grupo',
@@ -51,6 +57,7 @@ class LiderComuniMuniForm(forms.ModelForm):
                 'class':'form-control',
                 'required': False
             })
+
             if type(self.fields[field])==forms.BooleanField:
                 self.fields[field].widget.attrs.update({
                     'class':'form-check-input'

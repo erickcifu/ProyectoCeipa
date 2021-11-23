@@ -1,10 +1,11 @@
 {% extends 'EquipoMunicipal/municipalizacion.html' %}
 
 {% block page_content %}
+{% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
-<form method="POST" class="form-inline">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="col-xl-6 col-md-6 mb-6">
+    <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
         <div class="card border-left-warning shadow h-100 py-2">
         {% else %}
@@ -14,59 +15,220 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} padecimiento persona
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                              <div class="input-group">
-                                  {{ form.persona}}
-                              </div>
-                              <div class="input-group">
-                                  {{ form.grupo}}
-                              </div>
-                              <div class="input-group">
-                                  {{ form.cargo}}
-                              </div>
-                              <div class="input-group">
-                                  {{ form.programaC}}
-                              </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                  <label for="id_leer">Leer</label>
-                                  <div class="form-checked">
-                                    <input class="form-checked-input" name="leer" class="form-control" id="id_leer" type="checkbox"  {% if obj.leer %} checked {% endif %}>
-                                  </div>
-                                  <label for="id_escribir">Escribir</label>
-                                  <div class="form-checked">
-                                    <input class="form-checked-input" name="escribir" class="form-control" id="id_escribir" type="checkbox"  {% if obj.escribir %} checked {% endif %}>
-                                  </div>
-                                  <label for="id_vacunaCovid">Vacuna Covid</label>
-                                  <div class="form-checked">
-                                    <input class="form-checked-input" name="vacunaCovid" class="form-control" id="id_vacunaCovid" type="checkbox"  {% if obj.vacunaCovid %} checked {% endif %}>
-                                  </div>
-                                  <label for="id_participacionG">Participacion grupo</label>
-                                  <div class="form-checked">
-                                    <input class="form-checked-input" name="participacionG" class="form-control" id="id_participacionG" type="checkbox"  {% if obj.participacionG %} checked {% endif %}>
-                                  </div>
-                                    <label for="id_estado_padres">Estado</label>
-                                    <div class="form-check">
-                                      <input class="form-check-input" name="estado_padres" class="form-control" id="id_estado_padres" type="checkbox"  {% if obj.estado_padres %} checked {% endif %}>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- {{form.as_p}} -->
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'municipalizacion:padper_list' %}" class="btn btn-danger">Cancelar</a>
-                            </div>
-                        </div>
+                          <div class="col-12 col-md-12 offset-md-12">
+                            <h2>Nuevo Registro de Padres de familia</h2>
+                          </div>
                     </div>
                 </div>
+                <!--Wizzard-->
+                        <div class="card">
+                          <div class="card-header border-bottom">
+                            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                              <!--Wizard item 1-->
+                              <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                <div class="wizard-step-icon">1</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Persona</div>
+                                  <div class="wizard-step-text-details">Infomación general</div>
+                                </div>
+                              </a>
+                              <!--Wizard item 2-->
+                              <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="true">
+                                <div class="wizard-step-icon">2</div>
+                                <div class="wizard-step-text">
+                                  <div class="wizard-step-text-name">Padre de familia</div>
+                                  <div class="wizard-step-text-details">Información adicional del padre o madre de familia</div>
+                                </div>
+                              </a>
+
+                            <div class="card-body">
+                              <!--Errores form1-->
+                              {% if form.errors %}
+                                {% for field in form %}
+                                  {% for error in field.errors %}
+                                    {{error}}
+                                  {% endfor %}
+                                {% endfor %}
+                              {% endif %}
+                              <!--Errores form2-->
+                              {% if form2.errors %}
+                                {% for field in form2 %}
+                                  {% for error in field.errors %}
+                                    {{error}}
+                                  {% endfor %}
+                                {% endfor %}
+                              {% endif %}
+                              <!--Errores form3-->
+                              {% if form3.errors %}
+                                {% for field in form3 %}
+                                  {% for error in field.errors %}
+                                    {{error}}
+                                  {% endfor %}
+                                {% endfor %}
+                              {% endif %}
+                              <!--Wizard Body-->
+                                <div class="tab-content" id="cardTabContent">
+                                  <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 1</h3>
+                                        <h5 class="card-title mb-4">Ingrese la información general de la persona</h5>
+                                        <div class="row gx-12">
+                                        <!--Inicio Formulario-->
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.persona | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.apellidos_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.cui_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.direccion_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form.telefono_Persona | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                              {{ form.telefonoc_per | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.fotografia_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.muni | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.etni | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.estudios_anteriores | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-12">
+                                                {{ form.gen | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                            <div class="mb-3 col-md-6">
+                                              {{ form.disc | as_crispy_field }}
+                                            </div>
+                                            <div class="mb-3 col-md-6" hidden>
+                                              {{ form.estado_persona | as_crispy_field }}
+                                            </div>
+                                          </div>
+                                          <!--IDIOMA FORMSET-->
+                                          <div class="row gx-6">
+                                              <div class="row gx-3">
+                                                {{form3.management_form}}
+                                                {%for f in form3 %}
+                                                  <div id="formularios_idiomas_padres" class="row">
+                                                      {{ f | crispy }}
+                                                  </div>
+                                                  <br/>
+                                                  <br/>
+                                                {% endfor %}
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <div class="d-flex justify-content-between">
+                                                  <button class="btn btn-light" id="add_idioma_padres" type="button" role="button">
+                                                      <i class="me-2" data-feather="plus-circle"></i>Agregar idioma
+                                                </button>
+                                                </div>
+                                            </div>
+                                          <!--IDOMA FORMSET FIN-->
+
+
+
+                                        <!--Fin Formulario-->
+                                        </div>
+                                    </div>
+                                    </div>
+                                  </div>
+                                  <!--Tab item 2-->
+                                  <div class="tab-pane py-5 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                                    <div class="row justify-content-center">
+                                      <div class="col-xxl-6 col-xl-8">
+                                        <h3 class="text-primary">Paso 2</h3>
+                                        <h5 class="card-title mb-4">Ingrese la información que se requiere</h5>
+                                          <div class="row gx-12">
+                                          <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                {{ form2.programaC | as_crispy_field }}
+                                              </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                {{ form2.cantidad_hijos | as_crispy_field }}
+                                              </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                {{ form2.correo_padres | as_crispy_field }}
+                                              </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                {{ form2.participacionG | as_crispy_field }}
+                                              </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                {{ form2.grupo | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                                {{ form2.cargo | as_crispy_field }}
+                                              </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                              <div class="mb-3 col-md-12">
+                                                {{ form2.leer_P | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-12">
+                                                {{ form2.escribir_p | as_crispy_field }}
+                                              </div>
+                                          </div>
+                                          <div class="row gx-3">
+                                              <div class="mb-3 col-md-6">
+                                                {{ form2.vacunaCovid | as_crispy_field }}
+                                              </div>
+                                              <div class="mb-3 col-md-6">
+                                                {{ form2.estado_padres | as_crispy_field }}
+                                              </div>
+                                          </div>
+                                          <hr class="my-4"/>
+                                          <div class="d-flex justify-content-between">
+                                            <a class="btn btn-ligth" href="{% url 'municipalizacion:padfam_list' %}">Cancelar</a>
+                                            <button  type="submit" class="btn btn-success">Guardar</button>
+                                          </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
             </div>
         </div>
     </div>
@@ -74,4 +236,99 @@
 </div>
 {% endblock %}
 {% block js_page %}
+<script>
+  function isRequeried(field) {
+      console.log(field)
+        let value = field.value
+
+        if((!value || value.trim().length === 0)){
+          const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+
+          if(!$error_is_requeried)
+            field.insertAdjacentHTML('afterend', `<div id="isRequeried_${field.name}">Este campo es requerido</div>`)
+        }else{
+          const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+          if($error_is_requeried)
+            $error_is_requeried.remove()
+        }
+
+      }
+
+      const isEmail = (field)=>{
+              let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+              const result = isRequeried(field)
+              if(!result){
+                  let value = field.value
+                  if(!regexEmail.test(value)){
+                    const $error_is_email = document.querySelector(`#isEmail_${field.name}`)
+                    if(!$error_is_email){
+                      field.insertAdjacentHTML('afterend', `<div id="isEmail_${field.name}">No es un correo válido</div>`)
+                    }
+                  }else{
+                    const $error_is_email = document.querySelector(`#isEmail_${field.name}`)
+                    if($error_is_email) $error_is_email.remove()
+                  }
+              }
+          }
+
+  function isTelephoneNumber(field){
+      let regexNumber = /^[0-9]{8}$/
+      if(!field.value)return null
+      const $error_is_telephone = document.querySelector(`#isTelephoneNumber_${field.name}`)
+      if(!regexNumber.test(field.value)){
+        if(!$error_is_telephone){
+          field.insertAdjacentHTML('afterend', `<div id="isTelephoneNumber_${field.name}">El numero de telefono debe tener 8 digitos</div>`)
+        }
+      }else{
+        if($error_is_telephone) $error_is_telephone.remove()
+      }
+    }
+
+
+  function isIdentify(field) {
+      const result = isRequeried(field)
+      if(!result){
+        let regexNumber = /^[0-9]{13}$/
+        const $error_is_identify = document.querySelector(`#isIdenfify_${field.name}`)
+        if(!regexNumber.test(field.value)){
+          if(!$error_is_identify){
+            field.insertAdjacentHTML('afterend', `<div id="isIdenfify_${field.name}">
+                Debe tener 13 dígitos, no se aceptan letras
+              </div>`)
+          }
+        }else{
+          if($error_is_identify) $error_is_identify.remove()
+        }
+      }
+    }
+
+    const $add_idioma_padres = document.querySelector('#add_idioma_padres')
+    $add_idioma_padres.addEventListener('click', e=>{
+      e.preventDefault()
+      agregar_idiomas_padres();
+    })
+
+    function agregar_idiomas_padres(){
+      const $total_forms_padres = document.getElementById('id_idiomas_padres-TOTAL_FORMS')
+
+      let $label_idioma_padres = document.createElement('label')
+      $label_idioma_padres.innerHTML = 'Idioma'
+      let $input_idioma_padres = document.querySelector('#id_idiomas_padres-0-idioma').cloneNode(true)
+      $input_idioma_padres.name = 'idiomas_padres-'+$total_forms_padres.value+'-idioma'
+      $input_idioma_padres.id = 'id_idiomas_padres-'+$total_forms_padres.value+'-idioma'
+
+      let $label_estado_idper_padres = document.createElement('label')
+      $label_estado_idper_padres.innerHTML = 'Activo'
+      let $input_estado_idper_padres = document.querySelector('#id_idiomas_padres-0-estado_ip').cloneNode(true)
+      $input_estado_idper_padres.name = 'idiomas_padres-'+$total_forms_padres.value+'-estado_ip'
+      $input_estado_idper_padres.id = 'id_idiomas_padres-'+$total_forms_padres.value+'-estado_ip'
+
+      document.getElementById('formularios_idiomas_padres').appendChild($label_idioma_padres)
+      document.getElementById('formularios_idiomas_padres').appendChild($input_idioma_padres)
+      document.getElementById('formularios_idiomas_padres').appendChild($label_estado_idper_padres)
+      document.getElementById('formularios_idiomas_padres').appendChild($input_estado_idper_padres)
+
+      $total_forms_padres.value = parseInt($total_forms_padres.value) + 1
+    }
+</script>
 {% endblock %}

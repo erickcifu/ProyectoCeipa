@@ -65,7 +65,7 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.persona }} {{ item.persona.apellidos_persona }}</td>
+                      <td>{{ item.persona }}</td>
                       <td>{{ item.persona.muni }}</td>
                       <td>{{ item.persona.muni.dep }}</td>
                       {% if item.estado_beneficiado is True %}
@@ -77,7 +77,7 @@
                         <span class="badge bg-red-soft text-red">Inactivo</span>
                       </td>
                       {% endif %}
-                    
+
                   </tr>
                   {% endfor %}
               </tbody>

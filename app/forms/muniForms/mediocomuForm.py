@@ -2,6 +2,13 @@ from django import forms
 from app.models import MedioComuni, Persona
 
 class MedioComuniForm(forms.ModelForm):
+    estado = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs={
+                'checked':True,
+            }
+        ), required=False, label="Activo"
+    )
     class Meta:
         model = MedioComuni
         fields = ['nombre_medio',

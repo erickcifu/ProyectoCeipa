@@ -4,30 +4,32 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-          Participantes
-          <a href="{% url 'municipalizacion:ben_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+          Lider Comunitario
+          <a href="{% url 'municipalizacion:lidercomuni_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
       </div>
       <div class="card mb-4">
       <div class="card-body">
           {% if not obj %}
-          <div class="alert alert-info">No hay datos de participante</div>
+          <div class="alert alert-info">No hay Lideres Comunitarios</div>
           {% else %}
-          <table id="datatablesSimple" class="table">
+          <table id="datatablesSimple">
               <thead>
                   <th>Id</th>
-                  <th>Participante</th>
-                  <th>Ocupacion</th>
-                  <th>Establecimiento</th>
+                  <th>Nombre</th>
+                  <th>Correo electrónico</th>
+                  <th>Programa en CEIPA</th>
+                  <th>Periodo de Lider Comunitario</th>
                   <th>Estado</th>
               </thead>
               <tbody>
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td><a href="{% url 'municipalizacion:ben_detail' item.id %}">{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</a></td>
-                      <td>{{ item.ocup }}</td>
-                      <td>{{ item.establecimiento }}</td>
-                      {% if item.estado_beneficiado is True %}
+                      <td><a href="{% url 'municipalizacion:lidercomuni_detail' item.id %}">{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</a></td>
+                      <td>{{ item.correo_lideres}}</td>
+                      <td>{{ item.programa_c}}</td>
+                      <td>{{ item.periodo }}</td>
+                      {% if item.estado_liders is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>
                       </td>
@@ -37,13 +39,15 @@
                       </td>
                       {% endif %}
 
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
-          {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
       </div>
     </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block js_page %}
@@ -51,7 +55,6 @@
     //LLamando al dataTables jQuery plugin
     $(document).ready(function(){
         $('.table').DataTable();
-
-
+    });
 </script>
 {% endblock%}

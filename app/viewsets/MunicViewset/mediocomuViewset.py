@@ -16,11 +16,25 @@ from django.db import IntegrityError, transaction
 from app.models.educacion_model.idioma import idioma
 
 
-class MedioComuniView(IsCoordinadorMunicipalMixin, generic.ListView):
+class MedioComuniView(RolesCooMunicipalEquipoMunicipalMixin, generic.ListView):
     model = MedioComuni
     template_name = 'municipalizacion/mediocomu_list.html'
     context_object_name = 'obj'
     login_url = 'app:login'
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/mediocomu_list.html"]
+            else:
+                return [self.template_name]
 
 class MedioComuniNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView):
     model = MedioComuni
@@ -168,9 +182,23 @@ class MedioComuniEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
 
         return render(request, self.template_name, context)
 
-class MedioComuniDetail(IsCoordinadorMunicipalMixin, generic.DetailView):
+class MedioComuniDetail(RolesCooMunicipalEquipoMunicipalMixin, generic.DetailView):
     template_name = "municipalizacion/mediocomu_detail.html"
     model = MedioComuni
+
+    def get_template_names(self):
+        user = self.request.user.user_profile.rol.id
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if user == 7 or user == 8:
+                return [self.template_name]
+            elif user == 9:
+                return ["equipoMunicipal/mediocomu_detail.html"]
+            else:
+                return [self.template_name]
 
     def get_idioma(self, persona):
         return IdiomaPersona.objects.filter(persona=persona)
