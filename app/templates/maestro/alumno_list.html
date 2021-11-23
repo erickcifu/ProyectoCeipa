@@ -1,0 +1,113 @@
+{% extends 'maestro/base.html' %}
+
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+          Alumno
+          <a href="{% url 'educacion:alumno_new' %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar</a>
+      </div>
+      <div class="card-body">
+          {% if not obj %}
+          <div class="alert alert-info">No hay Alumnos</div>
+          {% else %}
+
+          <table id="datatablesSimple">
+              <thead>
+                  <th>Id</th>
+                  <th>Código MINEDUC</th>
+                  <th>Nombre</th>
+                  <th>fecha de nacimiento</th>
+                  <th>Tutor</th>
+                  <th>Estado</th>
+                  <th class="all">Acciones</th>
+              </thead>
+              <tbody>
+                  {% for item in obj %}
+                  <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.codigo_mineduc }}</td>
+                      <td><a href="{% url 'educacion:alumno_detail' item.id  %}">{{ item.nombres_alumno }} {{ item.apellidos_alumno }}</a></td>
+                      <td>{{ item.fecha_nacimiento|date:"d M, Y"  }}</td>
+                      <td>{{ item.tutor }}</td>
+                      <td>{% if item.estado_alumno is True %}
+                          <span class="badge bg-green-soft text-green">Activo </span>
+                        {% else %}
+                          <span class="badge bg-red-soft text-red">Inactivo</span>
+                        {% endif %}
+                      </td>
+                      <td>
+                        <a href="{% url 'educacion:prueba_alumno' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i class="far fa-edit"></i></a>
+                        <a href="{% url 'educacion:alumno_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+
+        <!--<div class="row">
+                  {% for item in obj %}
+                  <div class="col-lg-6 col-xl-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                          <a href="{% url 'educacion:alumno_detail' item.id  %}" class="text-primary stretched-link">{{ item.nombres_alumno }} {{ item.apellidos_alumno }}</a>
+                          <div class="text-primary"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <img class="card-img-top" src="{{item.foto_url|default_if_none:'ceipa/default.png'}}">
+                        <div class="card-body">
+                          <label><b>ID: </b>{{ item.id }}</label>
+                          <br/>
+                          <label><b>CUI: </b>{{ item.cui }}</label>
+                          <label><b>Codigo MINEDUC: </b>{{ item.codigo_mineduc }}</label>
+                          <label><b>Fecha de nacimiento: </b>{{ item.fecha_nacimiento|date:"d M, Y" }}</label>
+                          <label><b>Ingreso familiar: Q.</b>{{ item.ingreso_familiar }}</label>
+                          <label><b>direcciòn: </b>{{ item.direccion_alumno }}</label>
+                          <label><b>No. Telefono: </b>{{ item.telefono }}</label>
+                          <label><b>Ocupaciòn: </b>{{ item.ocup }}</label>
+                          <label><b>Etnia: </b>{{ item.etni }}</label>
+                          <label><b>Idioma: </b>{{ item.idiome }}</label>
+                          <label><b>Municipio: </b>{{ item.muni }}</label>
+                          <label><b>Gènero: </b>{{ item.gen }}</label>
+                          <label><b>Ultimo grado: </b>{{ item.estudios_anteriores }}</label>
+                          <label><b>Tutor: </b>{{ item.tutor }}</label>
+                          <div class="text-lg fw-bold">
+                            {% if item.estado_alumno is True %}
+                              <span class="badge bg-green-soft text-green">Activo </span>
+                            {% else %}
+                              <span class="badge bg-red-soft text-red">Inactivo</span>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                          <a href="{% url 'educacion:prueba_alumno' item.id %}" class="btn btn-outline-yellow" role="button">Editar</a>
+                          <a href="{% url 'educacion:alumno_del' item.id %}" class="btn btn-outline-red" role="button">Eliminar</a>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  </div>-->
+          {% endif %}
+      </div>
+
+{% endblock %}
+
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+<script >
+  function eliminar(id){
+  swal.fire({
+    "titulo":"Esta seguro",
+    "text":"esta accion no se puede deshacer",
+    "icon":"question",
+    "showCancelButton":true
+  })
+  }
+</script>
+{% endblock%}
