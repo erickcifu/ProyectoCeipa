@@ -5,7 +5,7 @@ class psicologico(models.Model):
     alumno =models.ForeignKey(Alumno, on_delete=models.CASCADE, related_name="A_alumno")
     Analisis_psicologico = models.CharField(max_length=255,null=False )
     tratamiento = models.CharField(max_length=255, null=True, blank=True)
-    fecha_Analisis = models.DateTimeField()
+    fecha_Analisis = models.DateField()
     Entrevistador = models.CharField(max_length=255, null=True, blank=True)
     tiene_sueños = models.BooleanField(default=False)
     sueños = models.CharField(max_length=255, null=True, blank=True)
