@@ -25,25 +25,24 @@
                             <br/>
                             <label><b>Género: </b>{{ item.persona_maestro.gen }}</label>
                             <br/>
-                            <label><b>No. CUI: </b>{{ item.persona_maestro.cui }}</label>
+                            <label><b>No. CUI: </b>{{ item.persona_maestro.cui_persona }}</label>
                             <br/>
                             <label><b>Dirección domiciliar: </b>{{ item.persona_maestro.direccion_persona }}</label>
                             <br/>
                             <label><b>Correo electrónico: </b>{{ item.correo_maestro }}</label>
-                            <label><b>Participación en grupo organizado: </b>
+                            <br/>
                               {% if item.Pargrupo is True %}
-                                <label>Sí participa</label>
+                                <label><b>Participación en grupo organizado: </b>Sí participa</label>
                                 <br/>
                                 <label><b>Grupo organizado en el que participa: </b>{{ item.gruporg }}</label>
                                 <br/>
                                 <label><b>Cargo que ocupa en el grupo: </b>{{ item.cargogrup }}</label>
                               {% else %}
-                                <label>No participa en ningun grupo</label>
+                                <label><b>Participación en grupo organizado: </b>No participa en ningun grupo</label>
                               {% endif %}
-                            </label>
                             <br/>
-                            <label><b>No. Telefono: </b>{{ item.persona_maestro.telefono }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label><b>No. Telefono de casa: </b> {{ item.persona_maestro.telefonoc }}</label>
+                            <label><b>No. Telefono: </b>{{ item.persona_maestro.telefono_Persona }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label><b>No. Telefono de casa: </b> {{ item.persona_maestro.telefonoc_per }}</label>
                             <br/>
                             <label><b>Municipio y departamento de origen: </b>{{ item.persona_maestro.muni }}, {{ item.persona_maestro.muni.dep }}</label>
                             <br/>

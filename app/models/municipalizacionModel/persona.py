@@ -7,7 +7,7 @@ from app.models.educacion_model.genero import genero
 class Persona(models.Model):
     persona = models.CharField(max_length=50,null=False)
     apellidos_persona = models.CharField(max_length=100,null=True)
-    cui_persona = models.CharField(max_length=13)
+    cui_persona = models.CharField(max_length=13, null=True, blank=True)
     direccion_persona = models.CharField(max_length=80)
     telefono_Persona = models.CharField(max_length=8, null=True, blank=True)
     telefonoc_per = models.CharField(max_length=8, null=True, blank=True)

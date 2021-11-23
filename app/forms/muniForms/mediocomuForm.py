@@ -12,9 +12,9 @@ class MedioComuniForm(forms.ModelForm):
         't_medio',
         'estado']
         labels = {'nombre_medio':'Nombres de el medio',
-        'correo':'Correo',
+        'correo_medio':'Correo',
         'vacuna_medio':'Vacunado contra COVID-19',
-        'telefono_medio':"Telefono",  'cargo':'Cargo',
+        'telefono_medio':"Telefono",  'cargo':'Cargo que ocupa el representante',
         't_medio':'Tipo de distribución del medio de comunicación',
         'estado':'Activo'}
         widget = {'nombre_medio', forms.TextInput}
@@ -23,6 +23,20 @@ class MedioComuniForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required':False
             })
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })
+            requiered = self.fields[field].required
+            if requiered:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+            })
+            if type(self.fields[field])==forms.EmailField:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isEmail({});'.format('id_'+field)
+                })
         self.fields['cargo'].empty_label = "Seleccione Cargo"

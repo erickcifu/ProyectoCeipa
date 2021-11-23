@@ -29,7 +29,7 @@
                       <td><a href="{% url 'municipalizacion:corpmuni_detail' item.id %}">{{ item.persona.persona }} {{ item.persona.apellidos_persona }}</a></td>
                       <td>{{ item.comision }}</td>
                       <td>{{ item.correo_corporacion }}</td>
-                      {% if item.vacuna is True %}
+                      {% if item.vacuna_corp is True %}
                         <td>
                           <span class="badge bg-purple-soft text-purple">Sí tiene</span>
                         </td>

@@ -16,8 +16,8 @@
               <thead>
                   <th>Id</th>
                   <th>Nombre</th>
-                  <th>Programa en CEIPA</th>
                   <th>Correo electrónico</th>
+                  <th>Programa en CEIPA</th>
                   <th>Periodo de Lider Comunitario</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
@@ -30,7 +30,7 @@
                       <td>{{ item.correo_lideres}}</td>
                       <td>{{ item.programa_c}}</td>
                       <td>{{ item.periodo }}</td>
-                      {% if item.estado is True %}
+                      {% if item.estado_liders is True %}
                       <td>
                         <span class="badge bg-green-soft text-green">Activo</span>
                       </td>

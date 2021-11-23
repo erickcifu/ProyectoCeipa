@@ -5,9 +5,7 @@
     <div class="card card-header-actions d-flex bd-highlight">
       <div class="card-header">
           <h2 class="text-dark">Datos de {{ item.persona }} {{ item.persona.apellidos_persona }}</h2>
-          <div class="p-2 bd-highlight">
-            <a href="#" class="btn btn-sm btn-light text-primary" role="button"><i class="me-2" data-feather="printer"></i>PDF</a>
-          </div>
+
       </div>
       <div class="card-body">
             <div class="row">
@@ -25,12 +23,12 @@
                             <br/>
                             <label><b>Género: </b>{{ item.persona.gen }}</label>
                             <br/>
-                            <label><b>No. CUI: </b>{{ item.persona.cui }}</label>
+                            <label><b>No. CUI: </b>{{ item.persona.cui_persona }}</label>
                             <br/>
                             <label><b>Dirección domiciliar: </b>{{ item.persona.direccion_persona }}</label>
                             <br/>
-                            <label><b>No. Telefono: </b>{{ item.persona.telefono }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label><b>No. Telefono de casa: </b> {{ item.persona.telefonoc }}</label>
+                            <label><b>No. Telefono: </b>{{ item.persona.telefono_Persona }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label><b>No. Telefono de casa: </b> {{ item.persona.telefonoc_per }}</label>
                             <br/>
                             <label><b>Municipio y departamento de origen: </b>{{ item.persona.muni }}, {{ item.persona.muni.dep }}</label>
                             <br/>
@@ -70,22 +68,22 @@
                             <br/>
                             <label>
                             {% if item.participacionG is True %}
-                              <label>Tiene participacion</label>
+                              <label><b>Participa en algún grupo organizado: </b>Sí participa</label>
+                              <br/>
+                              <label>
+                                <b>Grupo organizado: </b> {{item.grupo}}
+                              </label>
+                              <br/>
+                              <label>
+                                <b>Cargo Grupo: </b> {{item.cargo}}
+                              </label>
                             {% else %}
-                              <label>No tiene participacion</label>
+                              <label><b>Participa en algún grupo organizado: </b>No participa</label>
                             {% endif %}
                             </label>
                             <br/>
                             <label>
                               <b>Correo electronico: </b> {{item.correo_padres}}
-                            </label>
-                            <br/>
-                            <label>
-                              <b>Grupo organizado: </b> {{item.grupo}}
-                            </label>
-                            <br/>
-                            <label>
-                              <b>Cargo Grupo: </b> {{item.cargo}}
                             </label>
                             <br/>
                             <label>

@@ -16,7 +16,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                           <div class="col-12 col-md-6 offset-md-3">
-                            <h4> Editar comisión NA </h4>
+                            <h4> Editar comisión de niñez y adolescencia </h4>
                           </div>
                     </div>
                 </div>
@@ -238,7 +238,7 @@
 {% block js_page %}
 <script>
     function agregar_idiomas_na(){
-      const $total_forms = document.getElementById('id_form_na-TOTAL_FORMS')
+      const $total_forms = document.getElementById('#id_form_na-TOTAL_FORMS')
 
       let $label_idioma = document.createElement('label')
       $label_idioma.innerHTML = 'Idioma'
@@ -247,7 +247,7 @@
       $input_idioma.id = 'id_form_na-'+$total_forms.value+'-idioma'
 
       let $label_estado_idper = document.createElement('label')
-      $label_estado_idper.innerHTML = 'Activo/Inactivo'
+      $label_estado_idper.innerHTML = 'Activo'
       let $input_estado_idper = document.querySelector('#id_form_na-0-estado_ip').cloneNode(true)
       $input_estado_idper.name = 'form_na-'+$total_forms.value+'-estado_ip'
       $input_estado_idper.id = 'id_form_na-'+$total_forms.value+'-estado_ip'

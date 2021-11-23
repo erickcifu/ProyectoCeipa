@@ -19,3 +19,10 @@ class ListarPersonalEquipoMunicipalAsistenteMunicipal(IsCoordinadorMunicipalMixi
 
     def get_queryset(self):
         return User.objects.filter(is_active=True, user_profile__rol_id__in=[7,8,9]).annotate(cargo=F('user_profile__rol__nombre_rol'))
+
+
+class DeleteUserMuni(IsCoordinadorMunicipalMixin, generic.DeleteView):
+    model = User
+    template_name = 'CoordinadorMunicipal/deletemunicip.html'
+    context_object_name = "obj"
+    success_url = reverse_lazy("educacion:listar_asistente_equipo_municipal")

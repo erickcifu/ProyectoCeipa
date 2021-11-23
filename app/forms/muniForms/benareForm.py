@@ -6,7 +6,7 @@ class BenefArForm(forms.ModelForm):
     fecha_ba = forms.DateField(
         widget = forms.TextInput(
             attrs={'type':'date'}
-        )
+        ), label="Fecha de inscripción"
     )
     class Meta:
         model = BeneficiadoArea

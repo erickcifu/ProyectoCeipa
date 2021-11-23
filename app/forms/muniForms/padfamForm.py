@@ -7,7 +7,7 @@ class PadFamForm(forms.ModelForm):
             attrs={
                 'checked':True,
             }
-        ), required=False, label="Activo/Inactivo"
+        ), required=False, label="Activo"
     )
     class Meta:
         model = PadresFamilia
@@ -20,9 +20,9 @@ class PadFamForm(forms.ModelForm):
         'escribir_p':'Sabe escribir',
         'cantidad_hijos':'Cantidad de hijos que tiene',
         'programaC':'Programa al que pertenece en CEIPA',
-        'vacunaCovid':'Està vacunado contra COVID-19',
+        'vacunaCovid':'Está vacunado contra COVID-19',
         'correo_padres':'Correo electrónico',
-        'participacionG':'Ha participado en algùn grupo organizado',
+        'participacionG':'Ha participado en algún grupo organizado',
         'grupo':'Grupo en el que ha participado',
         'cargo':'Cargo que ha ocupado',
         'estado_padres':"Activo"}
@@ -34,8 +34,22 @@ class PadFamForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
-                'class':'form-control'
+                'class':'form-control',
+                'required':False
             })
-            self.fields['grupo'].empty_label = "Seleccione grupo"
-            self.fields['cargo'].empty_label = "Seleccione cargo"
-            self.fields['programaC'].empty_label = "Seleccione un Programa Ceipa"
+            if type(self.fields[field])==forms.BooleanField:
+                self.fields[field].widget.attrs.update({
+                    'class':'form-check-input'
+            })
+            requiered = self.fields[field].required
+            if requiered:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isRequeried({});'.format('id_'+field)
+            })
+            if type(self.fields[field])==forms.EmailField:
+                self.fields[field].widget.attrs.update({
+                    'onblur':'isEmail({});'.format('id_'+field)
+            })
+        self.fields['grupo'].empty_label = "Seleccione grupo"
+        self.fields['cargo'].empty_label = "Seleccione cargo"
+        self.fields['programaC'].empty_label = "Seleccione un Programa Ceipa"
