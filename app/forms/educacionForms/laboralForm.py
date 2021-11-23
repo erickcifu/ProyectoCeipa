@@ -4,7 +4,13 @@ from django.forms import widgets
 from app.models import AspectosLab
 
 class LaboralForm(forms.ModelForm):
-    estado_laborales = forms.BooleanField()
+
+    estado_laborales = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs = { 'checked':True }
+        ),
+        required=False, label='Activo'
+    )
     hora_entrada = forms.TimeField(
         widget = forms.TextInput(
             attrs = { 'type': 'time' }
@@ -15,6 +21,7 @@ class LaboralForm(forms.ModelForm):
             attrs = { 'type': 'time' }
         )
     )
+
     class Meta:
         model = AspectosLab
         fields = ['empleador',
