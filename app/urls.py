@@ -578,6 +578,7 @@ urlpatterns = [
 
     #Delete de los usuarios
     path('usuarios/coordinadorSocio/delete/<int:pk>', viewsets.DeleteUserSocio.as_view(), name='delete_sociop'),
+    path('usuarios/coordinadorMunicipal/delete/<int:pk>', viewsets.DeleteUserMuni.as_view(), name='delete_municip'),
     #prueba roles
 
 ]

@@ -147,7 +147,8 @@ class ComisionNAEdit(RolesCooMunicipalEquipoMunicipalMixin, generic.UpdateView):
         comna = self.get_object()
         persona_cna = comna.persona_cna
         idioma = IdiomaPersona.objects.filter(persona=persona_cna)
-        form = self.form_class(request.POST, instance = persona_cna)
+
+        form = self.form_class(request.POST, request.FILES, instance = persona_cna)
         form2 = self.second_form_class(request.POST, instance = comna)
 
         with transaction.atomic():

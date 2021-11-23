@@ -46,11 +46,12 @@ class LiderComunitarioNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateV
     def get_context_data(self, **kwargs):
         context = super(LiderComunitarioNew, self).get_context_data(**kwargs)
         if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
+            context['form'] = self.form_class()
         if 'form2' not in context:
-            context['form2'] = self.second_form_class(self.request.GET)
+            context['form2'] = self.second_form_class()
         if 'form3' not in context:
             context['form3'] = self.third_form_class(prefix = 'idioma_lider')
+        context['errors_forms'] = {}
         return context
 
     def get_object(self, request, pk, *args, **kwargs):
@@ -58,30 +59,47 @@ class LiderComunitarioNew(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateV
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST, request.FILES)
+        form2 = self.second_form_class(request.POST)
+        form3 = self.third_form_class(request.POST, prefix = 'idioma_lider')
         try:
             with transaction.atomic():
-                self.object = self.get_object
-                form = self.form_class(request.POST, request.FILES)
-                form2 = self.second_form_class(request.POST)
-                form3 = self.third_form_class(request.POST, prefix = 'idioma_lider')
-
                 if form.is_valid() and form2.is_valid() and form3.is_valid():
                     persona = form.save()
                     lidercom = form2.save(commit=False)
                     lidercom.persona = persona
                     lidercom.save()
-                    for idiom_lider in form3:
-                        idioma = idiom_lider.save(commit=False)
-                        idioma.persona = persona
-                        idioma.save()
+                    if len(form3.cleaned_data) == 1:
+                        if form3.cleaned_data[0]:
+                            for idiom_lider in form3:
+                                idioma = idiom_lider.save(commit=False)
+                                idioma.persona = persona
+                                idioma.save()
+                    elif len(form3.cleaned_data) >= 1:
+                        for idiom_lider in form3:
+                            if idiom_lider.cleaned_data:
+                                idioma = idiom_lider.save(commit=False)
+                                idioma.persona = persona
+                                idioma.save()
                     return HttpResponseRedirect(self.get_success_url())
                 else:
-                    return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
+                    print(form2.errors)
+                    errors = {
+                        'form':{'erros':form.errors, 'name':'Persona'},
+                        'form2':{'erros':form2.errors, 'name':'LiderComunitario'},
+                        'form3':{'erros':form3.errors, 'name':'IdiomaPersona'},
+                    }
+                    print(errors)
+                    return self.render_to_response(self.get_context_data(form=form,
+                        form2=form2,
+                        form3=form3,
+                    ))
         except IntegrityError:
-            handle_exception()
+            return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
 
 class LiderComunitarioEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
-    template_name = "municipalizacion/lidercomuni_form.html"
+    template_name = "municipalizacion/lidercomuni_edit.html"
     success_url = reverse_lazy("municipalizacion:lidercomuni_list")
     model = LiderComunitario
     context_object_name = "obj"
@@ -99,17 +117,19 @@ class LiderComunitarioEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     def post(self, request, *args, **kwargs):
         lidercom = self.get_object()
         persona = lidercom.persona
-        idioma = persona.I_persona.first()
+        idioma = IdiomaPersona.objects.filter(persona=persona)
 
-        form = self.form_class(request.POST, instance = persona)
+        form = self.form_class(request.POST, request.FILES, instance = persona)
         form2 = self.second_form_class(request.POST, instance = lidercom)
-        form3 = self.third_form_class(request.POST, instance = idioma )
 
         with transaction.atomic():
-            if form.is_valid() and form2.is_valid() and form3.is_valid():
+            for idi_lider in idioma:
+                form3 = self.third_form_class(request.POST, instance=idi_lider, prefix='idioma_lider')
+                if form3.is_valid():
+                    form3.save()
+            if form.is_valid() and form2.is_valid():
                 form.save()
                 form2.save()
-                form3.save()
                 return HttpResponseRedirect(self.success_url)
             else:
                 return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
@@ -119,13 +139,28 @@ class LiderComunitarioEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
         persona = lidercom.persona
         idioma = persona.I_persona.first()
 
+        try:
+            formidioma = formset_factory(IdPerForm, extra=0)
+            listdo_idiomasl = []
+            idiomas_lider = IdiomaPersona.objects.filter(persona=persona)
+            for idio_lider in idiomas_lider:
+                listdo_idiomasl.append({
+                    'idioma': idio_lider.idioma.id,
+                    'estado_ip': idio_lider.estado_ip
+                })
+            formset_idiomasl = formidioma(initial=listdo_idiomasl, prefix='idioma_lider')
+        except:
+            print('Ocurrió un error')
+            return HttpResponseRedirect(self.success_url)
+
         context = {}
         if 'form' not in context:
             context['form'] = self.form_class(instance = persona)
         if 'form2' not in context:
             context['form2'] = self.second_form_class(instance = lidercom)
         if 'form3' not in context:
-            context['form3'] = self.third_form_class(instance = idioma)
+            context['form3'] = formset_idiomasl
+
         context['obj'] = ''
         context['persona'] = self.get_object()
 

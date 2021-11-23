@@ -25,7 +25,7 @@
                   {% for item in obj %}
                   <tr>
                       <td>{{ item.id }}</td>
-                      <td>{{ item.persona_maestro.persona }} {{ item.persona_maestro.apellidos_persona }}</td>
+                      <td><a href="{% url 'municipalizacion:maes_detail' item.id %}">{{ item.persona_maestro.persona }} {{ item.persona_maestro.apellidos_persona }}</a></td>
                       <td>{{ item.establecimiento }}</td>
                       <td>{{ item.correo_maestro }}</td>
                       {% if item.estado_maestro is True %}

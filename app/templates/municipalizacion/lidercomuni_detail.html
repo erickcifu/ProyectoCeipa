@@ -25,12 +25,12 @@
                             <br/>
                             <label><b>Género: </b>{{ item.persona.gen }}</label>
                             <br/>
-                            <label><b>No. CUI: </b>{{ item.persona.cui }}</label>
+                            <label><b>No. CUI: </b>{{ item.persona.cui_persona }}</label>
                             <br/>
                             <label><b>Dirección domiciliar: </b>{{ item.persona.direccion_persona }}</label>
                             <br/>
-                            <label><b>No. Telefono: </b>{{ item.persona.telefono }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label><b>No. Telefono de casa: </b> {{ item.persona.telefonoc }}</label>
+                            <label><b>No. Telefono: </b>{{ item.persona.telefono_Persona }}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label><b>No. Telefono de casa: </b> {{ item.persona.telefonoc_per }}</label>
                             <br/>
                             <label><b>Municipio y departamento de origen: </b>{{ item.persona.muni }}, {{ item.persona.muni.dep }}</label>
                             <br/>
@@ -46,11 +46,11 @@
                               {% endif %}
                             </label>
                             <br/>
-                              {% if item.leer is True and item.escribir is True %}
+                              {% if item.leer_l is True and item.escribir_l is True %}
                               <label>Sabe leer y escribir</label>
-                              {% elif item.leer is True and item.escribir is False %}
+                              {% elif item.leer_l is True and item.escribir_l is False %}
                               <label>Sabe leer, no sabe escribir</label>
-                              {% elif item.escribir is True and item.leer is False %}
+                              {% elif item.escribir_l is True and item.leer_l is False %}
                               <label>Sabe escribir, no sabe leer</label>
                               {% else %}
                               <label>No sabe leer, no sabe escribir</label>
@@ -65,7 +65,7 @@
                             </label>
                             <br/>
                             <label>
-                              {% if item.vacuna_covid is True %}
+                              {% if item.vacuna_covid_l is True %}
                                 <span class="badge bg-yellow-soft text-yellow">Tiene vacuna contra COVID-19</span>
                               {% else %}
                                 <span class="badge bg-yellos-soft text-yellow">No tiene vacuna contra COVID-19</span>
@@ -73,7 +73,7 @@
                             </label>
                             <br/>
                             <label>
-                              {% if item.estado is True %}
+                              {% if item.estado_liders is True %}
                                 <span class="badge bg-green-soft text-green">Lider activo</span>
                               {% else %}
                                 <span class="badge bg-red-soft text-red">Lider inactivo</span>
@@ -98,9 +98,11 @@
                               <br/>
                               <label><b>Periodo del cargo: </b>{{ item.periodo }}</label>
                               <br/>
-                              <label><b>Fecha de inicio: </b>{{ item.fecha_inicio }}</label>
+                              <label><b>Fecha de inicio: </b>{{ item.fecha_inicio_l }}</label>
                               <br/>
-                              <label><b>Fecha de finalización: </b>{{ item.fecha_fin }}</label>
+                              <label><b>Fecha de finalización: </b>{{ item.fecha_fin_l }}</label>
+                              <br/>
+                              <label><b>Correo electrónico: </b>{{ item.correo_lideres }}</label>
                             </div>
                           </div>
                         </div>

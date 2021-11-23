@@ -46,7 +46,7 @@
                                 <div class="wizard-step-icon">4</div>
                                 <div class="wizard-step-text">
                                   <div class="wizard-step-text-name">Encargado</div>
-                                  <div class="wizard-step-text-details">Informaciòn del encargado</div>
+                                  <div class="wizard-step-text-details">Información del encargado</div>
                                 </div>
                               </a>
                               <div class="card-body">
@@ -88,7 +88,7 @@
                                     <div class="row justify-content-center">
                                       <div class="col-xxl-6 col-xl-8">
                                         <h3 class="text-primary">Paso 1</h3>
-                                        <h5 class="card-title mb-4">Ingrese la informaciòn personal del participante </h5>
+                                        <h5 class="card-title mb-4">Ingrese la información personal del participante </h5>
                                         <!--Inicio Formulario-->
                                         <div class="row gx-12">
                                           <div class="row gx-3">
@@ -260,7 +260,7 @@
                                       <div class="row justify-content-center">
                                         <div class="col-xxl-6 col-xl-8">
                                           <h3 class="text-primary">Paso 3</h3>
-                                          <h5 class="card-title mb-4">Ingrese informaciòn del encargado</h5>
+                                          <h5 class="card-title mb-4">Ingrese información del encargado</h5>
                                               <div class="row gx-3">
                                                 {% for f in form4 %}
                                                   {{ f.label }}
@@ -299,7 +299,6 @@
           alert('El campo: '+`${field.name}`+' No puede ir vacío')
         if((!value || value.trim().length === 0)){
           const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
-          alert('El campo: '+`${field.name}`+' No puede ir vacío')
           if(!$error_is_requeried)
             field.insertAdjacentHTML('afterend', `<div id="isRequeried_${field.name}">Este campo es requerido</div>`)
         }else{
@@ -325,12 +324,12 @@
 
 
   function isIdentify(field) {
-      const result = isRequeried(field)
-      if(!result){
-        let regexNumber = /^[0-9]{13}$/
-        const $error_is_identify = document.querySelector(`#isIdenfify_${field.name}`)
-        if(!regexNumber.test(field.value)){
-          if(!$error_is_identify){
+      //const result = isRequeried(field)
+      let regexNumber = /^[0-9]{13}$/
+      if(!field.value)return null
+      const $error_is_identify = document.querySelector(`#isIdenfify_${field.name}`)
+      if(!regexNumber.test(field.value)){
+        if(!$error_is_identify){
             field.insertAdjacentHTML('afterend', `<div id="isIdenfify_${field.name}">
                 Debe tener 13 dígitos, no se aceptan letras
               </div>`)
@@ -338,7 +337,7 @@
         }else{
           if($error_is_identify) $error_is_identify.remove()
         }
-      }
+
     }
 
     const validate_participante_form = () => {

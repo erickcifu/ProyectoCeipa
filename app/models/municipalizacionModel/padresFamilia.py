@@ -8,7 +8,7 @@ class PadresFamilia(models.Model):
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name="per_padre")
     leer_P = models.BooleanField(default=False)
     escribir_p = models.BooleanField(default=False)
-    cantidad_hijos = models.PositiveIntegerField()
+    cantidad_hijos = models.PositiveIntegerField(null=True, blank=True)
     vacunaCovid = models.BooleanField(default=False)
     participacionG = models.BooleanField(default=False)
     correo_padres = models.EmailField(max_length=150, null=True, blank=True)

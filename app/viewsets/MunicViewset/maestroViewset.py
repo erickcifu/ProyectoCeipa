@@ -146,7 +146,7 @@ class MaesEdit(RolesCooMunicipalEquipoMunicipalMixin, generic.UpdateView):
         persona_maestro = maestro.persona_maestro
         idioma = IdiomaPersona.objects.filter(persona=persona_maestro)
 
-        form = self.form_class(request.POST, instance = persona_maestro)
+        form = self.form_class(request.POST, request.FILES, instance = persona_maestro)
         form2 = self.second_form_class(request.POST, instance = maestro)
 
         with transaction.atomic():
@@ -157,7 +157,6 @@ class MaesEdit(RolesCooMunicipalEquipoMunicipalMixin, generic.UpdateView):
             if form.is_valid() and form2.is_valid():
                 form.save()
                 form2.save()
-                form3.save()
                 return HttpResponseRedirect(self.success_url)
             else:
                 return self.render_to_response(self.get_context_data(form=form, form2=form2, form3=form3))
@@ -172,8 +171,8 @@ class MaesEdit(RolesCooMunicipalEquipoMunicipalMixin, generic.UpdateView):
             idiom_maestro = IdiomaPersona.objects.filter(persona=persona_maestro)
             for id_ma in idiom_maestro:
                 listado_idmaestro.append({
-                    'idioma':i.idioma.id,
-                    'estado_ip':i.estado_ip
+                    'idioma':id_ma.idioma.id,
+                    'estado_ip':id_ma.estado_ip
                 })
             formset_idmaestro = formid_maestro(initial=listado_idmaestro, prefix='idiomas_maestro')
         except:
@@ -181,7 +180,7 @@ class MaesEdit(RolesCooMunicipalEquipoMunicipalMixin, generic.UpdateView):
             return HttpResponseRedirect(self.success_url)
         context = {}
         if 'form' not in context:
-            context['form'] = self.form_class(instance = persona)
+            context['form'] = self.form_class(instance = persona_maestro)
         if 'form2' not in context:
             context['form2'] = self.second_form_class(instance = maestro)
         if 'form3' not in context:

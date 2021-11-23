@@ -64,9 +64,8 @@
                     {% for item in obj %}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.nombresp }} {{ item.apellidos }}</td>
+                        <td>{{ item.nombresp }} {{ item.apellidosp }}</td>
                         <td>{{ item.DPIP }}</td>
-
                         {% if item.estado_persona_basica is True %}
                         <td>
                           <span class="badge bg-green-soft text-green">Activo</span>
@@ -81,7 +80,7 @@
                 </tbody>
             </table>
             {% endif %}
-            
+
         </div>
 {% endblock %}
 

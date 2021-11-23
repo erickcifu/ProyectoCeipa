@@ -124,25 +124,22 @@
 
                            <!--inscripsion -->
                            <div class="sidenav-menu-heading">Inscripción y asignación</div>
-                               <a class="nav-link" href="{% url 'socioproductivo:personabasica_list' %}">Registro de participante</a>
-                               <a class="nav-link" href="{% url 'socioproductivo:part_taller' %}">Inscripción de participante a taller</a>
-                               <a class="nav-link" href="{% url 'socioproductivo:part_formlab' %}">Inscripción de participante a formación laboral</a>
-                               <a class="nav-link" href="{% url 'socioproductivo:list_para_emprendimientos' %}">Crear emprendimiento</a>
+                               <a class="nav-link" href="{% url 'socioproductivo:personabasica_list' %}">Registro de participantes</a>
+
                                <!--<a class="nav-link" href="{% url 'socioproductivo:reportes_socio' %}">Reportes</a>-->
 
-                               <div class="sidenav-menu-heading">Listas</div>
+                               <div class="sidenav-menu-heading">Talleres</div>
+                               <a class="nav-link" href="{% url 'socioproductivo:part_taller' %}">Inscripción de participante a taller</a>
+                               <a class="nav-link" href="{% url 'socioproductivo:inscp_list' %}">Listado de participantes en talleres</a>
                                <!-- Sidenav Accordion (Dashboard)-->
-                               <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapselistado" aria-expanded="false" aria-controls="collapselistado">
-                                 Listados de participantes
-                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                               </a>
-                               <div class="collapse" id="collapselistado" data-bs-parent="#accordionSidenav">
-                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                 <a class="nav-link" href="{% url 'socioproductivo:formlab_list' %}">Participantes de formación laboral</a>
-                                 <a class="nav-link" href="{% url 'socioproductivo:emprend_list' %}">Emprendimientos</a>
+                               <div class="sidenav-menu-heading">Emprendimientos</div>
+                               <a class="nav-link" href="{% url 'socioproductivo:list_para_emprendimientos' %}">Crear emprendimiento</a>
+                              <a class="nav-link" href="{% url 'socioproductivo:emprend_list' %}">Listado de emprendimientos</a>
 
-                                </nav>
-                              </div>
+                              <div class="sidenav-menu-heading">Formación laboral</div>
+                              <a class="nav-link" href="{% url 'socioproductivo:part_formlab' %}">Inscripción de participante a formación laboral</a>
+                              <a class="nav-link" href="{% url 'socioproductivo:formlab_list' %}">Participantes de formación laboral</a>
+
                     {% endblock side_bar %}
                     <!-- Sidenav Footer-->
                     {% block footer %}

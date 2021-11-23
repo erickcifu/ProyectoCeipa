@@ -31,7 +31,7 @@
                                       <div class="wizard-step-icon">1</div>
                                       <div class="wizard-step-text">
                                         <div class="wizard-step-text-name">Persona</div>
-                                        <div class="wizard-step-text-details">Infomaciòn general</div>
+                                        <div class="wizard-step-text-details">Infomación general</div>
                                       </div>
                                     </a>
                                     <!--Wizard item 2-->
@@ -39,18 +39,42 @@
                                       <div class="wizard-step-icon">2</div>
                                       <div class="wizard-step-text">
                                         <div class="wizard-step-text-name">Registro Lider Comunitario</div>
-                                        <div class="wizard-step-text-details">Informaciòn adicional del lider comunitario</div>
+                                        <div class="wizard-step-text-details">Información adicional del lider comunitario</div>
                                       </div>
                                     </a>
 
                                   <div class="card-body">
+                                    <!--Errores form1-->
+                                    {% if form.errors %}
+                                      {% for field in form %}
+                                        {% for error in field.errors %}
+                                          {{error}}
+                                        {% endfor %}
+                                      {% endfor %}
+                                    {% endif %}
+                                    <!--Errores form2-->
+                                    {% if form2.errors %}
+                                      {% for field in form2 %}
+                                        {% for error in field.errors %}
+                                          {{error}}
+                                        {% endfor %}
+                                      {% endfor %}
+                                    {% endif %}
+                                    <!--Errores form3-->
+                                    {% if form3.errors %}
+                                      {% for field in form3 %}
+                                        {% for error in field.errors %}
+                                          {{error}}
+                                        {% endfor %}
+                                      {% endfor %}
+                                    {% endif %}
                                     <!--Wizard Body-->
                                       <div class="tab-content" id="cardTabContent">
                                         <div class="tab-pane py-5 py-xl-10 fade show active" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
                                           <div class="row justify-content-center">
                                             <div class="col-xxl-6 col-xl-8">
                                               <h3 class="text-primary">Paso 1</h3>
-                                              <h5 class="card-title mb-4">Ingrese la informaciòn general de la persona</h5>
+                                              <h5 class="card-title mb-4">Ingrese la información general de la persona</h5>
                                               <!--Inicio Formulario-->
                                                 <div class="row gx-3">
                                                   <div class="mb-3 col-md-6">
@@ -108,7 +132,7 @@
                                                     <div class="mb-3 col-md-6">
                                                       {{ form.disc | as_crispy_field }}
                                                     </div>
-                                                    <div class="mb-3 col-md-6">
+                                                    <div class="mb-3 col-md-6" hidden>
                                                       {{ form.estado_persona | as_crispy_field }}
                                                     </div>
                                                   </div>
@@ -128,7 +152,7 @@
                                                         <br/>
                                                         <br/>
                                                         <div class="d-flex justify-content-between">
-                                                          <button class="btn btn-light" role="button" onclick="agregar_idiomas_lider();">
+                                                          <button class="btn btn-light" id="add_idioma_lider" type="button" role="button">
                                                               <i class="me-2" data-feather="plus-circle"></i>Agregar idioma
                                                         </button>
                                                         </div>
@@ -143,10 +167,8 @@
                                           <div class="row justify-content-center">
                                             <div class="col-xxl-6 col-xl-8">
                                               <h3 class="text-primary">Paso 2</h3>
-                                              <h5 class="card-title mb-4">Ingrese informaciòn del lider comunitario</h5>
-                                              <div class="ow gx-12">
-
-
+                                              <h5 class="card-title mb-4">Ingrese información del lider comunitario</h5>
+                                              <div class="row gx-12">
                                                 <div class="row gx-3">
                                                     <div class="mb-3 col-md-12">
                                                       {{ form2.programa_c | as_crispy_field }}
@@ -190,7 +212,7 @@
                                                     <div class="mb-3 col-md-6">
                                                       {{ form2.vacuna_covid_l | as_crispy_field }}
                                                     </div>
-                                                    <div class="mb-3 col-md-6">
+                                                    <div class="mb-3 col-md-6" hidden>
                                                       {{ form2.estado_liders | as_crispy_field }}
                                                     </div>
                                                 </div>
@@ -218,6 +240,78 @@
 {% endblock %}
 {% block js_page %}
 <script>
+
+  function isRequeried(field) {
+      console.log(field)
+        let value = field.value
+
+        if((!value || value.trim().length === 0)){
+          const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+
+          if(!$error_is_requeried)
+            field.insertAdjacentHTML('afterend', `<div id="isRequeried_${field.name}">Este campo es requerido</div>`)
+        }else{
+          const $error_is_requeried = document.querySelector(`#isRequeried_${field.name}`)
+          if($error_is_requeried)
+            $error_is_requeried.remove()
+        }
+
+      }
+
+      const isEmail = (field)=>{
+              let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+              const result = isRequeried(field)
+              if(!result){
+                  let value = field.value
+                  if(!regexEmail.test(value)){
+                    const $error_is_email = document.querySelector(`#isEmail_${field.name}`)
+                    if(!$error_is_email){
+                      field.insertAdjacentHTML('afterend', `<div id="isEmail_${field.name}">No es un correo válido</div>`)
+                    }
+                  }else{
+                    const $error_is_email = document.querySelector(`#isEmail_${field.name}`)
+                    if($error_is_email) $error_is_email.remove()
+                  }
+              }
+          }
+
+  function isTelephoneNumber(field){
+      let regexNumber = /^[0-9]{8}$/
+      if(!field.value)return null
+      const $error_is_telephone = document.querySelector(`#isTelephoneNumber_${field.name}`)
+      if(!regexNumber.test(field.value)){
+        if(!$error_is_telephone){
+          field.insertAdjacentHTML('afterend', `<div id="isTelephoneNumber_${field.name}">El numero de telefono debe tener 8 digitos</div>`)
+        }
+      }else{
+        if($error_is_telephone) $error_is_telephone.remove()
+      }
+    }
+
+
+  function isIdentify(field) {
+      const result = isRequeried(field)
+      if(!result){
+        let regexNumber = /^[0-9]{13}$/
+        const $error_is_identify = document.querySelector(`#isIdenfify_${field.name}`)
+        if(!regexNumber.test(field.value)){
+          if(!$error_is_identify){
+            field.insertAdjacentHTML('afterend', `<div id="isIdenfify_${field.name}">
+                Debe tener 13 dígitos, no se aceptan letras
+              </div>`)
+          }
+        }else{
+          if($error_is_identify) $error_is_identify.remove()
+        }
+      }
+    }
+
+    const $add_idioma_lider = document.querySelector('#add_idioma_lider')
+    $add_idioma_lider.addEventListener('click', e=>{
+      e.preventDefault()
+      agregar_idiomas_lider();
+    })
+
     function agregar_idiomas_lider(){
       const $total_forms_lider = document.getElementById('id_idioma_lider-TOTAL_FORMS')
 

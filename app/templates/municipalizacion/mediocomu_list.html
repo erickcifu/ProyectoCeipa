@@ -16,9 +16,9 @@
               <thead>
                   <th>Id</th>
                   <th>Medio de Comunicación</th>
-                  <th>correo</th>
+                  <th>correo electrónico</th>
                   <th>Teléfono</th>
-                  <th>Persona</th>
+                  <th>Representante</th>
                   <th>Cargo</th>
                   <th>Estado</th>
                   <th class="all">Acciones</th>
@@ -29,8 +29,8 @@
                       <td>{{ item.id }}</td>
                       <td><a href="{% url 'municipalizacion:mediocomu_detail' item.id %}">{{ item.nombre_medio }}</a></td>
 
-                      <td>{{ item.correo }}</td>
-                      <td>{{ item.telefono }}</td>
+                      <td>{{ item.correo_medio }}</td>
+                      <td>{{ item.telefono_medio }}</td>
                       <td>{{ item.persona }}</td>
                       <td>{{ item.cargo }}</td>
                       {% if item.estado is True %}
