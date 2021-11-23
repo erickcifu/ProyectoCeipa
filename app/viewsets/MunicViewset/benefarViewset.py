@@ -155,16 +155,22 @@ class Area_beneficiado(RolesCooMunicipalEquipoMunicipalMixin, generic.CreateView
                 return self.render_to_response(self.get_context_data(form=form))
 
 
+class BenefArListGeneral(IsCoordinadorMunicipalMixin, generic.ListView):
+    model = BeneficiadoArea
+    template_name = "municipalizacion/benefar_listado.html"
+    context_object_name = "obj"
+    login_url = 'app:login'
+
 class BenefArEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
     model = BeneficiadoArea
-    template_name = "municipalizacion/benefar_form.html"
+    template_name = "municipalizacion/benefar_edit.html"
     context_object_name = "obj"
     form_class = BenefArForm
-    success_url = reverse_lazy("municipalizacion:benefar_list")
+    success_url = reverse_lazy("municipalizacion:benefar_list_general")
     login_url = 'app:login'
 
 class BenefArDel(IsCoordinadorMunicipalMixin, generic.DeleteView):
     model = BeneficiadoArea
     template_name = "municipalizacion/catalogos_del.html"
     context_object_name = "obj"
-    success_url = reverse_lazy("municipalizacion:benefar_list")
+    success_url = reverse_lazy("municipalizacion:benefar_list_general")

@@ -14,21 +14,21 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nuevo {% endif %} Comision
+                            {% if obj %} Editar {% else %} Nuevo {% endif %} Tipo de piso
                         </div>
                         <div class="dropdown-divider"></div>
                         <form>
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1">Nombre de Comisión</label>
-                                <input type="text" name="nombre_comision" maxlength="255" class="form-control" required id="id_nombre_comision"
-                                  placeholder="Escriba la comision" value="{% if obj %} {{ obj.nombre_comision }} {% endif %}">
+                                <label for="exampleFormControlInput1">Tipo de Piso</label>
+                                <input type="text" name="tipo_piso" maxlength="50" class="form-control" required id="id_tipo_piso"
+                                    placeholder="Tipo de Piso" value="{% if obj %} {{ obj.tipo_piso }} {% endif %}">
                             </div>
                         </form>
                             <div class="col-2">
                                 <div class="form-group">
-                                    <label for="id_estado_comision">Activo</label>
+                                    <label for="estado_tipopiso">Activo</label>
                                     <div class="form-check">
-                                      <input class="form-check-input" name="estado_comision" class="form-control" id="id_estado_comision" type="checkbox"  {% if obj.estado_comision is true %} checked {% endif %}>
+                                      <input class="form-check-input" name="estado_tipopiso" class="form-control" id="id_estado_tipopiso" type="checkbox"  {% if obj.estado_tipopiso is true %} checked {% endif %}>
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col">
                                 <button type="submit" class="btn btn-success">Guardar</button>
-                                <a href="{% url 'municipalizacion:com_list' %}" class="btn btn-danger">Cancelar</a>
+                                <a href="{% url 'municipalizacion:pisomuni_list' %}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </div>

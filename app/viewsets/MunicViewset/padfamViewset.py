@@ -121,7 +121,7 @@ class PadFamEdit(IsCoordinadorMunicipalMixin, generic.UpdateView):
         persona = padfam.persona
         idioma_padres = IdiomaPersona.objects.filter(persona=persona)
 
-        form = self.form_class(request.POST, instance = persona)
+        form = self.form_class(request.POST, request.FILES, instance = persona)
         form2 = self.second_form_class(request.POST, instance = padfam)
 
         with transaction.atomic():

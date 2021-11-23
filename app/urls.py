@@ -326,6 +326,7 @@ urlpatterns = [
     path('padresfamilia/delete/<int:pk>', viewsets.PadFamDel.as_view(), name='padfam_del'),
 
     path('participantes_area/', viewsets.BenefArView.as_view(), name='benefar_list'),
+    path('participantes_area/general/', viewsets.BenefArListGeneral.as_view(), name='benefar_list_general'),
     path('participantes_area/por_area/', viewsets.ListarPorArea.as_view(), name='benefar_por_area'),
     path('participantes_area/new/por_area/<int:id_area>', viewsets.Area_beneficiado.as_view(), name='area_ben_por_area'),
     path('participantes_area/new/', viewsets.BenefArNew.as_view(), name='benefar_new'),
@@ -393,6 +394,26 @@ urlpatterns = [
     path('grado_academico/new', viewsets.GradoacadNew.as_view(), name='gacad_new'),
     path('grado_academico/edit/<int:pk>', viewsets.GradoacadEdit.as_view(), name='gacad_edit'),
     path('grado_academico/delete/<int:pk>', viewsets.GradoacadDel.as_view(), name='gacad_del'),
+
+    path('tpiso_munic/', viewsets.Tpiso_muniView.as_view(), name='pisomuni_list'),
+    path('tpiso_munic/new', viewsets.Tpiso_muniNew.as_view(), name='pisomuni_new'),
+    path('tpiso_munic/edit/<int:pk>', viewsets.Tpiso_muniEdit.as_view(), name='pisomuni_edit'),
+    path('tpiso_munic/delete/<int:pk>', viewsets.Tpiso_muniDel.as_view(), name='pisomuni_del'),
+
+    path('techo_munic/', viewsets.TechomuniView.as_view(), name='techomuni_list'),
+    path('techo_munic/new', viewsets.TechomuniNew.as_view(), name='techomuni_new'),
+    path('techo_munic/edit/<int:pk>', viewsets.TechomuniEdit.as_view(), name='techomuni_edit'),
+    path('techo_munic/delete/<int:pk>', viewsets.TechomuniDel.as_view(), name='techomuni_del'),
+
+    path('pared_munic/', viewsets.ParedmuniView.as_view(), name='paredmuni_list'),
+    path('pared_munic/new', viewsets.ParedmuniNew.as_view(), name='paredmuni_new'),
+    path('pared_munic/edit/<int:pk>', viewsets.ParedmuniEdit.as_view(), name='paredmuni_edit'),
+    path('pared_munic/delete/<int:pk>', viewsets.ParedmuniDel.as_view(), name='paredmuni_del'),
+
+    path('categoria_munic/', viewsets.CatmuniView.as_view(), name='catmuni_list'),
+    path('categoria_munic/new', viewsets.CatmuniNew.as_view(), name='catmuni_new'),
+    path('categoria_munic/edit/<int:pk>', viewsets.CatmuniEdit.as_view(), name='catmuni_edit'),
+    path('categoria_munic/delete/<int:pk>', viewsets.CatmuniDel.as_view(), name='catmuni_del'),
 
     #SocioProductivo
     path('tipo_emprendimiento/', viewsets.TipoEmpView.as_view(), name='TipoEmp_list'),
