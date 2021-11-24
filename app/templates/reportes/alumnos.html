@@ -4,87 +4,170 @@
 <div id="layoutSidenav_content">
     <div class="card card-header-actions">
       <div class="card-header">
-            Reportes de los alumno
+            Reportes de los alumnos
+            <div class="p-2 bd-highlight">
+              <a href="{% url 'educacion:reportes_pdf_alumnos' %}" class="btn btn-sm btn-light text-primary" role="button"><i class="me-2" data-feather="printer"></i>PDF</a>
+            </div>
         </div>
       <div class="card-body">
           <div class="row">
                 <div class="card">
-                    <div class="card-header">
-                        Cantidad de alumnos por Genero
-                    </div>
                     <div class="card-body">
-                        <label><b>Masculino:</b> {{Masculino}}</label>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Total de alumnos activos</h5>
+                              <p class="card-text">{{ Total_alumnos }}</p>
+                            </div>
+                          </div>
+                          </div>
+                          <div class="col-sm-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Total de alumnos en etapas</h5>
+                                <p class="card-text">{{ Total_alumnos_etapas }}</p>
+                              </div>
+                            </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">Total de alumnos en grados</h5>
+                                  <p class="card-text">{{ Total_alumnos_grados }}</p>
+                                </div>
+                              </div>
+                              </div>
+                              <div class="col-sm-3">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <h5 class="card-title">Total de alumnos repitentes</h5>
+                                    <p class="card-text">{{ Total_alumnos_repitentes }}</p>
+                                  </div>
+                                </div>
+                                </div>
+                      </div>
+
                         <br/>
-                        <label><b>Femenino:</b> {{Femenino}}</label>
-                    </div>
-                </div>
-          </div>
+                      {% if not alumnos_por_genero %}
+                        <div class="alert alert-info">Alumnos por género: No hay datos</div>
+                      {% else %}
+                      <caption><b>Total de alumnos por género</b></caption>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Género</th>
+                            <th>Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for gen in alumnos_por_genero %}
+                            <tr>
+                              <td>{{ gen.genero }}</td>
+                              <td>{{ gen.cant_por_genero }}</td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      {% endif %}
+                      <br/>
+    {% if not alumnos_por_centro_educativo%}
+    <div class="alert alert-info">Alumnos por centro educativo: No hay datos</div>
+    {% else %}
+    <caption><b>Total de alumnos por centro educativo</b></caption>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Centro educativo</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for centroedu in alumnos_por_centro_educativo %}
+          <tr>
+            <td>{{ centroedu.nombre_centro }}</td>
+            <td>{{ centroedu.cantidad }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    <br/>
+    {% if not ocupacion%}
+    <div class="alert alert-info">Alumnos por ocupación: No hay datos</div>
+    {% else %}
+    <caption><b>Total de alumnos por ocupación</b></caption>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Ocupación</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ocup in ocupacion %}
+          <tr>
+            <td>{{ ocup.nombre_ocupacion }}</td>
+            <td>{{ ocup.cantidad_ocup }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+
+          {% if not alumnos_por_grado %}
+            <div class="alert alert-info">Total de alumnos por grado: No hay alumnos</div>
+            {% else %}
+            <caption><b>Total de alumnos por grado</b></caption>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Grado</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for a_grado in alumnos_por_grado %}
+                  <tr>
+                    <td>{{ a_grado.nombre_grado }}</td>
+                    <td>{{ a_grado.cantidad_por_grado }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% endif %}
+
+            {% if not alumnos_por_etapa %}
+              <div class="alert alert-info">Total de alumnos por etapa: No hay alumnos</div>
+              {% else %}
+              <caption><b>Total de alumnos por etapa</b></caption>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Etapa</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for a_etapa in alumnos_por_etapa %}
+                    <tr>
+                      <td>{{ a_etapa.nombre_etapa }}</td>
+                      <td>{{ a_etapa.cantidad_por_etapa }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <br/>
 
       </div>
-    </div>
-
-    {% if not alumnos_por_centro_educativo%}
-    <div class="alert alert-info">No hay datos de Grados</div>
-    {% else %}
-    <div class="row">
-        <div class="card">
-            <div class="card-header">
-              Cantidad de alumnos por centro educativo
-            </div>
-          </div>
-    {% for item in alumnos_por_centro_educativo %}
-        <div class="card">
-          <div class="card-body">
-            <label><b>{{item.nombre_centro}}</b> {{item.cantidad}}</label>
-            <br/>
         </div>
-    {% endfor %}
   </div>
-    {% endif %}
-    </div>
+</div>
 
-      <!--{% if not ocupacion%}
-          <div class="alert alert-info">No hay datos de Grados</div>
-          {% else %}
-            <div class="row">
-            <div class="card-header">
-                Cantidad de alumnos por ocupación
-              </div>
-            </div>
-          {% for item in ocupacion %}
-              <div class="card">
-                <div class="card-body">
-                  <label><b>{{item.nombre_ocupacion}}</b> {{item.cantidad}}</label>
-                  <br/>
-              </div>
-            </div>
-          {% endfor %}
-
-          {% endif %}
-
-        {% if not Alumnos_por_edad %}
-          <div class="alert alert-info">No hay alumnos</div>
-          {% else %}
-          <div class="row">
-            <div class="card">
-                <div class="card-header">
-                    <b>Cantidad de alumnos por edad
-                    </b>
-                </div>
-            </div>
-            {% for item in Alumnos_por_edad %}
-
-                <div class="card">
-                    <div class="card-body">
-                    <label><b>Edad {{item.edad}}</b> {{item.cantidad}}</label>
-                    <br/>
-                </div>
-                </div>
-            {% endfor %}
-
-        {%endif%}
-
-
+</div>
 {% endblock %}
 
 {% block js_page %}

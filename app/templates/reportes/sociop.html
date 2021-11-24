@@ -4,6 +4,9 @@
     <div class="card card-header-actions">
       <div class="card-header">
             Reportes programa socioproductivo
+            <div class="p-2 bd-highlight">
+              <a href="{% url 'socioproductivo:repo_socio' %}" class="btn btn-sm btn-light text-primary" role="button"><i class="me-2" data-feather="printer"></i>PDF</a>
+            </div>
         </div>
       <div class="card-body">
           <div class="row">
@@ -176,7 +179,7 @@
         <div class="dropdown-divider"></div>
         <div class="row">
             <div class="col">
-                <a href="{% url 'socioproductivo:socioproductivo' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+            <a href="{% url 'socioproductivo:home_coordinador_socioproductivo' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
             </div>
         </div>
           </div>

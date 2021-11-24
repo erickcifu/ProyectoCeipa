@@ -1,0 +1,197 @@
+{% extends 'directorGeneral/base.html' %}
+{% block page_content %}
+<div id="layoutSidenav_content">
+    <div class="card card-header-actions">
+      <div class="card-header">
+            Reportes programa socioproductivo
+            <div class="p-2 bd-highlight">
+              <a href="{% url 'socioproductivo:repo_socio' %}" class="btn btn-sm btn-light text-primary" role="button"><i class="me-2" data-feather="printer"></i>PDF</a>
+            </div>
+        </div>
+      <div class="card-body">
+          <div class="row">
+            <div class="card">
+            <div class="card-body">
+              <!--Totales-->
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Participantes que cumplieron con formación laboral</h5>
+                        <p class="card-text">{{ empleabilidad }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Total de participantes en fase de emprendimientos</h5>
+                        <p class="card-text">{{ emprendimientos }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <br/>
+
+                </div>
+                <br/>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Total de participantes que han pensado en migrar</h5>
+                        <p class="card-text">{{ total_migraciones }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Total de participantes que no piensan en migrar</h5>
+                        <p class="card-text">{{ total_no_migrar }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <!--Fin totales-->
+                <br/>
+              <!--Inicio por genero-->
+              {% if not sociop_po_genero %}
+                <div class="alert alert-info">Participantes por género: No hay datos</div>
+              {% else %}
+              <caption><b>Total de participantes por género</b></caption>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Género</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for gen_socio in sociop_po_genero %}
+                    <tr>
+                      <td>{{ gen_socio.genero }}</td>
+                      <td>{{ gen_socio.socio_genero }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por genero-->
+              <br/>
+              <!--Inicio por etnia-->
+              {% if not socio_grupo_etn %}
+                <div class="alert alert-info">Participantes por grupo étnico: No hay datos</div>
+              {% else %}
+              <caption><b>Total de participantes por grupo étnico</b></caption>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Étnia</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for etnia_socio in socio_grupo_etn %}
+                    <tr>
+                      <td>{{ etnia_socio.nombre_etnia }}</td>
+                      <td>{{ etnia_socio.socio_etnia }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+              <!--Fin por etnia-->
+                <br/>
+                {% if not emp_por_dep %}
+                <div class="alert alert-info">Participantes por departamento: No hay datos</div>
+                {% else %}
+                <caption><b>Total de participantes por departamento</b></caption>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Departamento</th>
+                      <th>Total de participantes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in emp_por_dep %}
+                    <tr>
+                      <td>{{ item.nombre_departamento }}</td>
+                      <td>{{ item.dep_sociop }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+                <br/>
+                <!--Inicio por  partido politico-->
+                {% if not emp_por_muni %}
+                  <div class="alert alert-info">Participantes por municipio: No hay datos</div>
+                {% else %}
+                <caption><b>Total de participantes por municipio</b></caption>
+                <table class="table table-bordered" id='datatablesSimple'>
+                  <thead>
+                    <tr>
+                      <th>Municipio</th>
+                      <th>Departamento</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for muni_socio in emp_por_muni %}
+                      <tr>
+                        <td>{{ muni_socio.nombre_municipio }}</td>
+                        <td>{{ muni_socio.dep.nombre_departamento }}</td>
+                        <td>{{ muni_socio.cantidad_municipio }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+                <!--Fin por grupos organizados-->
+                <!--Por estrato economico-->
+                <caption><b>Total de participantes por estrato económico</b></caption>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Estrato económico</th>
+                      <th scope="col">Total de participantes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>No pobre</td>
+                      <td>{{ estrato_no_pobre }}</td>
+                    </tr>
+                    <tr>
+                      <td>Pobre</td>
+                      <td>{{ estrato_pobre }}</td>
+                    </tr>
+                    <tr>
+                      <td>Extremadamente pobre</td>
+                      <td>{{ estrato_extr_pobre }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br/>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="row">
+            <div class="col">
+            <a href="{% url 'socioproductivo:home_director_general' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+            </div>
+        </div>
+          </div>
+      </div>
+      </div>
+</div>
+{% endblock %}
+{% block js_page %}
+<script>
+    //LLamando al dataTables jQuery plugin
+    $(document).ready(function(){
+        $('.table').DataTable();
+    });
+</script>
+{% endblock %}

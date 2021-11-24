@@ -91,7 +91,7 @@ class DirectorCentroForm(forms.ModelForm):
             }
         )
         )
-    certificadoRenas_personal = forms.BooleanField(label='está Certificado?')
+    certificadoRenas_personal = forms.BooleanField(label='Cuenta con certificado de RENAS?')
     class Meta:
         model = User
         fields = ['username','first_name', 'last_name','email']
@@ -181,7 +181,7 @@ class MaestroCentroForm(forms.ModelForm):
             }
         )
         )
-    certificadoRenas_personal = forms.BooleanField(label='está Certificado?')
+    certificadoRenas_personal = forms.BooleanField(label='Cuenta con certificado de RENAS?')
 
     class Meta:
         model = User

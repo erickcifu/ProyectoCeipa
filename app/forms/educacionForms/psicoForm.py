@@ -8,7 +8,12 @@ class PsicoForm(forms.ModelForm):
             attrs={'type':'date'}
         )
     )
-    estado_psicologico = forms.BooleanField()
+    estado_psicologico = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs = { 'checked':True }
+        ),
+        required=False, label='Activo'
+    )
     class Meta:
         model = psicologico
         fields = ['Analisis_psicologico',
@@ -38,7 +43,7 @@ class PsicoForm(forms.ModelForm):
                 'class':'form-check-input',
                 'checked':True
             })
-            
+
             #agreango el nombre de la funcion para utilizarla en la plantilla
             required = self.fields[field].required
             if required:

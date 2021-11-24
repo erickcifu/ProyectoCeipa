@@ -63,10 +63,11 @@ from .educacionViewset.viviendaViewset import VivView, VivNew, VivEdit, VivDel
 from .educacionViewset.educacionViewset import HomeEducacion
 from .educacionViewset.Reportes import (AlumnosPorEdad, AlumnosPorOcupacion, CantidadAlumnosPorCentro,
                                         CantidadAlumnosPorGenero, ReportesAlumnos)
+from .educacionViewset.reportes_pdf import  ReportesAlumnospdf
 from .educacionViewset.etapaView import EtapaView, EtapaNew, EtapaEdit, EtapaDel
 from .educacionViewset.ceView import CEView, CENew, Etapas_Del_Alumno
 from .educacionViewset.inscripcionesViewSet import ListarAlumnosParaCentro, ListarEtapasParaInscribirAlumnos, EtapasInscribirAlumnos, InsEtapaDel
-
+from .educacionViewset.reportes_general import ReportesAlumnosGeneral
 #homes de usuarios
 from .users.directorGeneral.HomeDirectorGeneral import HomeDirectorGeneral
 from .users.CoordinadorEducacion.HomeCoordinadorEduacion import HomeCoordinadorEducacion
@@ -78,10 +79,10 @@ from .users.EquipoSocioproductivo.HomeEquipoSocioproductivo import HomeEquipoSoc
 
 #users roles
 from .users.directorGeneral.User import (CrearCoordinador, ListarCoordinadores,
-                                            CrearDirectorGeneral)
+                                            CrearDirectorGeneral, DeleteUserGeneral)
 
 from .users.CoordinadorEducacion.User import (CrearAsistenteMaestroDirectorCentro,
-                                        ListarAsistentesMaestrosDirectorCentro)
+                                        ListarAsistentesMaestrosDirectorCentro, DeleteUserEducacion)
 
 from .users.directorCentro.User import ( CrearMaestroDeCadaCentro)
 
@@ -165,5 +166,7 @@ from .sociopViewset.techosocioView import TechosocioView, TechosocioNew, Techoso
 from .sociopViewset.paredsocioView import ParedsocioView, ParedsocioNew, ParedsocioEdit, ParedsocioDel
 from .sociopViewset.catsocioView import CatsocioView, CatsocioNew, CatsocioEdit, CatsocioDel
 from .sociopViewset.parentescosocioView import ParentescosocioView, ParentescosocioNew, ParentescosocioEdit, ParentescosocioDel
+from .sociopViewset.reportesocio_pdf import ParticipantesSociopdf
+from .sociopViewset.repo_director import ParticipantesSociop_direc
 #Reportes del director director general
 from .MunicViewset.reportes_director_general import reporte_participantes, reporte_comisiones, reporte_corporaciones, reporte_maestros, reporte_lideres, reporte_medios, reporte_padres

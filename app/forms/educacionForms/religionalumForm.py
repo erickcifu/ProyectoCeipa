@@ -4,7 +4,12 @@ from app.models import Religion_alumno, religion, Alumno
 
 
 class ReligionAlumnoForm(forms.ModelForm):
-    estado_religionalumno = forms.BooleanField()
+    estado_religionalumno = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs = { 'checked':True }
+        ),
+        required=False, label='Activo'
+    )
     class Meta:
         model = Religion_alumno
         fields = ['religion', 'nombre_iglesia','direccion_iglesia', 'estado_religionalumno']

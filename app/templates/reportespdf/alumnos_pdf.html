@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8/ISO-8859-1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes PRONNAT</title>
+</head>
+<body>
+    <div class="card card-header-actions">
+        <div class="card-header">
+              <h1>Reportes PRONNAT</h1>
+          </div>
+        <div class="card-body">
+            <div class="row">
+              <div class="card">
+              <div class="card-body">
+                <!--Totales-->
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Total de alumnos activos</h5>
+                        <p class="card-text">{{ Total_alumnos }}</p>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Total de alumnos en etapas</h5>
+                          <p class="card-text">{{ Total_alumnos_etapas }}</p>
+                        </div>
+                      </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Total de alumnos en grados</h5>
+                            <p class="card-text">{{ Total_alumnos_grados }}</p>
+                          </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Total de alumnos repitentes</h5>
+                              <p class="card-text">{{ Total_alumnos_repitentes }}</p>
+                            </div>
+                          </div>
+                          </div>
+                </div>
+                <!--Fin totales-->
+                  <br/>
+                <!--Inicio por genero-->
+                {% if not alumnos_por_genero %}
+                  <div class="alert alert-info">Alumnos por género: No hay datos</div>
+                {% else %}
+                  <caption><b>Total de alumnos por género</b></caption>
+                <table border="0.5">
+                  <thead>
+                    <tr>
+                      <th>Género</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for gen in alumnos_por_genero %}
+                      <tr>
+                        <td>{{ gen.genero }}</td>
+                        <td>{{ gen.cant_por_genero }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+                <!--Fin por genero-->
+                <br/>
+                <!--Inicio por etnia-->
+                {% if not alumnos_por_centro_educativo%}
+                <div class="alert alert-info">Alumnos por centro educativo: No hay datos</div>
+                {% else %}
+                <caption><b>Total de alumnos por centro educativo</b></caption>
+                <table border="0.5">
+                  <thead>
+                    <tr>
+                      <th>Centro educativo</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for centroedu in alumnos_por_centro_educativo %}
+                      <tr>
+                        <td>{{ centroedu.nombre_centro }}</td>
+                        <td>{{ centroedu.cantidad }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+                <!--Fin por etnia-->
+                <br/>
+                <!--Inicio por grupos organizados-->
+                {% if not ocupacion%}
+                <div class="alert alert-info">Alumnos por ocupación: No hay datos</div>
+                {% else %}
+                <caption><b>Total de alumnos por ocupación</b></caption>
+                <table border="0.5">
+                  <thead>
+                    <tr>
+                      <th>Ocupación</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for ocup in ocupacion %}
+                      <tr>
+                        <td>{{ ocup.nombre_ocupacion }}</td>
+                        <td>{{ ocup.cantidad_ocup }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% endif %}
+                <!--Fin por grupos organizados-->
+                  <br/>
+                  <!--Inicio por  partido politico-->
+                  {% if not alumnos_por_grado %}
+                    <div class="alert alert-info">Total de alumnos por grado: No hay alumnos</div>
+                    {% else %}
+                    <caption><b>Total de alumnos por grado</b></caption>
+                  <table border="0.5">
+                    <thead>
+                      <tr>
+                        <th>Grado</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for a_grado in alumnos_por_grado %}
+                        <tr>
+                          <td>{{ a_grado.nombre_grado }}</td>
+                          <td>{{ a_grado.cantidad_por_grado }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% endif %}
+
+                  <br/>
+                  <!--Fin por grupos organizados-->
+                  {% if not alumnos_por_etapa %}
+                    <div class="alert alert-info">Total de alumnos por etapa: No hay alumnos</div>
+                    {% else %}
+                    <caption><b>Total de alumnos por etapa</b></caption>
+                    <table border="0.5">
+                      <thead>
+                        <tr>
+                          <th>Etapa</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for a_etapa in alumnos_por_etapa %}
+                          <tr>
+                            <td>{{ a_etapa.nombre_etapa }}</td>
+                            <td>{{ a_etapa.cantidad_por_etapa }}</td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endif %}
+                    <br/>
+                  <br/>
+            </div>
+          </div>
+            </div>
+        </div>
+        </div>
+</body>
+</html>

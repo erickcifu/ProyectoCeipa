@@ -219,6 +219,7 @@ urlpatterns = [
     path('Vivienda/delete/<int:pk>', viewsets.VivDel.as_view(), name='viv_del'),
 
     path('reportes/alumnos/', viewsets.ReportesAlumnos.as_view(), name='reportes_alumnos'),
+    path('reportes_pdf/alumnos/', viewsets.ReportesAlumnospdf.as_view(), name='reportes_pdf_alumnos'),
 
     #Etapas
     path('ciclo_etapa/', viewsets.CEView.as_view(), name='ce_list'),
@@ -545,17 +546,21 @@ urlpatterns = [
 
     path('formacionlab', viewsets.FormLabView.as_view(), name='formlab_list'),
     path('inscripcion_formacionlab/new/<int:pk>/', viewsets.FormLabNew.as_view(),name='form_new'),
-    path('reportes/socioproductivo', viewsets.ParticipantesSociop.as_view(),name='reportes_socio'),
+    path('reportes/socioproductivo/', viewsets.ParticipantesSociop.as_view(),name='reportes_socio'),
 
 #reportes de director general
+    #educacion
+    path('municipalizacion/reporte_pronnat/', viewsets.ReportesAlumnosGeneral.as_view(), name='repo_educacion_general'),
+    #Socioproductivo
+    path('municipalizacion/reporte_socioproductivo/', viewsets.ParticipantesSociop_direc.as_view(), name='repo_socio_general'),
     #Reportes municipalización
-    path('municipalizacion/reporte_participantes/', viewsets.reporte_participantes.as_view(), name='repo_part'),
-    path('municipalizacion/reporte_comisiones/',viewsets.reporte_comisiones.as_view(), name='repo_comi'),
-    path('municipalizacion/reporte_corporaciones/',viewsets.reporte_corporaciones.as_view(), name='repo_corp'),
-    path('municipalizacion/reporte_maestros/',viewsets.reporte_maestros.as_view(), name='repo_maest'),
-    path('municipalizacion/reporte_lideres/',viewsets.reporte_lideres.as_view(), name='repo_lid'),
-    path('municipalizacion/reporte_medios/',viewsets.reporte_medios.as_view(), name='repo_med'),
-    path('municipalizacion/reporte_padres_madres/',viewsets.reporte_padres.as_view(), name='repo_pad'),
+    path('municipalizacion/reporte_participantes/', viewsets.reporte_participantes.as_view(), name='repo_part_muni'),
+    path('municipalizacion/reporte_comisiones/',viewsets.reporte_comisiones.as_view(), name='repo_comi_muni'),
+    path('municipalizacion/reporte_corporaciones/',viewsets.reporte_corporaciones.as_view(), name='repo_corp_muni'),
+    path('municipalizacion/reporte_maestros/',viewsets.reporte_maestros.as_view(), name='repo_maest_muni'),
+    path('municipalizacion/reporte_lideres/',viewsets.reporte_lideres.as_view(), name='repo_lid_muni'),
+    path('municipalizacion/reporte_medios/',viewsets.reporte_medios.as_view(), name='repo_med_muni'),
+    path('municipalizacion/reporte_padres_madres/',viewsets.reporte_padres.as_view(), name='repo_pad_muni'),
 
 #Reportes PDF
     path('municipalizacion/pdf_participantes/', viewsets.ListAlumnosDeptoPdf.as_view(), name='repo_part'),
@@ -565,7 +570,8 @@ urlpatterns = [
     path('municipalizacion/pdf_lideres/',viewsets.Total_lideresPDF.as_view(), name='repo_lid'),
     path('municipalizacion/pdf_medios/',viewsets.Total_mediosPDF.as_view(), name='repo_med'),
     path('municipalizacion/pdf_padres_madres/',viewsets.Total_padresPDF.as_view(), name='repo_pad'),
-
+    #Socioproductivo
+    path('socioproductivo/reportes_pdf/',viewsets.ParticipantesSociopdf.as_view(), name='repo_socio'),
 
 #login views
     path('', viewsets.Home.as_view(), name = 'home'),
@@ -600,6 +606,8 @@ urlpatterns = [
     #Delete de los usuarios
     path('usuarios/coordinadorSocio/delete/<int:pk>', viewsets.DeleteUserSocio.as_view(), name='delete_sociop'),
     path('usuarios/coordinadorMunicipal/delete/<int:pk>', viewsets.DeleteUserMuni.as_view(), name='delete_municip'),
+    path('usuarios/coordinadorEducacion/delete/<int:pk>', viewsets.DeleteUserEducacion.as_view(), name='delete_educ_user'),
+    path('usuarios/directorGeneral/delete/<int:pk>', viewsets.DeleteUserGeneral.as_view(), name='delete_general_user'),
     #prueba roles
 
 ]

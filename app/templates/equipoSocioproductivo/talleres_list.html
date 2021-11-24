@@ -34,10 +34,7 @@
                         <span class="badge bg-red-soft text-red">Inactivo</span>
                       </td>
                       {% endif %}
-                      <td>
-                          <a href="{% url 'socioproductivo:talleres_edit' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i data-feather="edit"></i></a>
-                          <a href="{% url 'socioproductivo:talleres_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
-                      </td>
+                      
                   </tr>
                   {% endfor %}
               </tbody>

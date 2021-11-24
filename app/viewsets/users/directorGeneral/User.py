@@ -10,7 +10,7 @@ from .mixin import IsDirectorGeneralMixin
 class CrearCoordinador(IsDirectorGeneralMixin,generic.CreateView):
     model = User
     form_class = UserFormCoordinadorGeneral
-    
+
     template_name = 'directorGeneral/CrearCoordinador.html'
     success_url = reverse_lazy('educacion:listar_coordinador')
 
@@ -28,3 +28,9 @@ class CrearDirectorGeneral(IsDirectorGeneralMixin, generic.CreateView):
     form_class = UserFormDirectorOAsistenteGeneral
     template_name = 'directorGeneral/CrearDirectorGeneral.html'
     success_url = reverse_lazy('educacion:listar_coordinador')
+
+class DeleteUserGeneral(IsDirectorGeneralMixin, generic.DeleteView):
+    model = User
+    template_name = 'directorGeneral/deletegeneral.html'
+    context_object_name = "obj"
+    success_url = reverse_lazy("educacion:listar_coordinador")

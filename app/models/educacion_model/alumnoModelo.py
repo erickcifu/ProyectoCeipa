@@ -30,7 +30,7 @@ class Alumno(models.Model):
     estado_alumno = models.BooleanField(default=True)
 
     @property
-    def foto_url(self):
+    def foto_url_a(self):
         if self.fotografia and hasattr(self.fotografia, 'url'):
             return self.fotografia.url
 
