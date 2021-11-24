@@ -37,11 +37,12 @@ class AlumnoView(RolesCooEducacionDirectorCentroMaestroMixin, generic.ListView):
                 "TemplateResponseMixin requires either a definition of "
                 "'template_name' or an implementation of 'get_template_names()'")
         else:
-            print('hola mundo')
             if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
                 return [self.template_name]
             elif self.request.user.user_profile.rol.id == 5:
                 return ["directorCentro/alumno_list.html"]
+            elif self.request.user.user_profile.rol.id == 6:
+                return ["maestro/alumno_list.html"]
 
 class AlumnoNew(RolesCooEducacionDirectorCentroMaestroMixin, generic.CreateView):
     model = Alumno
@@ -374,7 +375,7 @@ class AlumnoEditViviendaConvivientes(RolesCoordinadorEducacionYDirectorCentroMix
 
 class AlumnoDetailAndupdate(IsDirectorCentroMixin, generic.UpdateView):
     template_name = "directorCentro/alumnoEdit.html"
-    success_url = reverse_lazy("educacion:direc_prueba_alumno")
+    success_url = reverse_lazy("educacion:alumno_list")
     model = Alumno
     form_class = TutorForm
     second_form_class = EstAntForm
@@ -474,7 +475,7 @@ class AlumnoDetailAndupdate(IsDirectorCentroMixin, generic.UpdateView):
 
 class AlumnoupdateViviendaConvivientes(IsDirectorCentroMixin, generic.UpdateView):
     template_name = "directorCentro/alumnoEditViviendaConvivientes.html"
-    success_url = reverse_lazy("educacion:direc_alumno_list_convivientes")
+    success_url = reverse_lazy("educacion:prueba_alumno_list_convivientes")
     model = Alumno
     form_viv = VivFormEdit
     form_convivientes = formset_factory(ConvivienteFormEdit, extra=1)
@@ -509,23 +510,22 @@ class AlumnoupdateViviendaConvivientes(IsDirectorCentroMixin, generic.UpdateView
         else:
             return self.render_to_response(self.get_context_data(form7=form7))
 
-
 class AlumnoDetail(RolesCooEducacionDirectorCentroMaestroMixin, generic.DetailView):
     template_name = "educacion/alumno_detail.html"
     model = Alumno
 
     def get_template_names(self):
-            if self.template_name is None:
-                raise ImproperlyConfigured(
-                    "TemplateResponseMixin requires either a definition of "
-                    "'template_name' or an implementation of 'get_template_names()'")
-            else:
-                if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
-                    return [self.template_name]
-                elif self.request.user.user_profile.rol.id == 5:
-                    return ["directorCentro/alumno_detail.html"]
-                elif self.request.user.user_profile.rol.id == 6:
-                    return ["maestro/alumno_detail.html"]
+        if self.template_name is None:
+            raise ImproperlyConfigured(
+                "TemplateResponseMixin requires either a definition of "
+                "'template_name' or an implementation of 'get_template_names()'")
+        else:
+            if self.request.user.user_profile.rol.id == 1 or self.request.user.user_profile.rol.id == 2:
+                return [self.template_name]
+            elif self.request.user.user_profile.rol.id == 5:
+                return ["directorCentro/alumno_detail.html"]
+            elif self.request.user.user_profile.rol.id == 6:
+                return ["maestro/alumno_detail.html"]
 
     def get_apadecimientos(self, alumno):
         return Apadecimiento.objects.filter(alumno=alumno)
