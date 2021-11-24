@@ -15,7 +15,7 @@ from app.models import BeneficiadoArea
 
 class reporte_participantes(IsDirectorGeneralMixin, generic.ListView):
     model = Beneficiado
-    template_name = 'directorGeneral/reporte_participantes.html'
+    template_name = 'directorGeneral/participantes.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -36,7 +36,7 @@ class reporte_participantes(IsDirectorGeneralMixin, generic.ListView):
 
 class reporte_comisiones(IsDirectorGeneralMixin, generic.ListView):
     model = ComisionNA
-    template_name = 'directorGeneral/reporte_comisiones.html'
+    template_name = 'directorGeneral/comisiones.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -53,7 +53,7 @@ class reporte_comisiones(IsDirectorGeneralMixin, generic.ListView):
 
 class reporte_corporaciones(IsDirectorGeneralMixin, generic.ListView):
     model = CorporacionMunicipal
-    template_name = 'directorGeneral/reporte_corporaciones.html'
+    template_name = 'directorGeneral/corporaciones.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -69,7 +69,7 @@ class reporte_corporaciones(IsDirectorGeneralMixin, generic.ListView):
 
 class reporte_maestros(IsDirectorGeneralMixin, generic.ListView):
     model = Maestro
-    template_name = 'directorGeneral/reporte_maestros.html'
+    template_name = 'directorGeneral/maestros.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -88,7 +88,7 @@ class reporte_maestros(IsDirectorGeneralMixin, generic.ListView):
 
 class reporte_lideres(IsDirectorGeneralMixin, generic.ListView):
     model = LiderComunitario
-    template_name = 'directorGeneral/reporte_lideres.html'
+    template_name = 'directorGeneral/lideres.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -103,7 +103,7 @@ class reporte_lideres(IsDirectorGeneralMixin, generic.ListView):
 
 class reporte_medios(IsDirectorGeneralMixin, generic.ListView):
     model = MedioComuni
-    template_name = 'directorGeneral/reporte_medios.html'
+    template_name = 'directorGeneral/medios.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):
@@ -117,7 +117,7 @@ class reporte_medios(IsDirectorGeneralMixin, generic.ListView):
 
 class reporte_padres(IsDirectorGeneralMixin, generic.ListView):
     model = PadresFamilia
-    template_name = 'directorGeneral/reporte_padres.html'
+    template_name = 'directorGeneral/padres.html'
     context_object_name = 'obj'
 
     def get_context_data(self, **kwargs):

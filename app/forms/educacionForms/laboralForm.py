@@ -14,12 +14,12 @@ class LaboralForm(forms.ModelForm):
     hora_entrada = forms.TimeField(
         widget = forms.TextInput(
             attrs = { 'type': 'time' }
-        )
+        ), required=False,  label="Hora de entrada"
     )
     hora_salida = forms.TimeField(
         widget = forms.TextInput(
             attrs = { 'type': 'time' }
-        )
+        ), required=False,  label="Hora de salida"
     )
 
     class Meta:

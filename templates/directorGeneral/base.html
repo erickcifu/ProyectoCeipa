@@ -90,13 +90,13 @@
                             </a>
                             <div class="collapse" id="collapseCatalogos" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                  <a class="nav-link" href="{% url 'municipalizacion:repo_maest' %}">Maestros</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:repo_part' %}">Participantes</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:repo_lid' %}">Lideres comunitarios</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:repo_med' %}">Medios de comunicación</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:repo_pad' %}">Padres y madres de familia</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:repo_corp' %}">Corporaciones municipales</a>
-                                    <a class="nav-link" href="{% url 'municipalizacion:repo_comi' %}">Comisiones de niñez y adolescencia</a>
+                                  <a class="nav-link" href="{% url 'municipalizacion:repo_maest_muni' %}">Maestros</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:repo_part_muni' %}">Participantes</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:repo_lid_muni' %}">Lideres comunitarios</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:repo_med_muni' %}">Medios de comunicación</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:repo_pad_muni' %}">Padres y madres de familia</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:repo_corp_muni' %}">Corporaciones municipales</a>
+                                    <a class="nav-link" href="{% url 'municipalizacion:repo_comi_muni' %}">Comisiones de niñez y adolescencia</a>
                                 </nav>
                             </div>
 
@@ -106,7 +106,7 @@
                             </a>
                             <div class="collapse" id="collapsepronnat" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                  <a class="nav-link" href="{% url 'educacion:reportes_alumnos' %}">PRONNAT</a>
+                                  <a class="nav-link" href="{% url 'educacion:repo_educacion_general' %}">PRONNAT</a>
                                 </nav>
                             </div>
 
@@ -116,7 +116,7 @@
                             </a>
                             <div class="collapse" id="collapsesocio" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                  <a class="nav-link" href="{% url 'socioproductivo:reportes_socio' %}">Socioproductivo</a>
+                                  <a class="nav-link" href="{% url 'socioproductivo:repo_socio_general' %}">Socioproductivo</a>
                                 </nav>
                             </div>
 
@@ -162,6 +162,7 @@
                                             INICIO
                                         </h1>
                                         <div class="page-header-subtitle">Estadísticas de niños y jóvenes en toda la organización</div>
+                                        <div class="page-header-subtitle">{{user.first_name}}, {{user.last_name}}</div>
                                         <div class="page-header-subtitle">Dirección general</div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">

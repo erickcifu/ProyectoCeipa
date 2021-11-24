@@ -35,10 +35,10 @@
         </div>
         <div class="card-header">
             {%if id_centro_educativo%}
-                <h2>personal del {{id_centro_educativo.nombre_centro}}</h2>
+                <h2>participantes del {{id_centro_educativo.nombre_centro}}</h2>
                 <a href="{%url 'educacion:cg_list_para_inscribir_alumnos' id_centro_educativo.id %}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Agregar estudiantes</a>
               {%else%}
-                <h2>Personal Educativo</h2>
+                <h2>Participantes</h2>
             {%endif%}
             <a href="{%url 'educacion:alumno_list'%}" class="btn btn-sm btn-light text-success" role="button"><i class="me-2" data-feather="plus-circle"></i>Nuevo estudiante</a>
         </div>
@@ -64,7 +64,7 @@
                         <td>{{ item.cui }}</td>
                         <td>{{ item.nombres_alumno }}</td>
                         <td>{{ item.apellidos_alumno }}</td>
-                        <td>{{ item.telefono }}</td>
+                        <td>{{ item.telefono_alumno }}</td>
                         <td>{{ item.fecha_nacimiento|date:"d, M, Y" }}</td>
                         <td>{{ item.direccion_alumno }}</td>
                         <td>{{ item.estudios_anteriores }}</td>

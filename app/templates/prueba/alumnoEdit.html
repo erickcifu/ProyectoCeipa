@@ -3,7 +3,7 @@
 {% block page_content %}
 {% load crispy_forms_tags %}
 <div id="layoutSidenav_content">
-<form method="POST" class="form-inline">
+<form method="POST" class="form-inline" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-xl-12 col-md-12 mb-12">
         {% if obj %}
@@ -142,8 +142,7 @@
                                           </div>
                                           <div class="row gx-3">
                                             <div class="mb-3 col-md-12">
-                                              <label>Fotografía</label>
-                                                {{ form3.fotografia }}
+                                                {{ form3.fotografia | as_crispy_field}}
                                             </div>
                                           </div>
                                           <div class="row gx-3">
@@ -167,7 +166,7 @@
                                             </div>
                                           </div>
 
-                                          <div class="row gx-3" hidden>
+                                          <div class="row gx-3">
                                             <div class="mb-3 col-md-12">
                                               <label>Activo</label>
                                                 {{ form3.estado_alumno }}
@@ -429,7 +428,7 @@
                                                   {{ form4.direccion_iglesia | as_crispy_field }}
                                               </div>
                                             </div>
-                                            <div class="row gx-3" hidden>
+                                            <div class="row gx-3">
                                               <div class="mb-3 col-md-12">
                                                   {{ form4.estado_religionalumno | as_crispy_field }}
                                               </div>
@@ -459,7 +458,7 @@
 
                                           <div class="d-flex justify-content-between">
                                             <button class="btn btn-primary" role="button" onclick="agregar_form();">
-                                              nuevo form
+                                              Agregar
                                           </button>
                                           </div>
                                           <hr class="my-4"/>
@@ -511,7 +510,7 @@
                                             <div class="d-flex justify-content-between">
                                               <a class="btn btn-ligth" href="{% url 'educacion:alumno_list' %}">Cancelar</a>
                                               <button type="submit" class="btn btn-success"">Guardar</button>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                         </div>
                                       </div>

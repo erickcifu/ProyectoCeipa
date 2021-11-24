@@ -102,9 +102,9 @@ class AlumnoNew(RolesCooEducacionDirectorCentroMaestroMixin, generic.CreateView)
     @transaction.atomic
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
-        form = self.form_class(request.POST,request.FILES)
+        form = self.form_class(request.POST, request.FILES)
         form2 = self.second_form_class(request.POST)
-        form3 = self.third_form_class(request.POST,request.FILES)
+        form3 = self.third_form_class(request.POST, request.FILES)
         form4 = self.four_form_class(request.POST)
         form5 = self.five_form_class(request.POST, prefix = 'apadecimientos')
         form6 = self.six_form_class(request.POST)

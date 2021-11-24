@@ -19,3 +19,9 @@ class ListarAsistentesMaestrosDirectorCentro(IsCoordinadorEducacionMixin, generi
 
     def get_queryset(self):
         return User.objects.filter(is_active=True, user_profile__rol_id__in=[1,2,5,6]).annotate(cargo=F('user_profile__rol__nombre_rol'))
+
+class DeleteUserEducacion(IsCoordinadorEducacionMixin, generic.DeleteView):
+    model = User
+    template_name = 'coordinadorEducacion/deleteeduc.html'
+    context_object_name = "obj"
+    success_url = reverse_lazy("educacion:listar_maestro_director_centro")

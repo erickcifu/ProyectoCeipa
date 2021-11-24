@@ -19,6 +19,7 @@
                   <th>Apellidos</th>
                   <th>Cargo</th>
                   <th>Estado</th>
+                  <th>Acciones</th>
               </thead>
               <tbody>
                   {% for item in obj %}
@@ -36,6 +37,9 @@
                         <span class="badge bg-red-soft text-red">Inactivo</span>
                       </td>
                       {% endif %}
+                      <td>
+                        <a href="{% url 'educacion:delete_educ_user' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i data-feather="trash-2"></i></a>
+                      </td>
                   </tr>
                   {% endfor %}
               </tbody>

@@ -5,6 +5,9 @@
     <div class="card card-header-actions">
       <div class="card-header">
             Reportes de participantes
+            <div class="p-2 bd-highlight">
+              <a href="{% url 'municipalizacion:repo_part' %}" class="btn btn-sm btn-light text-primary" role="button"><i class="me-2" data-feather="printer"></i>PDF</a>
+            </div>
         </div>
       <div class="card-body">
           <div class="row">
@@ -203,13 +206,15 @@
                       </tbody>
                     </table>
                     {% endif %}
+
+
                     </div>
                 </div>
           </div>
           <div class="dropdown-divider"></div>
           <div class="row">
               <div class="col">
-                  <a href="{% url 'app:home_director_general' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
+                  <a href="{% url 'municipalizacion:municipalizacion' %}" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
               </div>
           </div>
       </div>
