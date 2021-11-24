@@ -20,7 +20,7 @@
                   <th>fecha de nacimiento</th>
                   <th>Tutor</th>
                   <th>Estado</th>
-                  <th class="all">Acciones</th>
+
               </thead>
               <tbody>
                   {% for item in obj %}
@@ -36,10 +36,7 @@
                           <span class="badge bg-red-soft text-red">Inactivo</span>
                         {% endif %}
                       </td>
-                      <td>
-                        <a href="{% url 'educacion:prueba_alumno' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark me-2" role="button"><i class="far fa-edit"></i></a>
-                        <a href="{% url 'educacion:alumno_del' item.id %}" class="btn btn-datatable btn-icon btn-transparent-dark" role="button"><i class="far fa-trash-alt"></i></a>
-                      </td>
+                      
                   </tr>
                   {% endfor %}
               </tbody>
